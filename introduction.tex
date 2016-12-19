@@ -5,21 +5,22 @@ computer science. Practical problems as they arise in the context of the
 specification and translation of programming languages find an exact
 description in the theory of formal languages and so get accessible to an exact
 treatment. Generation processes definable by formal languages can be interpreted as 
-non-deterministic automata which is as a generalized notion of a computer.
+non-deterministic automata which represent notational generalizations of a
+computer.
 
-These kinds of generalizations in general are easier to understand than
-deterministic algorithms which contain more details that do not reflect the
-original problem but the necessity to unambiguosly define the algorithm. This is
-part of the reason of the difficulty to prove the correctness of programs in
-an understandable way. On the other side, the proof of correctness for grammars
-or other mechanisms for generating languages offers the possibility to study correctness proofs
-on simpler objects.
+These generalizations in general are easier to understand than
+deterministic algorithms which contain more details not reflecting the
+original problem but are determined by the need for unambiguosly define the
+algorithm. This is part of the reason why it is difficult to prove the
+correctness of programs in a clear way. Correctness proofs for grammars or
+for other language generation mechanisms offer a possibility to study such
+proofs on simpler objects.
 
 The theory of formal languages in this respect contains the theory of
 algorithms but most often only the theory of {\bf context-free} languages is
 treated because of her extraordinary simplicity and beauty.
 
-In the light of the theory stand different methods for defining
+To the fore of the theory stand different methods for defining
 formal language classes, studying their word and equivalence problems and
 putting them into different hierarchical classifications.
 
@@ -27,104 +28,117 @@ The generation processes themselves become objects of interest in the theory
 because the generation process of a language in case of programming languages
 is related to the semantics of the programs.
 
-Of course, in the context of such a pocket book we have to make a strong
+Of course, in the context of such a pocket book you have to make a strong
 selection of topics concerning language classes, generation processes as well as
-basic questions. In doing so, we let us guide by the intention to keep the
-formal machinery rather small.
+basic questions. In doing that we let us guide by the wish to keep the
+formal machinery as small as possible.
 
-Because the theory of finite automata is the foundation for the whole theory of
-formal languages, we start our book with this topic. In developing this theory
+\transrem{In this book you mainly need some knowledge in graph and category
+terminology as well as some basic algebraic notions like monoids and
+congruences.}
+
+Because the theory of finite automata is the foundation of the whole theory of
+formal languages, we start our book with that topic. In developing the theory
 we do not consider the technical realization of finite automata by logical
-circuits and binary storage devices but rather focus on the basic algorithm however it is realized.
- 
-Our intuitive notion of finite automaton consists of a finite, oriented graph whose 
-edges are labeled with the symbols from the input alphabet of the automaton. 
-Depending on the input word we look for a path in the graph labelled with that
-word. If the end point of such a path, originating from the dedicated ''start point'' 
-of the automaton, is a member of the set of ''end points'', our automaton
-''accepts'' the word and doesn't do otherwise.
+circuits and binary storage devices but rather focus on the basic algorithm 
+however it will get realized. Our intuitive notion of a finite automaton
+is a {\em finite, oriented graph} whose edges are labeled with the symbols from
+the input alphabet of the automaton. Depending on the input string we look for a
+ path in the graph labelled with that string. If the end point of a path
+ starting from the dedicated {\em start point} of the automaton is one of the
+ {\em end points}, our automaton {\em accepts} the input word and doesn't
+ otherwise.
 
-We prove the equivalence of this concept with the other known methods of
-defining finite automata. We prove the usual closure properties of languages
-defined by finite automata. Additionally we investigate the relation between
+We prove the equivalence of this concept with the other known methods for
+defining finite automata. We prove the usual closure properties of languages defined
+ by finite automata. Additionally we investigate the relation between
 deterministic and non-deterministic automata and also 2-way automata.
 
 It is possible to generalize this theory in the direction of considering not
 only the free monoid of strings (words) over a finite alphabet but also
 arbitrary monoids.
 
-By considering finite automata with output, which means to attach a second label
-at the graph edges, we get the theory of {\bf rational transducers}. An
-extensive treatment of the theory of general transductions can be found in the book by
-Berstel.
+By considering finite automata with output, that is attaching a
+second label at the graph's edges, one gets the {\bf rational transducers}. A
+detailed theory of these general transductions can be found in the book by
+Berstel \cite{Berstel79}.
 
-Here we restrict ourselves to some special generalizations of the free monoid
-(of words), namely the {\bf free group}, the {\bf H-group} (where the relation
-$x x^{-1} = 1$ holds for $x$ from the generating system, but not $x^{-1} x = 1$) and the
-{\bf polycyclic monoid} (in addition to $x x^{-1} = 1$ it holds $x y^{-1} = 0$
-for $x \neq y$ and $0 x = x 0 = 0$ for $x,y$ from the generating system).
+We restrict ourselves here to special generalizations of the free monoid of
+words:
+\begin{itemize}
+  \item the {\bf free group}
+  \item the {\bf H-group} (the relation $x x^{-1} = 1$ holds for $x$ from
+  the generating system but not $x^{-1} x = 1$)
+	\item the {\bf polycyclic monoid} (in addition to $x x^{-1} = 1$ it holds 
+	$x y^{-1} = 0$ for $x \neq y$ and $0 x = x 0 = 0$ for $x,y$ from the generating
+	system)
+\end{itemize}
 
 By investigating the transductions from free monoids into the polycyclic
-monoids one gets a smooth transition from the theory of finite automata into the
-theory of context-free languages.
+monoids one gets now a smooth transition from the theory of finite automata into
+the theory of context-free languages.
 
-The corresponding construction of the theory of context-free languages leads to
-a simple path to the most important representation theorems. This includes the
-theorems of Chomsky-Schützenberger, Shamir and Greibach. Also for the
-transformation into Greibach normal form we get a simple and efficient
+The corresponding composition of the theory of context-free languages leads to
+a simple path to the most important representation theorems including the
+theorems of {\bf Chomsky-Schützenberger, Shamir and Greibach}. Also for the
+transformation into Greibach normal-form one gets a simple, efficient
 algorithm.
 
-In the same easy way as for finite automata one can prove the known closure
+As easy as in the case of finite automata one can prove the known closure
 properties for context-free languages.
 
-In the end we also prove the equivalence of this representation with the usual
-representation of context-free languages using context-free grammars.
+Finally we also prove the equivalence of this representation to the
+usual representation of context-free languages by context-free grammars.
 
-Our development of the theory is very close to the one repeatedly recommended by
-Goldstine since 1977, but its origins are independent from him. The difference
-is that we prove Greibach's representation theorem by making our automaton deterministic,
-namely by switching from output monoids to {\bf monoid rings}. Doing that you
-get the theorem of Shamir in a natural way and from this the theorem of Greibach.
+Our composition of the theory is very close to the one repeatedly recommended by
+Goldstine since 1977 even if it originated independently. The
+difference is that we prove Greibach's representation theorem by making our 
+automaton deterministic by going from output monoids to {\em monoid
+rings}. Doing so you get the theorem of Shamir in a natural way and from this
+the theorem of Greibach.
 
 From the theorem of Shamir you can get quite easily the algorithm of Valiant for
 deciding the word problem of context-free languages. Because of lack of space
 this could not be included into this book, the same holds for the treatment of
 the  deterministic languages.
 
-We want to emphasize another advantage of this development of the theory: As
-known, the exact formalization of the notion of ''derivation'' when using
-grammars brings some difficulties. In our theory, the ''derivation tree''
-corresponds to a path in our graph.
+We want to emphasize at this point another advantage of this development of the
+theory: As known, the exact formalization of the notion of {\em derivation}
+when using grammars brings some difficulties. In our theory, the {\em derivation
+tree} corresponds to a path in our graph.
 
 Maybe the use of non-free monoids is initially a problem for readers not used to
 it. But it seems to be the case that defining context-free
-languages in that way supports the intuition. For example, the usage of ''syntax
-diagrams'' for the definition of programming languages gives some evidence for
-this.
+languages in that way supports the intuition. For example, the usage of
+{\em syntax diagrams} for the definition of programming languages gives some
+evidence for this.
 
 Because we judge the former as rather important, we want to explain it on a
-specific example, namely the so-called {\bf Dyck language}.
+specific example, the so-called {\bf Dyck language}.
+
+\transrem{Sometimes the Dyck-language is defined such that corresponding
+brackets are symmetric and the language defined here is then called Semi-Dyck
+language}
 
 The {\bf Dyck language} $D(X_k)$ contains the correctly nested bracket sequences
-over $k$ different pairs of brackets, where $k \in \mathbb{N}$.
+over $k$ different pairs of brackets, $k \in \mathbb{N}$.
 
-A formal definition of $D(X_k)$ is as follows:
+A formal definition of $D(X_k)$ is:
 
 Let $X_k = \{ x_1, \ldots, x_k \}$ be an alphabet of $k$ elements. Define
-$\bar{X}_k = \{ \bar{x}_1, \ldots, \bar{x}_k \}$ such that $\bar{x}_i$ is regarded as the
-closing bracket for $x_i$.
+$\bar{X}_k = \{ \bar{x}_1, \ldots, \bar{x}_k \}$ such that $\bar{x}_i$ is regarded 
+as the closing bracket for $x_i$.
 
 Then it holds:
-
 \begin{enumerate}
   \item $\epsilon \in D(X_k)$
   \item $u, v \in D(X_k) \Rightarrow u \cdot v \in D(X_k)$
-  \item $u \in D(X_k) \Rightarrow x_i \cdot u \cdot \bar{x}_i \in D(X_k),\quad
-  \forall i = 1, \ldots, k$
+  \item $u \in D(X_k) \Rightarrow x_i \cdot u \cdot \bar{x}_i \in D(X_k),\quad i
+  = 1, \ldots, k$
   \item $D(X_k)$ is minimal with (1), (2) and (3). 
 \end{enumerate}
 
-For $D(X_k)$ we get the following syntax diagram:
+For $D(X_k)$ we get the following {\em syntax diagram}:
 %TODO: Fix diagram
 
 \begin{center}
@@ -149,34 +163,33 @@ For $D(X_k)$ we get the following syntax diagram:
 \end{tikzpicture}
 \end{center}
 
-If we consider all labellings of paths from $S$ to $F$ we get of course also
-words not contained in $D(X_k)$, for example $x_1 x_2 \bar{x}_k$ or $x_1
-\bar{x}_1 \bar{x}_2$ etc.
+If we consider all labellings of paths from vertex $S$ to vertex $F$ we get of
+course also words not contained in $D(X_k)$ like for example $x_1 x_2
+\bar{x}_k$ or $x_1 \bar{x}_1 \bar{x}_2$ etc.
 
-We have to guarantee that we get Dyck words only. To do that, we define a
-homomorphism from the path category of the graph into the polycyclic monoid over
-$X_k \cup \bar{X}_k$ such that the homomorphic images of the paths from $S$ to
-$F$ have a special form, for example they have to be equal to the unit of the
+We have to guarantee that we get Dyck words only. 
+
+To do that, we define a homomorphism from the paths of the graph into the
+polycyclic monoid over $X_k \cup \bar{X}_k$ such that the homomorphic images of the paths 
+from $S$ to $F$ have a special form, for example are equal to the unit of the
 polycyclic monoid.
 
-Let us consider the word
-\[ x_1 x_2 \bar{x}_2 \bar{x}_1 x_2 \bar{x}_2 \in D(X_2), \]
-then we have different paths
-\[s_{x_1} s_2 s_{x_2} s_{\bar{x}_2} s_3 s_{\bar{x}_1} s_1
-s_{x_2} s_{\bar{x}_2} \] 
+If we consider the word $ x_1 x_2 \bar{x}_2 \bar{x}_1 x_2 \bar{x}_2 \in D(X_2)$
+then we have different paths 
+\[s_{x_1} s_2 s_{x_2} s_{\bar{x}_2} s_3 s_{\bar{x}_1} s_1 s_{x_2} s_{\bar{x}_2} \] 
 and 
-\[s_{x_1} s_2 s_{x_2} s_{\bar{x}_2} s_3
-s_{\bar{x}_1} s_3 s_2 s_{x_2} s_{\bar{x}_2}\]
-which both have this word as their label and we can easily define a
-homomorphism in the sense above.
+\[s_{x_1} s_2 s_{x_2} s_{\bar{x}_2} s_3 s_{\bar{x}_1} s_3 s_2 s_{x_2}
+s_{\bar{x}_2}\] 
+which both have this word as label and we can easily define a homomorphism in
+the sense.
 
-We get different paths in our graph leading to the acceptance of the same word.
+We get in general different paths in our graph leading to the acceptance of the
+same word.
 
 The problem to construct a graph such that for each word in the accepted
 language exactly one path exists leads to the existence of the {\bf
-deterministic} finite automaton with storage.
+deterministic finite automaton with storage}.
 
-\transrem{This type of automaton is also known as ''monoid-automaton''
-and seems to get more attention nowadays. Some results from this book have also
-been redetected, see for example \cite{doi:10.1080/00927870802243580},
-\cite{Render}.}
+\transrem{Finite automata with monoid-storage, also known as
+{\em monoid-automata} have been investigated again in recent years, see for
+example \cite{doi:10.1080/00927870802243580}, \cite{Render}.}

@@ -1,119 +1,121 @@
 \section{Monoid homomorphisms and congruence relations}
 
-\begin{definition}[monoid homomorphism]
+\begin{definition}
 A {\bf monoid homomorphism} (short: homomorphism) from a monoid $M$ to a monoid
-$S$ is a mapping $\Phi : M \to S$ with the following properties:
+$S$ is a mapping $\phi : M \to S$ with:
 \begin{enumerate}
-  \item $\Phi(m_1 \cdot m_2) = \Phi(m_1) \cdot \Phi(m_2), \quad m_1, m_2 \in M$
-  \item $\Phi(1_M) = 1_S$
+  \item $\phi(m_1 \cdot m_2) = \phi(m_1) \cdot \phi(m_2), \quad m_1, m_2 \in M$
+  \item $\phi(1_M) = 1_S$
 \end{enumerate}
 \end{definition}
 
-It can be easily shown: if $M_1 \subset M$ is a submonoid of $M$, then
-$\Phi(M_1)$ is a submonoid of $S$. If $S_1$ is a submonoid of $S$, then
-$\Phi^{-1}(S_1)$ is a submonoid of $M$.
+\transrem{Some publications use even shorter just {\em morphism} but here this
+would lead to a conflict with the morphisms in categories.}
 
-A monoid homomorphism $\Phi : M \to S$ is called
-\begin{description}
-  \item[monomorphism] if $\Phi$ is injective
-  \item[epimorphism] if $\Phi$ is surjective
-  \item[isomorphism] if $\Phi$ is bijective
-\end{description}
+It can be easily shown: if $U \subset M$ is a submonoid of $M$, then
+$\phi(U)$ is a submonoid of $S$. If $V$ is a submonoid of $S$, then
+$\phi^{-1}(V)$ is a submonoid of $M$.
 
-Homomorphisms $\Phi : M \to M$ are called {\bf endomorphisms}, isomorphisms
-$\Phi : M \to M$ are called {\bf automorphisms}.
-
+A monoid homomorphism $\phi: M \to S$ is called
+\begin{eqnarray*}
+\text{\bf monomorphism} & & \text{ if $\phi$ is injective} \\
+\text{\bf epimorphism} & & \text{ if $\phi$ is surjective} \\
+\text{\bf isomorphism} & & \text{ if $\phi$ is bijective} \\
+\text{\bf endomorphism} & & \text{ if $\phi: M\to M$} \\
+\text{\bf automorphism} & & \text{ if $\phi$ is endomorphism and isomorphism} \\
+\end{eqnarray*}
 Monoids $M$ and $S$ are called {\bf isomorphic}, if there exists an
 isomorphism between $M$ and $S$.
 
 Of course, a homomorphism cannot be defined arbitrarily on a monoid $M$.
 Thus the following two questions arise:
 \begin{enumerate}
-  \item If $M_1 \subset M$ is a submonoid and $\Phi_1 : M_1 \to S$ is an arbitrary
-mapping. When is it possible to extend $\Phi_1$ to a homomorphism $\Phi
+  \item If $U \subset M$ is a submonoid and $\phi_1 : U \to S$ is an arbitrary
+mapping. When is it possible to extend $\phi_1$ to a homomorphism $\phi
 : M \to S$\ ?
-	\item If $\Phi_1, \Phi_2$ both are homomorphisms from $M$ to $S$ which
-	coincide on $M_1 \subset M$. In which way can $\Phi_1$ and $\Phi_2$ be
+	\item If $\phi_1, \phi_2$ both are homomorphisms from $M$ to $S$ which
+	coincide on $U \subset M$. In which way can $\phi_1$ and $\phi_2$ be
 	different? 
 \end{enumerate}
 
-The answer to this question of course depends on the structure of $M_1$. If
-$M_1 = \{ 1_M \}$ then $\Phi$ is determined uniquely on $M_1$ but there is
-little information on the relation between $\Phi_1$ and $\Phi2$.
+The answer to this question of course depends on the structure of $U$. If
+$U = \{ 1_M \}$ then $\phi$ is determined uniquely on $U$ but there is
+little information on the relation between $\phi_1$ and $\phi2$.
 
 The following two simple theorems which can be found in introductory algebra
-books are holding:
+books hold:
 \begin{enumerate}
-  \item If $M_1$ is a generating system of $M$ and $\Phi_1, \Phi_2 : M \to S$
-  both are monoid homomorphisms which coincide on $M_1$, then $\Phi1 = \Phi_2$.
-  \item If $A$ is a set and $M = A^*$, and $\Phi_1 : A \to S$ is an arbitrary
-  mapping, then there exists exactly one continuation $\Phi$ from $\Phi_1$ which
-  is a monoid homomorphism from $A^*$ to $S$.
+  \item If $A$ is a generating system of $M$ and $\phi_1, \phi_2 : M \to S$ are
+  monoid homomorphisms which coincide on $A$, then $\phi_1 = \phi_2$.
+  \item If $A$ is a set, $M = A^*$, and $\phi_1 : A \to S$ is an arbitrary
+  mapping, then there exists a unique continuation $\phi$ of $\phi_1$ which is
+  a monoid homomorphism from $A^*$ to $S$.
 \end{enumerate}
 
-\begin{definition}[free generating system, free monoid]
+\begin{definition}
 A subset $A \subset M$ is called a {\bf free generating system} of $M$, if each
-mapping $\Phi_1 : A \to S$, where $S$ is an arbitrary monoid, can be continued
-to a monoid homomorphims in a unique way. A monoid with a free generating system
-is called a {\bf free monoid}.
+mapping $\phi_1 : A \to S$, where $S$ is an arbitrary monoid, can be continued
+to a monoid homomorphims in a unique way. 
+
+A monoid with a free generating system is called a {\bf free monoid}.
 \end{definition}
 
 $A^*$ therefore is a free monoid and $A$ is a free generating system of $A^*$.
 
-It holds also: If $A$ is a free generating system of $M$ and $A^*$ is the monoid
+It holds too: If $A$ is a free generating system of $M$ and $A^*$ is the monoid
 of words (string) over $A$, then $A^*$ and $M$ are isomorphic.
 
-A free monoid has at most one free generating system. From that we can see that
-the length $|w|$ of a word $w \in A^*$ can be defined in a unique way for any
+A free monoid has at most one free generating system (exercise. From that one
+can see that the length $|w|$ of a word $w \in A^*$ can be defined in a unique way for any
 free monoid.
 
-The length mapping $L$ is an example for a monoid homomorphism $L : A^* \to
+The length function $L$ is an example for a monoid homomorphism $L : A^* \to
 \mathbb{N}$.
 
-If $\Phi : M \to S$ is a monoid homomorphism, then the sets 
-\[\{ \Phi^{-1}(s) \mid s \in S \} \subset Pot(M)\]
-form a monoid isomorphic to $\Phi(M)$.
+If $\phi : M \to S$ is a monoid homomorphism, then the sets 
+\[\{ \phi^{-1}(s) \mid s \in S \} \subset Pot(M) \]
+form a monoid isomorphic to $\phi(M)$ (exercise).
 
-We want to handle now the following question:
+We want to investigate now the following problem:
 
 Let $M$ be a monoid, $L \subset M$ be any subset of $M$. Does there exist a
-monoid $S$ and a homomorphism $\Phi : M \to S$ with the following property:
-There exists an $s \in S$ with $L \subset \Phi^{-1}(s)$?
+monoid $S$ and a homomorphism $\phi : M \to S$ with the following property:
+There exists an $s \in S$ with $L \subset \phi^{-1}(s)$?
 
-Of course, there always exists such an $S$: Choose $S = \{1\}$ and $\Phi(M) =
-\{1\}$.
+Of course, there always exists such an $S$: Choose $S = \{ 1 \}$ and $\phi(M) =
+\{1\}$. Therefore we strengthen our task: 
 
-Therefore we strengthen our task: Find $S$ and $\Phi$ such that $L \subset
-\Phi^{-1}(S)$ and for each other homomorphism $\Psi$ with that property holds:
-$L \subset \Psi^{-1}(S') \Rightarrow \Phi^{-1}(S) \subset \Psi^{-1}(S')$.
+Find $S$ and $\phi$ such that $L \subset \phi^{-1}(S)$ and for each other
+homomorphism $\Psi$ with that property holds:
+\[ L \subset \Psi^{-1}(S') \Rightarrow \phi^{-1}(S) \subset \Psi^{-1}(S') \]
 
 We want to describe $L$ as close as possible by a monoid homomorphism.
 
-Such an $S$ and $\Phi$ exists for each $L \subset M$ (see Algebra text), it is
+Such an $S$ and $\phi$ exists for each $L \subset M$ (see Algebra text), it is
 named $synt_M(L)$ an is constructed as follows:
 
-\begin{definition}[syntactic congruence]
+\begin{definition}
 Let $M$ be a monoid and $L \subset M$. For $a, b \in M$ we define
-\[ a \equiv b\ (L) \Leftrightarrow \mbox{for all}\ u, v \in M: u \cdot a \cdot v
-\in L \Leftrightarrow u \cdot b \cdot v \in L
-\]
+\[ a \equiv b (L) \iff \text{for all }u, v \in M: u \cdot a \cdot v \in L
+\Leftrightarrow u \cdot b \cdot v \in L \]
 \end{definition}
 
 $\equiv (L)$ is a congruence relation, it holds:
 \begin{enumerate}
   \item Let $[a]_L = \{ b \in M \mid a \equiv b\ (L) \}$\ then\ $b \in [a]_L
   \Rightarrow [a]_L = [b]_L $
-  \item If we define $[a]_L \cdot [b]_L := [a b]_L$\ (complex product), then
-  \[synt_M(L) = \{ [a]_L \mid a \in M \}\] becomes a monoid and the mapping
-  \[\Psi_L : M \to synt_M(L),\ \Psi_L(a) = [a]_L\]
+  \item If we define $[a]_L \cdot [b]_L := [a \cdot b]_L$\ (complex product),
+  then \[synt_M(L) = \{ [a]_L \mid a \in M \}\] becomes a monoid under this
+  operation and the mapping \[\phi_L : M \to synt_M(L),\ \phi_L(a) = [a]_L\]
    is a monoid epimorphism.
 \end{enumerate}
 
 We call $\equiv (L)$ the {\bf syntactic congruence} of $L$ and $synt_M(L)$ the
-{\bf syntactic monoid} of $L$ wrt. $M$.
+{\bf syntactic monoid} of $L$ with respect to $M$.
 
-To motivate the name ''syntactic monoid'' we give an example from German
+To motivate the name {\em syntactic monoid} we give an example from German
 language.
+
 Let $A$ be the alphabet of German and $L$ the set of sentences in German. One can
 denote two words $w_1$ and $w_2$ as congruent if they can always be exchanged in
 each german sentence. There exist words that cannot always be exchanged. In the
@@ -124,5 +126,29 @@ l''.
 The difficulty is of semantic nature. If you don't consider semantic correctness
 of sentences you get a classification of words wrt. their syntactic meaning.
 
-The important notion of ''syntactic congruence'' has been introduced by M. P.
+\transrem{I fear this example makes not a lot of sense in this translation}
+
+The important notion of ''syntactic congruence'' has been introduced by M.\ P.\
 Schützenberger in the context of coding problems.
+
+{\bf Exercise:} Prove the following 
+\begin{theorem}
+It is decidable if a monoid homomorphism $\alpha$ is injective.
+\end{theorem}
+
+Hint: Let $\alpha: A^* \to B^*$ be a given monoid homomorphism, $A =
+\{a_1,\ldots,a_n\},\ E = \{\alpha(a_1),\ldots,\alpha(a_n)\}$.
+
+Consider $A_1 := \{ u^{-1} v \in B^* \mid u, v \in E,\ u\neq v \}$ and then
+inductively $A_{k+1} = A_k^{-1} E \cup E A_k$.
+
+Prove that
+\begin{enumerate}
+  \item The construction of the $A_k$ halts
+  \item $1 \in \cup A_k \iff \alpha\text{ is not injective}$.
+\end{enumerate}
+
+
+\begin{corollary}
+In a free monoid it is decidable if a finite set is a free generating system.
+\end{corollary}

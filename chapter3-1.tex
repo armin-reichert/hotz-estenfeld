@@ -7,7 +7,7 @@ automaton with pushdown-store}.
 For preparation we remember theorem 2 from chapter II.8
 
 \begin{theorem}
-For a finite automaton $\fa{A} = (G, X^{[*]}, S, F, \alpha)$ it holds:
+For a finite automaton $\fa{A} = (G, \hgroup{X}, S, F, \alpha)$ it holds:
 \[ X^* \cap |L_{\fa{A}}| \in REG(X^*) \]
 \end{theorem}
 
@@ -16,13 +16,12 @@ Remark: From this theorem the following claims can be derived (exercise):
   \item With the same assumptions it holds $|L_{\fa{A}}| \in REG((X\cup
   X^{-1})^*)$
   \item Corresponding theorems hold for the free group $F(X)$ and the polycyclic
-  monoid \pocymon{X} instead of $X^{[*]}$.
+  monoid \pocymon{X} instead of \hgroup{X}.
 \end{enumerate}
-
   
 We want to introduce now the finite automaton with pushdown store. We define
-\begin{definition}[simple pushdown-store]
-$\mathcal{K} = (X, Y, \delta)$ is called a {\bf simple pushdown-store} with
+\begin{definition}
+$\mathcal{K} = (X, Y, \delta)$ is called {\bf simple pushdown-store} with
 input $X^*$ and stack-monoid $Y^*$ if
 \begin{itemize}
   \item[(K1)] $\delta: X \times Y^* \to Y^*$ is a mapping with
@@ -40,7 +39,7 @@ $\delta' = \delta |_{X \times (Y \cup \{\epsilon\})}$. Each such mapping can be
 continued using (K2) onto $X \times Y^*$ such that one gets a simple
 pushdown-store.
 
-We continue $\delta$ onto $X^* \times Y^*$ by defining
+We extend $\delta$ onto $X^* \times Y^*$ by defining
 \begin{eqnarray*}
 \delta(\epsilon, u) & = & u \\
 \delta(x v, u) & = & \delta(v,  \delta(x,u))
@@ -48,16 +47,91 @@ We continue $\delta$ onto $X^* \times Y^*$ by defining
 
 The following lemma holds:
 \begin{lemma}
-For $u \in X^{[*]}$
+For $u \in \hgroup{X}$ there exists a pushdown-store
+\[ \mathcal{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
+with $|u| = \delta(u, \epsilon)$.
 \end{lemma}
 
+\begin{proof}
+Define
+\begin{eqnarray*}
+\delta(x, \epsilon) & = & x,\ x\in \unioninv{X}\\
+\delta(x, y) & = & x y,\ x\neq y^{-1}\\
+\delta(x^{-1}, x) & = & \epsilon,\ x\in X
+\end{eqnarray*}
+
+Let $u\in (\unioninv{X})^*$ and $u = x_1^{\epsilon_1} \cdots x_n^{\epsilon_n}$
+with $x_i\in X,\ \epsilon_i\in \{1, -1\}$.
+
+For the sequence $y_1 = \delta(x_1^{\epsilon_1}, \epsilon),\ y_2 =
+\delta(x_2^{\epsilon_2}, y_1), \ldots,\ y_n = \delta(x_n^{\epsilon_n}, y_{n-1})$
+it holds: $y_n = |u|$ (exercise).
+\end{proof}
+
+Remark:
+\begin{enumerate}
+  \item The lemma holds also for the free group $F(X)$.
+  \item The lemma does not hold for the polycyclic monoid $\pocymon{X}$
+  (exercise).
+\end{enumerate}
+
+The reader should extend the definition of the pushdown-store to a
+pushdown-store with 0 such that the lemma holds also for the polycyclic monoid
+$\pocymon{X}$.
+
+We can now define the finite automaton with pushdown-store.
+
+\begin{definition}
+$\kappa = (\fa{A}, \mathcal{K})$ is called {\bf finite automaton with
+pushdown-store} or short {\bf PDA}, if $\fa{A} = (G, X, S, F, \alpha)$ is a
+finite automaton with graph $G = (V, E)$ and $\mathcal{K} = (E, Y,\delta)$ is a
+simple pushdown-store.
+\end{definition}
+
+Two sets are assigned to the PDA $\kappa$, the {\bf pushdown class}
+$KKL(\kappa)$ which is the set of possible words on the pushdown-store when
+$\fa{A}$ accepts a word, and the {\bf accepted language} $L_\kappa$ which is the
+set of input words accepted with empty pushdown-store.
+
+Formally:
+\begin{eqnarray*}
+KKL(\kappa) &:=& \{ \delta(\pi, \epsilon) \mid \pi \in \pathcat{G}(S, F) \} \\
+L_\kappa &:=& \{ \alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
+\epsilon) = \epsilon \}
+\end{eqnarray*}
+
+\begin{definition}
+\[ ALG(X_\infty^*) := \{ L \subset X_\infty^* \mid \text{there exists a PDA
+$\kappa$ with $L = L_\kappa$} \]
+is called the class of {\bf algebraic languages}.
+\end{definition}
+
+The pushdown-class $KKL(\kappa)$ is an example for our concept of generalizing
+the finite automata by changing the monoid. If we assign to each $x\in X$ a
+mapping $\delta_x: Y^* \to Y^*$, then we can represent $\kappa$ by
+\[ \mathcal{B} = (G, M, S, F, \beta) \]
+where $M = \{ \delta_x \mid x\in X \}^*$ and $\beta(x) = \delta_x$.
+
+It holds:
+\[ L_{\fa{B}}(\epsilon) := \{ \beta(\pi)(\epsilon) \mid \pi \in
+\pathcat{G}_{\fa{B}}(S, F) \} = KKL(\kappa) \]
+
+As our main result we get
+\begin{theorem}
+\[ KKL(\kappa) \in REG(Y^*) \]
+\end{theorem}
+
+\begin{proof}
+Before starting with the formal proof we want to explain the construction of the
+automaton for $KKL(\kappa)$ using an example.
+
+Let $\pi = (e_1 e_2 e_3 e_4 e_5 e_6 e_7 e_8)$ a path from \pathcat{G} and the
+pushdown-store be empty initially.
+
+$\delta$ shall be defined as follows:
 
 
-
-
-
-
-
+\end{proof}
 
 
 

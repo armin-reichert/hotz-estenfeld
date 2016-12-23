@@ -1,8 +1,8 @@
-\section{The finite automaton with pushdown-store}
+\section{The finite automaton with pushdown store}
 
 We investigate now a second example (after the 2-way automaton) that represents
 a generalization of the finite automaton in our concept, the {\bf finite
-automaton with pushdown-store}.
+automaton with pushdown store}.
 
 For preparation we remember theorem 2 from chapter II.8
 
@@ -21,7 +21,7 @@ Remark: From this theorem the following claims can be derived (exercise):
   
 We want to introduce now the finite automaton with pushdown store. We define
 \begin{definition}
-$\mathcal{K} = (X, Y, \delta)$ is called {\bf simple pushdown-store} with
+$\mathcal{K} = (X, Y, \delta)$ is called {\bf simple pushdown store} with
 input $X^*$ and stack-monoid $Y^*$ if
 \begin{itemize}
   \item[(K1)] $\delta: X \times Y^* \to Y^*$ is a mapping with
@@ -34,10 +34,10 @@ input $X^*$ and stack-monoid $Y^*$ if
 \end{itemize}
 \end{definition} 
 
-Obviously the simple pushdown-store $\mathcal{K}$ is uniquely determined by
+Obviously the simple pushdown store $\mathcal{K}$ is uniquely determined by
 $\delta' = \delta |_{X \times (Y \cup \{\epsilon\})}$. Each such mapping can be
 continued using (K2) onto $X \times Y^*$ such that one gets a simple
-pushdown-store.
+pushdown store.
 
 We extend $\delta$ onto $X^* \times Y^*$ by defining
 \begin{eqnarray*}
@@ -47,7 +47,7 @@ We extend $\delta$ onto $X^* \times Y^*$ by defining
 
 The following lemma holds:
 \begin{lemma}
-For $u \in \hgroup{X}$ there exists a pushdown-store
+For $u \in \hgroup{X}$ there exists a pushdown store
 \[ \mathcal{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
 with $|u| = \delta(u, \epsilon)$.
 \end{lemma}
@@ -75,28 +75,28 @@ Remark:
   (exercise).
 \end{enumerate}
 
-The reader should extend the definition of the pushdown-store to a
-pushdown-store with 0 such that the lemma holds also for the polycyclic monoid
+The reader should extend the definition of the pushdown store to a
+pushdown store with 0 such that the lemma holds also for the polycyclic monoid
 $\pocymon{X}$.
 
-We can now define the finite automaton with pushdown-store.
+We can now define the finite automaton with pushdown store.
 
 \begin{definition}
 $\kappa = (\fa{A}, \mathcal{K})$ is called {\bf finite automaton with
-pushdown-store} or short {\bf PDA}, if $\fa{A} = (G, X, S, F, \alpha)$ is a
+pushdown store} or short {\bf PDA}, if $\fa{A} = (G, X, S, F, \alpha)$ is a
 finite automaton with graph $G = (V, E)$ and $\mathcal{K} = (E, Y,\delta)$ is a
-simple pushdown-store.
+simple pushdown store.
 \end{definition}
 
 Two sets are assigned to the PDA $\kappa$, the {\bf pushdown class}
-$KKL(\kappa)$ which is the set of possible words on the pushdown-store when
+$KKL(\kappa)$ which is the set of possible words on the pushdown store when
 $\fa{A}$ accepts a word, and the {\bf accepted language} $L_\kappa$ which is the
-set of input words accepted with empty pushdown-store.
+set of input words accepted with empty pushdown store.
 
 Formally:
 \begin{eqnarray*}
-KKL(\kappa) &:=& \{ \delta(\pi, \epsilon) \mid \pi \in \pathcat{G}(S, F) \} \\
-L_\kappa &:=& \{ \alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
+KKL(\kappa) &:=& \{ \delta(\pi, \epsilon) \mid \pi \in \pathcategory{G}(S, F) \} \\
+L_\kappa &:=& \{ \alpha(\pi) \mid \pi \in \pathcategory{G}(S, F),\ \delta(\pi,
 \epsilon) = \epsilon \}
 \end{eqnarray*}
 
@@ -109,12 +109,12 @@ is called the class of {\bf algebraic languages}.
 The pushdown-class $KKL(\kappa)$ is an example for our concept of generalizing
 the finite automata by changing the monoid. If we assign to each $x\in X$ a
 mapping $\delta_x: Y^* \to Y^*$, then we can represent $\kappa$ by
-\[ \mathcal{B} = (G, M, S, F, \beta) \]
+\[ \fa{B} = (G, M, S, F, \beta) \]
 where $M = \{ \delta_x \mid x\in X \}^*$ and $\beta(x) = \delta_x$.
 
 It holds:
 \[ L_{\fa{B}}(\epsilon) := \{ \beta(\pi)(\epsilon) \mid \pi \in
-\pathcat{G}_{\fa{B}}(S, F) \} = KKL(\kappa) \]
+\pathcategory{G}(S, F) \} = KKL(\kappa) \]
 
 As our main result we get
 \begin{theorem}
@@ -125,12 +125,57 @@ As our main result we get
 Before starting with the formal proof we want to explain the construction of the
 automaton for $KKL(\kappa)$ using an example.
 
-Let $\pi = (e_1 e_2 e_3 e_4 e_5 e_6 e_7 e_8)$ a path from \pathcat{G} and the
-pushdown-store be empty initially.
+Let $\pi = (e_1 e_2 e_3 e_4 e_5 e_6 e_7 e_8)$ a path from \pathcategory{G} and the
+pushdown store be empty initially.
 
 $\delta$ shall be defined as follows:
+\[\begin{array}{r@{\,=\,}l@{\qquad}r@{\,=\,}l@{\qquad}r@{\,=\,}l}
+\delta(s_1,\epsilon)&y_1 & \delta(s_2,y_1)&y_1y_2 & \delta(s_3,y_2)&y_2y_3 \\
+\delta(s_4,y_3)&\epsilon & \delta(s_5,y_2)&y_2y_4 & \delta(s_6,y_4)&\epsilon \\
+\delta(s_7,y_2)&\epsilon & \delta(s_8,y_1)&y_1y_5
+\end{array}\]
 
+We assign to the computation of the pushdown store a word $w' \in (Y\cup
+Y^{-1})^*$. The reduced word is the current content of the pushdown store,
+hereby we have to guess in $w'$ the last symbol of the reduced word
+(corresponds to the symbol on top of the stack).
 
+Let a path $\pi \in \pathcategory{G},\ G=(V,E),$ be of the form
+\[ \edge{e_1} \edge{e_2} \edge{e_3} \edge{e_4} \edge{e_5} \edge{e_6} \edge{e_7}
+\edge{e_8} \]
+
+In the automaton to be constructed we will have the following marking
+\[ \edge{y_1} \edge{y_1^{-1} y_1 y_2} \edge{y_2^{-1} y_2 y_3} \edge{y_3^{-1}
+y_2^{-1} y_2} \edge{y_2^{-1} y_2 y_4} \edge{y_4^{-1} y_2^{-1} y_2}
+\edge{y_2^{-1} y_1^{-1} y_1} \edge{y_1^{-1} y_1 y_5}
+\]
+
+The first inverse on each edge label is used to ''guess'' the top symbol on
+the stack.
+
+The corresponding stack contents are:
+\[ y_1 \qquad y_1 y_2 \qquad y_1 y_2 y_3 \qquad y_1 y_2 \qquad y_1 y_2 y_4
+\qquad y_1 y_2 \qquad y_1 \qquad y_1 y_5 \qquad \]
+
+By multiplying the edge labels and applying the cancellation rules one gets the
+stack contents.
+
+We want to execute this idea formally:
+
+For the proof we construct an automaton $\fa{C}$ over the H-group $\hgroup{Y_0}$
+where $Y_0 := Y \cup \{y_0\},\ y_0 \notin Y$ and the property
+\[ Y_0^* \cap |L_{\fa{C}}| = y_0 \cdot KKL(\kappa) \]
+
+From theorem 1 then follows that $y_0 \cdot KKL(\kappa)$ is regular and from
+this follows immediately $KKL(\kappa) \in REG(Y^*)$.
+
+\transrem{The proof in the book was completely unreadable without the remarks
+and figures which have been added here.}
+
+We define the finite automaton $\fa{C}$ as follows:
+\[ \fa{C} = (G', \hgroup{Y_0}, S_0, F, \gamma) \]
+
+The graph $G'=(V',E')$ is defined by $V' = V \cup \{s_0\},\ s_0 \notin V$,
 \end{proof}
 
 

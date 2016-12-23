@@ -23,7 +23,7 @@ Proof:
 
 ''$\lang{A} = \emptyset$?'':
 
-Because of $\lang{A} = \emptyset \Leftrightarrow \pathcat{G}(S, F) =
+Because of $\lang{A} = \emptyset \Leftrightarrow \pathcategory{G}(S, F) =
 \emptyset$ this is a decidable problem (reachability in a finite graph). The
 formal proof is up to the reader.
 
@@ -65,7 +65,7 @@ mappings between finite automata are called {\bf automata homomorphisms}.
 \begin{definition}
 Let $\fa{A}, \fa{A'}$ be finite automata. A functor $\beta = (\beta', \beta'')$
 is called an {\bf automata homomorphism}, if
-\[ \beta' = (\pathcat{G}, \pathcat{G'}, \beta'_1, \beta'_2) \]
+\[ \beta' = (\pathcategory{G}, \pathcategory{G'}, \beta'_1, \beta'_2) \]
 is a functor,
 \[ \beta'': X^* \to X'^*	\]
 is a monoid homomorphism, and the axioms (A1) and (A2) hold:
@@ -73,9 +73,9 @@ is a monoid homomorphism, and the axioms (A1) and (A2) hold:
   \item[(A1)] The following diagram commutes:
   
   \begin{tikzcd}[column sep=large]
-  \pathcat{G} \arrow[r, "\alpha"] \arrow[d, "\beta'"] & X^* \arrow[d, "\beta''"]
+  \pathcategory{G} \arrow[r, "\alpha"] \arrow[d, "\beta'"] & X^* \arrow[d, "\beta''"]
   \\
-  \pathcat{G'} \arrow[r, "\alpha'"] & X'^*
+  \pathcategory{G'} \arrow[r, "\alpha'"] & X'^*
   \end{tikzcd}
   
   \item[(A2)] $\beta'_1(S) = S'$ and $\beta'_1(F) = F'$. 
@@ -94,7 +94,7 @@ It holds:
 
 \begin{theorem}
 Given an automata homomorphism $\beta: \fa{A} \to \fa{A'}$. If
-\[\beta_2(\pathcat{G}(S,F)) = \pathcat{G'}(S',F')\]
+\[\beta_2(\pathcategory{G}(S,F)) = \pathcategory{G'}(S',F')\]
 then $\beta''(\lang{A}) = \lang{A'}$.
 \end{theorem}
 
@@ -102,9 +102,9 @@ Proof:
 
 ''$\subset$'':
 
-Let $u \in \lang{A}$, then there exists a path $\pi \in \pathcat{G}(S, F)$
+Let $u \in \lang{A}$, then there exists a path $\pi \in \pathcategory{G}(S, F)$
 labelled with $u$, i.e. $\alpha(\pi) = u$. Because $\beta_2(\pi) \in
-\pathcat{G'}(S',F')$ by assumption, it follows $\alpha'(\beta_2(\pi)) \in
+\pathcategory{G'}(S',F')$ by assumption, it follows $\alpha'(\beta_2(\pi)) \in
 \lang{A'}$.
 
 Because of the commutativity of the diagram it follows $ \alpha'(\beta_2(\pi))
@@ -113,10 +113,10 @@ Because of the commutativity of the diagram it follows $ \alpha'(\beta_2(\pi))
 
 ''$\supset$'':
 
-Let $u' \in \lang{A'}$. Then there exists a path $\pi' \in \pathcat{G'}(S', F')$
+Let $u' \in \lang{A'}$. Then there exists a path $\pi' \in \pathcategory{G'}(S', F')$
 that is labeled with $u'$: $\alpha'(\pi') = u'$.
 
-Because $\beta_2$ is surjective on $\pathcat{G'}(S', F')$ it follows: there
+Because $\beta_2$ is surjective on $\pathcategory{G'}(S', F')$ it follows: there
 exists a path $\pi$ with $\beta_2(\pi) = \pi'$ and because $\beta$ is a functor
 it follows $\alpha(\pi) \in \lang{A}$.
 
@@ -130,7 +130,7 @@ Together this proves \[ \lang{A'} = \beta''(\lang{A}) \]
 Let $\fa{A}$ and $\fa{A'}$ be finite automata.
 
 A homomorphism $\beta : \fa{A \to \fa{A'}}$ is called a {\bf reduction} from
-$\fa{A}$ to $\fa{A'}$ if \[ \beta_2(\pathcat{G}(S, F)) = \pathcat{G'}(S', F') \]
+$\fa{A}$ to $\fa{A'}$ if \[ \beta_2(\pathcategory{G}(S, F)) = \pathcategory{G'}(S', F') \]
 and $\beta'' = id_{X^*}$.
 
 $\beta$ is a {\bf length-preserving reduction}, if it is a reduction and the
@@ -373,20 +373,20 @@ Without loss of generality we show the claim for $\beta_{\fa{A}}$ only.
 With $\beta''_{\fa{A}}$ the equation above holds.
 \item $\beta_{\fa{A}}(S_{\fa{C}}) = S_{\fa{A}}$ and $\beta_{\fa{A}}(F_{\fa{C}})
 = F_{\fa{A}}$ holds by definition
-\item $\beta_{\fa{A}}\Big(\pathcat{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})\Big)
-\stackrel{!}{=} \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}})$
+\item $\beta_{\fa{A}}\Big(\pathcategory{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})\Big)
+\stackrel{!}{=} \pathcategory{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}})$
 \end{enumerate}
 
-Let $\pi \in \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}})$ be an accepting path.
+Let $\pi \in \pathcategory{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}})$ be an accepting path.
 We have to show that there exists an accepting path $\pi' \in
-\pathcat{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})$ with $\beta_{\fa{A}}(\pi') = \pi$.
+\pathcategory{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})$ with $\beta_{\fa{A}}(\pi') = \pi$.
 
 Because $\gamma_{\fa{A}}$ is a reduction, there exists an accepting path
-$\pi_{\fa{D}} \in \pathcat_{\fa{D}}(S_{\fa{D}}, F_{\fa{D}})$ with
+$\pi_{\fa{D}} \in \pathcategory_{\fa{D}}(S_{\fa{D}}, F_{\fa{D}})$ with
 $\gamma_{\fa{A}}(\pi) = \pi_{\fa{D}}$.
 
 Further there exists an accepting path $\pi_{\fa{B}} \in
-\pathcat{G_{\fa{B}}}(S_{\fa{B}}, F_{\fa{B}})$ with
+\pathcategory{G_{\fa{B}}}(S_{\fa{B}}, F_{\fa{B}})$ with
 $\gamma_{\fa{B}}(\pi_{\fa{B}}) = \pi_{\fa{D}}$, because $\gamma_{\fa{B}}$ is a
 reduction (and therefore is surjective).
 
@@ -400,12 +400,12 @@ Because $\gamma_{\fa{A}}$ and $\gamma_{\fa{B}}$ are length-preserving it follows
 with $e'_i \in E_{\fa{B}}$.
 
 Now create the path $\pi_{\fa{C}} = (e_1, e'_1) \cdots (e_n, e'_n) \in
-\pathcat{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})$.
+\pathcategory{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})$.
 
-\[ \Rightarrow \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}}) \subset
-\beta_{\fa{A}}(\pathcat_{\fa{C}}(S_{\fa{C}}, F_{\fa{C}})) \]
-\[ \Rightarrow \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}}) =
-\beta_{\fa{A}}(\pathcat_{\fa{C}}(S_{\fa{C}}, F_{\fa{C}})) \]
+\[ \Rightarrow \pathcategory{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}}) \subset
+\beta_{\fa{A}}(\pathcategory_{\fa{C}}(S_{\fa{C}}, F_{\fa{C}})) \]
+\[ \Rightarrow \pathcategory{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}}) =
+\beta_{\fa{A}}(\pathcategory_{\fa{C}}(S_{\fa{C}}, F_{\fa{C}})) \]
 \end{proof}
 
 We want to treat again the question from the beginning of this section: How do
@@ -702,7 +702,7 @@ card(V)$.
 In our lemma we even proved a bit more:
 
 Let $\rho_1 : V \to X^*/L$ with $\rho_1(v) = [u]_L$, if $\pi \in
-\pathcat{G}(S, V)$ where $Z(\pi) = v$ and $\alpha(\pi) = u$ be the mapping from
+\pathcategory{G}(S, V)$ where $Z(\pi) = v$ and $\alpha(\pi) = u$ be the mapping from
 the lemma. Then it holds
 
 \begin{lemma}

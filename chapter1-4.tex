@@ -176,15 +176,15 @@ start point of the second path. Obviously it holds:
   	\end{eqnarray*}
 \end{enumerate}
 
-We denote the set of paths of a graph $G$ with $\pathcat{G}$. $\pathcat{G}$ is called the 
+We denote the set of paths of a graph $G$ with $\pathcategory{G}$. $\pathcategory{G}$ is called the 
 {\bf path category} of $G$ and in this context $G$ is also called a {\bf
-schema}. $\pathcat{G}$ is an important special case of a category.
+schema}. $\pathcategory{G}$ is an important special case of a category.
 
-\transrem{The letter $\mathcal{W}$ comes from the German word ''Wegekategorie''
+\transrem{The letter $\mathfrak{W}$ comes from the German word ''Wegekategorie''
 (path category).}
 
 Notation: 
-\[ \pathcat{G}(v, v') := \{ \pi \in \pathcat{G} \mid Q(\pi) = v,\ Z(\pi) = v' \}
+\[ \pathcategory{G}(v, v') := \{ \pi \in \pathcategory{G} \mid Q(\pi) = v,\ Z(\pi) = v' \}
 \]
 
 Categories are algebraic structures with a {\em partial} operation.
@@ -296,7 +296,7 @@ tree two edges go out which are labeled with $f$ and $g$.
 $G_2 = (V_2, E_2)$ consists of a single point $v_0$ and two loops labeled with
 $f$ and $g$ respectively.
 
-Consider the path categories $\pathcat{G_1}$ and $\pathcat{G_2}$. For $v
+Consider the path categories $\pathcategory{G_1}$ and $\pathcategory{G_2}$. For $v
 \in V_1$ define $\phi_1(v) := v_0$ and $\phi_2(1_P) := 1_{P_0}$.
 
 For the edges $e \in E_1$ define
@@ -305,11 +305,11 @@ For the edges $e \in E_1$ define
 	g & \text{if $e$ is marked with $g$}
 \end{cases} \]
 
-Now we define for paths $(v, e_1, \ldots, e_n, v') \in \pathcat{G_1}$:
+Now we define for paths $(v, e_1, \ldots, e_n, v') \in \pathcategory{G_1}$:
 \[ \phi_2((v, e_1, \ldots, e_n, v')) := (v_0, \phi'_2(e_1), \ldots,
 \phi'_2(e_n), v_0) \].
 
-Obviously $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi1, \phi_2)$ is a functor.
+Obviously $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi1, \phi_2)$ is a functor.
 
 It is a special functor because
 \begin{enumerate}
@@ -325,7 +325,7 @@ It is a special functor because
 
 FIGURE
 
-Then there exists a surjective functor from $\pathcat{G_1}$ to $\pathcat{G_2}$.
+Then there exists a surjective functor from $\pathcategory{G_1}$ to $\pathcategory{G_2}$.
 
 It is possible to construct surjective functors which fulfill (2) from example 1
 and other surjective functors which don't.
@@ -348,10 +348,10 @@ We define:
 
 For the units, the defintion of $\phi_2$ is clear. 
 
-One can see that $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$
+One can see that $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi_1, \phi_2)$
 is a functor.
 
-It is remarkable that $\phi_2(\pathcat{G_1})$ is not a category because this
+It is remarkable that $\phi_2(\pathcategory{G_1})$ is not a category because this
 set is not closed under the $\circ$ operation.
 
 \bigskip
@@ -375,7 +375,7 @@ We define:
 \phi_2(g) & 1_3
 \end{array} \]
 
-$\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$ is a functor.
+$\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi_1, \phi_2)$ is a functor.
 
 \bigskip
 {\bf Example 5}: The graph $G$ shall be defined by
@@ -412,21 +412,21 @@ f' = \left( \begin{array}{cc}
 \end{array} \right)
 \]
 
-We consider $\pathcat{G}$ and $MAT(\mathbb{N})$, the category of matrices
+We consider $\pathcategory{G}$ and $MAT(\mathbb{N})$, the category of matrices
 over $\mathbb{N}$.
 
 We define $\phi_1(i) = i$ for $i = 2,3,4$ and $\phi'_2(x) = x'$ for $x \in \{
 a, b, c, d, e, f \}$.
 
 $\phi'_2$ can be extended in a unique way to a mapping $\phi_2 :
-\pathcat{G} \to MAT(\mathbb{N})$ such that $\phi = (\pathcat{G},
+\pathcategory{G} \to MAT(\mathbb{N})$ such that $\phi = (\pathcategory{G},
 MAT(\mathbb{N}), \phi_1, \phi_2)$ is a functor.
 
 \bigskip
 We want to define now some special properties of functors.
 
 \begin{definition}
-Let $G_1, G_2$ be ordered graphs, $\phi = (\pathcat{G_1}, \pathcat{G_2},
+Let $G_1, G_2$ be ordered graphs, $\phi = (\pathcategory{G_1}, \pathcategory{G_2},
 \phi_1, \phi_2)$ a functor. $\phi$ is called {\bf ordered} or {\bf order
 preserving} if it holds:
 
@@ -454,7 +454,7 @@ Define $\phi$ by $\phi_1(v) = v'$ and
 Then $\phi$ respects the ordering in point $v$.
 
 \begin{definition}
-Let $G_1, G_2$ be oriented graphs and $\phi = (\pathcat{G_1}, \pathcat{G_2},
+Let $G_1, G_2$ be oriented graphs and $\phi = (\pathcategory{G_1}, \pathcategory{G_2},
 \phi_1, \phi_2)$ be a functor.
 
 $\phi$ is called {\bf regular} $iff$ the restriction of $\phi_2$
@@ -472,7 +472,7 @@ We slightly weaken the definition of a regular functor by only postulating
 regularity on the outgoing edges.
 
 \begin{definition}
-Let $G_1, G_2$ be oriented graphs and $\phi = (\pathcat{G_1}, \pathcat{G_2},
+Let $G_1, G_2$ be oriented graphs and $\phi = (\pathcategory{G_1}, \pathcategory{G_2},
 \phi_1, \phi_2)$ be a functor.
 
 $\phi$ is called {\bf out-regular}, if the restriction of $\phi_2$
@@ -483,8 +483,8 @@ to the set $\{ e \in E_1\ |\ Q(e) = v \}$ and $\{ e' \in E_2\ |\ Q(e') =
 The following lemma holds (exercise):
 
 \begin{lemma}
-If $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$ is an out-regular
-functor, then \\ $\phi(\pathcat{G_1})$ is a category.
+If $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi_1, \phi_2)$ is an out-regular
+functor, then \\ $\phi(\pathcategory{G_1})$ is a category.
 \end{lemma}
 
 Our next lemma describes a well-known fact from graph theory that has found many
@@ -492,7 +492,7 @@ applications.
 
 \begin{lemma}
 To each circle-free star $G = (V, E)$ relative to a point $v \in V$ there exists
-a tree $B$ and an out-regular functor $(\pathcat{B}, \pathcat{G},
+a tree $B$ and an out-regular functor $(\pathcategory{B}, \pathcategory{G},
 \phi_1, \phi_2)$ mapping the root of the tree $B$ to the point $v$. 
 
 $B$ is uniquely determined up to isomorphisms.

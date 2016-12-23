@@ -5,7 +5,7 @@ In this section we extend the finite automaton with an output which leads to:
 \begin{definition}
 \[ \fa{T} = (G, X, S, F, \alpha, \beta) \] is called a {\bf finite transducer}
 with input alphabet $X$ and output alphabet $Y$ if $(G, X, S, F, \alpha)$ is a
-finite automaton, $G = (V, E)$, and $\beta = (\pathcat{G}, Y^*, \beta_1,
+finite automaton, $G = (V, E)$, and $\beta = (\pathcategory{G}, Y^*, \beta_1,
 \beta_2)$ is a functor.
 \end{definition}
 
@@ -15,7 +15,7 @@ edges $e \in E$.
 $\fa{T}$ computes the {\bf finite transduction}
 \begin{eqnarray*}
 \tau(\fa{T}) & = & \{ (u, v) \in X^* \times Y^* \mid \mbox{there
-exists a path } w \in \pathcat{G}(S, F) \\
+exists a path } w \in \pathcategory{G}(S, F) \\
 & &  \mbox{ with } \alpha(w) = u \mbox{ and } \beta(w) = v \}
 \end{eqnarray*}
 
@@ -24,7 +24,7 @@ transducer $\fa{T'}$ with $|\alpha(e)| = |\beta(e)| = 1$ such that
 $\tau(\fa{T}) = \tau(\fa{T'})$.
 
 A finite transduction can equivalently be written as 
-\[ \tau(\fa{T})(u) = \beta(\alpha^{-1}(u) \cap \pathcat{G}(S, F)),\ u \in X^* \]
+\[ \tau(\fa{T})(u) = \beta(\alpha^{-1}(u) \cap \pathcategory{G}(S, F)),\ u \in X^* \]
 
 We also speak of {\bf rational transduction} instead of finite transduction.
 
@@ -74,7 +74,7 @@ then the image of $L$ under $\tau$ is a regular language over $Y^*$:
 \end{theorem}
 
 Proof: By definition, the image of $L$ can be presented as
-\[ \tau(\fa{T})(L) = \beta\big( \alpha^{-1}(L) \cap \pathcat{G}(S, F) \big) \]
+\[ \tau(\fa{T})(L) = \beta\big( \alpha^{-1}(L) \cap \pathcategory{G}(S, F) \big) \]
 
 $\alpha$ may be continued to a monoid homomorphism from $E^*$, the free monoid
 over the edge set of graph $G$, into $X^*$.
@@ -82,10 +82,10 @@ over the edge set of graph $G$, into $X^*$.
 We already know:
 \begin{eqnarray*}
 \alpha^{-1}(L) \in REG(E^*)    & \mbox{Theorem 2, chapter 2.3} \\
-\pathcat{G}(S, F) \in REG(E^*) & \mbox{Lemma 4, chapter 2.1} \\
-\Rightarrow \alpha^{-1}(L) \cap \pathcat{G}(S, F) \in
+\pathcategory{G}(S, F) \in REG(E^*) & \mbox{Lemma 4, chapter 2.1} \\
+\Rightarrow \alpha^{-1}(L) \cap \pathcategory{G}(S, F) \in
 REG(E^*) & \mbox{Theorem 1, chapter 2.1} \\
-\Rightarrow \beta(\alpha^{-1}(L) \cap \pathcat{G}(S, F)) \in
+\Rightarrow \beta(\alpha^{-1}(L) \cap \pathcategory{G}(S, F)) \in
 REG(Y^*) & \mbox{Theorem 7, chapter 2.1}
 \end{eqnarray*}
 
@@ -97,11 +97,11 @@ $\fa{T}_L$ with \[ \tau(\fa{T}_L)(\{x\}^*) = L \]
 \end{theorem}
 
 Proof: $L \in REG(Y^*) \Rightarrow$ there exists a finite automaton $\fa{B} =
-(G, Y, S, F, \beta),\ G= (V, E)$ with $L = \beta(\pathcat{G}(S, F))$. For $X =
+(G, Y, S, F, \beta),\ G= (V, E)$ with $L = \beta(\pathcategory{G}(S, F))$. For $X =
 \{x\}$ set $\alpha(e) = x$ for all edges $e \in E$.
 
-Then $\alpha^{-1}(X^*) \cap \pathcat{G}(S, F) = \pathcat{G}(S, F)$, from which
-follows \[\beta(\alpha^{-1}(X^*) \cap \pathcat{G}(S, F)) = L\]
+Then $\alpha^{-1}(X^*) \cap \pathcategory{G}(S, F) = \pathcategory{G}(S, F)$, from which
+follows \[\beta(\alpha^{-1}(X^*) \cap \pathcategory{G}(S, F)) = L\]
 
 \begin{theorem}
 If $\tau_1 : X^* \to Y^*$ and $\tau_2 : Y^* \to Z^*$ are finite,
@@ -136,7 +136,7 @@ Y^*,\quad \alpha^{(2)} : E_2^* \to Y^*,\quad \beta^{(2)} : E_2^* \to Z^* \]
 Let
 \[ E_3 := \{ (e_1, e_2) \mid \beta^{(1)}(e_1) = \alpha^{(2)}(e_2) \} \]
 and 
-\[ R_3 := \chi^{-1}(R_1) \times \rho^{-1}(R_2) = \pathcat{}(S_1 \times S_2, F_1
+\[ R_3 := \chi^{-1}(R_1) \times \rho^{-1}(R_2) = \pathcategory{}(S_1 \times S_2, F_1
 \times F_2) \]
 
 with monoid homomorphisms $\chi: e_3^* \to E_1^*$ and $\rho: E_3^* \to E_2^*$.
@@ -194,8 +194,8 @@ Proof: Our assumption is described by the following figure:
 
 \begin{center}
 \begin{tikzcd}[row sep=large]
-& E_1^* \cap \pathcat{G_1}(S_1,F_1) \arrow[dl,"\alpha^{(1)}"']
-\arrow[dr,"\beta^{(1)}"] & & E_2^* \cap \pathcat{G_2}(S_2, F_2)
+& E_1^* \cap \pathcategory{G_1}(S_1,F_1) \arrow[dl,"\alpha^{(1)}"']
+\arrow[dr,"\beta^{(1)}"] & & E_2^* \cap \pathcategory{G_2}(S_2, F_2)
 \arrow[dl,"\alpha^{(2)}"'] \arrow[dr,"\beta^{(2)}"] & \\
 X_1^* \arrow[rr,"\tau(\fa{T}_1)"] & & Y_1^* \arrow[rr,"\tau(\fa{T}_2)"] & &
 Y_2^*

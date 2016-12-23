@@ -50,10 +50,10 @@ v, \ Z(e) = v',\ \alpha(e) = x$)
 This defines a finite acceptor $\fa{A} = (G', X, S, F, \alpha)$.
 
 It is easily seen that
-\[ w \in \pathcat{G'} \Rightarrow Q(w) \derives{G} \alpha(w) \cdot Z(w) \mbox{
+\[ w \in \pathcategory{G'} \Rightarrow Q(w) \derives{G} \alpha(w) \cdot Z(w) \mbox{
  , if } Z(w) \in N\]
 
-For paths $w \in \pathcat{G'}(S, F)$ we get $\alpha(w) \in L$.
+For paths $w \in \pathcategory{G'}(S, F)$ we get $\alpha(w) \in L$.
 
 From this it follows $\lang{A} \subset L(G)$.
 
@@ -64,7 +64,7 @@ exists a sequence of derivation steps
 
 Then there exists a path 
 \[ w' = \big(S, (S,x_1 v_1), (v_1, x_2 v_2), \ldots, (v_{n-1}, x_{n-1} v_{n-1}),
-(v_{n-1}, x_n), F\big) \in \pathcat{G'}(S, F) \]
+(v_{n-1}, x_n), F\big) \in \pathcategory{G'}(S, F) \]
 and the label of this path is
 \[ \alpha(w') = x_1 \cdots x_n = w \]
 
@@ -158,7 +158,7 @@ notion of {\bf Kleene-algebra} which is based on the operations of union,
 complex product and Kleene-star.
 
 A set $\mathcal{A} \in Pot(X_\infty^*)$ is called a {\bf full AFL}, if
-$\mathbb{A}$ is closed under the operations of union, complex product,
+$\mathcal{A}$ is closed under the operations of union, complex product,
 Kleene-star, homomorphisms and inverse homomorphisms and intersection with
 regular languages.
 

@@ -21,7 +21,7 @@ Remark: From this theorem the following claims can be derived (exercise):
   
 We want to introduce now the finite automaton with pushdown store. We define
 \begin{definition}
-$\mathcal{K} = (X, Y, \delta)$ is called {\bf simple pushdown store} with
+$\pdstore{K} = (X, Y, \delta)$ is called {\bf simple pushdown store} with
 input $X^*$ and stack-monoid $Y^*$ if
 \begin{itemize}
   \item[(K1)] $\delta: X \times Y^* \to Y^*$ is a mapping with
@@ -34,7 +34,7 @@ input $X^*$ and stack-monoid $Y^*$ if
 \end{itemize}
 \end{definition} 
 
-Obviously the simple pushdown store $\mathcal{K}$ is uniquely determined by
+Obviously the simple pushdown store $\pdstore{K}$ is uniquely determined by
 $\delta' = \delta |_{X \times (Y \cup \{\epsilon\})}$. Each such mapping can be
 continued using (K2) onto $X \times Y^*$ such that one gets a simple
 pushdown store.
@@ -48,7 +48,7 @@ We extend $\delta$ onto $X^* \times Y^*$ by defining
 The following lemma holds:
 \begin{lemma}
 For $u \in \hgroup{X}$ there exists a pushdown store
-\[ \mathcal{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
+\[ \pdstore{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
 with $|u| = \delta(u, \epsilon)$.
 \end{lemma}
 
@@ -82,9 +82,9 @@ $\pocymon{X}$.
 We can now define the finite automaton with pushdown store.
 
 \begin{definition}
-$\kappa = (\fa{A}, \mathcal{K})$ is called {\bf finite automaton with
+$\kappa = (\fa{A}, \pdstore{K})$ is called {\bf finite automaton with
 pushdown store} or short {\bf PDA}, if $\fa{A} = (G, X, S, F, \alpha)$ is a
-finite automaton with graph $G = (V, E)$ and $\mathcal{K} = (E, Y,\delta)$ is a
+finite automaton with graph $G = (V, E)$ and $\pdstore{K} = (E, Y,\delta)$ is a
 simple pushdown store.
 \end{definition}
 
@@ -121,7 +121,6 @@ As our main result we get
 \[ KKL(\kappa) \in REG(Y^*) \]
 \end{theorem}
 
-\begin{proof}
 Before starting with the formal proof we want to explain the construction of the
 automaton for $KKL(\kappa)$ using an example.
 
@@ -163,19 +162,125 @@ stack contents.
 We want to execute this idea formally:
 
 For the proof we construct an automaton $\fa{C}$ over the H-group $\hgroup{Y_0}$
-where $Y_0 := Y \cup \{y_0\},\ y_0 \notin Y$ and the property
+where $Y_0 := Y \cup \setof{y_0},\ y_0 \notin Y$ and the property
 \[ Y_0^* \cap |L_{\fa{C}}| = y_0 \cdot KKL(\kappa) \]
 
 From theorem 1 then follows that $y_0 \cdot KKL(\kappa)$ is regular and from
 this follows immediately $KKL(\kappa) \in REG(Y^*)$.
 
-\transrem{The proof in the book was completely unreadable without the remarks
-and figures which have been added here.}
+\transrem{The proof in the book was completely unreadable to me. Therefore I
+used new names, added comments and figures.}
 
-We define the finite automaton $\fa{C}$ as follows:
-\[ \fa{C} = (G', \hgroup{Y_0}, S_0, F, \gamma) \]
+\begin{proof}
+Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA with finite automaton
+\[ \fa{A} = (G, X, S, F, \alpha) \]
+with graph $G = (V, E)$ and pushdown store $\pdstore{K}$.
 
-The graph $G'=(V',E')$ is defined by $V' = V \cup \{s_0\},\ s_0 \notin V$,
+We define a finite automaton $\fa{C}$ with the H-group over $Y_0$ as its storage
+monoid:
+\[ \fa{C} = (G', \hgroup{Y_0}, \setof{s_0}, F, \gamma) \]
+
+The graph $G'=(V',E')$ of $\fa{C}$ is defined as follows:
+
+The vertices are the same as in $G$ plus a new vertex $s_0$ which becomes the
+start state of $\fa{C}$:
+\[ V' = V \cup \setof{s_0},\ s_0 \notin V \]
+
+The edge set $E'$ contains three different types of edges:
+\[ E' = \underbrace{\setof{s_0} \times S}_{\text{start edges}} \quad\cup\quad
+\underbrace{E \times Y_0}_{\text{push-edges}} \quad\cup\quad \underbrace{E
+\times Y \times Y_0}_{\text{pop-edges}}
+\]
+
+{\bf Start edges:} These edges provide the initial
+stack content (bottom-of-stack symbol $y_0$).
+
+For each start state $s \in S$ of the PDA $\kappa$ we define an edge
+\[ e': s_0 \edge{y_0} s\]
+formally:
+\[ Q(e') = s_0,\quad Z(e') = s,\quad \gamma(e') = y_0 \]
+
+\bigskip
+{\bf Edges for simulating push-operations:} These edges simulate a
+push-operation on the stack.
+The top-most stack symbol $y$ is ''guessed'' and if the guess was correct, $y$ is
+restored and $z$ is pushed on the stack. A wrong guess results in a combination of symbols on 
+the stack that cannot be reduced to the empty word (no accepting computation
+possible) anymore.
+ 
+For each pair $(e, y) \in E \times Y$ there is an edge
+\[ e': Q(e) \edge{y^{-1} y z} Z(e)\]
+but only if the pushdown store does not compute the monoid unit for the edge,
+formally $|\delta(e, y)| \neq \epsilon$. That means, the pushdown store indeed
+puts a symbol on the stack when executing the transition $e$.
+
+\bigskip
+{\bf Edges for handling empty stack:} These edges simulate computations with
+empty stack. The bottom-of-stack symbol is guessed and if the guess was correct, the
+corresponding stack operation is simulated.
+
+For each edge $e \in E$ we define an edge
+\[ e': Q(e) \edge{y_0^{-1} y_0 \delta(e, \epsilon)} Z(e) \] 
+
+\bigskip
+{\bf Edges for simulating pop-operations:} These edges simulate popping of
+symbols from the stack.
+The top-most stack symbol $y$ is guessed and if the guess was correct, each
+possible symbol $z$ that could be on the stack after popping $y$ is provided as
+a possible continuation. If some symbol can never be on the stack after
+popping $y$ the computation can never be successful. 
+
+For each triple $(e, y, z) \in E \times Y
+\times Y_0$ we define an edge
+\[ e': Q(e) \edge{y^{-1} z^{-1} z} Z(e) \]
+but only if the pushdown store pops the symbol $y$ when executing the transition
+$e$, formally $\delta(e, y) = \epsilon$.
+
+\bigskip
+This completes the definition of the finite automaton $\fa{C}$.
+
+We prove first that each accepting computation of the pushdown store may be
+simulated with the finite automaton $\fa{C}$:
+\[ y_0 \cdot KKL(\kappa) \subset |L_{\fa{C}}| \]
+
+To prove this, we construct for each accepting path $\pi \in
+\pathcategory{G}(S,F)$ an accepting path $\pi' \in
+\pathcategory{G'}(\setof{s_0}, F)$ with $|y_0 \cdot \delta(\pi, \epsilon)| = |\gamma(\pi')|$ 
+which means that the computation of the pushdown store is equivalent modulo the
+H-group to the label of the computation path in $\fa{C}$.
+
+Given an accepting computation $\pi$ in the PDA, we consider all prefixes
+$\psi$ of $\pi$ by increasing length. The corresponding prefix of path $\pi'$ in
+graph $G'$ will be denoted by $\psi'$.
+
+{\em Induction base:} For prefix $\psi$ of length 0, that is $\psi =
+(Q(\pi), Q(\pi))$, we set $\psi' := s_0 \edge{y_0} Q(\pi)$, that
+is an edge from the start state $s_0$ to the start vertex of $\pi$. 
+
+We get $\delta(\psi, \epsilon) = \delta(\epsilon, \epsilon) = \epsilon$ and
+$\gamma(\psi') = y_0$ which proves the claim for paths of zero length.
+
+{\em Induction step:} We assume that the two prefixes $\psi$ and $\psi'$ have
+the same target vertex, $Z(\psi) = Z(\psi')$, and that the computations for
+these prefixes fulfill the induction assumption, namely $|\gamma(\psi')| =
+|y_0 \cdot \delta(\psi, \epsilon)|$.
+
+Consider the path $\pi = \psi \circ e$ where $e$ is an edge of $G$ and let
+$|y_0 \cdot \delta(\psi, \epsilon)| = u \cdot y$ for some symbol $y \in Y_0$.
+
+We have two cases.
+
+{\em Case 1}: $y \in Y$ and $\delta(e, y) = y z$:
+
+By construction of $G'$ there exists an edge $e': Q(e) \edge{y^{-1} y z} Z(e)
+\in E \times Y$.
+
+Therefore we have $|y_0 \cdot \delta(\psi \circ e, \epsilon)| = |y_0 \cdot u
+\cdot$
+
+
+
+
 \end{proof}
 
 

@@ -1,1 +1,163 @@
 \section{Closure properties of $ALG(X^*)$}
+
+In the last section we defined $ALG(X^*)$ as the class of languages over an
+alphabet $X$ accepted by a pushdown automaton.
+
+The name ''algebraic languages'' remembers the fact that these languages can be
+defined as the solution of equation systems with non-commutative variables using
+formal power series. See for example \cite{SaSo} or \cite{Berstel77}.
+
+We will prove for $ALG(X^*)$ similar closure properties as for $REG(X^*)$.
+
+In this section we assume without loss of generality that the pushdown automata
+have the following properties:
+
+$card(S) = card(F) = 1$ and no edge ends in a start state and no edge leaves a
+final state. Additionally, all edges labels have length 0 or 1, $\alpha(e) \leq
+1,\ e \in E$.
+
+In a very easy way one gets
+
+\begin{theorem}
+Let $\phi : X^* \to Y^*$ be a monoid homomorphism.
+\[ L \in ALG(X^*) \Rightarrow \phi(L) \in ALG(Y^*) \]
+\end{theorem} 
+
+\begin{proof}
+$L \in ALG(X^*) \Rightarrow$ there exists a PDA $\kappa = (\fa{A}, \pdstore{K})$
+with $L_{\kappa} = L$. Replace $\alpha$ by $\alpha' := \alpha \circ \phi$ in
+the definition of $\fa{A}$. 
+
+For
+\[ \fa{A'} = (G, Y, S, F, \alpha') \]
+the PDA $\kappa' = (\fa{A'}, \pdstore{K})$ accepts $\phi(L_{\kappa}) = \phi(L)$.
+\end{proof}
+
+\begin{theorem}
+$ALG(X^*)$ is closed under union, concatenation and Kleene-star operation.
+\end{theorem}
+
+{\em Closure under union:}
+\[ L,L' \in ALG(X^*) \Rightarrow L \cup L' \in ALG(X^*) \]
+\begin{proof}
+Let
+\[ \kappa = (\fa{A},\pdstore{K}),\quad \fa{A} = (G = (V, E), X, \setof{s},
+\setof{f}, \alpha),\quad \pdstore{K} = (X, Y, \delta)
+\]
+and
+\[ \kappa' = (\fa{A'}, \pdstore{K'}), \quad \fa{A'} = (G' = (V', E'), X,
+\setof{s'}, \setof{f'}, \alpha'),\quad \pdstore{K'} = (X, Y', \delta')
+\]
+be pushdown automata accepting $L$ and $L'$.
+
+We may assume that $Y \cap Y' = \emptyset,\ E \cap E' =
+\emptyset,\ V \cap V' = \setof{s, f}$ where $s = s'$ and $f = f'$.
+
+Define the PDA $\kappa \cup \kappa'$ by
+\[ \fa{A} \cup \fa{A'} := (G \cup G', X \cup X', \setof{s}, \setof{f}, \alpha
+\cup \alpha')
+\]
+and pushdown store
+\[ \pdstore{K} \cup \pdstore{K'} := (E \cup E', Y \cup Y' \cup
+\setof{\%}, \delta \cup \delta')
+\]
+where
+\[ (\delta \cup \delta')(e, y) = \begin{cases}
+\delta(e, y) & e \in E,\ y \in Y \cup \setof{\epsilon} \\ 
+\delta'(e, y) & e \in E',\ y \in Y' \cup \setof{\epsilon} \\
+\%\% & \text{else} 
+\end{cases}
+\]
+
+The symbol $\%$ is only introduced to make $\delta \cup \delta'$
+complete. If $\%$ is on-top of the pushdown store, then this cannot become
+empty anymore. In that way it will become impossible to ''mix'' words from both
+languages.
+
+It holds: $L_{\kappa \cup \kappa'} = L_{\kappa} \cup L_{\kappa'}$ (exercise).
+
+The following figure shows our constructions:
+
+FIGURE
+
+\end{proof}
+
+{\em Closure under complex product:}
+\[ L,L' \in ALG(X^*) \Rightarrow L \cdot L' \in ALG(X^*) \]
+\begin{proof}
+We construct the PDA $\kappa'' = (\fa{A''}, \pdstore{K}'')$ with 
+\[\fa{A''} = (G'', X, \setof{s}, \setof{f'}, \alpha'')\]
+where
+\begin{eqnarray*}
+G'' &=& (V'', E'') \\
+V'' &=& V \cup V' \cup \setof{p},\ p \notin V \cup V' \\
+E'' &=& E \cup E' \cup \setof{e_1, e_2},\ e_i \notin E \cup E',\ i = 1, 2
+\end{eqnarray*}
+
+For the new edges $e_1, e_2$ it is $e_1: f \edge{\epsilon} p$ and $e_2: p
+\edge{\epsilon} s'$, that is $e1$ and $e_2$ form a bridge between $G$ and $G'$.
+
+The labeling of the graph is defined by 
+\[ \alpha''(e) = \begin{cases} 
+\alpha(e) & e \in E \\
+\alpha'(e) & e \in E' \\
+\epsilon & e \in \setof{e_1, e_2} 
+\end{cases}\]
+
+FIGURE
+
+The pushdown store $\pdstore{K''} = (E'', Y'', \delta'')$ is defined by
+\[ Y'' = Y \cup Y' \cup \setof{\$, \%} \text{ with }\setof{\$, \%} \cap (Y \cup
+Y') = \emptyset \]
+\[ \delta''(e, y) = \begin{cases}
+\delta(e, y) & e \in E,\ y\in Y \cup \setof{\epsilon} \\
+\delta'(e, y) & e \in E',\ y\in Y' \cup \setof{\epsilon} \\
+y \cdot \$ & e = e_1,\ y \in Y \cup \setof{\epsilon} \\
+\epsilon & e = e_2,\ y = \$ \\
+\%\% & \text{else}
+\end{cases}\]
+
+We prove now that the so defined pushdown automaton $\kappa''$ accepts the
+complex product $L \cdot L'$.
+
+''$L \cdot L' \subset L_{\kappa''}$'':
+
+
+
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

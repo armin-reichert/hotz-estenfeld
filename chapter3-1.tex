@@ -276,37 +276,70 @@ By construction of $G'$ there exists an edge $e': Q(e) \edge{y^{-1} y z} Z(e)
 \in E \times Y$.
 
 Therefore we have $|y_0 \cdot \delta(\psi \circ e, \epsilon)| = |y_0 \cdot u
-\cdot$
+\cdot y \cdot z = |\gamma(\psi') \cdot e'|$.
+
+The case $y=y_0$ and $\delta(e, \epsilon) = y$ can be handled similarly.
+
+{\em Case 2}: $y \in Y$ and $\delta(e, y) = |y y^{-1}| = \epsilon$:
+
+In this case it is $u = u' z \neq \epsilon$ and we can write $|y_0 \cdot
+\delta(\psi, \epsilon)| = u'zy$.
+
+In $E'$ there exists an edge $e' : Q(e) \edge{y^{-1}z^{-1}z} Z(e) \in E
+\times Y \times Y_0$.
+
+We define $\psi' \circ e'$ as the path corresponding to $\psi \circ e$ and get
+$|y_0 \cdot \delta(\psi \circ e, \epsilon)| = |\gamma(\psi' \circ e')| = u$.
+
+This proves inductively the inclusion $y_0 \cdot KKL(\kappa) \subset
+|L_{\fa{C}}|$.
 
 
+We prove now:
+\[ y_0 \cdot Y^* \cap |L_{\fa{C}}| \subset y_0 \cdot KKL(\kappa) \]
 
+Let $\pi' \in \pathcategory{G'}(\setof{s_0}, F)$ and $|\gamma(\pi')| \in y_0 \cdot
+Y^*$.
 
+From the definition of $\gamma$ on $E'$ it follows that also for each path
+prefix $\psi'$ of $\pi$ it holds: $|\gamma(\psi')| \in y_0 \cdot Y^*$.
+
+We construct for each path $\psi'$ a path $\psi$ with $|\gamma(\psi)| = y_0
+\cdot \delta(\pi, \epsilon) \in \pathcategory{G}$.
+
+To a path of length 1 we assign the empty path $1_{Z(\psi')}$.
+
+For a path $\psi' = e_1 \circ \psi''$ where $e_1 \in E'$ we assign to $\psi''$
+the projection $\pi''$ of $\psi''$ onto $\pathcategory{G}$. This projection is a
+functor that maps paths into paths.
+
+For $\psi'$ of length 1, our claim $|\gamma(\psi')| = y_0 \cdot \delta(\pi,
+\epsilon)$ is obviously true.
+
+Assume the claim to be true for $\psi'$ and $\psi' \circ e'$ to be a subpath of
+$\pi'$.
+
+{\em Case 1}:
+
+$\gamma(e') = y^{-1}yz$ so $e' = (e, y) \in E'$. From $|\gamma(\psi' \cdot
+e')| \in y_0 \cdot Y^*$ it follows $|\gamma(\psi')| = u \cdot y$, so we have
+$\delta(\psi' \circ e')| = y_0 \cdot |\delta(\psi \circ e, \epsilon)|$.
+
+{\em Case 2}:
+
+$\gamma(e') = y^{-1} z^{-1} z$, so $e' = (e, y, z) \in E'$.
+
+As before it follows $\gamma(\psi')| = uyz = \delta(\pi, \epsilon)$. Therefore
+it holds also in this case $|\gamma(\psi' \circ e')| = y_0 \cdot |\delta(\psi
+\circ e, \epsilon)|$.
+
+By induction follows the inclusion $y_0 \cdot Y^* \cap |L_{\fa{C}}| \subset y_0
+\cdot KKL(\kappa)$.
+
+Both inclusions give the proof of our theorem.
 \end{proof}
 
+{\bf Exercise:}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Let $L = \setof{ w \cdot w^R \mid w \in X^*}$. Define a PDA accepting $L$ and
+prove its correctness.

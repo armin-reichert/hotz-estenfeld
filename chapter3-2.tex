@@ -33,101 +33,210 @@ For
 the PDA $\kappa' = (\fa{A'}, \pdstore{K})$ accepts $\phi(L_{\kappa}) = \phi(L)$.
 \end{proof}
 
+\transrem{I changed names in the following proof for better readability.}
+
+\bigskip
 \begin{theorem}
-$ALG(X^*)$ is closed under union, concatenation and Kleene-star operation.
+$ALG(X^*)$ is closed under union, concatenation and Kleene-star.
 \end{theorem}
 
 {\em Closure under union:}
-\[ L,L' \in ALG(X^*) \Rightarrow L \cup L' \in ALG(X^*) \]
+\[ L_1, L_2 \in ALG(X^*) \Rightarrow L_1 \cup L_2 \in ALG(X^*) \]
 \begin{proof}
 Let
-\[ \kappa = (\fa{A},\pdstore{K}),\quad \fa{A} = (G = (V, E), X, \setof{s},
-\setof{f}, \alpha),\quad \pdstore{K} = (X, Y, \delta)
+\[ \kappa_1 = (\fa{A}_1,\pdstore{K}_1),\quad \fa{A}_1 = (G_1, X,
+\setof{s_1}, \setof{f_1}, \alpha_1),\quad G_1 = (V_1, E_1),\quad \pdstore{K}_1 =
+(X, Y_1, \delta_1)
 \]
 and
-\[ \kappa' = (\fa{A'}, \pdstore{K'}), \quad \fa{A'} = (G' = (V', E'), X,
-\setof{s'}, \setof{f'}, \alpha'),\quad \pdstore{K'} = (X, Y', \delta')
+\[ \kappa_2 = (\fa{A}_2,\pdstore{K}_2),\quad \fa{A}_2 = (G_2, X,
+\setof{s_2}, \setof{f_2}, \alpha_2),\quad G_2 = (V_2, E_2),\quad \pdstore{K}_2 =
+(X, Y_2, \delta_2)
 \]
-be pushdown automata accepting $L$ and $L'$.
+be pushdown automata accepting $L_1$ resp.\ $L_2$.
 
-We may assume that $Y \cap Y' = \emptyset,\ E \cap E' =
-\emptyset,\ V \cap V' = \setof{s, f}$ where $s = s'$ and $f = f'$.
+We may assume that $Y_1 \cap Y_2 = \emptyset,\ E_1 \cap E_2 =
+\emptyset,\ V_1 \cap V_2 = \setof{s_1, f_2}$ where $s_1 = s_2$ and $f_1 = f_2$.
 
-Define the PDA $\kappa \cup \kappa'$ by
-\[ \fa{A} \cup \fa{A'} := (G \cup G', X \cup X', \setof{s}, \setof{f}, \alpha
-\cup \alpha')
-\]
+Define the PDA $\kappa_1 \cup \kappa_2$ by
+\[ \fa{A}_1 \cup \fa{A}_2 := (G_1 \cup G_2, X, \setof{s_1}, \setof{f_2},
+\alpha_1 \cup \alpha_2) \]
 and pushdown store
-\[ \pdstore{K} \cup \pdstore{K'} := (E \cup E', Y \cup Y' \cup
-\setof{\%}, \delta \cup \delta')
-\]
+\[ \pdstore{K}_1 \cup \pdstore{K}_2 := (E_1 \cup E_2, Y_1 \cup Y_2 \cup
+\setof{\infty}, \delta_1 \cup \delta_2) \]
 where
-\[ (\delta \cup \delta')(e, y) = \begin{cases}
-\delta(e, y) & e \in E,\ y \in Y \cup \setof{\epsilon} \\ 
-\delta'(e, y) & e \in E',\ y \in Y' \cup \setof{\epsilon} \\
-\%\% & \text{else} 
+\[ (\delta_1 \cup \delta_2)(e, y) = \begin{cases}
+\delta_1(e, y) & e \in E_1,\ y \in Y_1 \cup \setof{\epsilon} \\ 
+\delta_2(e, y) & e \in E_2,\ y \in Y_2 \cup \setof{\epsilon} \\
+\infty\infty & \text{else} 
 \end{cases}
 \]
 
-The symbol $\%$ is only introduced to make $\delta \cup \delta'$
-complete. If $\%$ is on-top of the pushdown store, then this cannot become
+The symbol $\infty$ is only introduced to make $\delta_1 \cup \delta_2$
+complete. If $\infty$ is on-top of the pushdown store, then this cannot become
 empty anymore. In that way it will become impossible to ''mix'' words from both
 languages.
 
-It holds: $L_{\kappa \cup \kappa'} = L_{\kappa} \cup L_{\kappa'}$ (exercise).
+It holds: $L_{\kappa_1 \cup \kappa_2} = L_{\kappa_1} \cup L_{\kappa_2}$
+(exercise).
 
-The following figure shows our constructions:
+The following figure shows our construction:
 
 FIGURE
 
 \end{proof}
 
 {\em Closure under complex product:}
-\[ L,L' \in ALG(X^*) \Rightarrow L \cdot L' \in ALG(X^*) \]
+\[ L_1, L_2 \in ALG(X^*) \Rightarrow L_1 \cdot L_2 \in ALG(X^*) \]
 \begin{proof}
-We construct the PDA $\kappa'' = (\fa{A''}, \pdstore{K}'')$ with 
-\[\fa{A''} = (G'', X, \setof{s}, \setof{f'}, \alpha'')\]
+We construct the PDA $\kappa = (\fa{A}, \pdstore{K})$ with 
+\[\fa{A} = (G, X, \setof{s_1}, \setof{f_2}, \alpha)\]
 where
 \begin{eqnarray*}
-G'' &=& (V'', E'') \\
-V'' &=& V \cup V' \cup \setof{p},\ p \notin V \cup V' \\
-E'' &=& E \cup E' \cup \setof{e_1, e_2},\ e_i \notin E \cup E',\ i = 1, 2
+G &=& (V, E) \\
+V &=& V_1 \cup V_2 \cup \setof{p},\ p \notin V_1 \cup V_2 \\
+E &=& E_1 \cup E_2 \cup \setof{b_1, b_2},b_1, b_2 \notin E_1 \cup E_2
 \end{eqnarray*}
 
-For the new edges $e_1, e_2$ it is $e_1: f \edge{\epsilon} p$ and $e_2: p
-\edge{\epsilon} s'$, that is $e1$ and $e_2$ form a bridge between $G$ and $G'$.
+For the new ''bridge'' edges $b_1, b_2$ it holds $b_1: f_1 \edge{\epsilon} p$
+and $b_2: p \edge{\epsilon} s_2$.
 
-The labeling of the graph is defined by 
-\[ \alpha''(e) = \begin{cases} 
-\alpha(e) & e \in E \\
-\alpha'(e) & e \in E' \\
-\epsilon & e \in \setof{e_1, e_2} 
+The labeling of the graph $G$ is defined by 
+\[ \alpha(e) = \begin{cases} 
+\alpha_1(e) 	& e \in E_1 \\
+\alpha_2(e) 	& e \in E_2 \\
+\epsilon 			& e \in \setof{b_1, b_2} 
 \end{cases}\]
 
 FIGURE
 
-The pushdown store $\pdstore{K''} = (E'', Y'', \delta'')$ is defined by
-\[ Y'' = Y \cup Y' \cup \setof{\$, \%} \text{ with }\setof{\$, \%} \cap (Y \cup
-Y') = \emptyset \]
-\[ \delta''(e, y) = \begin{cases}
-\delta(e, y) & e \in E,\ y\in Y \cup \setof{\epsilon} \\
-\delta'(e, y) & e \in E',\ y\in Y' \cup \setof{\epsilon} \\
-y \cdot \$ & e = e_1,\ y \in Y \cup \setof{\epsilon} \\
-\epsilon & e = e_2,\ y = \$ \\
-\%\% & \text{else}
+The pushdown store $\pdstore{K} = (E, Y, \delta)$ is defined by
+\[ Y = Y_1 \cup Y_2 \cup \setof{\Join, \infty} \text{ with }\setof{\Join, \infty} \cap
+(Y_1 \cup Y_2) = \emptyset \]
+
+\[ \delta(e, y) = \begin{cases}
+\delta_1(e, y) 					& e \in E_1,\ y \in Y_1 \cup \setof{\epsilon} \\
+\delta_2(e, y) 					& e \in E_2,\ y \in Y_2 \cup \setof{\epsilon} \\
+y \cdot \Join 					& e = b_1,\ y \in Y \cup \setof{\epsilon} \\
+\epsilon 								& e = b_2,\ y = \Join \\
+\infty\infty 						& \text{else}
 \end{cases}\]
 
-We prove now that the so defined pushdown automaton $\kappa''$ accepts the
-complex product $L \cdot L'$.
+We prove now that the pushdown automaton $\kappa$ defined in that way accepts
+the complex product $L_1 \cdot L_2$.
 
-''$L \cdot L' \subset L_{\kappa''}$'':
+''$L_1 \cdot L_2 \subset L_{\kappa}$'':
 
+Let $w \in L_1 \cdot L_2$. Then there exists a factorization $w = w_1 \cdot
+w_2,\ w_1 \in L_1, w_2 \in L_2$.
 
+For $w_1$ there exists an accepting path $\pi_1 \in \pathcategory{G_1}(s_1,
+f_1)$ with label $\alpha_1(\pi_1) = w_1$ and pushdown store computation
+$\delta_1(w_1, \epsilon) = \epsilon$.
 
+For $w_2$ there exists an accepting path $\pi_2 \in \pathcategory{G_2}(s_2,
+f_2)$ with label $\alpha_2(\pi_2) = w_2$ and pushdown store computation
+$\delta_2(w_2, \epsilon) = \epsilon$.
 
+Consider the path $\pi = \pi_1 \circ b_1 \circ b_2 \circ \pi_2 \in
+\pathcategory{G}(s_1, f_2)$.
+
+It holds
+\begin{eqnarray*}
+\delta(\pi) &=& \delta(\pi_1 \circ b_1 \circ b_2 \circ \pi_2) \\
+&=& \delta(b_1 \circ b_2 \circ \pi_2, \delta(\pi, \epsilon)) \\
+&=& \delta(b_1 \circ b_2 \circ \pi_2, \epsilon) \\
+&=& \delta(b_2 \circ \pi_2, \delta(b_1, \epsilon)) \\
+&=& \delta(b_2 \circ \pi_2, \epsilon \cdot \Join) \\
+&=& \delta(\pi_2, \delta(b_2, \Join)) \\
+&=& \delta(\pi_2, \epsilon) \\
+&=& \delta_2(\pi_2, \epsilon) \\
+&=& \epsilon
+\end{eqnarray*}
+
+This means, the pushdown store computation for $\pi$ is accepting.
+
+The label of path $\pi$ is
+\begin{eqnarray*}
+\alpha(\pi) &=& \alpha(\pi_1 \circ b_1 \circ b_2 \circ \pi_2) \\
+&=& \alpha(\pi_1) \circ \alpha(b_1) \circ \alpha(b_1 \circ \alpha(\pi_2) \\
+&=& w_1 \cdot \epsilon \cdot \epsilon \cdot w_2 \\
+&=& w_1 \cdot w_2 \\
+&=& w
+\end{eqnarray*}
+
+This proves $w \in L_{\kappa}$ and therefore $L_1 \cdot L_2 \subset L_{\kappa}$.
+
+''$L_1 \cdot L_2 \supset L_{\kappa}$'':
+
+Let $w \in L_{\kappa}$ be a word accepted by the PDA $\kappa$. Then there exists
+a path $\pi \in \pathcategory{G}(s_1, f_2)$ with label $\alpha(\pi) = w$ and a
+pushdown store computation $\delta(\pi, \epsilon) = \epsilon$.
+
+The path $\pi$ has a unique factorization $\pi = \pi_1 \circ b_1 \circ b_2
+\circ \pi_2$ with $\pi_1 \in \pathcategory{G_1}(s_1, f_1)$ and $\pi_2 \in
+\pathcategory{s_2, f_2}$. 
+
+Consider $\delta(\pi_1, \epsilon)$, the computation of the pushdown store on the
+path prefix $\pi_1$:
+
+Assume $\delta(\pi_1, \epsilon) \neq \epsilon$. Then $\delta(\pi_1 \circ b_1
+\circ b_2 \circ \pi_2, \epsilon) = \delta_1(\pi, \epsilon)$
+
+TODO clarify
+
+For the path labels we have $\alpha_1(\pi_1) = w_1 \in L_1, \alpha_2(\pi_2) =
+w_2 \in L_2$ and
+\begin{eqnarray*}
+\alpha(\pi) &=& \alpha(\pi_1 \cdot b_1 \cdot b_2 \cdot \alpha_2) \\
+&=& \alpha(\pi_1) \cdot \epsilon \cdot \epsilon \cdot \alpha(\pi_2) \\
+&=& w_1 \cdot w_2 \\
+&=& w
+\end{eqnarray*}
+
+So $w \in L_1 \cdot L_2$ and $L_1 \cdot L_2 \supset L_{\kappa}$.
 \end{proof}
 
+{\em Closure under Kleene-star:}
+\[ L \in ALG(X^*) \Rightarrow L^* \in ALG(X^*) \]
+\begin{proof}
+Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$. We construct a PDA
+$\kappa'$ accepting $L^*$ as follows:
+\[ \fa{A}' = (G, X, \setof{s}, \setof{f}, \alpha')\]
+with
+\begin{eqnarray*}
+G' &=& (V', E') \\
+V' &=& V \cup \setof{p, q},\ \setof{p, q} \cap E = \emptyset \\
+E' &=& E \cup \setof{e_0, e_0', e_1, e_1'},\ \setof{e_0, e_0', e_1, e_1'} \cap E
+= \emptyset \\
+\end{eqnarray*}
 
+The new edges have the following source, target states and labeling:
+\begin{eqnarray*}
+& e_0: s \edge{\epsilon} p \\
+& e_0': s \edge{\epsilon} f \\
+& e_1: f \edge{\epsilon} q \\
+& e_1': q \edge{\epsilon} s \\
+\end{eqnarray*}
+
+FIGURE
+
+The pushdown store $\pdstore{K}' = (E', Y', \delta')$ is defined by $Y' = Y
+\cup \setof{y', y'', \infty}$ where $\setof{y', y'', \infty} \cap Y =
+\emptyset$ and $\delta'$ defined by
+\[ \delta'(e, y) = \begin{cases}
+\delta(e, y)		& e \in E, y \in  \cup \epsilon \\
+y'							& e = e_0, y = \epsilon \\
+\epsilon				& e = e_0', y = y' \\
+y''							& e = e_1, y = \epsilon \\
+\epsilon				& e = e_1', y = y'' \\
+\infty\infty		& \text{else}
+\end{cases}\]
+
+For the so defined PDA $\kappa'$ we show $L_{\kappa'} = L^*$.
+
+ 
+\end{proof}
 
 
 

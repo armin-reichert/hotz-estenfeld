@@ -225,20 +225,162 @@ The pushdown store $\pdstore{K}' = (E', Y', \delta')$ is defined by $Y' = Y
 \cup \setof{y', y'', \infty}$ where $\setof{y', y'', \infty} \cap Y =
 \emptyset$ and $\delta'$ defined by
 \[ \delta'(e, y) = \begin{cases}
-\delta(e, y)		& e \in E, y \in  \cup \epsilon \\
-y'							& e = e_0, y = \epsilon \\
-\epsilon				& e = e_0', y = y' \\
-y''							& e = e_1, y = \epsilon \\
-\epsilon				& e = e_1', y = y'' \\
+\delta(e, y)		& e \in E,\ y \in  Y \cup \setof{\epsilon} \\
+y'							& e = e_0,\ y = \epsilon \\
+\epsilon				& e = e_0',\ y = y' \\
+y''							& e = e_1,\ y = \epsilon \\
+\epsilon				& e = e_1',\ y = y'' \\
 \infty\infty		& \text{else}
 \end{cases}\]
 
-For the so defined PDA $\kappa'$ we show $L_{\kappa'} = L^*$.
+For the so defined PDA $\kappa'$ we show $L^* = L_{\kappa'}$.
 
+''$L^* \subset L_{\kappa}$'':
+
+Let $w \in L^*$, then we have two cases:
+
+\begin{enumerate}
+  \item $w = \epsilon$: Then there exists the path $\pi = e_0 \circ e_0' \in
+  \pathcategory{G'}(s, f)$ with label $\alpha(\pi) = \epsilon$ and
+  pushdown computation $\delta'(\pi) = \epsilon$.
+  \item $w \neq \epsilon$: Then there exists a factorization $w = w_1 \cdots
+  w_k,\ w_i \in L$ and paths $\pi \in \pathcategory{G}(s, f)$ with labels
+  $\alpha(\pi_i) = w_i$ and pushdown computations $\delta(\pi, \epsilon) =
+  \epsilon,\ i = 1, \ldots, k$.
+  
+  Consider the path $\pi = \pi_1 \circ e_1 \circ e_1' \circ \pi_2 \circ e_1
+  \circ e_1' \ldots \circ e_1 \circ e_1' \circ \pi_k \in \pathcategory{G'}(s,
+  f)$.
+  
+  It holds
+  \begin{eqnarray*}
+  \alpha(\pi) &=& \alpha(\pi_1) \cdot \alpha(e_1 \circ e_1') \cdot \alpha(\pi_2)
+  \cdots \alpha(e_1 \circ e_1') \cdot \alpha(\pi_k) \\
+  &=& \alpha(\pi_1) \cdot \epsilon \cdot \alpha(\pi_2) \cdots \epsilon \cdot
+  \alpha(\pi_k)  \\
+  &=& w_1 \cdots w_k = w
+  \end{eqnarray*}
+  
+  For the pushdown computation holds:
+  \begin{eqnarray*}
+  \delta'(\pi, \epsilon) &=& \delta'(e_1 \circ e_1' \circ \pi_2 \ldots \pi_k,
+  \delta(\pi_1, \epsilon)) \\
+  &=& \delta'(e_1' \circ \pi_2 \ldots \pi_k, y'') = \delta'(\pi_2 \ldots \pi_k,
+  \epsilon) \\
+  &\ldots& \\
+  &=& \delta'(\pi_k, \epsilon) = \delta(\pi_k, \epsilon) = \epsilon
+  \end{eqnarray*}
  
+  From this follows $w \in L_{\kappa'}$.
+\end{enumerate} 
+ 
+''$L^* \supset L_{\kappa}$'':
+
+Let $w \in L_{\kappa'}$ be a word accepted by the PDA $\kappa'$. Then there
+exists a path $\pi \in \pathcategory{G'}(s, f)$ with label $\alpha'(\pi) = w$
+and pushdown computation $\delta'(\pi, \epsilon) = \epsilon$.
+
+\begin{enumerate}
+  \item $\pi = e_0 \circ e_0',\ \alpha'(\pi) = \epsilon,\ \delta'(\pi, \epsilon)
+  = \epsilon \Rightarrow \epsilon \in L^*$.
+  
+  \item Given a factorization $\pi = \pi_1 \circ e_1 \circ e_1' \circ \pi_2 \circ e_1
+  \circ e_1' \ldots \circ e_1 \circ e_1' \circ \pi_k$ with $\pi_i \in
+  \pathcategory{G}(s, f)$ and edges $e_1, e_1'$ as constructed.
+  
+  Claim: $\delta'(\pi, \epsilon) = \epsilon \Rightarrow \delta(\pi_1, \epsilon)
+  = \epsilon$
+  
+  Assumption: $\delta(\pi, \epsilon) \neq \epsilon$. Then by definition of
+  $\delta'$ it holds $\delta'(e_1, \delta(\pi_1, \epsilon)) = \infty\infty$ and
+  because $\delta'(e, \infty) = \infty\infty$ the pushdown store will never
+  become empty, therefore $\delta'(\pi, \epsilon) \neq \epsilon$.
+  
+  This holds inductively for the paths $\pi_i,\ i = 1, \ldots k$. We get
+  \begin{eqnarray*}
+  \delta'(\pi, \epsilon) &=& \delta'(\pi_1 \circ e_1 \circ e_1' \circ \pi_2
+  \ldots \pi_k, \epsilon) \Rightarrow \\
+  \delta'(\pi_1, \epsilon) &=& \epsilon \\
+  \delta'(\pi_1 \circ e_1 \circ e_1', \epsilon) &=& \delta'(e_1 \circ e_1',
+  \delta(\pi_1, \epsilon)) = \delta'(e_1', y'') = \epsilon
+  \end{eqnarray*}
+  and for all $i = 1, \ldots, k:\ \delta'(\pi_i, \epsilon) = \epsilon$. 
+  
+  It holds $\alpha(\pi_i) = w_i \in L,\ i = 1, \ldots, k$.
+  
+  $\alpha'(\pi_1 \circ e_1 \circ e_1' \circ \pi_2 \ldots \pi_k) = \alpha(\pi_1)
+  \cdot \epsilon \ldots \epsilon \cdot \alpha(\pi_k) = w_1 \cdots w_k = w \in
+  L^*$.
+\end{enumerate}
+
+This completes the proof of our theorem.
 \end{proof}
 
+\bigskip
+\begin{theorem}
+\[ L \in ALG(X^*),\ R \in REG(X^*) \Rightarrow L \cap R \in ALG(X^*) \]
+\end{theorem}
 
+\begin{proof}
+Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA with $L_{\kappa} = L$ and $\fa{B}$
+a complete, deterministic finite automaton accepting $R$. At each vertex, a loop
+labeled with $\epsilon$ should be attached.
+
+We construct a finite automaton $\fa{C} = \fa{A} \times \fa{B}$ as we did for
+the intersection of regular languages in chapter II.1. The graph of $\fa{C}$ is
+$G = (V, E)$ where the vertex set $V$ is the cartesian product $V_{\fa{A}}
+\times V_{\fa{B}}$ and the edges are defined by
+\[ E = \setof{(e, e') \in E_{\fa{A}} \times E_{\fa{B}} \mid \alpha(e) =
+\beta(e') } \]
+
+Because $\fa{B}$ is complete and deterministic, it holds $L_{\fa{C}} =
+L_{\fa{A}} \cap L_{\fa{B}}$.
+
+Now let $\kappa' = (\fa{C}, \pdstore{K}')$ be a PDA with $\pdstore{K}' = (E,
+Y, \delta')$ and $\delta'((e, e'), y) = \delta(e, y)$.
+For a word $w \in L_{\kappa'}$ there exists a path $\pi \in
+\pathcategory{G}(S, F)$ with label $\alpha(\pi) = w$ and pushdown store
+computation $\delta'(\pi, \epsilon) = \delta(proj_1(\pi), \epsilon) = \epsilon$.
+Here $proj_1(\pi)$ denotes the projection onto the first component of the
+edge-pairs constituting the path $\pi$.
+
+From this follows $w \in L_{\kappa} \cap L_{\fa{B}}$.
+
+The opposite direction is clear because of the construction of PDA $\kappa'$.
+\end{proof}
+
+\bigskip
+\begin{theorem}[Closure under inverse homorphism]
+Let $\phi : X^* \to Y^*$ be a monoid homomorphism and $\phi(x) \in Y \cup
+\setof{\epsilon}$. Then
+\[ L \in ALG(Y^*) \Rightarrow \phi^{-1}(L) \in ALG(X^*) \]
+\end{theorem}
+
+\begin{proof}
+Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$. For the language
+\[ \phi^{-1}(L) = \setof{w \in X^* \mid \phi(w) \in L} \]
+we construct a PDA $\kappa' = (\fa{A}', \pdstore{K}')$ as follows (for
+simplicity, we construct the graph and the pushdown store in parallel):
+
+Let $\fa{A}$ be a finite acceptor for $L$,
+\[ \fa{A} = (G, Y, S, F, \alpha) \]
+with graph $G = (V, E)$.
+
+Define
+\[ \fa{A}' = (G', X, S, F, \alpha') \]
+with graph $G' = (V', E')$.
+
+The vertex set $V'$ of this graph is
+\[ V' = V \cup \setof{R_i^{v} \mid v \in V,\ i = 1,\ldots,m} \]
+
+The edge set $E'$ is defined by:
+
+For each edge $e \in E$ labeled $\alpha(e) = y \in Y$
+\begin{itemize}
+  \item include edges $e_1, \ldots, e_{k(y)}$ with $e_i : Q(e) \to Z(e)$ and
+  $\delta'(e_i, y) = \delta(e, y)$.
+\end{itemize}
+\end{proof}
 
 
 

@@ -7,10 +7,10 @@ points and the streets are the edges of the graph. The edges may be oriented
 such that they have a one-way direction. Paths in graphs are sequences of edges
 that you could drive for example with a car without violating the traffic rules.
 
-One can show that every graph as we will formally define has, with a certain
-restriction, a faithful image in $\mathbb{R}^3$, see \cite{Wagner}. The
-points of the graph are the points in $\mathbb{R}^3$, the edges are
-connecting lines in $\mathbb{R}^3$ which do not intersect pair-wise.
+One can show that every graph, as we will formally define, has (with a certain
+restriction) a faithful image in $\mathbb{R}^3$, see \cite{Wagner}. The
+points of the graph become points in $\mathbb{R}^3$, the edges become connecting
+lines in $\mathbb{R}^3$ which do not pairwise intersect.
 
 The mentioned restriction concerning the points is that the graph must not have
 more points than the cardinality of $\mathbb{R}^3$ which is the cardinality of
@@ -25,10 +25,9 @@ of a graph without getting our intuition mistaken. The following definition of a
 graph nevertheless does not contain any geometry.
 
 \begin{definition}
-A {\bf graph} $G = (V, E)$ consists of a non-empty set $V$ of points (also
-called vertices) and a set $E$ of edges and a mapping $\rho: E \to Pot(V)$ with
-$card(\rho(e)) <= 2$ for $e \in E$. $\rho(e)$ is the set of {\em border points}
-of $e$.
+A {\bf graph} $G = (V, E)$ consists of a non-empty set $V$ of points
+(vertices), a set $E$ of edges and a mapping $\rho: E \to Pot(V)$ with
+$card(\rho(e)) <= 2$ for $e \in E$. $\rho(e)$ is the set of {\em border points} of $e$.
 \end{definition}
 
 Border points of an edge do not need to be different. If $card(\rho(e)) = 2$ we
@@ -70,8 +69,7 @@ V$ holds: There exists a unique (up-to cyclic permutation) ordering on the set
 $\{ e \in E  \mid v \in \rho(e) \}$.
 \end{definition}
 
-Notation: $\{ e \in E \mid v \in \rho(e) \}$ is called the {\bf cycle} of $v$
-($cycle(v)$).
+Notation: $\{ e \in E \mid v \in \rho(e) \}$ is called the {\bf cycle} of $v$.
 
 Explanation: Imagine each point and its adjacent edges to be stuck on a litte
 circle as in the following figure:
@@ -98,17 +96,21 @@ FIGURE
 \begin{definition}
 A {\bf path} in an oriented graph $G$ is a sequence 
 \[ \pi = (q, e_1, \ldots, e_k, z),\ k \geq 1 \]
-where $ e_1, \ldots, e_k \in E,\ Q(e_1) = q,\ Z(e_k) = z$ and
-$Q(e_{i+1}) = Z(e_i)$ for $i = 1, \ldots, k-1$.
+where $ e_1, \ldots, e_k \in E$ are edges and
+\begin{eqnarray*}
+Q(e_1) & = & q \\
+Z(e_{i}) & = & Q(e_{i+1})\text{ for }i = 1, \ldots, k-1 \\
+Z(e_k) & = & z 
+\end{eqnarray*}
 \end{definition}
 
-We extend the mappings $Q$ and $Z$ onto paths by defining $Q(\pi) := q$ and
-$Z(\pi) := z$. $q$ is called the {\bf start point} and $z$ the {\bf end
-point} of path $\pi$.
+We extend the source and target mappings $Q$ and $Z$ onto paths by defining
+$Q(\pi) := q$ and $Z(\pi) := z$. $q$ is called the {\bf start point} and $z$ the {\bf end
+point} of the path $\pi$.
 
-$k$ is the {\bf length} of $\pi$, written as $L(\pi) = k$. For $k = 0$ we
-declare for all points $v \in V$ that $\pi = (v, v)$ is the path of length 0
-from $v$ to $v$.
+$L(\pi) := k$ is called the {\bf length} of the path $\pi$. For $k = 0$ we
+define for all points $v \in V$ that $\pi = (v, v)$ is the path of length 0 from
+$v$ to $v$.
 
 Paths in arbitrary graphs are defined by switching to the oriented graph
 $\hat{G}$.
@@ -116,7 +118,7 @@ $\hat{G}$.
 \begin{definition}
 Let $\pi = (q, e_1, \ldots, e_k, z)$ be a path. A path $\pi' = (q', e'_1,
 \ldots, e'_m, z')$ is called a {\bf subpath} of $\pi$ if there exists an $i$
-with $1 \leq i \leq k$ and $e'_j = e'_{i+j-1},\ j = 1, \ldots, m$ and $i + m -
+with $1 \leq i \leq k$ and $e'_j = e_{i+j-1},\ j = 1, \ldots, m$ and $i + m -
 1 \leq k$.
 \end{definition}
 
@@ -133,7 +135,7 @@ following definition reflects a special connectivity property.
 
 \begin{definition}
 Let $G = (V, E)$ be an oriented graph and $v \in V$. $G$ is called a {\bf star
-wrt.\ v} if for each $v' \in V$ there exists a path $\pi_{v'}$ with
+relative to $v$} if for each $v' \in V$ there exists a path $\pi_{v'}$ with
 $Q(\pi_{v'}) = v$ and $Z(pi_{v'}) = v'$. $v$ is called the {\bf center} of $G$.
 \end{definition} 
 
@@ -147,7 +149,7 @@ A {\bf tree} is a circle-free star where for all $v \in V$ it holds
 
 The following lemma holds:
 \begin{lemma}
-A tree has exactly one center which is called the {\bf root}.
+A tree has exactly one center which is called its {\bf root}.
 \end{lemma}
 
 Historical remark: Leonard Euler (1735) at a walk in Königsberg asked himself if
@@ -167,7 +169,7 @@ on paths. We define:
 That means you can concatenate two paths if the end point of the first is the
 start point of the second path. Obviously it holds:
 \begin{enumerate}
-  \item The product of paths, if defined, is associative
+  \item The product of paths (if defined) is associative
   \item For each point $v$ of a graph $G$ there exists exactly one path $1_v :=
   (v, v)$ such that for each path $\pi$ it holds:
   	\begin{eqnarray*}
@@ -176,8 +178,8 @@ start point of the second path. Obviously it holds:
   	\end{eqnarray*}
 \end{enumerate}
 
-We denote the set of paths of a graph $G$ with $\pathcategory{G}$. $\pathcategory{G}$ is called the 
-{\bf path category} of $G$ and in this context $G$ is also called a {\bf
+We denote the set of paths of a graph $G$ with $\pathcategory{G}$. $\pathcategory{G}$ is 
+called the {\bf path category} of $G$ and in this context $G$ is also called a {\bf
 schema}. $\pathcategory{G}$ is an important special case of a category.
 
 \transrem{The letter $\mathfrak{W}$ comes from the German word ''Wegekategorie''
@@ -187,7 +189,7 @@ Notation:
 \[ \pathcategory{G}(v, v') := \{ \pi \in \pathcategory{G} \mid Q(\pi) = v,\ Z(\pi) = v' \}
 \]
 
-Categories are algebraic structures with a {\em partial} operation.
+{\em Categories} are algebraic structures with a {\em partial} operation.
 
 \begin{definition}
 $C = (O, M, Q, Z, \circ)$ is called a {\bf category} if the axioms (K1) to
@@ -213,55 +215,54 @@ Notations: $Obj(C) := O$ is called the {\bf set of objects} and $Mor(C) := M$
 the {\bf set of morphisms} of the category $C$.
 
 Historical remark: Euler was already interested in graphs and paths in graphs
-(see above). The notion of path category of a graph has already been used before
-the notion of category even existed. The axiomatic formulation of categories and its 
-importance for many areas of mathematics has been elaborated by S.\ Eilenberg
-and S.\ MacLane in 1945 \cite{EiMa}. Their work has stimulated a broad, very abstract theory 
-of categories. We will only use the notations for structures which are
-categories and some elementary concepts which also in the theory of formal languages lead
-to fruitful questions.
+(see above). The notion {\em path category} of a graph had already been used
+before the notion {\em category} even existed. The axiomatic formulation of
+categories and its importance for many areas of mathematics was elaborated by
+S.\ Eilenberg and S.\ MacLane in 1945 \cite{EiMa}. Their work has stimulated a broad, 
+very abstract theory of categories. We will use here only the notations for
+structures which are categories and some elementary concepts which also in the theory of formal 
+languages lead to fruitful questions.
 
-We explain the notion of category on a number of examples:
+We explain the notion of a category with some examples:
 \begin{enumerate}
-  \item {\bf The category of relations} \\
+  \item {\bf The category of relations on sets} \\
   Let $O$ be a set of sets ($O \notin O)$. 
   
-  Define $REL(O) = (O, M, Q, Z,\circ)$ by:
+  Define $REL(O) := (O, M, Q, Z,\circ)$ by:
   \begin{itemize}
-  	\item $M = \{ (A,B,R) \mid A \in O,\ B \in O,\ R \subset A \times B \},\
-  	Q(A,B,R) = A, \ Z(A,B,R) = B$
-  	\item $(A,B,R_1) \circ (B,C,R_1) = (A,C,R')\\
-  	\text{where }R'= \{ (a,c) \mid \exists b \in B: (a,b)\in R_1\text{ and }(b,c)\in R_2 \}$
+  	\item $M := \setof{(A,B,R) \mid A \in O,\ B \in O,\ R \subset A \times B}$
+  	\item $Q(A,B,R) := A, \ Z(A,B,R) := B$
+  	\item $(A,B,R_1) \circ (B,C,R_2) := (A,C,R')\\
+  	\text{where }R'= \setof{(a,c) \mid \exists b \in B: (a,b)\in R_1\text{ and
+  	}(b,c)\in R_2}$
   \end{itemize}
-  With these definitions $REL(O)$ becomes a category (exercise).
-  
-  $(A, A, \{(a, a) \mid a\in A \})$ are the units, $A\in O$.
+  With these definitions $REL(O)$ becomes a category (exercise) and the
+  morphisms $(A, A, \{(a, a) \mid a\in A \})$ are the units for each set $A \in O$.
 
-  \item {\bf The category of matrices} \\
-  Let $MAT(\mathbb{Q}) = (O. M, Q, Z, \circ)$ with
+  \item {\bf The category of matrices over the rational numbers} \\
+  Define $MAT(\mathbb{Q}) := (O. M, Q, Z, \circ)$ by:
   \begin{itemize}
-    \item $O = \mathbb{N}$
-    \item $M = $ the set of $k \times n$ matrices, $k, n \in \mathbb{N}$, with
-    entries from $\mathbb{Q}$.
+    \item $O := \mathbb{N}$
+    \item $M :=$ the set of $k \times n$ matrices with entries from
+    $\mathbb{Q} (k, n \in \mathbb{N})$.
     \item For a $k \times n$ matrix $A_{k,n}$ define source and target mappings
     by
     \begin{itemize}
-	    \item[] $Q(A_{k,n}) = k$ the number of rows
-  	  \item[] $Z(A_{k,n}) = n$ the number of columns
+	    \item[] $Q(A_{k,n}) := k$ (the number of rows)
+  	  \item[] $Z(A_{k,n}) := n$ (the number of columns)
     \end{itemize}
   \end{itemize}
-	With the matrix multiplikation as category operation $\circ$, the set
-	$MAT(\mathbb{Q})$ becomes a category.
-	
-	Units in this category are the $n\times n$ unit matrices.
+	With the matrix multiplication as category operation $\circ$, $MAT(\mathbb{Q})$ 
+	becomes a category. Units in this category are the $n\times n$ unit matrices.
 \end{enumerate}
 
+\bigskip
 In analogy to the monoid homomorphisms we introduce structure-preserving
-mappings between categories, named {\bf functors}.
+mappings between categories called {\bf functors}.
 
 \begin{definition}
 Let $C_i = (O_i, M_i, Q_i, Z_i, \circ_i), i = 1, 2$ be two categories and
-$\phi_1: O_1 \to O_2$ and $\phi_2: M_1 \to M_2$ be mappings.
+$\phi_1: O_1 \to O_2$ and $\phi_2: M_1 \to M_2$ mappings.
 
 $\phi = (C_1, C_2, \phi_1, \phi_2)$ is called a {\bf functor} from $C_1$ to
 $C_2$ if the axioms (F1) to (F3) hold:
@@ -293,8 +294,7 @@ FIGURE
 $G1 = (V_1, E_1)$ represents an infinite binary tree. From each point of the
 tree two edges go out which are labeled with $f$ and $g$.
 
-$G_2 = (V_2, E_2)$ consists of a single point $v_0$ and two loops labeled with
-$f$ and $g$ respectively.
+$G_2 = (V_2, E_2)$ consists of a single point $v_0$ and two loops labeled $f$ and $g$ respectively.
 
 Consider the path categories $\pathcategory{G_1}$ and $\pathcategory{G_2}$. For $v
 \in V_1$ define $\phi_1(v) := v_0$ and $\phi_2(1_P) := 1_{P_0}$.
@@ -305,13 +305,12 @@ For the edges $e \in E_1$ define
 	g & \text{if $e$ is marked with $g$}
 \end{cases} \]
 
-Now we define for paths $(v, e_1, \ldots, e_n, v') \in \pathcategory{G_1}$:
+Now we define for the paths $(v, e_1, \ldots, e_n, v') \in \pathcategory{G_1}$:
 \[ \phi_2((v, e_1, \ldots, e_n, v')) := (v_0, \phi'_2(e_1), \ldots,
-\phi'_2(e_n), v_0) \].
+\phi'_2(e_n), v_0) \]
 
-Obviously $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi1, \phi_2)$ is a functor.
-
-It is a special functor because
+Obviously $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi1, \phi_2)$ is a
+functor. It is even a special functor because
 \begin{enumerate}
   \item $\phi$ is surjective
   \item If $v_1$ is a point in $G_1$ and $\bar{\pi}$ is a path in $G_2$, then
@@ -346,7 +345,7 @@ We define:
 \phi_2((P_3, r, P_4)) & (Q_2, g, Q_3)
 \end{array} \]
 
-For the units, the defintion of $\phi_2$ is clear. 
+For the units, the definition of $\phi_2$ is clear. 
 
 One can see that $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi_1, \phi_2)$
 is a functor.
@@ -412,11 +411,11 @@ f' = \left( \begin{array}{cc}
 \end{array} \right)
 \]
 
-We consider $\pathcategory{G}$ and $MAT(\mathbb{N})$, the category of matrices
-over $\mathbb{N}$.
+Consider $\pathcategory{G}$, the path category of $G$, and $MAT(\mathbb{N})$,
+the category of matrices over $\mathbb{N}$.
 
-We define $\phi_1(i) = i$ for $i = 2,3,4$ and $\phi'_2(x) = x'$ for $x \in \{
-a, b, c, d, e, f \}$.
+We define $\phi_1(i) = i$ for $i = 2,3,4$ and $\phi'_2(x) = x'$ for $x \in
+\setof{a, b, c, d, e, f}$.
 
 $\phi'_2$ can be extended in a unique way to a mapping $\phi_2 :
 \pathcategory{G} \to MAT(\mathbb{N})$ such that $\phi = (\pathcategory{G},
@@ -457,25 +456,23 @@ Then $\phi$ respects the ordering in point $v$.
 Let $G_1, G_2$ be oriented graphs and $\phi = (\pathcategory{G_1}, \pathcategory{G_2},
 \phi_1, \phi_2)$ be a functor.
 
-$\phi$ is called {\bf regular} $iff$ the restriction of $\phi_2$
-to the set $\{ e \in E_1\ |\ Q(e) = v \}$ and $\{ e' \in E_2\ |\ Q(e') =
-\phi_1(v) \}$ and to $\{ e \in E_1\ |\ Z(e) = v \}$ and $\{ e' \in E_2\ |\ Z(e')
-= \phi_1(v) \}$ for $v \in V_1$ is bijective.
+$\phi$ is called {\bf regular} $\iff$ the restriction of $\phi_2$
+to the set $\setof{e \in E_1 \mid Q(e) = v}$ and $\setof{e' \in E_2 \mid Q(e') =
+\phi_1(v)}$ and to $\setof{e \in E_1 \mid Z(e) = v}$ and $\setof{e' \in E_2 \mid
+Z(e') = \phi_1(v)}$ for $v \in V_1$ is bijective.
 \end{definition}
 
-To each incoming / outgoing edge of a point $v \in V_1$ corresponds exactly
-one incoming / outgoing edge of $\phi_1(v) \in V_2$.
+To each incoming (outgoing) edge of a point $v \in V_1$ corresponds exactly
+one incoming (outgoing) edge of $\phi_1(v) \in V_2$.
 
-In our example, $\phi$ was not regular.
-
-We slightly weaken the definition of a regular functor by only postulating
-regularity on the outgoing edges.
+In our example, $\phi$ was not regular. We slightly weaken the definition of a
+regular functor by only postulating regularity on the outgoing edges.
 
 \begin{definition}
 Let $G_1, G_2$ be oriented graphs and $\phi = (\pathcategory{G_1}, \pathcategory{G_2},
 \phi_1, \phi_2)$ be a functor.
 
-$\phi$ is called {\bf out-regular}, if the restriction of $\phi_2$
+$\phi$ is called {\bf out-regular} $\iff$ the restriction of $\phi_2$
 to the set $\{ e \in E_1\ |\ Q(e) = v \}$ and $\{ e' \in E_2\ |\ Q(e') =
 \phi_1(v) \}$ for $v \in V_1$ is bijective.
 \end{definition}

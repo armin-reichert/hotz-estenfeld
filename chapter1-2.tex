@@ -9,12 +9,12 @@ $S$ is a mapping $\phi : M \to S$ with:
 \end{enumerate}
 \end{definition}
 
-\transrem{Some publications use even shorter just {\em morphism} but here this
-would lead to a conflict with the morphisms in categories.}
+\transrem{Some authors use just {\em morphism} but this would lead in this
+book to a conflict with the morphisms of categories.}
 
-It can be easily shown: if $U \subset M$ is a submonoid of $M$, then
-$\phi(U)$ is a submonoid of $S$. If $V$ is a submonoid of $S$, then
-$\phi^{-1}(V)$ is a submonoid of $M$.
+It can easily be shown: if $U \subset M$ is a submonoid of $M$, then
+$\phi(U)$ is a submonoid of the target monoid $S$. If $V$ is a submonoid of $S$,
+then $\phi^{-1}(V)$ is a submonoid of $M$.
 
 A monoid homomorphism $\phi: M \to S$ is called
 \begin{eqnarray*}
@@ -22,7 +22,7 @@ A monoid homomorphism $\phi: M \to S$ is called
 \text{\bf epimorphism} & & \text{ if $\phi$ is surjective} \\
 \text{\bf isomorphism} & & \text{ if $\phi$ is bijective} \\
 \text{\bf endomorphism} & & \text{ if $\phi: M\to M$} \\
-\text{\bf automorphism} & & \text{ if $\phi$ is endomorphism and isomorphism} \\
+\text{\bf automorphism} & & \text{ if $\phi$ is an endomorphism and isomorphism}
 \end{eqnarray*}
 Monoids $M$ and $S$ are called {\bf isomorphic}, if there exists an
 isomorphism between $M$ and $S$.
@@ -31,19 +31,19 @@ Of course, a homomorphism cannot be defined arbitrarily on a monoid $M$.
 Thus the following two questions arise:
 \begin{enumerate}
   \item If $U \subset M$ is a submonoid and $\phi_1 : U \to S$ is an arbitrary
-mapping. When is it possible to extend $\phi_1$ to a homomorphism $\phi
+mapping. In which case is it possible to extend $\phi_1$ to a homomorphism $\phi
 : M \to S$\ ?
 	\item If $\phi_1, \phi_2$ both are homomorphisms from $M$ to $S$ which
-	coincide on $U \subset M$. In which way can $\phi_1$ and $\phi_2$ be
-	different? 
+	coincide on a submonoid $U \subset M$. In which way can $\phi_1$ and $\phi_2$
+	be different? 
 \end{enumerate}
 
-The answer to this question of course depends on the structure of $U$. If
+The answers to these questions of course depend on the structure of $U$. If
 $U = \{ 1_M \}$ then $\phi$ is determined uniquely on $U$ but there is
-little information on the relation between $\phi_1$ and $\phi2$.
+little information on the relation between $\phi_1$ and $\phi_2$.
 
 The following two simple theorems which can be found in introductory algebra
-books hold:
+texts hold:
 \begin{enumerate}
   \item If $A$ is a generating system of $M$ and $\phi_1, \phi_2 : M \to S$ are
   monoid homomorphisms which coincide on $A$, then $\phi_1 = \phi_2$.
@@ -55,26 +55,26 @@ books hold:
 \begin{definition}
 A subset $A \subset M$ is called a {\bf free generating system} of $M$, if each
 mapping $\phi_1 : A \to S$, where $S$ is an arbitrary monoid, can be continued
-to a monoid homomorphims in a unique way. 
+to a monoid homomorphim in a unique way. 
+\end{definition}
 
 A monoid with a free generating system is called a {\bf free monoid}.
-\end{definition}
 
 $A^*$ therefore is a free monoid and $A$ is a free generating system of $A^*$.
 
-It holds too: If $A$ is a free generating system of $M$ and $A^*$ is the monoid
-of words (string) over $A$, then $A^*$ and $M$ are isomorphic.
+It also holds: If $A$ is a free generating system of $M$ and $A^*$ is the
+monoid of words (strings) over $A$, then $A^*$ and $M$ are isomorphic.
 
-A free monoid has at most one free generating system (exercise. From that one
-can see that the length $|w|$ of a word $w \in A^*$ can be defined in a unique way for any
+A free monoid has at most one free generating system (exercise). From this fact
+one can see that the length $|w|$ of a word $w \in A^*$ can be defined in a unique way for any
 free monoid.
 
 The length function $L$ is an example for a monoid homomorphism $L : A^* \to
-\mathbb{N}$.
+\mathbb{N}$ into the monoid of natural numbers.
 
 If $\phi : M \to S$ is a monoid homomorphism, then the sets 
 \[\{ \phi^{-1}(s) \mid s \in S \} \subset Pot(M) \]
-form a monoid isomorphic to $\phi(M)$ (exercise).
+form a monoid which is isomorphic to $\phi(M)$ (exercise).
 
 We want to investigate now the following problem:
 
@@ -91,8 +91,8 @@ homomorphism $\Psi$ with that property holds:
 
 We want to describe $L$ as close as possible by a monoid homomorphism.
 
-Such an $S$ and $\phi$ exists for each $L \subset M$ (see Algebra text), it is
-named $synt_M(L)$ an is constructed as follows:
+Such an $S$ and $\phi$ exists for each $L \subset M$ (see any algebra text), it
+is denoted by $synt_M(L)$ and constructed as follows:
 
 \begin{definition}
 Let $M$ be a monoid and $L \subset M$. For $a, b \in M$ we define
@@ -100,55 +100,58 @@ Let $M$ be a monoid and $L \subset M$. For $a, b \in M$ we define
 \Leftrightarrow u \cdot b \cdot v \in L \]
 \end{definition}
 
-$\equiv (L)$ is a congruence relation, it holds:
+The equivalence relation $\equiv (L)$ is a {\bf congruence relation}, it holds:
 \begin{enumerate}
-  \item Let $[a]_L = \{ b \in M \mid a \equiv b\ (L) \}$\ then\ $b \in [a]_L
-  \Rightarrow [a]_L = [b]_L $
+  \item Let $[a]_L = \setof{ b \in M \mid a \equiv b\ (L) }$\ then\ $b \in
+  [a]_L \Rightarrow [a]_L = [b]_L $
   \item If we define $[a]_L \cdot [b]_L := [a \cdot b]_L$\ (complex product),
-  then \[synt_M(L) = \{ [a]_L \mid a \in M \}\] becomes a monoid under this
-  operation and the mapping \[\phi_L : M \to synt_M(L),\ \phi_L(a) = [a]_L\]
+  then \[synt_M(L) := \setof{[a]_L \mid a \in M} \] becomes a monoid under
+  this operation and the mapping \[\phi_L : M \to synt_M(L),\ \phi_L(a) = [a]_L\]
    is a monoid epimorphism.
 \end{enumerate}
 
 We call $\equiv (L)$ the {\bf syntactic congruence} of $L$ and $synt_M(L)$ the
 {\bf syntactic monoid} of $L$ with respect to $M$.
 
-To motivate the name {\em syntactic monoid} we give an example from German
-language.
+To motivate the name {\em syntactic monoid} we give an example.
 
-Let $A$ be the alphabet of German and $L$ the set of sentences in German. One can
-denote two words $w_1$ and $w_2$ as congruent if they can always be exchanged in
-each german sentence. There exist words that cannot always be exchanged. In the
-sentence ''Apfel ist eine Kernfrucht'' the word ''Apfel'' can be exchanged by
-''Birne'' but this is not possible in the sentence ''Apfel schreibt sich A p f e
-l''.
+Let $A$ be the alphabet for English and $L$ the set of English sentences.
+One can consider two words $w_1$ and $w_2$ from $L$ as {\em congruent} if they
+can be exchanged in each sentence. There exist words that cannot always be exchanged. 
+In the sentence ''An apple is a fruit'' the word ''apple'' can always be
+exchanged by ''pear'' but this is not possible in the sentence ''apple is
+spelled a p p l e''.
 
-The difficulty is of semantic nature. If you don't consider semantic correctness
-of sentences you get a classification of words wrt. their syntactic meaning.
+The difficulty is of {\em semantic} nature. If you don't consider semantic
+correctness of sentences you get a classification of words wrt.\ their syntactic
+meaning.
 
-\transrem{I fear this example makes not a lot of sense in this translation}
+The important notion of {\em syntactic congruence} was introduced by M.\
+P.\ Schützen\-berger in the context of coding problems.
 
-The important notion of ''syntactic congruence'' has been introduced by M.\ P.\
-Schützenberger in the context of coding problems.
-
-{\bf Exercise:} Prove the following 
+{\bf Exercise:} Prove the following theorem:
 \begin{theorem}
-It is decidable if a monoid homomorphism $\alpha$ is injective.
+It is decidable if a monoid homomorphism $\phi$ is injective.
 \end{theorem}
 
-Hint: Let $\alpha: A^* \to B^*$ be a given monoid homomorphism, $A =
-\{a_1,\ldots,a_n\},\ E = \{\alpha(a_1),\ldots,\alpha(a_n)\}$.
+Hint: Let $\phi: A^* \to B^*$ be a given monoid homomorphism, $A =
+\{a_1,\ldots,a_n\},\ E = \{\phi(a_1),\ldots,\phi(a_n)\}$.
 
-Consider $A_1 := \{ u^{-1} v \in B^* \mid u, v \in E,\ u\neq v \}$ and then
-inductively $A_{k+1} = A_k^{-1} E \cup E A_k$.
+Consider
+\begin{eqnarray*}
+A_1 &:=& \setof{u^{-1} v \in B^* \mid u, v \in E,\ u\neq v }\text{ and then
+inductively}\\
+A_{k+1} &:=& A_k^{-1} \cdot E \cup E \cdot A_k
+\end{eqnarray*}
 
 Prove that
 \begin{enumerate}
-  \item The construction of the $A_k$ halts
-  \item $1 \in \cup A_k \iff \alpha\text{ is not injective}$.
+  \item The construction of the $A_k$ stops
+  \item $1 \in \bigcup_{k \geq 1} A_k \iff \phi\text{ is not injective}$.
 \end{enumerate}
 
 
 \begin{corollary}
-In a free monoid it is decidable if a finite set is a free generating system.
+For a free monoid $M$ it is decidable if some finite subset is a free generating
+system of $M$.
 \end{corollary}

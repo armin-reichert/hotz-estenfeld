@@ -18,7 +18,8 @@ final state. Additionally, all edges labels have length 0 or 1, $\alpha(e) \leq
 
 In a very easy way one gets
 
-\begin{theorem}
+\begin{theorem}[Closure under monoid homomorphism]
+\label{alg-lang-closure-hom}
 Let $\phi : X^* \to Y^*$ be a monoid homomorphism.
 \[ L \in ALG(X^*) \Rightarrow \phi(L) \in ALG(Y^*) \]
 \end{theorem} 
@@ -317,8 +318,9 @@ This completes the proof of our theorem.
 \end{proof}
 
 \bigskip
-\begin{theorem}
-\[ L \in ALG(X^*),\ R \in REG(X^*) \Rightarrow L \cap R \in ALG(X^*) \]
+\begin{theorem}[Closure under intersection with regular language]
+\label{alg-lang-closure-reg-intersect}
+\[ L \in ALG(X^*),\ R \in REG(X^*)\Rightarrow L \cap R \in ALG(X^*) \]
 \end{theorem}
 
 \begin{proof}
@@ -351,10 +353,14 @@ The opposite direction is clear because of the construction of PDA $\kappa'$.
 
 \bigskip
 \begin{theorem}[Closure under inverse homorphism]
+\label{alg-lang-closure-inv-hom}
 Let $\phi : X^* \to Y^*$ be a monoid homomorphism and $\phi(x) \in Y \cup
 \setof{\epsilon}$. Then
 \[ L \in ALG(Y^*) \Rightarrow \phi^{-1}(L) \in ALG(X^*) \]
 \end{theorem}
+
+\transrem{In the following proof some names have been changed and some comments
+been added}
 
 \begin{proof}
 Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$. For the language
@@ -362,53 +368,118 @@ Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$. For the language
 we construct a PDA $\kappa' = (\fa{A}', \pdstore{K}')$ as follows (for
 simplicity, we construct the graph and the pushdown store in parallel):
 
-Let $\fa{A}$ be a finite acceptor for $L$,
-\[ \fa{A} = (G, Y, S, F, \alpha) \]
-with graph $G = (V, E)$.
+Let $\fa{A}$ be the finite automaton
+\[ \fa{A} = (G, Y, S, F, \alpha),\quad G = (V, E) \]
 
 Define
 \[ \fa{A}' = (G', X, S, F, \alpha') \]
 with graph $G' = (V', E')$.
 
-The vertex set $V'$ of this graph is
-\[ V' = V \cup \setof{R_i^{v} \mid v \in V,\ i = 1,\ldots,m} \]
+1. Vertex set $V'$: In addition to the vertices of $V$, new vertices $r(v, x),\
+x \in X$ are added which will be used to create cycles simulating the erasure of
+symbols from $X$ by $\phi$.
+\[ V' = V \cup \setof{r(v,x) \mid v \in V} \]
 
-The edge set $E'$ is defined by:
+2. Edge set $E'$: For each symbol $x \in X$ which is mapped by $\phi$ to a 
+symbol $y \in Y$, an edge is added to simulate the computation on $y$.
+For each symbol $x \in X$ which is erased by $\phi$, two edges are added that
+form a cycle simulating the computation on the empty word. Formally:
 
-For each edge $e \in E$ labeled $\alpha(e) = y \in Y$
-\begin{itemize}
-  \item include edges $e_1, \ldots, e_{k(y)}$ with $e_i : Q(e) \to Z(e)$ and
-  $\delta'(e_i, y) = \delta(e, y)$.
-\end{itemize}
+\begin{enumerate}
+  \item Let $X[\to Y] := \setof{x \in X \mid \phi(x) \in Y}$. For each edge
+  $e \in E$ labelled $y \in Y$ and each $x \in X[\to Y]$ an edge $e': Q(e)
+  \edge{x} Z(e)$ is added to $E'$.
+  
+  \item Let $X[\to \epsilon] := \setof{x \in X \mid \phi(x) = \epsilon}$. For
+  each vertex $v  \in V$ and each $x \in X[\to \epsilon]$ two edges $e'$ and
+  $e''$ are added where
+  \[ e': v \edge{x} r(v,x),\qquad e': r(v,x) \edge{\epsilon} v \]
+  The pushdown store computation for $e', e''$ is defined by
+  \[ \delta'(e', y) = y \$,\qquad \delta'(e'', \$) = \epsilon \]
+  This means, when traversing edge $e'$, the symbol ${\$}$ is pushed onto the
+  stack and popped again when $e''$ is traversed.
+\end{enumerate}
+
+The PDA $\kappa' = (\fa{A'}, \pdstore{K'})$ with pushdown store
+$\pdstore{K'} = (E', Y \cup \setof{\$}, \delta')$ with $\delta'$ defined as
+above accepts the language $\phi^{-1}(L)$ (exercise).
 \end{proof}
 
+Remark: The theorem also holds for arbitrary homomorphisms ($\phi(x) \in Y^*$).
 
+\begin{corollary}
+Let $\tau: X^* \to Y^*$ be a rational transduction. Then
+\[ L\in ALG(X^*)\Rightarrow \tau(L)\in ALG(Y^*) \]
+\end{corollary}
 
+\begin{proof}
+As shown in chapter II.5 we can write $\tau(L)$ as
+\[ \tau(L)=\beta(\alpha^{-1}(L)\cap R) \]
+where $\alpha : X^*\to Z^*, \beta: X^*\to Y^*$ are monoid homomorphisms and
+$R\in REG(Z^*)$ is a regular language.
 
+\begin{eqnarray*}
+L\in ALG(X^*) &\Rightarrow& \alpha^{-1}(L)\in ALG(Z^*)\text{ by theorem
+\ref{alg-lang-closure-inv-hom}}\\
+&& \alpha^{-1}(L)\cap R\in ALG(Z^*)\text{ by theorem
+\ref{alg-lang-closure-reg-intersect}}\\
+&& \beta(\alpha^{-1(L)}\cap R)\in ALG(Y^*)\text{ by theorem
+\ref{alg-lang-closure-hom}}
+\end{eqnarray*}
+\end{proof}
 
+\bigskip
+We want to prove another important closure property of the algebraic languages.
+To do so, we introduce the notion of {\bf substitution}.
 
+\begin{definition}
+Let $X_\infty$ be a countably infinite alphabet (see chapter II.4), let $X
+\subset X_\infty$ and $\sigma:X\to ALG(X_\infty^*)$ be a mapping.
+$ALG(X_\infty^*)$ is a monoid with the complex product as its operation.
 
+The continuation of $\sigma$ to a monoid homomorphism 
+\[ \sigma: X^*\to ALG(X_\infty^*) \]
+is called {\bf algebraic substitution}.
+\end{definition}
 
+It holds
+\begin{theorem}
+Let $L\in ALG(X^*)$ and $\sigma: X^*\to ALG(X_\infty^*)$ an algebraic
+substitution. Then
+\[ \sigma(L) := \setof{\sigma(w)\mid w\in L} \in ALG(X_\infty*) \]
+\end{theorem}
 
+\begin{proof}
 
+\end{proof}
 
+\bigskip
+We have proved now the most important closure properties for algebraic
+languages.
 
+In the next section we investigate the theorem of Chomsky-Schützenberger,
+another important theorem which gives a characterization of the algebraic languages.
 
+{\bf Exercises:}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{enumerate}
+  \item Let $L\in ALG(X^*),\ R\in REG(X^*)$. Show:
+  \[ LR^{-1}\in ALG(X^*)\text{ and }R^{-1}L\in ALG(X^*) \]
+  
+  \item For $L\in X^*$ let
+  \begin{eqnarray*}
+  INIT(L) &:=& \setof{u\mid uv\in L\text{ for }v\in X^*}\\
+  FIN(L) &:=& \setof{u\mid vu\in L\text{ for }v\in X^*}\\
+  SUBWORD(L) &:=& \setof{v\mid uvw\in L\text{ for }u,w\in X^*}
+  \end{eqnarray*}
+  Show: $L\in ALG(X^*) \Rightarrow INIT(L), FIN(L), SUBWORD(L)\in ALG(X^*)$.
+  
+  \item Show: There exist algebraic langauges $L_1, L_2\in ALG(X^*)$ such that
+  $L_1^{-1} L_2 \notin ALG(X^*)$.
+  
+  Hint: Set $L_1 = a \setof{b^ia^i\mid i\geq 1}^*$ and $L_2 =
+  \setof{a^{i}b^{2i}\mid i\geq 1}^*$. Prove that $L_1$ and $L_2$ are algebraic
+  and take the intersection $(L_1^{-1}L_2)\cap b^+$. Then prove the following
+  theorem: If $X$ contains a single element, then each algebraic language over
+  $X$ is regular. From this the claim immediately follows.
+\end{enumerate}

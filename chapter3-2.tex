@@ -421,9 +421,9 @@ $R\in REG(Z^*)$ is a regular language.
 \begin{eqnarray*}
 L\in ALG(X^*) &\Rightarrow& \alpha^{-1}(L)\in ALG(Z^*)\text{ by theorem
 \ref{alg-lang-closure-inv-hom}}\\
-&& \alpha^{-1}(L)\cap R\in ALG(Z^*)\text{ by theorem
+&\Rightarrow& \alpha^{-1}(L)\cap R\in ALG(Z^*)\text{ by theorem
 \ref{alg-lang-closure-reg-intersect}}\\
-&& \beta(\alpha^{-1(L)}\cap R)\in ALG(Y^*)\text{ by theorem
+&\Rightarrow& \beta(\alpha^{-1(L)}\cap R)\in ALG(Y^*)\text{ by theorem
 \ref{alg-lang-closure-hom}}
 \end{eqnarray*}
 \end{proof}
@@ -450,7 +450,155 @@ substitution. Then
 \end{theorem}
 
 \begin{proof}
+Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$,
+\[ \fa{A}=(G, X, \setof{s}, \setof{f}, \alpha),\quad G=(V,E),\quad
+\pdstore{K}=(E, Y, \delta)
+\]
 
+Let $\kappa_x = (\fa{A}_x, \pdstore{K}_x)$ be a PDA accepting $\sigma(x)$,
+\[ \fa{A}_x = (G_x, A_x, \setof{s_x}, \setof{f_x}, \alpha_x),\quad G_x=(V_x,
+E_x) \] and
+\[ \pdstore{K}_x = (E_x, Y_x, \delta_x) \]
+
+We construct a PDA $\kappa'$ accepting $\sigma(L)$:
+
+Informal idea: In the PDA for $L$ each edge labelled with $x$ is substituted by
+a separate copy of the graph $G_x$ together with 3 auxiliary edges. These edges
+are used to ensure that the resulting graph cannot accept more words that those
+from $\sigma(L)$.
+
+FIGURE
+
+Consider an edge $e: p \edge{x} r \in E,\ \alpha(e)=x\in X$.
+
+Add new edges $e_1, e_2, e_3$ to $E'$ and a new vertex $p_e$ to $V'$ with
+\begin{eqnarray*}
+& e_1: p \edge{\epsilon} p_e \\
+& e_2: p_e \edge{\epsilon} s_x \\
+& e_3: f_x \edge{\epsilon} r
+\end{eqnarray*}
+
+Additionally, add a disjoint copy of the graph $G_x$ to the graph $G'$ and keep
+the labels, i.e.\ $\alpha'(e) = \alpha_x(e),\ e\in E_x$.
+
+The pushdown computation is defined as follows:
+\begin{eqnarray*}
+\delta'(e_1, y) &=& \delta(e, y),\ y\in Y\cup\setof{\epsilon} \\
+\delta'(e_2, y) &=& y \cdot {\$}_e,\ y\in Y\cup\setof{\epsilon} \\
+\delta'(e_3, {\$}_e) &=& \epsilon \\
+\delta'(e', {\$}_e) &=& {\$}_e \cdot \delta_x(e', \epsilon),\ e'\in E_x,\ Q(e')
+=s_x \\
+\delta'(e', y) &=& \delta_x(e', y),\ e'\in E_x,\ Q(e')\neq s_x,\ y\in Y_x \cup
+\setof{\epsilon} \\
+\delta'(e', y) &=& \infty\infty,\text{ else}
+\end{eqnarray*}
+
+We get a PDA $\kappa' = (\fa{A}', \pdstore{K}')$ with
+\[ \fa{A}' = (G', X', \setof{s}, \setof{f}, ,\alpha'),\quad G'=(V',E') \]
+where the vertex set is
+\[ V' = V \cup \bigcup_{x \in X} V_x \cup \setof{p_e \mid e \in E} \]
+and the edge set is
+\[ E' = \bigcup_{x \in X} E_x \cup \setof{e_1, e_2, e_3 \mid e \in E} \cup
+\setof{e \in E \mid \alpha(e) = \epsilon} \]
+
+The start and final state is the same as in PDA $\kappa$.
+
+The edge labels are defined by
+\[ \alpha'(e)= \begin{cases}
+\alpha_x(e) & e \in E_x,\ x\in X \\
+\epsilon & \text{ else}
+\end{cases} \]
+
+The pushdown store is defined as
+\[ \pdstore{K}' = (E', Y', \delta') \]
+where the pushdown alphabet $Y'$ is
+\[ Y' = \bigcup_{x \in X} Y_x \cup \setof{{\$}_e \mid e \in E,\
+\alpha(e)\neq\epsilon} \cup \setof{\infty} \]
+
+$\delta'$ is defined as shown above, additionally $\delta'(e, y) = \delta(e,
+y)$ for all edges with $\alpha(e)=\epsilon$.
+
+Claim: It holds \[ L_{\kappa'} = \sigma(L) \]
+
+''$\subset$'':
+
+Let $w \in L_{\kappa'}$ be a word accepted by PDA $\kappa'$. Then
+there exists a path $\pi \in \pathcategory{G'}(s, f)$ with label
+$\alpha'(\pi)=w$ and pushdown store computation $\delta'(\pi, \epsilon) =
+\epsilon$.
+
+The path $\pi$ can be decomposed into $\pi = \pi_1 \circ \ldots \pi_k$ and each
+subpath $\pi$ can be decomposed into $\pi_i = e_1^{(i)} \circ e_2^{(i)}
+\circ \pi'_i \circ e_3^{(i)}$ where $\pi'_i \in
+\pathcategory{G_{x_i}}(s_{x_i}, f_{x_i})$ and $\alpha(e_i) = x_i$.
+
+By construction it holds $\alpha'(\pi'_i) \in \sigma(x_i),\ x_i \in X$.
+$\alpha'(e_i) = \epsilon \Rightarrow \alpha'(\pi'_i) \in \sigma(x_i)
+\Rightarrow$
+\begin{eqnarray*}
+w &=& \alpha'(\pi) \\
+  &=& \alpha'(\pi_1) \cdots \alpha'(\pi_k) \in \sigma(x_1) \cdots \sigma(x_k) \\
+  &=& \sigma(x_1 \cdots x_k),\ x_1 \cdots x_k \in X^*
+\end{eqnarray*}
+
+It remains to show $x_1 \cdots x_k \in L$.
+
+Let by construction $e_1 \circ \ldots \circ e_k \in \pathcategory{G}(s, f)$ be
+an accepting path in the pushdown automaton for $L$, so $\alpha(e_1 \circ \ldots
+\circ e_k) = x_1 \cdots x_k$.
+
+We claim that the pushdown store computation for this path is the same as the
+one of the corresponding path in the original PDA:
+\[ \delta'(\pi_1 \circ \ldots \circ \pi_k, \epsilon) = \delta(e_1 \circ \ldots
+\circ e_k, \epsilon) \]
+
+It holds
+\begin{eqnarray*}
+\delta'(\pi_1, \epsilon) &=& \delta'(e_1^{(1)} \circ e_2^{(1)} \circ \pi'_1
+\circ e_3^{(1)}, \epsilon) \\
+&=& \delta'(e_1^{(2)} \circ \pi'_1 \circ e_3^{(1)}, \delta(e_1,\epsilon))
+\\
+&=& \delta'(e_1^{(3)}, \delta(e_1, \epsilon) \cdot {\$}_{e_1}) \\
+&=& \delta(e_1, \epsilon)
+\end{eqnarray*}
+
+By induction, the claim follows.
+
+By assumption it holds $\delta'(\pi_1 \circ \ldots \pi_k, \epsilon) = \epsilon
+\Rightarrow \delta(e_1 \circ \ldots \circ e_k) = \epsilon$ 
+\[ \Rightarrow x_1 \cdots x_k \in L_{\kappa} \Rightarrow \alpha'(\pi) \in
+\sigma(L_{\kappa}) = \sigma(L) \]
+
+\bigskip
+''$\supset$'':
+
+Let $w \in \sigma(L)$ be a word in the target language of the substitution
+$\sigma$. Then there exists a word $v \in L$ with $w \in \sigma(v)$. For $v$
+there exists an accepting path $\pi \in \pathcategory{G}(s, f)$ labelled
+$\alpha(\pi) = v$ and with pushdown computation $\delta(\pi, \epsilon) =
+\epsilon$.
+
+Let $\pi = \pi_1 \circ\ldots\circ \pi_k$ be a decomposition of path $\pi$ into
+single edges. To each edge $\pi_i$ with label $\alpha(\pi_i) = x_i$ there exists
+a PDA $\kappa_{x_i}$ accepting $\sigma(x_i)$.
+
+For each edge $\pi_i$ there exists in $\kappa'$ a path 
+\[ \pi_i' = {\pi'}_i^{(1)} \circ {\pi'}_i^{(2)} \circ \pi_{x_i} \circ
+{\pi'}_i^{(3)} \]
+where $\delta_{x_i}(\pi_{x_i}, \epsilon) = \epsilon$ and
+$\alpha'(\pi_i') \in \sigma(x_i)$ such that $\alpha'({\pi'}_1) \cdots \alpha'({\pi'}_k) = u$.
+
+By construction of $\delta'$ it holds 
+\[ \delta'(\pi'_1 \circ\ldots\circ \pi'_k, \epsilon) = \delta(\pi_1
+\circ\ldots\circ \pi'_k, \epsilon) \]
+and from that follows $\delta'(\pi'_1 \circ\ldots\circ \pi'_k, \epsilon) =
+\epsilon$.
+
+Together: $\alpha'(\pi'_1 \circ\ldots\circ \pi'_k) = u$ and $\delta'(\pi'_1
+\cdots \pi'_k, \epsilon) = \epsilon \Rightarrow u \in L_{\kappa'}$.
+
+\medskip
+This finishes the proof $L_{\kappa'} = \sigma(L)$.
 \end{proof}
 
 \bigskip

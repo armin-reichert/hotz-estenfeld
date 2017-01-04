@@ -6,7 +6,26 @@
 \usepackage{pgf}
 \usepackage{tkz-graph}
 \usepackage{tikz}
+
+% TikZiT preamble begin
+%\usepackage[svgnames]{xcolor}
+%\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.geometric}
+%\pagestyle{empty}
+\pgfdeclarelayer{edgelayer}
+\pgfdeclarelayer{nodelayer}
+\pgfsetlayers{edgelayer,nodelayer,main}
+\tikzstyle{none}=[inner sep=0pt]
+\tikzstyle{state_node}=[circle,draw=black]
+%\usepackage[graphics,tightpage,active]{preview}
+%\PreviewEnvironment{tikzpicture}
+\newlength{\imagewidth}
+\newlength{\imagescale}
+% end
+
 \usetikzlibrary{arrows,automata,cd,positioning,shapes}
+
 
 \newtheorem{definition}{Definition}[section]
 \newtheorem{lemma}{Lemma}[section]

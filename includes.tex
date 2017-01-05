@@ -1,41 +1,33 @@
 \usepackage[utf8]{inputenc}
 \usepackage{parskip}
-%\usepackage{amsmath}
-%\usepackage{amssymb}
-%\usepackage{amsthm}
-\usepackage{pgf}
-\usepackage{tkz-graph}
 \usepackage{tikz}
-
+\usetikzlibrary{arrows,automata,cd,positioning,shapes}
 % TikZiT preamble begin
 %\usepackage[svgnames]{xcolor}
-%\usepackage{tikz}
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{shapes.geometric}
-%\pagestyle{empty}
 \pgfdeclarelayer{edgelayer}
 \pgfdeclarelayer{nodelayer}
 \pgfsetlayers{edgelayer,nodelayer,main}
-\tikzstyle{none}=[inner sep=0pt]
-\tikzstyle{state_node}=[circle,draw=black]
-%\usepackage[graphics,tightpage,active]{preview}
-%\PreviewEnvironment{tikzpicture}
 \newlength{\imagewidth}
 \newlength{\imagescale}
+%styles
+\tikzstyle{none}=[inner sep=0pt]
+\tikzstyle{state}=[circle,fill=white,draw=black]
+\tikzstyle{transition}=[-latex,draw=black]
 % end
 
-\usetikzlibrary{arrows,automata,cd,positioning,shapes}
 
-
+% theorem environments
 \newtheorem{definition}{Definition}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{corollary}{Corollary}[section]
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{maintheorem}{Main Theorem}[section]
 
+% custom commands
 \newcommand{\transrem}[1]{\begin{center}\fboxrule0.1mm\fboxsep0.5em\fbox{\parbox{12cm}{\em
 Remark: #1}}\end{center}}
-
 \newcommand{\setof}[1]{\mbox{$\{#1\}$}}
 \newcommand{\dderives}[1]{\underset{#1}{\Rightarrow}}
 \newcommand{\derives}[1]{\underset{#1}{\overset{*}{\Rightarrow}}}

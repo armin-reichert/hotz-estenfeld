@@ -1,1 +1,104 @@
 \section{The theorem of Chomsky-Schützenberger}
+
+The Chomsky-Schützenberger theorem is one of the fundamental theorems in the
+theory of formal languages, especially the context-free languages \cite{ChSch}.
+
+In the literature, the proof of this theorem is always based on grammars.
+
+We will give an automata-theoretic access to this theorem. We present this
+theorem at this place in the book because it can be very well appended to the
+section on pushdown classes (chapter III.1) from a proof technical point of
+view. A similar access to this theorem has been given by Goldstine
+\cite{Goldstine77} (?).
+
+The Chomsky-Schützenberger theorem characterizes the the context-free languages
+by a very simple subclass of context-free languages with the use of a
+homomorphism.
+
+In this respect the theorem is an analogon to lemma 7 in chapter II.1 where we
+proved that each regular language can be presented as a homomorphic image of a
+local language.
+
+We want to formulate the theorem now.
+
+Let $D(X)$ be the Dyck language over the alphabet $X$ (see chapter I.3).
+
+Remark: In the literature, often the language
+\[ \setof{w\in (\unioninv{X})^* \mid |w|= \epsilon\text{ in the free group
+}F(X)} 
+\] 
+is called Dyck language. We denote this language as {\em symmetric Dyck
+language}.
+
+With our notations the following theorem holds:
+\begin{theorem}[Chomsky-Schützenberger]
+To each algebraic language $L\in ALG(X^*)$ there exists an alphabet $\Sigma
+\subset X_\infty$, a regular set $R\in REG((\unioninv{\Sigma})^*)$ and a monoid
+homomorphism $\phi: (\unioninv{\Sigma})^* \to X^*$ such that
+\[ L = \phi(D(\Sigma)\cap R) \]
+\end{theorem}
+
+\begin{proof}
+$L\in ALG(X^*) \Rightarrow$ it exists a PDA $\kappa=(\fa{A},\pdstore{K})$ with
+$L = L_\kappa$, where $\fa{A}=(G, X, S, F, \alpha)$ is the corresponding finite
+automaton.
+
+For the proof we use the graph $G'=(V',E')$ we constructed in theorem 2 of
+section III.1 and the mapping $\gamma: E' \to \hgroup{Y}$.
+
+Our goal is to construct a graph $G''$ with edges from $\unioninv{\Sigma}$.
+
+To do so, we define a relation $\rho \subset E'\times E'$ on the edge set of
+$G'$ such that for edges $e_1, e_2\in E'$ it holds
+\[ e_1 \rho e_2 \iff e_1 = (e, y),\ e_2 = (e', y', y)\text{ with }\delta(e, y) =
+yy' \]
+
+This relation can be represented by a bipartite graph that has the edges from
+$E'$ as its vertices and whose edges connect edges from $E'$ is these are
+related by $\rho$.
+
+\transrem{TODO: write down the proof in a more readable form than in the book and
+illustrate its ideas using diagrams.}
+\end{proof}
+
+We get the following
+\begin{corollary}
+Foe each PDA $\kappa$ there exists a Dyck language $D(\Sigma)$ and a local set
+$R$ over $\unioninv{\Sigma}$ and a monoid homomorphism $\phi:
+(\unioninv{\Sigma})^* \to X^*$ such that
+\begin{enumerate}
+  \item $\phi(D(\Sigma\cap R)) = L_\kappa$
+  \item For $w\in X^*$ it holds $<\kappa, w> = card(\phi^{-1}(w))$
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+\begin{enumerate}
+  \item Theorem of Chomsky-Schützenberger
+  \item Follows from the construction in the proof
+\end{enumerate}
+\end{proof}
+
+We even proved slightly more:
+
+Let \[ <\kappa, w> := card(\setof{\pi\in\pathcategory{G}(S,F)\mid
+\alpha(\pi)=w,\ \delta(\pi,\epsilon)=\epsilon})
+\]
+Problem: Is it possible to always find a PDA $\kappa$ accepting an algebraic
+language $L \in ALG(X^*)$ such that for each word $w$ it holds $<\kappa, w> <
+\infty$?
+
+If the definition of the pushdown store is generalized such that $\delta(X
+\times Y) \subset Y*$ is allowed, is then the condition $<\kappa, w> <
+\infty$ always satisfiable?
+
+At the end of this section we want to mention the following (for the interested
+reader):
+
+Because $D(\Sigma) \in ALG(X_\infty^*)$ and by theorem 1 in section III.2 the
+class of algebraic languages is closed under monoid homomorphism and by theorem
+3 in chapter III.2 under intersection with regular sets, from the theorem of
+Chomsky-Schützenberger follows that the class of algebraic languages over the
+alphabet $X_\infty$ equals the class of context-free languages.
+
+The problem above will be investigated in a later chapter.

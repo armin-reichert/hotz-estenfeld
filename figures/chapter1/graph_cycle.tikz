@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, -0) {};
+		\node [style=none] (1) at (-2, 3) {};
+		\node [style=none] (2) at (2, 3) {};
+		\node [style=none] (3) at (3, -2) {};
+		\node [style=none] (4) at (-2, -2) {};
+		\node [style=none] (5) at (-3, 1) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (1.center) to node[auto]{$e_1$} (0.center);
+		\draw (2.center) to node[auto]{$e_2$} (0.center);
+		\draw (3.center) to node[auto]{$e_3$} (0.center);
+		\draw (4.center) to node[auto]{$e_4$} (0.center);
+		\draw (5.center) to node[auto]{$e_5$} (0.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

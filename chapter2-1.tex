@@ -1,8 +1,8 @@
 \section{The finite automaton, regular sets in $X^*$,\ $REG(X^*)$}
 
 Let $G = (V, E)$ be a finite, oriented graph, $X$ a finite set and $\alpha =
-(\pathcategory{G}, X^*,\alpha_1, \alpha_2)$ a functor with $\alpha_1 : V \to \{ X^*
-\},\ \alpha_2 : \pathcategory{G} \to X^*$.
+(\pathcat{G}, X^*,\alpha_1, \alpha_2)$ a functor with $\alpha_1 : V \to \{ X^*
+\},\ \alpha_2 : \pathcat{G} \to X^*$.
 
 (Remark by the translator: Here the free monoid $X^*$ is regarded as a category
 $X^* = (\{X^*\}, X^*, Q, Z, \cdot \})$ where $\cdot$ is the monoid operation
@@ -25,14 +25,14 @@ $X$ instead of $X^*$, otherwise we specify the monoid explicitly.
 
 \begin{definition}[accepted set]
 If we define 
-\[ \pathcategory{G}(S, F) := \{ w \in \pathcategory{G}\ |\ Q(w) \in S \wedge Z(w)
+\[ \pathcat{G}(S, F) := \{ w \in \pathcat{G}\ |\ Q(w) \in S \wedge Z(w)
 \in F \}, \]
-then \[ L_{\fa{A}} := \alpha_2(\pathcategory{G}(S, F)) \] 
+then \[ L_{\fa{A}} := \alpha_2(\pathcat{G}(S, F)) \] 
 is called the set {\bf accepted by} the automaton. 
 \end{definition}
 
-We will also write shortly $\alpha$ instead of $\alpha_2$ and $\pathcategory{}(S,F)$
-instead of $\pathcategory{G}(S,F)$.
+We will also write shortly $\alpha$ instead of $\alpha_2$ and $\pathcat{}(S,F)$
+instead of $\pathcat{G}(S,F)$.
 
 \begin{definition}[regular language over free monoid]
 Let $X$ be an alphabet. \[ REG(X^*) := \{ L \subset X^*\ | \mbox{ there
@@ -164,7 +164,7 @@ Proof: We ''split'' all edges according to their labels.
   \item Let $e \in E$ with $\alpha_2(e) = x_1 \cdots x_k,\ k > 1, x_i \in X$.\\
   Remove edge $e$ and add new edges $e'_1,
   \ldots, e'_k$ and new points $P'_1, \ldots, P'_{k-1}$ such that $(Q(e),
-  e'_1, \ldots, e'_k, Z(e)) \in \pathcategory{G'}$ and define a new graph $G' =
+  e'_1, \ldots, e'_k, Z(e)) \in \pathcat{G'}$ and define a new graph $G' =
   (V', E')$. The labeling of the new edges is defined by $\alpha'(e'_i) := x_i$
   for $i = 1, \ldots, k$.
   
@@ -426,7 +426,7 @@ Because \fa{A} is complete and deterministic, every word $w \in X^*$ determines
 a unique path starting in $S_{\fa{A}}$.
 
 This $w \in X^*$ uniquely determines a point $P \in V(G)$ with $w \in
-\alpha(\pathcategory{W}(S_{\fa{A}}, P))$.
+\alpha(\pathcat{W}(S_{\fa{A}}, P))$.
 
 It is either $P \in F_{\fa{A}}$ or $P \in F_{\fa{A'}}$ and from $F_{\fa{A}}
 \cap F_{\fa{A}'} = \emptyset$ follows $w \in \lang{A} \Leftrightarrow w
@@ -473,7 +473,7 @@ We now prove that $\lang{A} = \lang{A}_1 \cdot \lang{A}_2$.
   and 
   \[ S_2 \ni Q_0 \edge{v_1} Q_1 \edge{v_2} \ldots \edge{v_m} Q_m \in F_2 \]
   
-  By construction of graph $G$ there exists a path in $\pathcategory{G}(S1, F2)$ of
+  By construction of graph $G$ there exists a path in $\pathcat{G}(S1, F2)$ of
   the form
   \[ S_1 \ni P_0 \edge{u_1} P_1 \edge{u_2} \ldots P_{n-1} \edge{u_n} Q_0
   \edge{v_1} Q_1 \edge{v_2} \ldots \edge{v_m} Q_m \in F_2 \]
@@ -484,7 +484,7 @@ We now prove that $\lang{A} = \lang{A}_1 \cdot \lang{A}_2$.
   \item $\lang{A} \subset \lang{A}_1 \cdot \lang{A}_2$
   
   Let \[ S \ni P_0 \edge{w_1} P_1 \edge{w_2} \ldots \edge{w_n} P_n \in F \] be
-  an accepting path in $\pathcategory{G}(S, F)$. Then there exist states $P_i \in
+  an accepting path in $\pathcat{G}(S, F)$. Then there exist states $P_i \in
   S_2$ and $P_j \in V(G_1)$ with $j < i$ because $V(G_1) \cap V(G_2) =
   \emptyset$.
   
@@ -540,7 +540,7 @@ state in insufficient in general.
 Proof: Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite acceptor for $L$. Then \[
 \fa{B} = (G, Y, S, F, \beta)\] with $\beta_2(e) := \phi(\alpha_2(e)),\ e \in
 E(G)$, is an acceptor for $\phi(L)$ because \[\phi(L) =
-\phi(\alpha_2(\pathcategory{G}(S, F))) = \beta_2(\pathcategory{G}(S,F))\]
+\phi(\alpha_2(\pathcat{G}(S, F))) = \beta_2(\pathcat{G}(S,F))\]
 Therefore \[ \phi(L) \in REG(Y^*) \]
 
 After having proved closure properties, we prove some other important properties
@@ -558,7 +558,7 @@ Set $G = (\{S,F\}, \emptyset)$, then $\fa{A} = (G, \emptyset, \{S\}, \{F\},
 \emptyset)$ fulfills $\lang{A} = \emptyset$.
 
 \begin{lemma}
-Set $G = (V, E)$. Then $\pathcategory{G}(S,F) \in REG(E^*)$.
+Set $G = (V, E)$. Then $\pathcat{G}(S,F) \in REG(E^*)$.
 \end{lemma}
 
 This means the set of paths of a graph which start in a start state and end in a
@@ -572,7 +572,7 @@ Let $S, F \subset X$ and $R \subset X \times X$ be a relation on $X$ with \[ L =
 \end{definition}
 
 \begin{lemma}[The accepting path set of a FA is local]
-Let $G = (V, E)$ be a graph. Then $\pathcategory{G}(S, F)$ is local over $E$.
+Let $G = (V, E)$ be a graph. Then $\pathcat{G}(S, F)$ is local over $E$.
 \end{lemma}
 
 Proof: Let \begin{eqnarray*}

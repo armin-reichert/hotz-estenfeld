@@ -58,7 +58,7 @@ This construction will play an exceptional role in later chapters.
 Without loss of generality we may assume that for each edge of our graph $G =
 (V, E)$ holds: $\alpha(e) \in X\cup X^{-1}\cup \{\epsilon\}$.
 
-{\bf Step 1:} If there is a path $\pi \in \pathcategory{G}(v, v')$ with
+{\bf Step 1:} If there is a path $\pi \in \pathcat{G}(v, v')$ with
 $|\alpha(\pi)| = \epsilon$, then we add a new edge $e: v \to v'$ to $E$ and set
 $\alpha(e) := \epsilon$. $\epsilon$-loops will be removed.
 
@@ -122,7 +122,7 @@ functor which preserves the labelling of the edges.
 
 Therefore $\lang{A}' \subset |L|$.
 
-Let to the opposite $\pi$ be a path in $\pathcategory{G_3}$ with label $\alpha(\pi)
+Let to the opposite $\pi$ be a path in $\pathcat{G_3}$ with label $\alpha(\pi)
 = |\alpha(\pi)|$, then there is no $(+, -)$-sequence in the label.
 
 That means the path $\pi$ stays unchanged in $G'$ as long as the label of the
@@ -140,32 +140,32 @@ In this proof we even showed more which is summarized in the following
 corollary.
 
 \begin{corollary}
-To each path $\pi = e_1 \cdots e_k \in \pathcategory{G}(S, -),\ e_i \in E$ with
+To each path $\pi = e_1 \cdots e_k \in \pathcat{G}(S, -),\ e_i \in E$ with
 $\alpha(e_k) \neq \epsilon$ and $\alpha(\pi) \neq \epsilon$ there is assigned a
-unique $\epsilon$-free path $\pi' \in \pathcategory{G_3}(S, -)$ with $\alpha(\pi) =
+unique $\epsilon$-free path $\pi' \in \pathcat{G_3}(S, -)$ with $\alpha(\pi) =
 \alpha(\pi')$.
 
-Additionally, we can define a functor $\nu : \pathcategory{G_3} \to \pathcategory{G}$ such
+Additionally, we can define a functor $\nu : \pathcat{G_3} \to \pathcat{G}$ such
 that the following holds:
 
 For each accepted word $u \in L$ there exists an accepting path $\pi = e_1
-\cdots e_n \in \pathcategory{G_3}(S, F)$ with $e_i \in E_3,\ \alpha(e_i) \neq \epsilon$ such
+\cdots e_n \in \pathcat{G_3}(S, F)$ with $e_i \in E_3,\ \alpha(e_i) \neq \epsilon$ such
 that $\alpha(\nu(\pi)) = u$
 \end{corollary}
 
 Proof: Exercise.
 
 Our construction show even more: the number of paths $\pi$ with $\alpha(\pi) =
-u$ for a given $u \in |L|$ is the same in $\pathcategory{G_3}$ as in $\pathcategory{G'}$.
-Therefore this number is in $\pathcategory{G'}$ less or equal to the number in
-$\pathcategory{G_2}$. A similar statement holds for $\pathcategory{G_1}$ and
-$\pathcategory{G}$.
+u$ for a given $u \in |L|$ is the same in $\pathcat{G_3}$ as in $\pathcat{G'}$.
+Therefore this number is in $\pathcat{G'}$ less or equal to the number in
+$\pathcat{G_2}$. A similar statement holds for $\pathcat{G_1}$ and
+$\pathcat{G}$.
 
 This fact, which will be of importance later in this book, is summarized in the
 following corollary. We define
 
 \begin{definition}
-\[ INDEX(|\fa{A}|, u) := card( \{ \pi \in \pathcategory{G}(S, F) \mid |\alpha(\pi) =
+\[ INDEX(|\fa{A}|, u) := card( \{ \pi \in \pathcat{G}(S, F) \mid |\alpha(\pi) =
 u \} ) \]
 \end{definition}
 
@@ -185,8 +185,8 @@ Now we can prove the announced theorem.
 \begin{proof}
  The inclusion ''$\supset$'' is clear.
  
- ''$\subset$'': Every functor $\alpha : \pathcategory{G} \to \pocymon{X}$ can be
- extended to a functor $\alpha' : \pathcategory{G} \to (X \cup X^{-1})^*$ by
+ ''$\subset$'': Every functor $\alpha : \pathcat{G} \to \pocymon{X}$ can be
+ extended to a functor $\alpha' : \pathcat{G} \to (X \cup X^{-1})^*$ by
  defining $\alpha'(e) := |u|$ for each edge $e \in E$ and $\alpha(e) = [u]$.
  
  $\alpha'$ is continued to a functor and for the finite automaton
@@ -216,7 +216,7 @@ such that
 The proof follows directly from the construction of the automaton $\fa{A}'$.
 
 If $V'$ is the set of the vertices $v$ which have an associated vertex $v^+$ in
-$G'$, then every path $\pi \in \pathcategory{G'}(S', F')$ can be uniquely split into
+$G'$, then every path $\pi \in \pathcat{G'}(S', F')$ can be uniquely split into
 a product $\pi_1 \cdot \pi_2$ where the target $Z(\pi_1)$ is such a vertex $v$.
 
 Therefore one can write

@@ -74,7 +74,17 @@ Notation: $\{ e \in E \mid v \in \rho(e) \}$ is called the {\bf cycle} of $v$.
 Explanation: Imagine each point and its adjacent edges to be stuck on a litte
 circle as in the following figure:
 
-FIGURE
+\begin{center}
+\input{figures/chapter1/graph_cycle.tikz}
+\end{center}
+
+In this figure the orderings for $\setof{e_1,e_2,e_3,e_4,e_5}$ are:
+\begin{eqnarray*}
+& e_1, e_2, e_3, e_4, e_5 \\
+& e_2, e_3, e_4, e_5, e_1 \\
+& \ldots & \\
+& e_5, e_1, e_2, e_3, e_4
+\end{eqnarray*}
 
 \begin{definition}
 A loop-free, oriented graph $G$ is called {\bf ordered} if for all points
@@ -91,7 +101,15 @@ $e_1', \ldots, e_m'$ the ordering of the outgoing edges of $v$.
 
 Example:
 
-FIGURE
+\begin{center}
+\input{figures/chapter1/edge_ordering.tikz}
+\end{center}
+
+$e_1,e_2,e_3,e_4,e_5,e_6$ is the ordering of vertex $v$.
+
+$e_1,e_2,e_3$ is the ordering of the incoming edges.
+
+$e_6,e_5,e_4$ is the ordering of the outgoing edges.
 
 \begin{definition}
 A {\bf path} in an oriented graph $G$ is a sequence 
@@ -178,15 +196,15 @@ start point of the second path. Obviously it holds:
   	\end{eqnarray*}
 \end{enumerate}
 
-We denote the set of paths of a graph $G$ with $\pathcategory{G}$. $\pathcategory{G}$ is 
+We denote the set of paths of a graph $G$ with $\pathcat{G}$. $\pathcat{G}$ is 
 called the {\bf path category} of $G$ and in this context $G$ is also called a {\bf
-schema}. $\pathcategory{G}$ is an important special case of a category.
+schema}. $\pathcat{G}$ is an important special case of a category.
 
 \transrem{The letter $\mathfrak{W}$ comes from the German word ''Wegekategorie''
 (path category).}
 
 Notation: 
-\[ \pathcategory{G}(v, v') := \{ \pi \in \pathcategory{G} \mid Q(\pi) = v,\ Z(\pi) = v' \}
+\[ \pathcat{G}(v, v') := \{ \pi \in \pathcat{G} \mid Q(\pi) = v,\ Z(\pi) = v' \}
 \]
 
 {\em Categories} are algebraic structures with a {\em partial} operation.
@@ -289,14 +307,22 @@ Let's look at some examples:
 
 {\bf Example 1}: Consider the following oriented graphs $G_1$ and $G_2$:
 
-FIGURE
+$G_1$:
+\begin{center}
+\input{figures/chapter1/bin_tree.tikz}
+\end{center}
 
-$G1 = (V_1, E_1)$ represents an infinite binary tree. From each point of the
+$G_1 = (V_1, E_1)$ represents an infinite binary tree. From each point of the
 tree two edges go out which are labeled with $f$ and $g$.
+
+$G_2$:
+\begin{center}
+\input{figures/chapter1/two_loops.tikz}
+\end{center}
 
 $G_2 = (V_2, E_2)$ consists of a single point $v_0$ and two loops labeled $f$ and $g$ respectively.
 
-Consider the path categories $\pathcategory{G_1}$ and $\pathcategory{G_2}$. For $v
+Consider the path categories $\pathcat{G_1}$ and $\pathcat{G_2}$. For $v
 \in V_1$ define $\phi_1(v) := v_0$ and $\phi_2(1_P) := 1_{P_0}$.
 
 For the edges $e \in E_1$ define
@@ -305,11 +331,11 @@ For the edges $e \in E_1$ define
 	g & \text{if $e$ is marked with $g$}
 \end{cases} \]
 
-Now we define for the paths $(v, e_1, \ldots, e_n, v') \in \pathcategory{G_1}$:
+Now we define for the paths $(v, e_1, \ldots, e_n, v') \in \pathcat{G_1}$:
 \[ \phi_2((v, e_1, \ldots, e_n, v')) := (v_0, \phi'_2(e_1), \ldots,
 \phi'_2(e_n), v_0) \]
 
-Obviously $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi1, \phi_2)$ is a
+Obviously $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi1, \phi_2)$ is a
 functor. It is even a special functor because
 \begin{enumerate}
   \item $\phi$ is surjective
@@ -319,67 +345,70 @@ functor. It is even a special functor because
 \end{enumerate}
 
 \bigskip
-
 {\bf Example 2}: Let graphs $G1, G_2$ be given as follows:
 
-FIGURE
+$G_1$:
+\begin{center}
+\input{figures/chapter1/chapter1-4-example2.tikz}
+\end{center}
 
-Then there exists a surjective functor from $\pathcategory{G_1}$ to $\pathcategory{G_2}$.
+$G_2:$
+\begin{center}
+\input{figures/chapter1/two_loops.tikz}
+\end{center}
+
+Then there exists a surjective functor from $\pathcat{G_1}$ to $\pathcat{G_2}$.
 
 It is possible to construct surjective functors which fulfill (2) from example 1
 and other surjective functors which don't.
 
 \bigskip
-
 {\bf Example 3}: Let $G_1$ and $G_2$ be given as:
 
-FIGURE
+$G_1:\ p_1 \edge{s} p_2 \qquad p_3 \edge{r} p_4$.
 
-We define: 
-\[ \begin{array}{r@{\quad = \quad}l}
-\phi_1(P_1) & Q_1 \\
-\phi_1(P_2) & Q_2 \\
-\phi_1(P_3) & Q_2 \\
-\phi_1(P_4) & Q_3 \\
-\phi_2((P_1, s, P_2)) & (Q_1, f, Q_2) \\
-\phi_2((P_3, r, P_4)) & (Q_2, g, Q_3)
-\end{array} \]
+$G_2:\ q_1 \edge{f} q_2 \edge{g} q_3$
+
+We define: $\phi_1(p_1) = q_1,\ \phi_1(p_2) = q_2,\ \phi_1(p_3) =
+q_2,\ \phi_1(p_4) = q_3,\ \phi_2((p_1, s, p_2)) = (q_1, f, q_2),\ \phi_2((p_3,
+r, p_4)) = (q_2, g, q_3)$.
 
 For the units, the definition of $\phi_2$ is clear. 
 
-One can see that $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi_1, \phi_2)$
+One can see that $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$
 is a functor.
 
-It is remarkable that $\phi_2(\pathcategory{G_1})$ is not a category because this
+It is remarkable that $\phi_2(\pathcat{G_1})$ is not a category because this
 set is not closed under the $\circ$ operation.
 
 \bigskip
 {\bf Example 4}: Let $G_1$ and $G_2$ be given as follows:
 
-FIGURE
+$G_1$:
+\begin{center}
+\input{figures/chapter1/chapter1-4-example4-g1.tikz}
+\end{center}
 
-We define:
-\[ \begin{array}{r@{\quad = \quad}l}
-\phi_1(1) & 1' \\
-\phi_1(2) & 2' \\
-\phi_1(3) & 3' \\
-\phi_1(4) & 3' \\
-\phi_1(5) & 3' \\
-\phi_2(a) & a' \\
-\phi_2(b) & b' \\
-\phi_2(c) & c' \\
-\phi_2(d) & d' \\
-\phi_2(e) & 1_3 \\
-\phi_2(f) & 1_3 \\
-\phi_2(g) & 1_3
-\end{array} \]
+$G_2$:
+\begin{center}
+\input{figures/chapter1/chapter1-4-example4-g2.tikz}
+\end{center}
 
-$\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi_1, \phi_2)$ is a functor.
+We define a functor $\phi$ by:
 
-\bigskip
+$\phi_1(1) = 1',\ \phi_1(2) = 2',\ \phi_1(3) = 3',\ \phi_1(4) = 3',\ \phi_1(5) =
+3'$,
+
+$\phi_2(a) = a',\ \phi_2(b) = b',\ \phi_2(c) = c',\ \phi_2(d) = d',\ \phi_2(e) =
+1_3,\ \phi_2(f) = 1_3,\ \phi_2(g) = 1_3$.
+
+$\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$ is a functor.
+
 {\bf Example 5}: The graph $G$ shall be defined by
 
-FIGURE
+\begin{center}
+\input{figures/chapter1/chapter1-4-example5.tikz}
+\end{center}
 
 Additionally, the following matrices are given:
 
@@ -411,21 +440,21 @@ f' = \left( \begin{array}{cc}
 \end{array} \right)
 \]
 
-Consider $\pathcategory{G}$, the path category of $G$, and $MAT(\mathbb{N})$,
+Consider $\pathcat{G}$, the path category of $G$, and $MAT(\mathbb{N})$,
 the category of matrices over $\mathbb{N}$.
 
 We define $\phi_1(i) = i$ for $i = 2,3,4$ and $\phi'_2(x) = x'$ for $x \in
 \setof{a, b, c, d, e, f}$.
 
 $\phi'_2$ can be extended in a unique way to a mapping $\phi_2 :
-\pathcategory{G} \to MAT(\mathbb{N})$ such that $\phi = (\pathcategory{G},
+\pathcat{G} \to MAT(\mathbb{N})$ such that $\phi = (\pathcat{G},
 MAT(\mathbb{N}), \phi_1, \phi_2)$ is a functor.
 
 \bigskip
 We want to define now some special properties of functors.
 
-\begin{definition}
-Let $G_1, G_2$ be ordered graphs, $\phi = (\pathcategory{G_1}, \pathcategory{G_2},
+\begin{definition}[ordered functor]
+Let $G_1, G_2$ be ordered graphs, $\phi = (\pathcat{G_1}, \pathcat{G_2},
 \phi_1, \phi_2)$ a functor. $\phi$ is called {\bf ordered} or {\bf order
 preserving} if it holds:
 
@@ -444,22 +473,26 @@ Let $v \in V_1$ be a point with ordering $e_1, e_2, e_3, e'_4, e'_3, e'_2,
 e'_1$ and $v' \in V_2$ be a point with ordering $r_1, r_2, r'_5,
 r'_4, r'_3, r'_2, r'_1$ as shown in the following figure:
 
-FIGURE
+\begin{center}
+\input{figures/chapter1/ordered-functor.tikz}
+\end{center}
 
-Define $\phi$ by $\phi_1(v) = v'$ and 
-\[ \phi_2(e_1) = r_1, \phi_2(e_2) = r_2, \phi_2(e_3) = r_2 \]
-\[ \phi_2(e'_1) = r'_1, \phi_2(e'_2) = r'_3, \phi_2(e'_3) = r'_4, \phi_2(e'_4) = r'_5 \]
-
+Define $\phi$ by $\phi_1(p) = p'$ and 
+\[ \phi_2(s_1) = r_1, \phi_2(s_2) = r_2, \phi_2(s_3) = r_2 \]
+\[ \phi_2(s'_1) = r'_1, \phi_2(s'_2) = r'_3, \phi_2(s'_3) = r'_4, \phi_2(s'_4) =
+r'_5 \]
 Then $\phi$ respects the ordering in point $v$.
 
-\begin{definition}
-Let $G_1, G_2$ be oriented graphs and $\phi = (\pathcategory{G_1}, \pathcategory{G_2},
-\phi_1, \phi_2)$ be a functor.
+\bigskip
+\begin{definition}[regular functor]
+Let $G_1=(V_1,E_1),\ G_2=(V_2,E_2)$ be oriented graphs and 
+\[ \phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)\text{ a functor.}
+\]
 
 $\phi$ is called {\bf regular} $\iff$ the restriction of $\phi_2$
-to the set $\setof{e \in E_1 \mid Q(e) = v}$ and $\setof{e' \in E_2 \mid Q(e') =
-\phi_1(v)}$ and to $\setof{e \in E_1 \mid Z(e) = v}$ and $\setof{e' \in E_2 \mid
-Z(e') = \phi_1(v)}$ for $v \in V_1$ is bijective.
+to the set \[ \setof{e \in E_1 \mid Q(e) = v}\text{ and }\setof{e' \in E_2 \mid
+Q(e') = \phi_1(v)} \] and to \[ \setof{e \in E_1 \mid Z(e) = v}\text{ and
+}\setof{e' \in E_2 \mid Z(e') = \phi_1(v)} \] for $v \in V_1$ is bijective.
 \end{definition}
 
 To each incoming (outgoing) edge of a point $v \in V_1$ corresponds exactly
@@ -468,20 +501,22 @@ one incoming (outgoing) edge of $\phi_1(v) \in V_2$.
 In our example, $\phi$ was not regular. We slightly weaken the definition of a
 regular functor by only postulating regularity on the outgoing edges.
 
-\begin{definition}
-Let $G_1, G_2$ be oriented graphs and $\phi = (\pathcategory{G_1}, \pathcategory{G_2},
-\phi_1, \phi_2)$ be a functor.
+\bigskip
+\begin{definition}[out-regular functor]
+Let $G_1=(V_1,E_1),\ G_2=(V_2,E_2)$ be oriented graphs and
+\[ \phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)\text{ a functor.}
+\]
 
 $\phi$ is called {\bf out-regular} $\iff$ the restriction of $\phi_2$
-to the set $\{ e \in E_1\ |\ Q(e) = v \}$ and $\{ e' \in E_2\ |\ Q(e') =
-\phi_1(v) \}$ for $v \in V_1$ is bijective.
+to the set \[ \setof{e\in E_1 \mid Q(e) = v} \] and \[ \setof{e' \in E_2 \mid
+Q(e') = \phi_1(v)} \] for $v \in V_1$ is bijective.
 \end{definition}
 
 The following lemma holds (exercise):
 
 \begin{lemma}
-If $\phi = (\pathcategory{G_1}, \pathcategory{G_2}, \phi_1, \phi_2)$ is an out-regular
-functor, then \\ $\phi(\pathcategory{G_1})$ is a category.
+If $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$ is an out-regular
+functor, then \\ $\phi(\pathcat{G_1})$ is a category.
 \end{lemma}
 
 Our next lemma describes a well-known fact from graph theory that has found many
@@ -489,8 +524,8 @@ applications.
 
 \begin{lemma}
 To each circle-free star $G = (V, E)$ relative to a point $v \in V$ there exists
-a tree $B$ and an out-regular functor $(\pathcategory{B}, \pathcategory{G},
+a tree $B$ and an out-regular functor $(\pathcat{B}, \pathcat{G},
 \phi_1, \phi_2)$ mapping the root of the tree $B$ to the point $v$. 
+\end{lemma}
 
 $B$ is uniquely determined up to isomorphisms.
-\end{lemma}

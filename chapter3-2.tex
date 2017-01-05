@@ -131,16 +131,16 @@ the complex product $L_1 \cdot L_2$.
 Let $w \in L_1 \cdot L_2$. Then there exists a factorization $w = w_1 \cdot
 w_2,\ w_1 \in L_1, w_2 \in L_2$.
 
-For $w_1$ there exists an accepting path $\pi_1 \in \pathcategory{G_1}(s_1,
+For $w_1$ there exists an accepting path $\pi_1 \in \pathcat{G_1}(s_1,
 f_1)$ with label $\alpha_1(\pi_1) = w_1$ and pushdown store computation
 $\delta_1(w_1, \epsilon) = \epsilon$.
 
-For $w_2$ there exists an accepting path $\pi_2 \in \pathcategory{G_2}(s_2,
+For $w_2$ there exists an accepting path $\pi_2 \in \pathcat{G_2}(s_2,
 f_2)$ with label $\alpha_2(\pi_2) = w_2$ and pushdown store computation
 $\delta_2(w_2, \epsilon) = \epsilon$.
 
 Consider the path $\pi = \pi_1 \circ b_1 \circ b_2 \circ \pi_2 \in
-\pathcategory{G}(s_1, f_2)$.
+\pathcat{G}(s_1, f_2)$.
 
 It holds
 \begin{eqnarray*}
@@ -171,12 +171,12 @@ This proves $w \in L_{\kappa}$ and therefore $L_1 \cdot L_2 \subset L_{\kappa}$.
 ''$L_1 \cdot L_2 \supset L_{\kappa}$'':
 
 Let $w \in L_{\kappa}$ be a word accepted by the PDA $\kappa$. Then there exists
-a path $\pi \in \pathcategory{G}(s_1, f_2)$ with label $\alpha(\pi) = w$ and a
+a path $\pi \in \pathcat{G}(s_1, f_2)$ with label $\alpha(\pi) = w$ and a
 pushdown store computation $\delta(\pi, \epsilon) = \epsilon$.
 
 The path $\pi$ has a unique factorization $\pi = \pi_1 \circ b_1 \circ b_2
-\circ \pi_2$ with $\pi_1 \in \pathcategory{G_1}(s_1, f_1)$ and $\pi_2 \in
-\pathcategory{s_2, f_2}$. 
+\circ \pi_2$ with $\pi_1 \in \pathcat{G_1}(s_1, f_1)$ and $\pi_2 \in
+\pathcat{s_2, f_2}$. 
 
 Consider $\delta(\pi_1, \epsilon)$, the computation of the pushdown store on the
 path prefix $\pi_1$:
@@ -242,15 +242,15 @@ Let $w \in L^*$, then we have two cases:
 
 \begin{enumerate}
   \item $w = \epsilon$: Then there exists the path $\pi = e_0 \circ e_0' \in
-  \pathcategory{G'}(s, f)$ with label $\alpha(\pi) = \epsilon$ and
+  \pathcat{G'}(s, f)$ with label $\alpha(\pi) = \epsilon$ and
   pushdown computation $\delta'(\pi) = \epsilon$.
   \item $w \neq \epsilon$: Then there exists a factorization $w = w_1 \cdots
-  w_k,\ w_i \in L$ and paths $\pi \in \pathcategory{G}(s, f)$ with labels
+  w_k,\ w_i \in L$ and paths $\pi \in \pathcat{G}(s, f)$ with labels
   $\alpha(\pi_i) = w_i$ and pushdown computations $\delta(\pi, \epsilon) =
   \epsilon,\ i = 1, \ldots, k$.
   
   Consider the path $\pi = \pi_1 \circ e_1 \circ e_1' \circ \pi_2 \circ e_1
-  \circ e_1' \ldots \circ e_1 \circ e_1' \circ \pi_k \in \pathcategory{G'}(s,
+  \circ e_1' \ldots \circ e_1 \circ e_1' \circ \pi_k \in \pathcat{G'}(s,
   f)$.
   
   It holds
@@ -278,7 +278,7 @@ Let $w \in L^*$, then we have two cases:
 ''$L^* \supset L_{\kappa}$'':
 
 Let $w \in L_{\kappa'}$ be a word accepted by the PDA $\kappa'$. Then there
-exists a path $\pi \in \pathcategory{G'}(s, f)$ with label $\alpha'(\pi) = w$
+exists a path $\pi \in \pathcat{G'}(s, f)$ with label $\alpha'(\pi) = w$
 and pushdown computation $\delta'(\pi, \epsilon) = \epsilon$.
 
 \begin{enumerate}
@@ -287,7 +287,7 @@ and pushdown computation $\delta'(\pi, \epsilon) = \epsilon$.
   
   \item Given a factorization $\pi = \pi_1 \circ e_1 \circ e_1' \circ \pi_2 \circ e_1
   \circ e_1' \ldots \circ e_1 \circ e_1' \circ \pi_k$ with $\pi_i \in
-  \pathcategory{G}(s, f)$ and edges $e_1, e_1'$ as constructed.
+  \pathcat{G}(s, f)$ and edges $e_1, e_1'$ as constructed.
   
   Claim: $\delta'(\pi, \epsilon) = \epsilon \Rightarrow \delta(\pi_1, \epsilon)
   = \epsilon$
@@ -341,7 +341,7 @@ L_{\fa{A}} \cap L_{\fa{B}}$.
 Now let $\kappa' = (\fa{C}, \pdstore{K}')$ be a PDA with $\pdstore{K}' = (E,
 Y, \delta')$ and $\delta'((e, e'), y) = \delta(e, y)$.
 For a word $w \in L_{\kappa'}$ there exists a path $\pi \in
-\pathcategory{G}(S, F)$ with label $\alpha(\pi) = w$ and pushdown store
+\pathcat{G}(S, F)$ with label $\alpha(\pi) = w$ and pushdown store
 computation $\delta'(\pi, \epsilon) = \delta(proj_1(\pi), \epsilon) = \epsilon$.
 Here $proj_1(\pi)$ denotes the projection onto the first component of the
 edge-pairs constituting the path $\pi$.
@@ -523,14 +523,14 @@ Claim: It holds \[ L_{\kappa'} = \sigma(L) \]
 ''$\subset$'':
 
 Let $w \in L_{\kappa'}$ be a word accepted by PDA $\kappa'$. Then
-there exists a path $\pi \in \pathcategory{G'}(s, f)$ with label
+there exists a path $\pi \in \pathcat{G'}(s, f)$ with label
 $\alpha'(\pi)=w$ and pushdown store computation $\delta'(\pi, \epsilon) =
 \epsilon$.
 
 The path $\pi$ can be decomposed into $\pi = \pi_1 \circ \ldots \pi_k$ and each
 subpath $\pi$ can be decomposed into $\pi_i = e_1^{(i)} \circ e_2^{(i)}
 \circ \pi'_i \circ e_3^{(i)}$ where $\pi'_i \in
-\pathcategory{G_{x_i}}(s_{x_i}, f_{x_i})$ and $\alpha(e_i) = x_i$.
+\pathcat{G_{x_i}}(s_{x_i}, f_{x_i})$ and $\alpha(e_i) = x_i$.
 
 By construction it holds $\alpha'(\pi'_i) \in \sigma(x_i),\ x_i \in X$.
 $\alpha'(e_i) = \epsilon \Rightarrow \alpha'(\pi'_i) \in \sigma(x_i)
@@ -543,7 +543,7 @@ w &=& \alpha'(\pi) \\
 
 It remains to show $x_1 \cdots x_k \in L$.
 
-Let by construction $e_1 \circ \ldots \circ e_k \in \pathcategory{G}(s, f)$ be
+Let by construction $e_1 \circ \ldots \circ e_k \in \pathcat{G}(s, f)$ be
 an accepting path in the pushdown automaton for $L$, so $\alpha(e_1 \circ \ldots
 \circ e_k) = x_1 \cdots x_k$.
 
@@ -574,7 +574,7 @@ By assumption it holds $\delta'(\pi_1 \circ \ldots \pi_k, \epsilon) = \epsilon
 
 Let $w \in \sigma(L)$ be a word in the target language of the substitution
 $\sigma$. Then there exists a word $v \in L$ with $w \in \sigma(v)$. For $v$
-there exists an accepting path $\pi \in \pathcategory{G}(s, f)$ labelled
+there exists an accepting path $\pi \in \pathcat{G}(s, f)$ labelled
 $\alpha(\pi) = v$ and with pushdown computation $\delta(\pi, \epsilon) =
 \epsilon$.
 

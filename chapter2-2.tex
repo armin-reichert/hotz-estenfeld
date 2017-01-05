@@ -47,20 +47,20 @@ graph with $k$ edges.
 Add a new edge $e : P \edge{x} R$ labeled with $x \in X$ to the graph $G_k$. The
 resulting graph shall be $G_{k+1}$. Then the set of accepting paths in $G_{k+1}$
 can be written as \begin{eqnarray*}
- \pathcategory{G_{k+1}}(S, F) & = & \pathcategory{G_k}(S, F) \\
- & \cup & \pathcategory{G_k}(S, P) \cdot e \cdot \Big( \pathcategory{G_k}(R, P) \cdot
- e \Big)^* \cdot \pathcategory{G_k}(R, F)
+ \pathcat{G_{k+1}}(S, F) & = & \pathcat{G_k}(S, F) \\
+ & \cup & \pathcat{G_k}(S, P) \cdot e \cdot \Big( \pathcat{G_k}(R, P) \cdot
+ e \Big)^* \cdot \pathcat{G_k}(R, F)
 \end{eqnarray*}
 
 FIGURE
 
 By induction hypothesis it holds:
-\[ \alpha(\pathcategory{G_k}(S, F)) \in RAT(X^*) \]
-\[ \alpha(\pathcategory{G_k}(S, P)) \in RAT(X^*) \]
-\[ \alpha(\pathcategory{G_k}(R, F)) \in RAT(X^*) \]
-\[ \alpha(\pathcategory{G_k}(R, P)) \in RAT(X^*) \]
+\[ \alpha(\pathcat{G_k}(S, F)) \in RAT(X^*) \]
+\[ \alpha(\pathcat{G_k}(S, P)) \in RAT(X^*) \]
+\[ \alpha(\pathcat{G_k}(R, F)) \in RAT(X^*) \]
+\[ \alpha(\pathcat{G_k}(R, P)) \in RAT(X^*) \]
 
-From this we get $\alpha(\pathcategory{G_{k+1}}(S, F)) \in RAT(X^*)$.
+From this we get $\alpha(\pathcat{G_{k+1}}(S, F)) \in RAT(X^*)$.
 
 This concludes the proof of Kleene's theorem.
 

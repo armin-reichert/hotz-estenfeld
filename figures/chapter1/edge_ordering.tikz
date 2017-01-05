@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$v$};
+		\node [style=none] (1) at (-2, 3) {};
+		\node [style=none] (2) at (2, 3) {};
+		\node [style=none] (3) at (3, 1) {};
+		\node [style=none] (4) at (2.25, -1.5) {};
+		\node [style=none] (5) at (-0.75, -1.5) {};
+		\node [style=none] (6) at (-2.75, -0.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (1.center) to node[auto]{$e_1$} (0);
+		\draw [style=transition] (2.center) to node[auto]{$e_2$} (0);
+		\draw [style=transition] (3.center) to node[auto]{$e_3$} (0);
+		\draw [style=transition] (0) to node[auto]{$e_4$} (4.center);
+		\draw [style=transition] (0) to node[auto]{$e_5$} (5.center);
+		\draw [style=transition] (0) to node[auto]{$e_6$} (6.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

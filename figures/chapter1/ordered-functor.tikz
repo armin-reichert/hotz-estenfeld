@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$p$};
+		\node [style=state] (1) at (7, -0) {$p'$};
+		\node [style=none] (2) at (-3, 2) {};
+		\node [style=none] (3) at (-0.5, 2) {};
+		\node [style=none] (4) at (2, 2) {};
+		\node [style=none] (5) at (-3.5, -0.75) {};
+		\node [style=none] (6) at (-2.25, -1.75) {};
+		\node [style=none] (7) at (0, -2) {};
+		\node [style=none] (8) at (2.25, -1.25) {};
+		\node [style=none] (9) at (5, 2) {};
+		\node [style=none] (10) at (9, 2) {};
+		\node [style=none] (11) at (4.5, -0.75) {};
+		\node [style=none] (12) at (5.25, -2) {};
+		\node [style=none] (13) at (6.75, -2) {};
+		\node [style=none] (14) at (9, -1.75) {};
+		\node [style=none] (15) at (9.75, -0.75) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (2.center) to node[auto]{$s_1$} (0);
+		\draw [style=transition] (3.center) to node[auto]{$s_2$} (0);
+		\draw [style=transition] (4.center) to node[auto]{$s_3$} (0);
+		\draw [style=transition] (0) to node[auto]{$s_1'$} (5.center);
+		\draw [style=transition] (0) to node[auto]{$s_2'$} (6.center);
+		\draw [style=transition] (0) to node[auto]{$s_3'$} (7.center);
+		\draw [style=transition] (0) to node[auto]{$s_4'$} (8.center);
+		\draw [style=transition] (9.center) to node[auto]{$r_1$} (1);
+		\draw [style=transition] (10.center) to node[auto]{$r_2$} (1);
+		\draw [style=transition] (1) to node[auto]{$r_1'$} (11.center);
+		\draw [style=transition] (1) to node[auto]{$r_2'$} (12.center);
+		\draw [style=transition] (1) to node[auto]{$r_3'$} (13.center);
+		\draw [style=transition] (1) to node[auto]{$r_4'$} (14.center);
+		\draw [style=transition] (1) to node[auto]{$r_5'$} (15.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

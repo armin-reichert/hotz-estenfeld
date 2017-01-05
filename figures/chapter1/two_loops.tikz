@@ -1,0 +1,9 @@
+\begin{tikzpicture}[scale=8.0]
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$v_0$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition, in=135, out=-135, loop] (0) to node[auto]{$f$} ();
+		\draw [style=transition, in=-45, out=45, loop] (0) to node[auto]{$g$} ();
+	\end{pgfonlayer}
+\end{tikzpicture}

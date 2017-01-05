@@ -95,8 +95,8 @@ set of input words accepted with empty pushdown store.
 
 Formally:
 \begin{eqnarray*}
-KKL(\kappa) &:=& \{ \delta(\pi, \epsilon) \mid \pi \in \pathcategory{G}(S, F) \} \\
-L_\kappa &:=& \{ \alpha(\pi) \mid \pi \in \pathcategory{G}(S, F),\ \delta(\pi,
+KKL(\kappa) &:=& \{ \delta(\pi, \epsilon) \mid \pi \in \pathcat{G}(S, F) \} \\
+L_\kappa &:=& \{ \alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
 \epsilon) = \epsilon \}
 \end{eqnarray*}
 
@@ -114,7 +114,7 @@ where $M = \{ \delta_x \mid x\in X \}^*$ and $\beta(x) = \delta_x$.
 
 It holds:
 \[ L_{\fa{B}}(\epsilon) := \{ \beta(\pi)(\epsilon) \mid \pi \in
-\pathcategory{G}(S, F) \} = KKL(\kappa) \]
+\pathcat{G}(S, F) \} = KKL(\kappa) \]
 
 As our main result we get
 \begin{theorem}
@@ -124,7 +124,7 @@ As our main result we get
 Before starting with the formal proof we want to explain the construction of the
 automaton for $KKL(\kappa)$ using an example.
 
-Let $\pi = (e_1 e_2 e_3 e_4 e_5 e_6 e_7 e_8)$ a path from \pathcategory{G} and the
+Let $\pi = (e_1 e_2 e_3 e_4 e_5 e_6 e_7 e_8)$ a path from \pathcat{G} and the
 pushdown store be empty initially.
 
 $\delta$ shall be defined as follows:
@@ -139,7 +139,7 @@ Y^{-1})^*$. The reduced word is the current content of the pushdown store,
 hereby we have to guess in $w'$ the last symbol of the reduced word
 (corresponds to the symbol on top of the stack).
 
-Let a path $\pi \in \pathcategory{G},\ G=(V,E),$ be of the form
+Let a path $\pi \in \pathcat{G},\ G=(V,E),$ be of the form
 \[ \edge{e_1} \edge{e_2} \edge{e_3} \edge{e_4} \edge{e_5} \edge{e_6} \edge{e_7}
 \edge{e_8} \]
 
@@ -244,8 +244,8 @@ simulated with the finite automaton $\fa{C}$:
 \[ y_0 \cdot KKL(\kappa) \subset |L_{\fa{C}}| \]
 
 To prove this, we construct for each accepting path $\pi \in
-\pathcategory{G}(S,F)$ an accepting path $\pi' \in
-\pathcategory{G'}(\setof{s_0}, F)$ with $|y_0 \cdot \delta(\pi, \epsilon)| = |\gamma(\pi')|$ 
+\pathcat{G}(S,F)$ an accepting path $\pi' \in
+\pathcat{G'}(\setof{s_0}, F)$ with $|y_0 \cdot \delta(\pi, \epsilon)| = |\gamma(\pi')|$ 
 which means that the computation of the pushdown store is equivalent modulo the
 H-group to the label of the computation path in $\fa{C}$.
 
@@ -298,19 +298,19 @@ This proves inductively the inclusion $y_0 \cdot KKL(\kappa) \subset
 We prove now:
 \[ y_0 \cdot Y^* \cap |L_{\fa{C}}| \subset y_0 \cdot KKL(\kappa) \]
 
-Let $\pi' \in \pathcategory{G'}(\setof{s_0}, F)$ and $|\gamma(\pi')| \in y_0 \cdot
+Let $\pi' \in \pathcat{G'}(\setof{s_0}, F)$ and $|\gamma(\pi')| \in y_0 \cdot
 Y^*$.
 
 From the definition of $\gamma$ on $E'$ it follows that also for each path
 prefix $\psi'$ of $\pi$ it holds: $|\gamma(\psi')| \in y_0 \cdot Y^*$.
 
 We construct for each path $\psi'$ a path $\psi$ with $|\gamma(\psi)| = y_0
-\cdot \delta(\pi, \epsilon) \in \pathcategory{G}$.
+\cdot \delta(\pi, \epsilon) \in \pathcat{G}$.
 
 To a path of length 1 we assign the empty path $1_{Z(\psi')}$.
 
 For a path $\psi' = e_1 \circ \psi''$ where $e_1 \in E'$ we assign to $\psi''$
-the projection $\pi''$ of $\psi''$ onto $\pathcategory{G}$. This projection is a
+the projection $\pi''$ of $\psi''$ onto $\pathcat{G}$. This projection is a
 functor that maps paths into paths.
 
 For $\psi'$ of length 1, our claim $|\gamma(\psi')| = y_0 \cdot \delta(\pi,

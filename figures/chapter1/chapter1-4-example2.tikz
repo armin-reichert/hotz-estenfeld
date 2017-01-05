@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {};
+		\node [style=state] (1) at (-5, 5) {};
+		\node [style=state] (2) at (5, 5) {};
+		\node [style=state] (3) at (-5, -5) {};
+		\node [style=state] (4) at (5, -5) {};
+		\node [style=state] (5) at (-5, -0) {};
+		\node [style=state] (6) at (5, -0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to (5);
+		\draw [style=transition] (0) to (6);
+		\draw [style=transition] (5) to (1);
+		\draw [style=transition] (5) to (3);
+		\draw [style=transition] (6) to (2);
+		\draw [style=transition] (6) to (4);
+		\draw [style=transition, bend left, looseness=1.25] (1) to (0);
+		\draw [style=transition, bend right, looseness=1.25] (1) to (0);
+		\draw [style=transition, bend right, looseness=1.00] (2) to (0);
+		\draw [style=transition, bend left, looseness=1.00] (2) to (0);
+		\draw [style=transition, bend right, looseness=1.00] (3) to (0);
+		\draw [style=transition, bend left, looseness=1.00] (3) to (0);
+		\draw [style=transition, bend left, looseness=1.00] (4) to (0);
+		\draw [style=transition, bend right, looseness=1.00] (4) to (0);
+	\end{pgfonlayer}
+\end{tikzpicture}

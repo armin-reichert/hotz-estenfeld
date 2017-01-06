@@ -47,26 +47,54 @@ We extend $\delta$ onto $X^* \times Y^*$ by defining
 
 The following lemma holds:
 \begin{lemma}
-For $u \in \hgroup{X}$ there exists a pushdown store
+For $w \in \hgroup{X}$ there exists a pushdown store
 \[ \pdstore{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
-with $|u| = \delta(u, \epsilon)$.
+with $|w| = \delta(w, \epsilon)$.
 \end{lemma}
 
 \begin{proof}
 Define
-\begin{eqnarray*}
-\delta(x, \epsilon) & = & x,\ x\in \unioninv{X}\\
-\delta(x, y) & = & x y,\ x\neq y^{-1}\\
-\delta(x^{-1}, x) & = & \epsilon,\ x\in X
-\end{eqnarray*}
+\begin{eqnarray}
+\delta(x, \epsilon) & = & x,\ x\in \unioninv{X} \label{delta:1} \\
+\delta(x, y) & = & yx,\ x\neq y^{-1} \label{delta:2}\\
+\delta(x^{-1}, x) & = & \epsilon,\ x\in X \label{delta:3}
+\end{eqnarray}
 
-Let $u\in (\unioninv{X})^*$ and $u = x_1^{\epsilon_1} \cdots x_n^{\epsilon_n}$
+Let $w\in (\unioninv{X})^*$ and $w = x_1^{\epsilon_1} \cdots x_n^{\epsilon_n}$
 with $x_i\in X,\ \epsilon_i\in \{1, -1\}$.
 
 For the sequence $y_1 = \delta(x_1^{\epsilon_1}, \epsilon),\ y_2 =
 \delta(x_2^{\epsilon_2}, y_1), \ldots,\ y_n = \delta(x_n^{\epsilon_n}, y_{n-1})$
-it holds: $y_n = |u|$ (exercise).
+it holds: $y_n = |w|$ (exercise).
 \end{proof}
+
+\transrem{The following example was not in the original book and has been
+inserted because the definition \eqref{delta:2} of $\delta$ in the book had an
+error.}
+
+Example: Let $X=\setof{a,b}$ and $w=abb^{-1}baa^{-1}\in \hgroup{X}$. It is
+easy to see that the reduced word $|w|=ab$. The computation of $\delta(w,\epsilon)$ is
+\begin{eqnarray*}
+\delta(abb^{-1}baa^{-1}, \epsilon)
+&=&\delta(bb^{-1}baa^{-1}, \delta(a,\epsilon)) \\
+&=&\delta(bb^{-1}baa^{-1}, a) \\
+&=&\delta(b^{-1}baa^{-1}, \delta(b, a)) \\
+&=&\delta(b^{-1}baa^{-1}, ab)\\
+&=&\delta(baa^{-1}, \delta(b^{-1}, ab)) \\
+&=&\delta(baa^{-1}, a \delta(b^{-1}, b)) \\
+&=&\delta(baa^{-1}, a \epsilon) \\
+&=&\delta(baa^{-1}, a) \\
+&=&\delta(aa^{-1}, \delta(b,a)) \\
+&=&\delta(aa^{-1}, a b) \\
+&=&\delta(a^{-1}, \delta(a,ab)) \\
+&=&\delta(a^{-1}, a \delta(a,b)) \\
+&=&\delta(a^{-1}, a b a) \\
+&=&\delta(\epsilon, \delta(a^{-1}, aba)) \\
+&=&\delta(\epsilon, a b \delta(a^{-1}, a)) \\
+&=&\delta(\epsilon, a b \epsilon) \\
+&=&\delta(\epsilon, a b) \\
+&=&a b \\
+\end{eqnarray*}
 
 Remark:
 \begin{enumerate}
@@ -81,48 +109,58 @@ $\pocymon{X}$.
 
 We can now define the finite automaton with pushdown store.
 
-\begin{definition}
+\begin{definition}[finite automaton with pushdown store, PDA]
 $\kappa = (\fa{A}, \pdstore{K})$ is called {\bf finite automaton with
-pushdown store} or short {\bf PDA}, if $\fa{A} = (G, X, S, F, \alpha)$ is a
+pushdown store} ({\bf PDA}) if $\fa{A} = (G, X, S, F, \alpha)$ is a
 finite automaton with graph $G = (V, E)$ and $\pdstore{K} = (E, Y,\delta)$ is a
 simple pushdown store.
 \end{definition}
 
-Two sets are assigned to the PDA $\kappa$, the {\bf pushdown class}
-$KKL(\kappa)$ which is the set of possible words on the pushdown store when
-$\fa{A}$ accepts a word, and the {\bf accepted language} $L_\kappa$ which is the
-set of input words accepted with empty pushdown store.
+\transrem{In the original book, the pushdown store language ($PSL(\kappa)$) was
+called ''Kellerklasse'' (cellar class) and denoted by $KKL(\kappa)$.}
+
+Two sets are assigned to the PDA $\kappa$, the {\bf pushdown store language}
+$PSL(\kappa)$ which is the set of possible words on the pushdown store when
+$\fa{A}$ accepts a word, and the {\bf accepted language} $L_\kappa$ which is the set of
+ input words accepted with empty pushdown store.
 
 Formally:
 \begin{eqnarray*}
-KKL(\kappa) &:=& \{ \delta(\pi, \epsilon) \mid \pi \in \pathcat{G}(S, F) \} \\
+PSL(\kappa) &:=& \{ \delta(\pi, \epsilon) \mid \pi \in \pathcat{G}(S, F) \} \\
 L_\kappa &:=& \{ \alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
 \epsilon) = \epsilon \}
 \end{eqnarray*}
 
 \begin{definition}
-\[ ALG(X_\infty^*) := \{ L \subset X_\infty^* \mid \text{there exists a PDA
-$\kappa$ with $L = L_\kappa$} \]
+\[ ALG(X_\infty^*) := \setof{L \subset X_\infty^* \mid \text{there exists a PDA
+$\kappa$ with $L = L_\kappa$}}
+\]
 is called the class of {\bf algebraic languages}.
 \end{definition}
 
-The pushdown-class $KKL(\kappa)$ is an example for our concept of generalizing
-the finite automata by changing the monoid. If we assign to each $x\in X$ a
-mapping $\delta_x: Y^* \to Y^*$, then we can represent $\kappa$ by
-\[ \fa{B} = (G, M, S, F, \beta) \]
-where $M = \{ \delta_x \mid x\in X \}^*$ and $\beta(x) = \delta_x$.
+The pushdown store language $PSL(\kappa)$ is an example for our concept of
+generalizing finite automata by changing the monoid. 
+
+Let $\pdstore{K}=(X, Y, \delta)$ be a pushdown store. If to each $x\in X$ we
+assign a mapping $\delta_x: Y^* \to Y^*,\ \delta_x(u) := \delta(x, u)$, then we can 
+represent a PDA $\kappa$ by the finite automaton
+\[ \fa{B} = (G, M, S, F, \beta),\quad G=(V,E) \]
+with monoid $M = (\setof{\delta_e \mid e\in E}, \circ)$ and labelling $\beta(e)
+= \delta_e$.
 
 It holds:
-\[ L_{\fa{B}}(\epsilon) := \{ \beta(\pi)(\epsilon) \mid \pi \in
-\pathcat{G}(S, F) \} = KKL(\kappa) \]
+\[ L_{\fa{B}}(\epsilon) := \setof{\beta(\pi)(\epsilon) \mid \pi
+\in \pathcat{G}(S, F)} = PSL(\kappa)
+\]
 
+\bigskip
 As our main result we get
-\begin{theorem}
-\[ KKL(\kappa) \in REG(Y^*) \]
+\begin{theorem}[Pushdown store languages are regular]
+\[ PSL(\kappa) \in REG(Y^*) \]
 \end{theorem}
 
 Before starting with the formal proof we want to explain the construction of the
-automaton for $KKL(\kappa)$ using an example.
+automaton for $PSL(\kappa)$ using an example.
 
 Let $\pi = (e_1 e_2 e_3 e_4 e_5 e_6 e_7 e_8)$ a path from \pathcat{G} and the
 pushdown store be empty initially.

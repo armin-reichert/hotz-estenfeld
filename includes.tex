@@ -25,20 +25,24 @@
 \newtheorem{maintheorem}{Main Theorem}[section]
 
 % custom commands
-\newcommand{\transrem}[1]{\begin{center}\fboxrule0.1mm\fboxsep0.5em\fbox{\parbox{12cm}{Translator's
-remark: #1}}\end{center}}
-\newcommand{\setof}[1]{\mbox{$\{#1\}$}}
+\newcommand{\card}[1]{\mathrm{card}(#1)}
+\newcommand{\category}[1]{\mbox{$\mathfrak{#1}$}}
 \newcommand{\dderives}[1]{\underset{#1}{\Rightarrow}}
 \newcommand{\derives}[1]{\underset{#1}{\overset{*}{\Rightarrow}}}
-\newcommand{\category}[1]{\mbox{$\mathfrak{#1}$}}
-\newcommand{\pathcat}[1]{\mbox{$\mathfrak{W}(#1)$}}
-\newcommand{\fa}[1]{\mbox{$\mathfrak{#1}$}}
-\newcommand{\pdstore}[1]{\mbox{$\mathcal{#1}$}}
-\newcommand{\faequiv}[1]{\underset{\fa{#1}}{\equiv}}
-\newcommand{\lang}[1]{\mbox{$L_{\mathfrak{#1}}$}}
 \newcommand{\edge}[1]{\xrightarrow{\ {#1}\ }}
-\newcommand{\pocymon}[1]{\mbox{${#1}^{(*)}$}}
-\newcommand{\hgroup}[1]{\mbox{${#1}^{[*]}$}}
-\newcommand{\unioninv}[1]{#1 \cup {#1}^{-1}}
+\newcommand{\faequiv}[1]{\underset{\fa{#1}}{\equiv}}
+\newcommand{\fa}[1]{\mbox{$\mathfrak{#1}$}}
 \newcommand{\generatedbyone}[1]{\mbox{${<}#1{>}$}}
 \newcommand{\generatedby}[2]{\mbox{${<}#1,#2{>}$}}
+\newcommand{\hgroup}[1]{\mbox{${#1}^{[*]}$}}
+\newcommand{\lang}[1]{\mbox{$L_{\mathfrak{#1}}$}}
+\newcommand{\pathcat}[1]{\mbox{$\mathfrak{W}(#1)$}}
+\newcommand{\pdstore}[1]{\mbox{$\mathcal{#1}$}}
+\newcommand{\pocymon}[1]{\mbox{${#1}^{(*)}$}}
+\newcommand{\powset}[1]{\mathfrak{P}(#1)}
+\newcommand{\setof}[1]{\mbox{$\{#1\}$}}
+\newcommand{\transrem}[1]{%
+\begin{center}%
+\fboxrule0.1mm\fboxsep0.5em\fbox{\parbox{12cm}{Translator's remark: #1}}%
+\end{center}}
+\newcommand{\unioninv}[1]{#1 \cup {#1}^{-1}}

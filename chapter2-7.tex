@@ -165,8 +165,8 @@ This fact, which will be of importance later in this book, is summarized in the
 following corollary. We define
 
 \begin{definition}
-\[ INDEX(|\fa{A}|, u) := card( \{ \pi \in \pathcat{G}(S, F) \mid |\alpha(\pi) =
-u \} ) \]
+\[ INDEX(|\fa{A}|, u) := \card{\setof{\pi \in \pathcat{G}(S, F) \mid
+|\alpha(\pi) = u}} \]
 \end{definition}
 
 \begin{corollary}
@@ -205,7 +205,7 @@ $|REG|(\pocymon{X})$.
 \begin{theorem}
 Let $\fa{A}$ be a finite automaton
 \[ \fa{A} = (G, X \cup X^{-1}, S, F, \alpha) \]
-where $G = (V, E)$ and $card(E) = c$. Then there exist $c$ pairs $(L_i^+,
+where $G = (V, E)$ and $\card{E} = c$. Then there exist $c$ pairs $(L_i^+,
 L_i^-)$ with 
 \[ L_i^+ \in REG(X^*),\qquad L_i^- \in REG((X^{-1})^*) \]
 such that
@@ -234,7 +234,7 @@ Let $L = \lang{A}^+ \subset X^*$ and $L' = \lang{A}^- \subset (X^{-1})^*$. Then
 there exist $L_1^+,\ldots,L_p^+ \in REG(X^*),\ L_1,\ldots,L_q^- \in
 REG((X^{-1})^*)$ with
 \[ |L \cdot L'| = \bigcup_{i=1}^{p} L_i^+ \ \cup\ \bigcup_{j=1}^{q} L_j^- \]
-Here $p, q \leq card(F(\fa{A'}))$.
+Here $p, q \leq \card{F(\fa{A'})}$.
 \end{lemma}
 
 \begin{proof}
@@ -261,7 +261,7 @@ We define
 \[ \mathcal{R}(G) := \{ L_{\fa{A}(\tilde{S},\tilde{F})} \mid \fa{A} = (G, X \cup
 X^{-1}, S, F, \alpha),\ \tilde{S} \subset V,\ \tilde{F} \subset V \} \]
 
-For $c := card(V)$ then it trivially holds $card(\mathcal{R}(G)) \leq 2^{2
+For $c := \card{V}$ then it trivially holds $\card{\mathcal{R}(G)} \leq 2^{2
 \cdot c}$.
 
 Remark: The set $\mathcal{R}(G)$ is in general not closed under union but it
@@ -334,7 +334,7 @@ v, q \in V \}$. Then $\mathcal{B}(G', S, F)$ is a union base for
 \end{corollary}
 
 This corollary gives us a smaller base. For fixed $S$ and $F$ we can represent
-each set $|L^+ \cdot L^-|$ as the union of at most $2 \cdot card(V)$ sets of
+each set $|L^+ \cdot L^-|$ as the union of at most $2 \cdot \card{V}$ sets of
 type $L^+_{\fa{A}(S, v)}$ resp.\ $L^-_{\fa{A}(q, F)}$.
 
 We now assign to $\mathcal{B}(G)$ a system 

@@ -1,17 +1,14 @@
 \section{Monoid homomorphisms and congruence relations}
 
 \begin{definition}
-\index{monoid homomorphism}
 A {\bf monoid homomorphism} (short: homomorphism) from a monoid $M$ to a monoid
 $S$ is a mapping $\phi : M \to S$ with:
 \begin{enumerate}
   \item $\phi(m_1 \cdot m_2) = \phi(m_1) \cdot \phi(m_2), \quad m_1, m_2 \in M$
   \item $\phi(1_M) = 1_S$
 \end{enumerate}
+\index{monoid homomorphism}
 \end{definition}
-
-\transrem{Some authors use just {\em morphism} but this would lead in this
-book to a conflict with the morphisms of categories.}
 
 It can easily be shown: if $U \subset M$ is a submonoid of $M$, then
 $\phi(U)$ is a submonoid of the target monoid $S$. If $V$ is a submonoid of $S$,
@@ -74,7 +71,7 @@ The length function $L$ is an example for a monoid homomorphism $L : A^* \to
 \mathbb{N}$ into the monoid of natural numbers.
 
 If $\phi : M \to S$ is a monoid homomorphism, then the sets 
-\[\{ \phi^{-1}(s) \mid s \in S \} \subset Pot(M) \]
+\[ \setof{\phi^{-1}(s) \mid s \in S} \subset \powset{M} \]
 form a monoid which is isomorphic to $\phi(M)$ (exercise).
 
 We want to investigate now the following problem:

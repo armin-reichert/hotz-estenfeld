@@ -643,7 +643,7 @@ Notation: $[w]_L := \{ v \mid w \equiv_L v \}$
 With this notatation it holds
 
 \begin{lemma}
-\[ card(X^*/L) \mbox{ is finite} \iff L \in REG(X^*) \]
+\[ \card{X^*/L} \mbox{ is finite} \iff L \in REG(X^*) \]
 \end{lemma}
 
 \begin{proof}
@@ -695,8 +695,8 @@ it follows
 This gives us a mapping that assigns to each vertex (state) $v \in V$ a
 congruence class, namely $[\alpha(\pi)]$.
 
-From this we get: $card(X^*/L)$ is finite, especially $card(X^*/L) \leq
-card(V)$.
+From this we get: $\card{X^*/L}$ is finite, especially $\card{X^*/L} \leq
+\card{V}$.
 \end{proof}
 
 In our lemma we even proved a bit more:
@@ -856,7 +856,7 @@ As measure of complexity of \fa{A} we define
 
 \begin{tabular}{ll}
   ''Splitting'' the edges: & $O(\|\fa{A}\|)$ \\  \\
-  Creating the bridges: & $(card(E))^2$ \\ \\
+  Creating the bridges: & $(\card{E})^2$ \\ \\
   Transitive closure of $\epsilon$-graph & $O(\|\fa{A}\|^3)$ \\  \\
   Construction of $\fa{A} \times \fa{B}$: & $\|\fa{A}\| \cdot \|\fa{B}\|$ \\ \\
   Test for reduction \\

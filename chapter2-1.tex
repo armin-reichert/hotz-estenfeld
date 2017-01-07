@@ -117,17 +117,17 @@ some basic properties for finite automata.
 \begin{lemma}
 Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton. Then there
 exists a finite automaton $\fa{A'} = (G', X, S', F', \alpha')$ such that
-$card(S') = card(F') = 1$ and $\lang{A} = \lang{A'}$.
+$\card{S'} = \card{F'} = 1$ and $\lang{A} = \lang{A'}$.
 \end{lemma}
 
 An automaton with a single start state is called {\bf initial}.
 
-Proof: If $card(S) = card(F) = 1$ we are done.
+Proof: If $\card{S} = \card{F} = 1$ we are done.
 
 (Comment by translator: The proof in the book is completely unreadable because
 of all these tildes, primes, indices etc. Therefore it is reformulated here.) 
 
-Let $card(S) > 1$ or $card(F) > 1$.
+Let $\card{S} > 1$ or $\card{F} > 1$.
 
 1. Add new edges leaving the new start state $S'$:
 
@@ -271,15 +271,15 @@ If \fa{A} is a finite automaton, then there exists a complete,
 deterministic automaton \fa{A'} which accepts the same language.
 \end{theorem}
 
-Proof: From our lemmata we may assume that $card(S_{\fa{A}}) = 1$ and
+Proof: From our lemmata we may assume that $\card{S_{\fa{A}}} = 1$ and
 $\alpha_2(e) \in X$ for all edges $e$ in the graph of \fa{A}.
 
 We construct an automaton \fa{A'} as follows (''subset construction''):
 
 Instead of the points of the graph $G$ our new graph has the power set
-$Pot(V(G))$ of $V(G)$ as its point set.
+$\powset{V(G)}$ of $V(G)$ as its point set.
 
-For $\tilde{P} \in Pot(V(G))$ we define 
+For $\tilde{P} \in \powset{V(G)}$ we define 
 \begin{eqnarray*}
 & N(x, \tilde{P}) := & \{ P \in V(G) \mid \mbox{there exists an edge } e \in
 E(G) \mbox{ with } \\
@@ -289,14 +289,14 @@ E(G) \mbox{ with } \\
 The empty set $\emptyset$ is also an element of the power set such that it will
 also become a point of the new graph.
 
-Let $\tilde{P}, \tilde{R} \in Pot(V(G))$. These points are connected by an edge
-$e$ with label $\alpha'_s(e) = x \Leftrightarrow \tilde{R} = N(x, \tilde{P})$.
+Let $\tilde{P}, \tilde{R} \in \powset{V(G)}$. These points are connected by an
+edge $e$ with label $\alpha'_s(e) = x \Leftrightarrow \tilde{R} = N(x, \tilde{P})$.
 
 This defines our new graph $G' = (V', E')$.
 
 The start and final states are defined as follows:
 \[ S_{\fa{A'}} = \{ S_{\fa{A}} \} \]
-\[ F_{\fa{A'}} = \{ \tilde{R} \in Pot(V(G)) \mid \tilde{R} \cap
+\[ F_{\fa{A'}} = \{ \tilde{R} \in \powset{V(G)} \mid \tilde{R} \cap
 F_{\fa{A}} \neq \emptyset \} \]
 
 This completes the definition of automaton $\fa{A'} = (G', X,
@@ -307,7 +307,7 @@ We first prove that
 
 \fa{A'} has a single start state $S_{\fa{A'}} = \{ S_{\fa{A}}
 \}$, the edge labels are all single symbols and 
-\[ card(\{ e \in E' \mid Q(e) = \tilde{P}, \alpha'_2(e) = x \}) = 1 \]
+\[ \card{\setof{e \in E' \mid Q(e) = \tilde{P}, \alpha'_2(e) = x}} = 1 \]
 for all $\tilde{P} \in V(G')$.
 
 Now we prove that the accepted languages are equal:

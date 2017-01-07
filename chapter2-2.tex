@@ -4,13 +4,13 @@ In this section we want to introduce a second characterization of regular sets
 over free monoids. We need the following definition.
 
 \begin{definition}[rationally closed]
-If $M$ is a monoid, then $K \in Pot(M)$ is called is called {\bf rationally
+If $M$ is a monoid, then $K \in \powset{M}$ is called is called {\bf rationally
 closed} $\Leftrightarrow$ $K$ is closed unter union $\cup$, complex product $\cdot$ and Kleene-star $^*$.
 \end{definition}
 
 \begin{definition}
-$RAT(M)$ is the smallest, rationally closed subset of $Pot(M)$ that contains the
-single element sets $\{m\}, m \in M$ and the empty set $\emptyset$.
+$RAT(M)$ is the smallest, rationally closed subset of $\powset{M}$ that
+contains the single element sets $\{m\}, m \in M$ and the empty set $\emptyset$.
 \end{definition}
 
 From main theorem 1 immediately follows:
@@ -36,7 +36,7 @@ from $\emptyset$ and $\{x\}, x \in X$	using $\cup$, $\cdot$ and $^*$-operations.
 We prove this by induction over the number $k$ of edges in the graph of the
 automaton when the number of vertices is fixed.
 
-We may assume that the automaton has a single start state, $card(S) = 1$.
+We may assume that the automaton has a single start state, $\card{S} = 1$.
 
 $k = 0$: Without loss of generality, we may assume $S \cap F = \emptyset$. It
 follows $\lang{A} = \emptyset$ which is a rational set over $X^*$.

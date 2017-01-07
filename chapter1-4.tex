@@ -26,12 +26,13 @@ graph nevertheless does not contain any geometry.
 
 \begin{definition}
 A {\bf graph} $G = (V, E)$ consists of a non-empty set $V$ of points
-(vertices), a set $E$ of edges and a mapping $\rho: E \to Pot(V)$ with
-$card(\rho(e)) <= 2$ for $e \in E$. $\rho(e)$ is the set of {\em border points} of $e$.
+(vertices), a set $E$ of edges and a mapping $\rho: E \to \powset{V}$ with
+$\card{\rho(e)} <= 2$ for $e \in E$. $\rho(e)$ is the set of {\em border points}
+of $e$.
 \end{definition}
 
-Border points of an edge do not need to be different. If $card(\rho(e)) = 2$ we
-call $e$ a {\bf line}, if $card(\rho(e)) = 1$ we call it a {\bf loop}.
+Border points of an edge do not need to be different. If $\card{\rho(e)} = 2$ we
+call $e$ a {\bf line}, if $\card{\rho(e)} = 1$ we call it a {\bf loop}.
 
 \begin{definition}
 A graph is called {\bf loop-free} if it does not contain any loops.
@@ -162,7 +163,7 @@ the theory of formal languages.
 
 \begin{definition}
 A {\bf tree} is a circle-free star where for all $v \in V$ it holds
-\[ card(\{ e \in E \mid Z(e) = v \}) \leq 1 \]
+\[ \card{\setof{e \in E \mid Z(e) = v}} \leq 1 \]
 \end{definition}
 
 The following lemma holds:

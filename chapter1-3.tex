@@ -40,8 +40,8 @@ The congruence classes of $u \in A^*$ in the factor monoid $A^*/R$ are denoted
 by $[u]_{A^*/R}$ or simply $[u]$.
 
 \begin{definition}
-Let $X$ be an alphabet. Define $X^{-1} := \{ x^{-1}\ |\ x \in X \}$ as the set
-of formal inverses.
+Let $X$ be an alphabet. Define $X^{-1} := \setof{x^{-1} \mid x \in X}$ as the
+set of formal inverses.
 \end{definition}
 
 We can think of $x$ and $x^{-1}$ as corresponding pairs of
@@ -51,7 +51,7 @@ We will now introduce a partition of $(X \cup X^{-1})^*$ wrt.\ to
 different congruence relations and look into the corresponding factor monoids.
 
 \begin{definition}
-\[ \hgroup{X} := (\unioninv{X})^*\ /\ \{ x x^{-1} = 1 \mid x \in X \} \] is
+\[ \hgroup{X} := (\unioninv{X})^*\ /\ \setof{x x^{-1} = 1 \mid x \in X} \] is
 called the {\bf H-group}.
 \end{definition}
 
@@ -72,7 +72,9 @@ which means:
 The polycyclic monoid is the syntactic monoid of the Dyck language (exercise).
 
 \begin{definition}
-\[ F(X) := (\unioninv{X})^*\ /\ \{ x x^{-1} = x^{-1} x = 1 \mid x \in X \} \]
+\[ F(X) := (\unioninv{X})^*\ /\ \setof{x \cdot x^{-1} = x^{-1} \cdot x = 1 \mid
+x \in X}
+\]
 \end{definition}
 is the {\bf free group} over $X$.
 

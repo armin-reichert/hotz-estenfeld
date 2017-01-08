@@ -20,8 +20,8 @@ As in chapter 1.6 we have the notions of {\em derivation} and {\em generated
 language}.
 
 \begin{definition}[right-linear languages]
-\[ r{-}LIN(X^*) = \{ L \subset X^* \mid \mbox{there exists a right-linear
-grammar $G$ with } L = L(G) \} \]
+\[ r{-}LIN(X^*) = \setof{L \subset X^* \mid \mbox{there exists a right-linear
+grammar $G$ with } L = L(G)} \]
 is the class of {\bf right-linear languages} in $X^*$.
 \end{definition}
 
@@ -37,8 +37,8 @@ Proof:
 
 ''$\supset$'': Let $L \in r{-}LIN(X^*)$ with $L = L(G),\ G = (N, X, P, S)$.
 
-We construct a graph $G' = (V, E)$ with vertices $V = N \cup \{F\}, F \notin N$
-and we use the productions of the grammar as edge set $E$:
+We construct a graph $G' = (V, E)$ with vertices $V = N \cup \setof{F}, F
+\notin N$ and we use the productions of the grammar as edge set $E$:
 \begin{eqnarray*}
 p: v \to x v' \in P & \Rightarrow & e:  v \edge{x} v' \in E \\
 p: v \to x \in P & \Rightarrow & e : v \edge{x} F \in E
@@ -81,10 +81,10 @@ and $|\alpha(e)| = 1$ for each edge $e \in E$.
 We define a right-linear grammar $RLG = (N, X, P, S)$ with $N = E, S =
 S_{\fa{A}}$ and production set
 \begin{eqnarray*}
-P & = & \{ (q, \alpha(e) \cdot r) \mid \exists \mbox{ edge } e : q \to r \in E
-\} \\
-& \cup & \{ (q, \alpha(e)) \mid \exists \mbox{ edge } e : q \to r \in E,\ r \in
-F_{\fa{A}} \}
+P & = & \setof{(q, \alpha(e) \cdot r) \mid \exists \mbox{ edge } e : q \to r \in
+E} \\
+& \cup & \setof{(q, \alpha(e)) \mid \exists \mbox{ edge } e : q \to r \in E,\ r
+\in F_{\fa{A}}}
 \end{eqnarray*}
 
 It holds $L(RLG) = \lang{A}$ (exercise) which completes the proof of the

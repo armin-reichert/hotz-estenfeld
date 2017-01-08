@@ -14,7 +14,7 @@ We represent the elements of \pocymon{X} by their reduced words (see chapter
 Let $|w|$ be the reduced word of $w \in (X \cup X^{-1})^*$ with respect to the
 polycyclic monoid \pocymon{X} and let $L \subset (X \cup X^{-1})^*$ be a
 language. Then
-\[ |L| := \{ |w| \mid w \in L,\ |w| \neq 0 \} \]
+\[ |L| := \setof{|w| \mid w \in L,\ |w| \neq 0} \]
 is the set of reduced words of $L$.
 \end{definition}
 
@@ -22,7 +22,7 @@ is the set of reduced words of $L$.
 \begin{eqnarray*}
 |REG|(\pocymon{X}) & := & \{ L \subset (X\cup X^{-1})^* \mid \mbox{there exists
 }L' \in REG(\pocymon{X}) \\
-& & \mbox{ with } L = \{|w| \mid [w] \in L' \} \}
+& & \mbox{ with } L = \setof{|w| \mid [w] \in L'} \}
 \end{eqnarray*}
 \end{definition}
 
@@ -56,7 +56,7 @@ We construct in several steps an automaton $\fa{A}'$ accepting $|L|$.
 This construction will play an exceptional role in later chapters.
 
 Without loss of generality we may assume that for each edge of our graph $G =
-(V, E)$ holds: $\alpha(e) \in X\cup X^{-1}\cup \{\epsilon\}$.
+(V, E)$ holds: $\alpha(e) \in X\cup X^{-1}\cup \setof{\epsilon}$.
 
 {\bf Step 1:} If there is a path $\pi \in \pathcat{G}(v, v')$ with
 $|\alpha(\pi)| = \epsilon$, then we add a new edge $e: v \to v'$ to $E$ and set
@@ -82,8 +82,8 @@ labelling $\alpha$ as described.
 resulting graph shall be $G_3$ with labelling $\alpha$.
 
 Because of our construction we get:
-\[ \lang{A}_3 = \{ v \mid v \mbox{ is reduced word of } w \in
-\lang{A} \mbox{ wrt. } x\cdot x^{-1} = 1 \} \]
+\[ \lang{A}_3 = \setof{v \mid v \mbox{ is reduced word of } w \in
+\lang{A} \mbox{ wrt. } x\cdot x^{-1} = 1} \]
 
 {\bf Step 4:} We interrupt all paths with a label containing $x \cdot y^{-1},\
 x\neq y$. To do so, we duplicate certain vertices and edges of $G_3$.
@@ -110,8 +110,8 @@ The following figure shows the construction:
 FIGURE
 
 We do this with every such vertex of $G_3$. Tge resulting graph shall be $G'$.
-With start and final state sets $S' := S$ and $F' := F \cup \{e^+ \mid e\in F\}$
-we get a finite automaton
+With start and final state sets $S' := S$ and $F' := F \cup \setof{e^+ \mid e\in
+F}$ we get a finite automaton
 \[ \fa{A}' = (G', X \cup X^{-1}, ', F', \alpha') \]
 
 It then holds: $\lang{A}' = |L|$!
@@ -179,7 +179,7 @@ INDEX(\fa{A}', u)$.
 Now we can prove the announced theorem.
 
 \begin{theorem}
-\[ |REG|(\pocymon{X}) = \{ |L| \mid L \in REG((X\cup X^{-1})^*) \} \]
+\[ |REG|(\pocymon{X}) = \setof{|L| \mid L \in REG((X\cup X^{-1})^*)} \]
 \end{theorem}
 
 \begin{proof}
@@ -192,11 +192,11 @@ Now we can prove the announced theorem.
  $\alpha'$ is continued to a functor and for the finite automaton
  \[ \fa{A}' = (G', X \cup X^{-1}, S', F', \alpha') \]
  it holds:
- \[ \lang{A} = \{ [u] \mid u \in \lang{A}' \} \]
+ \[ \lang{A} = \setof{[u] \mid u \in \lang{A}'} \]
  and with lemma 1 we get:
- \[ \lang{A} = \{ [u] \mid u \in |\lang{A}'| \} \]
+ \[ \lang{A} = \setof{[u] \mid u \in |\lang{A}'|} \]
  which means
- \[ |\lang{A}| = \{ |u| \mid u \in \lang{A}' \} \]
+ \[ |\lang{A}| = \setof{|u| \mid u \in \lang{A}'} \]
 \end{proof}
 
 The next theorem gives an even more precise characterization for
@@ -255,11 +255,11 @@ defined with fixed graph and show two simple but important properties of these
 sets.
 
 Let $G = (V, E)$ be a graph and $\alpha : E \to (X \cup X^{-1})^*$. We may
-assume that $\alpha(e) \in X \cup X^{-1} \cup \{\epsilon\}$.
+assume that $\alpha(e) \in X \cup X^{-1} \cup \setof{\epsilon}$.
 
 We define
-\[ \mathcal{R}(G) := \{ L_{\fa{A}(\tilde{S},\tilde{F})} \mid \fa{A} = (G, X \cup
-X^{-1}, S, F, \alpha),\ \tilde{S} \subset V,\ \tilde{F} \subset V \} \]
+\[ \mathcal{R}(G) := \setof{L_{\fa{A}(\tilde{S},\tilde{F})} \mid \fa{A} = (G, X
+\cup X^{-1}, S, F, \alpha),\ \tilde{S} \subset V,\ \tilde{F} \subset V} \]
 
 For $c := \card{V}$ then it trivially holds $\card{\mathcal{R}(G)} \leq 2^{2
 \cdot c}$.
@@ -281,7 +281,7 @@ Exercise for the reader.
 
 Let $\fa{A'}$ be the automaton constructed as in lemma 1. We construct a graph
 $G' = (V', E')$ from the graph $G = (V, E)$. Define
-\[ \mathcal{B}(G') := \{ L_{\fa{A'}(v, v')} \mid v, v' \in V' \]
+\[ \mathcal{B}(G') := \setof{L_{\fa{A'}(v, v')} \mid v, v' \in V'} \]
 
 \begin{lemma}
 Let $L^+ \subset X^*, L^- \subset (X^{-1})^*$ and $L^+, L^- \in
@@ -328,9 +328,9 @@ theorems of context-free grammars (chapter IV). This is especially true for the
 following
 
 \begin{corollary}
-If $\mathcal{B}(G', S, F) = \{ L^+_{\fa{A'}(S, v)},\ L^-_{\fa{A'}(q, F)} \mid
-v, q \in V \}$. Then $\mathcal{B}(G', S, F)$ is a union base for
-\[ \{ |L^+ \cdot L^-| \mid L^+, L^- \in \mathcal{B}(G', S, F) \} \]
+If $\mathcal{B}(G', S, F) = \setof{L^+_{\fa{A'}(S, v)},\ L^-_{\fa{A'}(q, F)}
+\mid v, q \in V}$. Then $\mathcal{B}(G', S, F)$ is a union base for
+\[ \setof{|L^+ \cdot L^-| \mid L^+, L^- \in \mathcal{B}(G', S, F)} \]
 \end{corollary}
 
 This corollary gives us a smaller base. For fixed $S$ and $F$ we can represent
@@ -339,9 +339,9 @@ type $L^+_{\fa{A}(S, v)}$ resp.\ $L^-_{\fa{A}(q, F)}$.
 
 We now assign to $\mathcal{B}(G)$ a system 
 \begin{eqnarray*} 
-\mathcal{P}(G) & \subset & \mathcal{B}(G) \times \mathcal{B}(G)
-\cdot \{;\} \cdot \mathcal{B}(G) \\
-& \cup & \{ \epsilon \} \times \mathcal{B}(G)
+\mathcal{P}(G) & \subset & \mathcal{B}(G) \times \mathcal{B}(G) \cdot \setof{;}
+\cdot \mathcal{B}(G) \\
+& \cup & \setof{\epsilon} \times \mathcal{B}(G)
 \end{eqnarray*}
 in the following way:
 \begin{eqnarray*}

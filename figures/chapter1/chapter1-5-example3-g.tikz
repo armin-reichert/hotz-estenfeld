@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, 6) {$1$};
+		\node [style=state] (1) at (-3, 4) {$6$};
+		\node [style=state] (2) at (3, 4) {$2$};
+		\node [style=state] (3) at (-3, -0) {$5$};
+		\node [style=state] (4) at (3, -0) {$3$};
+		\node [style=state] (5) at (0, -2) {$4$};
+		\node [style=state] (6) at (7, 2) {$2'$};
+		\node [style=state] (7) at (9, 4) {$1'$};
+		\node [style=state] (8) at (9, -0) {$3'$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to (2);
+		\draw [style=transition] (2) to (4);
+		\draw [style=transition] (4) to (5);
+		\draw [style=transition] (5) to (3);
+		\draw [style=transition] (3) to (1);
+		\draw [style=transition] (1) to (0);
+		\draw [style=transition] (2) to (6);
+		\draw [style=transition] (4) to (8);
+		\draw [style=transition] (7) to (6);
+		\draw [style=transition] (6) to (8);
+		\draw [style=transition] (8) to (7);
+		\draw [style=transition] (1) to (8);
+		\draw [style=transition] (3) to (6);
+		\draw [style=transition] (0) to (7);
+		\draw [style=transition, bend right=75, looseness=1.75] (5) to (7);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -37,7 +37,7 @@ mapping. In which case is it possible to extend $\phi_1$ to a homomorphism $\phi
 \end{enumerate}
 
 The answers to these questions of course depend on the structure of $U$. If
-$U = \{ 1_M \}$ then $\phi$ is determined uniquely on $U$ but there is
+$U = \setof{1_M}$ then $\phi$ is determined uniquely on $U$ but there is
 little information on the relation between $\phi_1$ and $\phi_2$.
 
 The following two simple theorems which can be found in introductory algebra
@@ -80,8 +80,8 @@ Let $M$ be a monoid, $L \subset M$ be any subset of $M$. Does there exist a
 monoid $S$ and a homomorphism $\phi : M \to S$ with the following property:
 There exists an $s \in S$ with $L \subset \phi^{-1}(s)$?
 
-Of course, there always exists such an $S$: Choose $S = \{ 1 \}$ and $\phi(M) =
-\{1\}$. Therefore we strengthen our task: 
+Of course, there always exists such an $S$: Choose $S = \setof{1}$ and
+$\phi(M) = \setof{1}$. Therefore we strengthen our task: 
 
 Find $S$ and $\phi$ such that $L \subset \phi^{-1}(S)$ and for each other
 homomorphism $\Psi$ with that property holds:
@@ -133,7 +133,7 @@ It is decidable if a monoid homomorphism $\phi$ is injective.
 \end{theorem}
 
 Hint: Let $\phi: A^* \to B^*$ be a given monoid homomorphism, $A =
-\{a_1,\ldots,a_n\},\ E = \{\phi(a_1),\ldots,\phi(a_n)\}$.
+\setof{a_1,\ldots,a_n},\ E = \setof{\phi(a_1),\ldots,\phi(a_n)}$.
 
 Consider
 \begin{eqnarray*}

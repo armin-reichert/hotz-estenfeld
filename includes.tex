@@ -1,7 +1,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage{parskip}
+\usepackage{rotating}
 \usepackage{tikz}
-\usetikzlibrary{arrows,automata,cd,positioning,shapes}
+\usetikzlibrary{arrows,cd}
+
 % TikZiT preamble begin
 %\usepackage[svgnames]{xcolor}
 \usetikzlibrary{decorations.markings}
@@ -11,18 +13,18 @@
 \pgfsetlayers{edgelayer,nodelayer,main}
 \newlength{\imagewidth}
 \newlength{\imagescale}
-%styles
 \tikzstyle{none}=[inner sep=0pt]
 \tikzstyle{state}=[circle,fill=white,draw=black]
+\tikzstyle{oval_state}=[ellipse,fill=white,draw=black]
 \tikzstyle{transition}=[-latex,draw=black]
-% end
 
 % theorem environments
-\newtheorem{definition}{Definition}[section]
-\newtheorem{lemma}{Lemma}[section]
 \newtheorem{corollary}{Corollary}[section]
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{lemma}{Lemma}[section]
 \newtheorem{maintheorem}{Main Theorem}[section]
+\newtheorem{theorem}{Theorem}[section]
 
 % custom commands
 \newcommand{\card}[1]{\mathrm{card}(#1)}

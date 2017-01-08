@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, 5) {$1'$};
+		\node [style=state] (1) at (-5, -0) {$2'$};
+		\node [style=state] (2) at (5, -0) {$3'$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to (1);
+		\draw [style=transition] (1) to (2);
+		\draw [style=transition] (2) to (0);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -26,8 +26,8 @@ input $X^*$ and stack-monoid $Y^*$ if
 \begin{itemize}
   \item[(K1)] $\delta: X \times Y^* \to Y^*$ is a mapping with
   \begin{eqnarray*}
-  \delta(X \times Y) & \subset & Y^2 \cup \{\epsilon\} \\
-  \delta(X \times \{\epsilon\}) & \subset & Y
+  \delta(X \times Y) & \subset & Y^2 \cup \setof{\epsilon} \\
+  \delta(X \times \setof{\epsilon}) & \subset & Y
   \end{eqnarray*} 
   \item[(K2)] $\delta(x, u \cdot v) = u \cdot \delta(x, v)$ for $v \in Y^+,u \in
   Y^*$.
@@ -35,8 +35,8 @@ input $X^*$ and stack-monoid $Y^*$ if
 \end{definition} 
 
 Obviously the simple pushdown store $\pdstore{K}$ is uniquely determined by
-$\delta' = \delta |_{X \times (Y \cup \{\epsilon\})}$. Each such mapping can be
-continued using (K2) onto $X \times Y^*$ such that one gets a simple
+$\delta' = \delta |_{X \times (Y \cup \setof{\epsilon})}$. Each such mapping
+can be continued using (K2) onto $X \times Y^*$ such that one gets a simple
 pushdown store.
 
 We extend $\delta$ onto $X^* \times Y^*$ by defining
@@ -61,7 +61,7 @@ Define
 \end{eqnarray}
 
 Let $w\in (\unioninv{X})^*$ and $w = x_1^{\epsilon_1} \cdots x_n^{\epsilon_n}$
-with $x_i\in X,\ \epsilon_i\in \{1, -1\}$.
+with $x_i\in X,\ \epsilon_i\in \setof{1, -1}$.
 
 For the sequence $y_1 = \delta(x_1^{\epsilon_1}, \epsilon),\ y_2 =
 \delta(x_2^{\epsilon_2}, y_1), \ldots,\ y_n = \delta(x_n^{\epsilon_n}, y_{n-1})$
@@ -126,9 +126,9 @@ $\fa{A}$ accepts a word, and the {\bf accepted language} $L_\kappa$ which is the
 
 Formally:
 \begin{eqnarray*}
-PSL(\kappa) &:=& \{ \delta(\pi, \epsilon) \mid \pi \in \pathcat{G}(S, F) \} \\
-L_\kappa &:=& \{ \alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
-\epsilon) = \epsilon \}
+PSL(\kappa) &:=& \setof{\delta(\pi, \epsilon) \mid \pi \in \pathcat{G}(S, F)}\\
+L_\kappa &:=& \setof{\alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
+\epsilon) = \epsilon}
 \end{eqnarray*}
 
 \begin{definition}

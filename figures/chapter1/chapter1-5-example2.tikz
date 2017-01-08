@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$1$};
+		\node [style=state] (1) at (4, -0) {$2$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition, in=-45, out=-135, loop] (0) to node[auto]{$e$} ();
+		\draw [style=transition] (0) to node[auto]{$e_1$} (1);
+	\end{pgfonlayer}
+\end{tikzpicture}

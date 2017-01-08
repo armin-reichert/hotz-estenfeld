@@ -85,7 +85,7 @@ $\beta$ is called {\bf length-preserving} $\Leftrightarrow \beta'_2(e) \in
 E(G')$ for each edge $e \in E(G)$.
 
 $\beta$ is called {\bf non-expanding} $\Leftrightarrow \beta_2'(e) \in E(G')
-\cup \{ 1_e \mid e \in E(G') \}$
+\cup \setof{1_e \mid e \in E(G')}$
 \end{definition}
 
 In the following we will always identify $\beta'$ with $\beta$.
@@ -211,14 +211,14 @@ $V_{\fa{C}}$. We do this in the same way for the edges.
 
 We get equivalence classes
 \begin{eqnarray*}
-\left[ v \right] & := & \{ v' \in V_{\fa{C}} \mid v \equiv v' \} \\
-\left[ e \right] & := & \{ e' \in E_{\fa{C}} \mid e \equiv e' \}
+\left[ v \right] & := & \setof{v' \in V_{\fa{C}} \mid v \equiv v'} \\
+\left[ e \right] & := & \setof{e' \in E_{\fa{C}} \mid e \equiv e'}
 \end{eqnarray*}
 
 We define the sets of equivalence classes by
 \begin{eqnarray*}
-\bar{V} & := & \{ [v] \mid v \in V_{\fa{C}} \} \\ 
-\bar{E} & := & \{ [e] \mid e \in E_{\fa{C}} \} 
+\bar{V} & := & \setof{[v] \mid v \in V_{\fa{C}}} \\ 
+\bar{E} & := & \setof{[e] \mid e \in E_{\fa{C}}} 
 \end{eqnarray*}
 
 Claim: With $Q([e]) := [Q(e)]$ and $Z([e]) := [Z(e)],\ e \in E_{\fa{C}}$ we get
@@ -258,8 +258,7 @@ well-defined.
 To complete the definition of the automaton $\fa{D}$ we have to define start and
 final state sets.
 \[ \fa{D} := (\bar{G}, X, [S_{\fa{C}}], [F_{\fa{C}}], \alpha_{\fa{D}}) \]
-
-with final state set $[F_{\fa{C}}] := \{ [f] \mid f \in F_{\fa{C}} \}$.
+with final state set $[F_{\fa{C}}] := \setof{[f] \mid f \in F_{\fa{C}}}$.
 
 Claim: The canonical mapping $e \to [e],\ v \to [v]$ is a reduction.
 
@@ -279,15 +278,15 @@ essential, as the following example shows:
 
 FIGURE
 
-It holds: $\lang{A} = \lang{B} = \lang{C} = \{ a^n \mid n \in \mathbb{N} \}
-\cup \{ b^n \mid n \in \mathbb{N} \}$.
+It holds: $\lang{A} = \lang{B} = \lang{C} = \setof{a^n \mid n \in \mathbb{N}}
+\cup \setof{b^n \mid n \in \mathbb{N}}$.
 
 From our construction it follows $4 \equiv 2 \equiv 1 \equiv 3$ and the
 automaton $\fa{D}$ has the form
 
 FIGURE
 
-But $\lang{D} = \{ a, b \}^* \neq \lang{C}$. It follows:
+But $\lang{D} = \setof{a, b}^* \neq \lang{C}$. It follows:
 
 There exists no reduction from $\fa{C}$ to $\fa{D}$ because \fa{A}, \fa{B} and
 \fa{C} are not complete {\it and} deterministic.
@@ -350,8 +349,8 @@ We construct the automaton
 with vertex (state) set
 \[ V_{\fa{C}} = V_{\fa{A}} \times V_{\fa{B}} \]
 and edge set
-\[ E_{\fa{C}} = \{ (e, e') \in E_{\fa{A}} \times E_{\fa{B}} \mid
-\gamma_{\fa{A}}(e) = \gamma_{\fa{B}}(e') \} \]
+\[ E_{\fa{C}} = \setof{(e, e') \in E_{\fa{A}} \times E_{\fa{B}} \mid
+\gamma_{\fa{A}}(e) = \gamma_{\fa{B}}(e')} \]
 start states
 \[ S_{\fa{C}} = S_{\fa{A}} \times S_{\fa{B}} \]
 final states
@@ -427,8 +426,8 @@ FIGURE
 Let $\fa{A}_1$ be the initial automaton with start state $Z_0$.
 
 We construct an automaton $\fa{A}'_1$ by adding for each start state $i \in
-S_{\fa{A}}$ a state $i' \in V_G$ and setting $S_{\fa{A}'} = \{ 1', \ldots, k'
-\}$:
+S_{\fa{A}}$ a state $i' \in V_G$ and setting $S_{\fa{A}'} = \setof{1', \ldots,
+k'}$:
 
 FIGURE
 
@@ -464,15 +463,15 @@ $\fa{A}'$.
 
 We construct an automaton $\fa{A}_2'$ by constructing edges of the following
 form:
-\[ e := (\{p_1, \ldots, p_r\}, p_i) \edge{x} (\{q_1, \ldots, q_s\}, q_j) \]
-if $p_i \edge{e'} q_j \in E_{\fa{A_2}}$ and $\alpha(e') = x$ for all $i = 1,
+\[ e := (\setof{p_1, \ldots, p_r}, p_i) \edge{x} (\setof{q_1, \ldots, q_s},
+q_j) \] if $p_i \edge{e'} q_j \in E_{\fa{A_2}}$ and $\alpha(e') = x$ for all $i = 1,
 \ldots,r,\ j = 1, \ldots, s$ in the construction of the deterministic automaton.
 
 We get homomorphisms
 \[ \tilde{\phi} \mbox{ with } \tilde{\phi}(e) := (p_i \edge{x} q_j) \]
 and 
-\[ \hat{\phi} \mbox{ with } \hat{\phi}(e) := (\{p_1, \ldots, p_r\} \edge{x}
-\{q_1, \ldots, q_s\}) \]
+\[ \hat{\phi} \mbox{ with } \hat{\phi}(e) := (\setof{p_1, \ldots, p_r} \edge{x}
+\setof{q_1, \ldots, q_s}) \]
 for all edges $e$ as described above.
 
 Both homomorphisms are reductions.
@@ -637,8 +636,8 @@ $u, v \in X^*$ are called {\bf congruent modulo $L$}, written as
 \in L \iff v \cdot w \in L \]
 \end{definition}
 
-Notation: $[w]_L := \{ v \mid w \equiv_L v \}$
-\[ X^*/L := \{ [w]_L \mid w \in X^* \} \]
+Notation: $[w]_L := \setof{v \mid w \equiv_L v}$
+\[ X^*/L := \setof{[w]_L \mid w \in X^*} \]
 
 With this notatation it holds
 
@@ -652,10 +651,10 @@ With this notatation it holds
 One sees immediately: $w \equiv_L w' \Rightarrow w \cdot x \equiv_L w' \cdot x$
 
 We construct the graph $G' = (X^*/L, E)$ with edge set
-\[ E = \{ ([w], [wx]) \mid w \in X^*,\ x \in X \} \]
+\[ E = \setof{([w], [wx]) \mid w \in X^*,\ x \in X} \]
 which by assumption is finite.
 
-Set $S := \{ [e] \},\ F := \{[w] \mid w\in L \}$ and define the labelling
+Set $S := \setof{[e]},\ F := \setof{[w] \mid w\in L}$ and define the labelling
 $\alpha$ by $\alpha(([w], [wx])) := x$.
 
 We obtain a finite automaton \[ \fa{A} = \fa{A}(L) = (G', X, S, F, \alpha) \]
@@ -801,8 +800,8 @@ such that the following diagram commutes:
 \end{lemma}
 
 \begin{proof}
-Let \[ G := (V_{\fa{A}} \times V_{\fa{B}}, \{ (e, e') \in E_{\fa{A}} \times
-E_{\fa{B}} \mid \alpha_{\fa{A}}(e) = \alpha_{\fa{B}}(e') \}  ) \]
+Let \[ G := (V_{\fa{A}} \times V_{\fa{B}}, \setof{(e, e') \in E_{\fa{A}} \times
+E_{\fa{B}} \mid \alpha_{\fa{A}}(e) = \alpha_{\fa{B}}(e')}  ) \]
 
 Then the finite automaton $\fa{A} \times \fa{B}$ is defined by
 \[ \fa{A} \times \fa{B} := (G, X, S_{\fa{A}} \times S_{\fa{B}}, F_{\fa{A}}

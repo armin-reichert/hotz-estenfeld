@@ -42,8 +42,8 @@ We introduce an orientation for the edges.
 
 \begin{definition}
 A graph $G = (V,E)$ is called an {\bf oriented graph} if there are two mappings
-$Q : E \to V$ and $Z : E \to V$ with $\rho(e) = \{Q(e), Z(e)\}$ for all $e \in
-E$.
+$Q : E \to V$ and $Z : E \to V$ with $\rho(e) = \setof{Q(e), Z(e)}$ for all $e
+\in E$.
 $Q(e)$ is called the {\bf source} and $Z(e)$ the {\bf target} point of $e$.
 \end{definition}
 
@@ -67,10 +67,11 @@ $i = 1, \ldots, k-1$.
 \begin{definition}
 A loop-free graph $G = (V,E)$ is called {\bf ordered} if for each point $v \in
 V$ holds: There exists a unique (up-to cyclic permutation) ordering on the set
-$\{ e \in E  \mid v \in \rho(e) \}$.
+$\setof{e \in E \mid v \in \rho(e)}$.
 \end{definition}
 
-Notation: $\{ e \in E \mid v \in \rho(e) \}$ is called the {\bf cycle} of $v$.
+Notation: $\setof{e \in E \mid v \in \rho(e)}$ is called the {\bf cycle} of
+$v$.
 
 Explanation: Imagine each point and its adjacent edges to be stuck on a litte
 circle as in the following figure:
@@ -92,15 +93,15 @@ A loop-free, oriented graph $G$ is called {\bf ordered} if for all points
 $v \in V$ it	holds: In the cycle of $v$ there exists an ordering 
 \[ e_1, \ldots, e_k, e_m', \ldots, e_1'\]
 such that
-\[ \{ e_1, \ldots, e_k \} = \{ e \in E \mid Z(e) = v \} \]
+\[ \setof{e_1, \ldots, e_k} = \setof{e \in E \mid Z(e) = v} \]
 and 
-\[ \{ e_1', \ldots, e_m' \} = \{ e \in E\ |\ Q(e) = v \} \]
+\[ \setof{e_1', \ldots, e_m'} = \setof{e \in E \mid Q(e) = v} \]
 \end{definition}
 
 $e_1, \ldots, e_k$ is called the {\bf ordering} of the incoming edges of $v$ and
 $e_1', \ldots, e_m'$ the ordering of the outgoing edges of $v$.
 
-Example:
+{\bf Example:}
 
 \begin{center}
 \input{figures/chapter1/edge_ordering.tikz}
@@ -205,9 +206,9 @@ schema}. $\pathcat{G}$ is an important special case of a category.
 (path category).}
 
 Notation: 
-\[ \pathcat{G}(v, v') := \{ \pi \in \pathcat{G} \mid Q(\pi) = v,\ Z(\pi) = v' \}
+\[ \pathcat{G}(v, v') := \setof{\pi \in \pathcat{G} \mid Q(\pi) = v,\ Z(\pi) =
+v'}
 \]
-
 {\em Categories} are algebraic structures with a {\em partial} operation.
 
 \begin{definition}
@@ -256,7 +257,8 @@ We explain the notion of a category with some examples:
   	}(b,c)\in R_2}$
   \end{itemize}
   With these definitions $REL(O)$ becomes a category (exercise) and the
-  morphisms $(A, A, \{(a, a) \mid a\in A \})$ are the units for each set $A \in O$.
+  morphisms $(A, A, \setof{(a, a) \mid a\in A})$ are the units for each set $A
+  \in O$.
 
   \item {\bf The category of matrices over the rational numbers} \\
   Define $MAT(\mathbb{Q}) := (O. M, Q, Z, \circ)$ by:
@@ -306,7 +308,8 @@ $\phi_2$ are injective (surjective, bijective).
 
 Let's look at some examples:
 
-{\bf Example 1}: Consider the following oriented graphs $G_1$ and $G_2$:
+\begin{example}
+Consider the following oriented graphs $G_1$ and $G_2$:
 
 $G_1$:
 \begin{center}
@@ -344,9 +347,11 @@ functor. It is even a special functor because
   there exists exactly one path $\pi$ in $G_1$ with $Q(\pi) = v_1$ such that
   $\phi_2(\pi) = \bar{\pi}$.
 \end{enumerate}
+\end{example}
 
 \bigskip
-{\bf Example 2}: Let graphs $G1, G_2$ be given as follows:
+\begin{example}
+Let graphs $G1, G_2$ be given as follows:
 
 $G_1$:
 \begin{center}
@@ -362,9 +367,11 @@ Then there exists a surjective functor from $\pathcat{G_1}$ to $\pathcat{G_2}$.
 
 It is possible to construct surjective functors which fulfill (2) from example 1
 and other surjective functors which don't.
+\end{example}
 
 \bigskip
-{\bf Example 3}: Let $G_1$ and $G_2$ be given as:
+\begin{example}
+Let $G_1$ and $G_2$ be given as:
 
 $G_1:\ p_1 \edge{s} p_2 \qquad p_3 \edge{r} p_4$.
 
@@ -381,9 +388,11 @@ is a functor.
 
 It is remarkable that $\phi_2(\pathcat{G_1})$ is not a category because this
 set is not closed under the $\circ$ operation.
+\end{example}
 
 \bigskip
-{\bf Example 4}: Let $G_1$ and $G_2$ be given as follows:
+\begin{example}
+Let $G_1$ and $G_2$ be given as follows:
 
 $G_1$:
 \begin{center}
@@ -404,8 +413,10 @@ $\phi_2(a) = a',\ \phi_2(b) = b',\ \phi_2(c) = c',\ \phi_2(d) = d',\ \phi_2(e) =
 1_3,\ \phi_2(f) = 1_3,\ \phi_2(g) = 1_3$.
 
 $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$ is a functor.
+\end{example}
 
-{\bf Example 5}: The graph $G$ shall be defined by
+\begin{example}
+The graph $G$ shall be defined by
 
 \begin{center}
 \input{figures/chapter1/chapter1-4-example5.tikz}
@@ -450,6 +461,7 @@ We define $\phi_1(i) = i$ for $i = 2,3,4$ and $\phi'_2(x) = x'$ for $x \in
 $\phi'_2$ can be extended in a unique way to a mapping $\phi_2 :
 \pathcat{G} \to MAT(\mathbb{N})$ such that $\phi = (\pathcat{G},
 MAT(\mathbb{N}), \phi_1, \phi_2)$ is a functor.
+\end{example}
 
 \bigskip
 We want to define now some special properties of functors.

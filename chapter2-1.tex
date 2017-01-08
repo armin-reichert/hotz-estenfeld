@@ -1,13 +1,13 @@
 \section{The finite automaton, regular sets in $X^*$,\ $REG(X^*)$}
 
 Let $G = (V, E)$ be a finite, oriented graph, $X$ a finite set and $\alpha =
-(\pathcat{G}, X^*,\alpha_1, \alpha_2)$ a functor with $\alpha_1 : V \to \{ X^*
-\},\ \alpha_2 : \pathcat{G} \to X^*$.
+(\pathcat{G}, X^*,\alpha_1, \alpha_2)$ a functor with $\alpha_1 : V \to
+\setof{X^*},\ \alpha_2 : \pathcat{G} \to X^*$.
 
-(Remark by the translator: Here the free monoid $X^*$ is regarded as a category
-$X^* = (\{X^*\}, X^*, Q, Z, \cdot \})$ where $\cdot$ is the monoid operation
-(word concatenation). Words are treated as morphisms with source and target
-$X^*$. Klingt komisch, is aber so.)
+\transrem{Here the free monoid $X^*$ is regarded as a category
+$X^* = (\setof{X^*}, X^*, Q, Z, \cdot \})$ where $\cdot$ is the monoid
+operation (word concatenation). Words are treated as morphisms with source and target
+$X^*$.}
 
 \begin{definition}[nondeterministic finite automaton]
 $\fa{A} = (G, X^*, \alpha)$ is called a {\bf nondeterministic finite
@@ -23,31 +23,30 @@ In the following we will use the terms acceptor and automaton as synonyms.
 If the finite automaton works over the free monoid $X^*$ we write shorter just
 $X$ instead of $X^*$, otherwise we specify the monoid explicitly.
 
-\begin{definition}[accepted set]
 If we define 
-\[ \pathcat{G}(S, F) := \{ w \in \pathcat{G}\ |\ Q(w) \in S \wedge Z(w)
-\in F \}, \]
-then \[ L_{\fa{A}} := \alpha_2(\pathcat{G}(S, F)) \] 
-is called the set {\bf accepted by} the automaton. 
-\end{definition}
+\[ \pathcat{G}(S, F) := \setof{w \in \pathcat{G} \mid Q(w) \in S,\ Z(w) \in F}
+\] 
+then
+\[ L_{\fa{A}} := \alpha_2(\pathcat{G}(S, F)) \]
+is called the {\bf set accepted by} \fa{A}. 
 
 We will also write shortly $\alpha$ instead of $\alpha_2$ and $\pathcat{}(S,F)$
 instead of $\pathcat{G}(S,F)$.
 
-\begin{definition}[regular language over free monoid]
-Let $X$ be an alphabet. \[ REG(X^*) := \{ L \subset X^*\ | \mbox{ there
-exists a finite automaton } \fa{A} \mbox{ with } L = \lang{A} \}
+\begin{definition}[set of regular languages over free monoid]
+Let $X$ be an alphabet. 
+\[ REG(X^*) := \setof{L \subset X^* \mid \mbox{ there exists a finite automaton
+}\fa{A} \mbox{ with } L = \lang{A}}
 \]
-
-$REG(X^*)$ is the set of {\bf regular languages} over the free monoid $X^*$.
+$REG(X^*)$ is the {\bf set of regular languages} over the free monoid $X^*$.
 \end{definition}
 
-Remark: We defined here the finite automaton via its ''state graph''. Most
+Remark: We defined the finite automaton via its ''state graph''. Most
 often, the definition is given using the ''next state relation'' as follows:
 
-\[ \delta = \{ (a, P_1, P_2) \in X \times V \times V)\ | \]
-\[ \mbox{there exists an edge } e \mbox{ with } Q(e) = P_1, Z(e) = P_2 \mbox{
-and } \alpha(e) = a \in X \}. \]
+\[ \delta = \setof{(a, P_1, P_2) \in X \times V \times V) \mid 
+\mbox{there exists an edge } e \mbox{ with } Q(e) = P_1, Z(e) = P_2 \mbox{
+and } \alpha(e) = a \in X}. \]
 
 $\delta$ my be regarded as a relation between $X \times V$ and $V$ where $X$ is
 the input alphabet and $V$ the state set of the automaton \[ \fa{B} = (X,
@@ -80,14 +79,17 @@ in $S$ to a point in $F$ which is labeld with $w$.
 
 Let's consider some examples for finite automata:
 
-Example 1: Let $X = \{ a, b \}$ and $L = \{ (a b)^{2n}\ |\ n \in \mathbb{N} \}$.
-It holds: $L \in REG(\{a, b\}^*)$.
+Example 1: Let $X = \setof{a, b}$ and $L = \setof{(a b)^{2n} \mid n \in
+\mathbb{N}}$.
+It holds: $L \in REG(\setof{a, b}^*)$.
 
 The following acceptor accepts $L$ (exercise):
 
-$\fa{A} = (G, \{a, b\}, {1}, {1}, \alpha)$.
+$\fa{A} = (G, \setof{a, b}, {1}, {1}, \alpha)$.
 
-FIGURE
+\begin{center}
+\input{figures/chapter2/chapter2-1-example1.tikz}
+\end{center}
 
 Example 2: Lexical analysis, check for special characters.
 
@@ -97,19 +99,25 @@ during the lexical analysis. We give a finite acceptor which realizes such a che
 of reserved words:
 
 Let the set of reserved words be 
-$\{$ 'BEGIN', 'END', 'ELSE', 'IF', FI', 'FOR', 'INTEGER', 'THEN', 'LOOP',
-'POOL', 'PROCEDURE' $\}$.
+\begin{center}
+\{\,'BEGIN',\ 'END',\ 'ELSE',\ 'IF',\ FI',\ 'FOR',\ 'INTEGER',\ 'THEN',\
+'LOOP',\ 'POOL',\ 'PROCEDURE'\,\}
+\end{center}
 
 The following acceptor accepts this set:
 
-FIGURE
+\begin{minipage}{\textwidth}
+\begin{sideways}
+\input{figures/chapter2/chapter2-1-example2.tikz}
+\end{sideways}
+\end{minipage}
 
 The images of the edges under the mapping $\alpha$ are shown as edge labels. The
 points of the graph are the ovals with their labels. Start and final states are
 given by $S = \{$ START $\}$ and $F = \{$ STOP $\}$.
 
-The labels of the points are chosen such that one can see the information stored
-by the automaton.
+The labels at the vertices are chosen such that one can see the information
+stored by the automaton.
 
 Now we want to prove some properties of $REG(X^*)$. To do that, we need
 some basic properties for finite automata.
@@ -132,23 +140,24 @@ Let $\card{S} > 1$ or $\card{F} > 1$.
 1. Add new edges leaving the new start state $S'$:
 
 Define the set of all edges leaving an old start state by
-\[ OUT := \{ e \in E \mid Q(e) \in S \} \]
+\[ OUT := \setof{e \in E \mid Q(e) \in S} \]
 Add the following new edges to the graph:
-\[ OUT' := \{ e' = (S', Z(e)) \mid e \in OUT,\ \alpha'(e') := \alpha(e) \} \]
+\[ OUT' := \setof{e' = (S', Z(e)) \mid e \in OUT,\ \alpha'(e') := \alpha(e)} \]
 
 2. Add new edges reaching the new final state $F'$:
 
 Define the set of all edges reaching an old final state by
-\[ IN := \{ e \in E \mid Z(e) \in F \} \]
+\[ IN := \setof{e \in E \mid Z(e) \in F} \]
 Add the following new edges to the graph:
-\[ IN' := \{ e' = (Q(e), F') \mid e \in IN,\ \alpha'(e') := \alpha(e) \} \]
+\[ IN' := \setof{e' = (Q(e), F') \mid e \in IN,\ \alpha'(e') := \alpha(e)} \]
 
 To each new edge we assign the same label as the edge from which it has been
 derived.
 
-The new automaton $\fa{A'} = (G', X, \{S'\}, \{F'\}, \alpha')$ is defined
-by the graph $G' = (V \cup \{ S', F' \}, E \cup OUT' \cup IN')$
-and the new labeling $\alpha'$ which is identical to $\alpha$ for all existing edges and is defined as shown above for the new edges.
+The new automaton $\fa{A'} = (G', X, \setof{S'}, \setof{F'}, \alpha')$ is
+defined by the graph $G' = (V \cup \setof{S', F'}, E \cup OUT' \cup IN')$
+and the new labeling $\alpha'$ which is identical to $\alpha$ for all existing 
+edges and is defined as shown above for the new edges.
 
 It is easily shown that $\lang{A'} = \lang{A}$.
 
@@ -181,9 +190,8 @@ Proof: We ''split'' all edges according to their labels.
     \item  (Skip $\epsilon$-edges that can be continued and remove the
     $\epsilon$-edge)\\
     If there exists an edge $e' \in E$ with $Q(e') = Z(e) : E'' := E - e$.
-    Add new edges: $E' := E'' \cup \{
-    \tilde{e} \mid Q(\tilde{e}) = Q(e), Z(\tilde{e}) = Z(e'),\
-    alpha'(\tilde{e}) := \alpha(e') \}$
+    Add new edges: $E' := E'' \cup \setof{\tilde{e} \mid Q(\tilde{e}) = Q(e), 
+    Z(\tilde{e}) = Z(e'),\ alpha'(\tilde{e}) := \alpha(e')}$
   \end{enumerate}
   If in step (b) or (c) the target of the edge is a final state, then add the
   source of the edge to the set of final states.
@@ -224,8 +232,8 @@ We may assume that the edge and point sets of both automata graphs are disjoint.
 	
 	\item Closure under intersection: Define $G' = (V', E')$ where
 	\[ V' = V_A \times V_B \]
-	\[ E' = \{ (e_A, e_B) \in E_A \times E_B \mid \alpha_2(e_A) = \beta_2(e_B)
-		 \}. \]
+	\[ E' = \setof{(e_A, e_B) \in E_A \times E_B \mid \alpha_2(e_A) = \beta_2(e_B)}
+	. \]
 	By lemma 2 we may assume that the edge labels are all single symbols from $X$.
 	
 	We define the new labeling $\delta_2$ by \[ \delta_2 : E' \to X,\
@@ -295,9 +303,9 @@ edge $e$ with label $\alpha'_s(e) = x \Leftrightarrow \tilde{R} = N(x, \tilde{P}
 This defines our new graph $G' = (V', E')$.
 
 The start and final states are defined as follows:
-\[ S_{\fa{A'}} = \{ S_{\fa{A}} \} \]
-\[ F_{\fa{A'}} = \{ \tilde{R} \in \powset{V(G)} \mid \tilde{R} \cap
-F_{\fa{A}} \neq \emptyset \} \]
+\[ S_{\fa{A'}} = \setof{S_{\fa{A}}} \]
+\[ F_{\fa{A'}} = \setof{\tilde{R} \in \powset{V(G)} \mid \tilde{R} \cap
+F_{\fa{A}} \neq \emptyset} \]
 
 This completes the definition of automaton $\fa{A'} = (G', X,
 S_{\fa{A'}}, F_{\fa{A'}}, \alpha')$.
@@ -305,8 +313,8 @@ S_{\fa{A'}}, F_{\fa{A'}}, \alpha')$.
 We first prove that
 \fa{A'} is complete and deterministic:
 
-\fa{A'} has a single start state $S_{\fa{A'}} = \{ S_{\fa{A}}
-\}$, the edge labels are all single symbols and 
+\fa{A'} has a single start state $S_{\fa{A'}} = \setof{S_{\fa{A}}}$, 
+the edge labels are all single symbols and 
 \[ \card{\setof{e \in E' \mid Q(e) = \tilde{P}, \alpha'_2(e) = x}} = 1 \]
 for all $\tilde{P} \in V(G')$.
 
@@ -322,7 +330,7 @@ which are to be understood as follows: For $P \edge{x} R \in E(G)$
 there exists by construction $\tilde{P} \edge{x} \tilde{R} \in
 E(G')$ with $P \in \tilde{P}$ and $R \in \tilde{R}$.
 
-Starting with $S_{\fa{A'}} = \{ S_{\fa{A}} \} = \{ \{ P_0 \} \}$ and
+Starting with $S_{\fa{A'}} = \setof{S_{\fa{A}}} = \setof{\setof{P_0 }}$ and
 concatenating these diagrams, we get for $x_1 \cdots x_k \in
 L_{\fa{A}}$:
 \begin{eqnarray*}
@@ -356,8 +364,8 @@ the diagram from right to left. For $P_k \in \tilde{P}_k \cap F_{\fa{A}}$ we get
  P_{k-1} \edge{x_k} P_k \in F_{\fa{A}} 
 \end{eqnarray*}
 
-Because of $S_{\fa{A'}} = \{ S_{\fa{A}} \} = \{\{ P_0 \}\}$ it holds: $x_1
-\cdots x_k \in \lang{A} \Rightarrow \lang{A'} \subset \lang{A}$.
+Because of $S_{\fa{A'}} = \setof{S_{\fa{A}}} = \setof{\setof{P_0}}$ it holds:
+$x_1 \cdots x_k \in \lang{A} \Rightarrow \lang{A'} \subset \lang{A}$.
 
 \[ \Rightarrow \lang{A'} \subset \lang{A}\]
 
@@ -366,17 +374,17 @@ From both inclusions we get $\lang{A} = \lang{A'}$.
 Remark: The state set grows exponentially when the automaton is made
 deterministic. The following example will clarify this fact \cite{Commentz}.
 
-Example: Let $X = \{ a, b \}$. Define for arbitrary, but fixed $n \in
-\mathbb{N}$ \[ L_n := \{ w \mid w = w_1 \cdot w_2 \mbox{ with } w1 \neq w_2, |w_1| = |w_2|
-= n, w_1, w_2 \in X^* \} \]
+Example: Let $X = \setof{a, b}$. Define for arbitrary, but fixed $n \in
+\mathbb{N}$ \[ L_n := \setof{w \mid w = w_1 \cdot w_2 \mbox{ with } w1 \neq w_2,
+|w_1| = |w_2| = n, w_1, w_2 \in X^*} \]
 
 $L_n \in REG(X^*)$ because there exists a nondeterministic finite acceptor
 $\fa{A}_{n}$ with $L_n = L_{\fa{A}_{n}}$.
 
 We want to give the automaton for $n = 3$:
 
-$\fa{A}_3 = (G_3, \{a,b\}, \{1\}, \{22\}, \alpha)$ with the following graph
-$G_3$:
+$\fa{A}_3 = (G_3, \setof{a,b}, \setof{1}, \setof{22}, \alpha)$ with the
+following graph $G_3$:
 
 FIGURE
 
@@ -534,7 +542,7 @@ state in insufficient in general.
 \begin{theorem}[Regular languages are closed under homomorphism]
 \[ L \in REG(X^*), \phi : X^* \to Y^* \mbox{ monoid homomorphism } \Rightarrow
 \]
-\[ \phi(L) := \{ \phi(w) \mid w \in L \} \in REG(X^*) \]
+\[ \phi(L) := \setof{\phi(w) \mid w \in L} \in REG(X^*) \]
 \end{theorem}
 
 Proof: Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite acceptor for $L$. Then \[
@@ -547,15 +555,15 @@ After having proved closure properties, we prove some other important properties
 of regular sets.
 
 \begin{lemma}
-For $x \in X$ it holds $\{ x \} \in REG(X^*)$ and $\emptyset \in REG(X^*)$.
+For $x \in X$ it holds $\setof{x} \in REG(X^*)$ and $\emptyset \in REG(X^*)$.
 \end{lemma}
 
-Proof: Set $G = (\{S,F\}, \{e\})$ be a graph, then the finite acceptor
-\[\fa{A}_x = (G, \{x\}, \{S\}, \{F\}, \alpha)\] with $\alpha_2(e) = x$ fulfills
-$\lang{A} = \{x\}$.
+Proof: Set $G = (\setof{S,F}, \setof{e})$ be a graph, then the finite acceptor
+\[\fa{A}_x = (G, \setof{x}, \setof{S}, \setof{F}, \alpha)\] with $\alpha_2(e) =
+x$ fulfills $\lang{A} = \setof{x}$.
 
-Set $G = (\{S,F\}, \emptyset)$, then $\fa{A} = (G, \emptyset, \{S\}, \{F\},
-\emptyset)$ fulfills $\lang{A} = \emptyset$.
+Set $G = (\setof{S,F}, \emptyset)$, then $\fa{A} = (G, \emptyset, \setof{S},
+\setof{F}, \emptyset)$ fulfills $\lang{A} = \emptyset$.
 
 \begin{lemma}
 Set $G = (V, E)$. Then $\pathcat{G}(S,F) \in REG(E^*)$.
@@ -566,9 +574,9 @@ final state is a regular set over the set of edges of the graph. The proof is
 trivial, just label the edges with their name.
 
 \begin{definition}[local set]
-Let $S, F \subset X$ and $R \subset X \times X$ be a relation on $X$ with \[ L =
-\{ x_1 \cdots x_k \mid x_1 \in S, x_k \in F, (x_i, x_{i+1}) \in R,\ i = 1,
-\ldots, k - 1 \} \]
+Let $S, F \subset X$ and $R \subset X \times X$ be a relation on $X$ with 
+\[ L = \setof{x_1 \cdots x_k \mid x_1 \in S, x_k \in F, (x_i, x_{i+1}) \in R,\ i
+= 1, \ldots, k - 1} \]
 \end{definition}
 
 \begin{lemma}[The accepting path set of a FA is local]
@@ -576,9 +584,9 @@ Let $G = (V, E)$ be a graph. Then $\pathcat{G}(S, F)$ is local over $E$.
 \end{lemma}
 
 Proof: Let \begin{eqnarray*}
-S & = & \{ e \in E \mid Q(e) \in S \} \\ 
-F & = & \{ e \in E \mid Z(e) \in F \} \\
-R & = & \{ (e, e') \in E \times E \mid Z(e) = Q(e') \} 
+S & = & \setof{e \in E \mid Q(e) \in S} \\ 
+F & = & \setof{e \in E \mid Z(e) \in F} \\
+R & = & \setof{(e, e') \in E \times E \mid Z(e) = Q(e')} 
 \end{eqnarray*}
 
 Then the claim is immediately proved.
@@ -590,12 +598,13 @@ Then the claim is immediately proved.
 Proof: Let $S$ and $F$ be the subsets of $X$ from the definition of a local
 set. We define a graph $G = (V, E)$ as follows:
 \begin{eqnarray*}
-V & = & X \cup \{ \bar{S} \} \mbox{ with } X \cap \{ \bar{S} \} = \emptyset \\
-E & = & \{ e : \{ \bar{S} \} \to x \mid x \in S \} \cup \{ e : x \to y \mid
-(x, y) \in R \}
+V & = & X \cup \setof{\bar{S}} \mbox{ with } X \cap \setof{\bar{S}} = \emptyset
+\\
+E & = & \setof{e : \setof{\bar{S}} \to x \mid x \in S} \cup \setof{e : x \to y
+\mid (x, y) \in R}
 \end{eqnarray*}
 
-Consider the finite acceptor $\fa{A} = (G, X, \{\bar{X}\}, F, \alpha)$ with
+Consider the finite acceptor $\fa{A} = (G, X, \setof{\bar{X}}, F, \alpha)$ with
 labeling $\alpha$ defined by $\alpha_2(e) = Z(e)$ for each edge $e \in E$.
 
 Then it is clear that $\lang{A} = L$.
@@ -610,8 +619,8 @@ Proof: Exercise
 We want to summarize our results to some main theorems where we organize these
 results differently.
 
-Let $X_\infty = \{ x_1, x_2, \ldots \}$ be an infinite alphabet. Define \[
-REG(X_\infty^*) = \bigcup_{X	\subset X_\infty} REG(X^*), \mbox{$X$ is finite}
+Let $X_\infty = \setof{x_1, x_2, \ldots}$ be an infinite alphabet. Define 
+\[ REG(X_\infty^*) = \bigcup_{X	\subset X_\infty} REG(X^*), \mbox{$X$ is finite}
 \]
 
 \begin{maintheorem}
@@ -622,8 +631,8 @@ REG(X_\infty^*) = \bigcup_{X	\subset X_\infty} REG(X^*), \mbox{$X$ is finite}
 $REG(X_\infty^*)$ is closed under $\phi$.
 	\item Every $L \in REG(X_\infty^*)$ is the homomorphic image of a local set
 	over $X_\infty^*$.
-	\item $REG(X_\infty^*)$	 contains the sets $\{x\}, x \in X_\infty^*$ and the
-	empty set $\emptyset$.
+	\item $REG(X_\infty^*)$	 contains the sets $\setof{x}, x \in X_\infty^*$ and
+	the empty set $\emptyset$.
 \end{enumerate}
 \end{maintheorem}
 
@@ -650,8 +659,8 @@ Languages $L \in REG(X^\oplus)$ are also called {\bf semi-linear}.
 
 Exercices:
 \begin{enumerate}
-  \item Let $\phi : (\{x, y\}^*, \cdot) \to (\mathbb{Z} / 3 \mathbb{Z} \times
-  \mathbb{Z} / 4 \mathbb{Z}, +)$ be given by $\phi(x) = (0,1), \phi(y) = (1,0)$.
+  \item Let $\phi : (\setof{x, y}^*, \cdot) \to (\mathbb{Z} / 3 \mathbb{Z}
+  \times \mathbb{Z} / 4 \mathbb{Z}, +)$ be given by $\phi(x) = (0,1), \phi(y) = (1,0)$.
   
   Construct a finite automaton \fa{A} with $\lang{A} = \phi^{-1}((0,0))$ and
   present $\phi^{-1}((0,0))$ as a rational set.
@@ -666,7 +675,8 @@ Exercices:
     |x| \leq 2n$ and $x \in \lang{A}$.
    \end {enumerate}
 
-	\item Show: The set $L = \{ a^n b^n \} \mid n \in \mathbb{N}$ is not regular.
+	\item Show: The set $L = \setof{a^n b^n} \mid n \in \mathbb{N}$ is not
+	regular.
 	
 	\item Let $L \in REG(X^*), M \subset X^*$ finite. Show: $M^{-1}L \in REG(X^*)$.
 	What if $M \subset REG(X^*)$ is an arbitrary regular set?

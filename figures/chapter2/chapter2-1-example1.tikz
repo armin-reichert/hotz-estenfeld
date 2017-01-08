@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (-5, -0) {$1$};
+		\node [style=state] (1) at (5, -0) {$3$};
+		\node [style=state] (2) at (0, 3) {$2$};
+		\node [style=state] (3) at (0, -3) {$4$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to node[auto]{$k_1$} (2);
+		\draw [style=transition] (2) to node[auto]{$k_2$} (1);
+		\draw [style=transition] (1) to node[auto]{$k_3$} (3);
+		\draw [style=transition] (3) to node[auto]{$k_4$} (0);
+		\draw [style=transition, in=-135, out=135, loop] (0) to node[auto]{$k_5$} ();
+	\end{pgfonlayer}
+\end{tikzpicture}

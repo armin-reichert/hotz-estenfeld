@@ -8,12 +8,14 @@
 %\usepackage[svgnames]{xcolor}
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shadows}
 \pgfdeclarelayer{edgelayer}
 \pgfdeclarelayer{nodelayer}
 \pgfsetlayers{edgelayer,nodelayer,main}
 \newlength{\imagewidth}
 \newlength{\imagescale}
 \tikzstyle{none}=[inner sep=0pt]
+\tikzstyle{filled_vertex}=[circle,fill=black!50,minimum size=0.5cm] 
 \tikzstyle{state}=[circle,fill=white,draw=black]
 \tikzstyle{oval_state}=[ellipse,fill=white,draw=black]
 \tikzstyle{transition}=[-latex,draw=black]
@@ -42,6 +44,7 @@
 \newcommand{\pdstore}[1]{\mbox{$\mathcal{#1}$}}
 \newcommand{\pocymon}[1]{\mbox{${#1}^{(*)}$}}
 \newcommand{\powset}[1]{\mathfrak{P}(#1)}
+\newcommand{\production}[1]{\xrightarrow{#1}}
 \newcommand{\setof}[1]{\mbox{$\{#1\}$}}
 \newcommand{\transrem}[1]{%
 \begin{center}%

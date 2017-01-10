@@ -1,52 +1,56 @@
-\section{The finite automaton, regular sets in $X^*$,\ $REG(X^*)$}
+\section{The finite automaton, regular sets in $X^*$,\ $\reglang(X^*)$}
 
 Let $G = (V, E)$ be a finite, oriented graph, $X$ a finite set and $\alpha =
 (\pathcat{G}, X^*,\alpha_1, \alpha_2)$ a functor with $\alpha_1 : V \to
 \setof{X^*},\ \alpha_2 : \pathcat{G} \to X^*$.
+
+\begin{definition}
+$\fa{A} = (G, X^*, \alpha)$ is called a {\bf nondeterministic finite
+automaton}.
+\end{definition}
 
 \transrem{Here the free monoid $X^*$ is regarded as a category
 $X^* = (\setof{X^*}, X^*, Q, Z, \cdot \})$ where $\cdot$ is the monoid
 operation (word concatenation). Words are treated as morphisms with source and target
 $X^*$.}
 
-\begin{definition}[nondeterministic finite automaton]
-$\fa{A} = (G, X^*, \alpha)$ is called a {\bf nondeterministic finite
-automaton}.
-\end{definition}
+If $S, F \subset V$, we call 
+\[ \fa{A} = (G, X^*, s, f, \alpha) \]
+a finite automaton with start and final states or shortly a {\bf finite
+acceptor}.
 
-If $S, F \in V$ are points of the graph $G$, we call $\fa{A} = (G, X^*,
-S, F, \alpha)$ a finite automaton with start and final states or shortly a {\bf
-finite acceptor}.
-
-In the following we will use the terms acceptor and automaton as synonyms.
+In the following we will use the terms {\em acceptor} and {\em finite automaton}
+as synonyms.
 
 If the finite automaton works over the free monoid $X^*$ we write shorter just
 $X$ instead of $X^*$, otherwise we specify the monoid explicitly.
 
 If we define 
-\[ \pathcat{G}(S, F) := \setof{w \in \pathcat{G} \mid Q(w) \in S,\ Z(w) \in F}
+\[ \pathcat{G}(S, F) := \setof{\pi \in \pathcat{G} \mid Q(\pi) \in S,\ Z(\pi)
+\in F}
 \] 
-then
-\[ L_{\fa{A}} := \alpha_2(\pathcat{G}(S, F)) \]
-is called the {\bf set accepted by} \fa{A}. 
+then $L_{\fa{A}} := \alpha_2(\pathcat{G}(S, F))$ is called the {\bf set accepted
+by} \fa{A}.
 
 We will also write shortly $\alpha$ instead of $\alpha_2$ and $\pathcat{}(S,F)$
 instead of $\pathcat{G}(S,F)$.
 
-\begin{definition}[set of regular languages over free monoid]
+\begin{definition}
 Let $X$ be an alphabet. 
-\[ REG(X^*) := \setof{L \subset X^* \mid \mbox{ there exists a finite automaton
-}\fa{A} \mbox{ with } L = \lang{A}}
-\]
-$REG(X^*)$ is the {\bf set of regular languages} over the free monoid $X^*$.
+\[ \reglang(X^*) := \setof{L \subset X^* \mid \mbox{ there exists a finite acceptor
+}\fa{A} \mbox{ with } L = L_{\fa{A}}} \]
+
+$\reglang(X^*)$ is called the {\bf set of regular languages} over the free monoid
+$X^*$.
 \end{definition}
 
 Remark: We defined the finite automaton via its ''state graph''. Most
 often, the definition is given using the ''next state relation'' as follows:
-
-\[ \delta = \setof{(a, P_1, P_2) \in X \times V \times V) \mid 
-\mbox{there exists an edge } e \mbox{ with } Q(e) = P_1, Z(e) = P_2 \mbox{
-and } \alpha(e) = a \in X}. \]
+\begin{eqnarray*}
+\delta &=& \{(a, v_1, v_2) \in X \times V \times V) \mid \\
+&& \mbox{there exists an edge } e \mbox{ with } Q(e) = v_1,\ Z(e) = v_2 \mbox{
+and } \alpha(e) = a \in X \}
+\end{eqnarray*}
 
 $\delta$ my be regarded as a relation between $X \times V$ and $V$ where $X$ is
 the input alphabet and $V$ the state set of the automaton \[ \fa{B} = (X,
@@ -54,43 +58,45 @@ V, \delta, S, F) \]
 
 The elements of $V$ denote the current state of the automaton $\fa{B}$.
 
-If the automaton $\fa{B}$ is in state $z \in V$ and reads the symbol $x
-\in X$ then it changes into state $z' \in V$ where $(x, z, z') \in \delta$. If
-there doesn't exist such a $z'$ the automaton halts.
+If the automaton $\fa{B}$ is in state $v \in V$ and reads the symbol $x
+\in X$ then it changes into state $v' \in V$ where $(x, v, v') \in \delta$. If
+there doesn't exist such a $v'$ the automaton halts.
 
 This interpretation can be visualized as follows:
 
-FIGURE
+TODO: insert figure
 
-Let's return to out definition of the finite automaton. We explain its
+Let's return to our definition of the finite automaton. We explain its
 working based on our definition:
 
 The automaton $\fa{A} = (G, X, S, F, \alpha)$ may be interpreted as a
-nondeterministic algorithm. The points of graph $G$ define the possible states
-of the algorithm, the elements of $X$ are the input alphabet.
+nondeterministic algorithm. The points (vertices) of the graph $G$ define the
+possible states of the algorithm, the elements of $X$ are the input alphabet.
 
 The nondeterministic automaton $\fa{A}$ which reads a symbol $x \in X$
-while in state $P \in V$ changes into state $P'$ if there exists an edge $e$
-from $P$ to $P'$ with label $\alpha(e) = x$. If the graph has no such edge
-originating in $P$ the automaton is set ''out of service''.
+while in state $v \in V$ changes into state $v'$ if there exists an edge $e$
+from $v$ to $v'$ with label $\alpha(e) = x$. If the graph has no such edge
+originating in $v$ the automaton is set ''out of service''.
 
 A finite acceptor accepts a word $w \in X^*$ if there exists a path from a point
-in $S$ to a point in $F$ which is labeld with $w$.
+in $S$ to a point in $F$ which is labelled with the word $w$.
 
 Let's consider some examples for finite automata:
 
-Example 1: Let $X = \setof{a, b}$ and $L = \setof{(a b)^{2n} \mid n \in
+\begin{example}
+Let $X = \setof{a, b}$ and $L = \setof{(a b)^{2n} \mid n \in
 \mathbb{N}}$.
-It holds: $L \in REG(\setof{a, b}^*)$.
 
-The following acceptor accepts $L$ (exercise):
+It holds: $L \in \reglang(\setof{a, b}^*)$.
 
-$\fa{A} = (G, \setof{a, b}, {1}, {1}, \alpha)$.
-
+The acceptor $\fa{A} = (G, \setof{a, b}, {1}, {1}, \alpha)$ accepts $L$
+(exercise):
 \begin{center}
 \input{figures/chapter2/chapter2-1-example1.tikz}
 \end{center}
+\end{example}
 
+\bigskip
 Example 2: Lexical analysis, check for special characters.
 
 In every programming language there exist special character combinations
@@ -119,7 +125,7 @@ given by $S = \{$ START $\}$ and $F = \{$ STOP $\}$.
 The labels at the vertices are chosen such that one can see the information
 stored by the automaton.
 
-Now we want to prove some properties of $REG(X^*)$. To do that, we need
+Now we want to prove some properties of $\reglang(X^*)$. To do that, we need
 some basic properties for finite automata.
 
 \begin{lemma}
@@ -132,8 +138,9 @@ An automaton with a single start state is called {\bf initial}.
 
 Proof: If $\card{S} = \card{F} = 1$ we are done.
 
-(Comment by translator: The proof in the book is completely unreadable because
-of all these tildes, primes, indices etc. Therefore it is reformulated here.) 
+\transrem{The proof in the original book was rather unreadable
+because of all these tildes, primes, indices etc. Therefore it has been
+reformulated.}
 
 Let $\card{S} > 1$ or $\card{F} > 1$.
 
@@ -206,11 +213,11 @@ If we apply this algorithm to our automaton from example 1, we obtain:
 
 FIGURE
 
-Now we want to prove some closure properties of $REG(X^*)$.
+Now we want to prove some closure properties of $\reglang(X^*)$.
 
 \begin{theorem}[Regular languages are closed under union and intersection]
-\[ L, L' \in REG(X^*) \Rightarrow L \cup L' \in REG(X^*) \wedge L \cap L' \in
-REG(X^*) \]
+\[ L, L' \in \reglang(X^*) \Rightarrow L \cup L' \in \reglang(X^*) \wedge L \cap L' \in
+\reglang(X^*) \]
 \end{theorem}
 
 Proof: Let $L = \lang{A}$ and $L' = \lang{B}$ with automata \[
@@ -246,7 +253,7 @@ We may assume that the edge and point sets of both automata graphs are disjoint.
 \end{enumerate}
 
 \begin{theorem}[Regular languages are closed under mirror operation]
-\[ L \in REG(X^*) \Rightarrow L^R \in REG(X^*) \]
+\[ L \in \reglang(X^*) \Rightarrow L^R \in \reglang(X^*) \]
 \end{theorem}
 
 Proof: Let $\fa{A} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha)$ be a
@@ -259,7 +266,7 @@ which means we reverse the orientation of the edges.
 
 For the resulting automaton $\fa{A'} = (G', X, S_{\fa{A}},
 F_{\fa{A}}, \alpha')$ with $\alpha'(e') = \alpha(e)$ for all edges of $G'$
-it holds: $\lang{A'} = \lang{A}^R = L^R \in REG(X^*)$.
+it holds: $\lang{A'} = \lang{A}^R = L^R \in \reglang(X^*)$.
 
 \begin{definition}[deterministic and complete automaton]
 Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton with
@@ -378,7 +385,7 @@ Example: Let $X = \setof{a, b}$. Define for arbitrary, but fixed $n \in
 \mathbb{N}$ \[ L_n := \setof{w \mid w = w_1 \cdot w_2 \mbox{ with } w1 \neq w_2,
 |w_1| = |w_2| = n, w_1, w_2 \in X^*} \]
 
-$L_n \in REG(X^*)$ because there exists a nondeterministic finite acceptor
+$L_n \in \reglang(X^*)$ because there exists a nondeterministic finite acceptor
 $\fa{A}_{n}$ with $L_n = L_{\fa{A}_{n}}$.
 
 We want to give the automaton for $n = 3$:
@@ -419,12 +426,12 @@ less memory but the computing time can grow linear for each simulation step.
 We want to state an important consequence from our last theorem.
 
 \begin{theorem}[Regular languages are closed under complement]
-\[ L \in REG(X^*) \Rightarrow \bar{L} = X^* - L \in REG(X^*) \]
+\[ L \in \reglang(X^*) \Rightarrow \bar{L} = X^* - L \in \reglang(X^*) \]
 \end{theorem}
 
 Proof: 
 
-$L \in REG(X^*) \Rightarrow $ there exists a complete, deterministic
+$L \in \reglang(X^*) \Rightarrow $ there exists a complete, deterministic
 finite acceptor $\fa{A}$ with $\lang{A} = L$.
 
 Define $\fa{A'} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha)$ where $F_{\fa{A}} :=
@@ -441,10 +448,10 @@ It is either $P \in F_{\fa{A}}$ or $P \in F_{\fa{A'}}$ and from $F_{\fa{A}}
 \notin \lang{A'}$ and therefore $\lang{A'} = \bar{\lang{A}}$.
 
 \begin{theorem}[Regular languages are closed under concatenation]
-\[ L_1, L_2 \in REG(X^*) \Rightarrow L_1 \cdot L_2 \in REG(X^*) \]
+\[ L_1, L_2 \in \reglang(X^*) \Rightarrow L_1 \cdot L_2 \in \reglang(X^*) \]
 \end{theorem}
 
-Proof: $L_1, L_2 \in REG(X^*) \Rightarrow$\ there exist finite acceptors
+Proof: $L_1, L_2 \in \reglang(X^*) \Rightarrow$\ there exist finite acceptors
 $\fa{A}_i = (G_i, X, S_i, F_i, \alpha_i)$ with $L_i = \lang{A}_i,\ i = 1,2$.
 
 We define a new acceptor
@@ -514,7 +521,7 @@ From (1) and (2) it follows $\lang{A} = \lang{A}_1 \cdot
 \lang{A}_2$.
 
 \begin{theorem}[Regular languages are closed under Kleene-star]
-\[ L \in REG(X^*) \Rightarrow L^* \in REG(X^*) \]
+\[ L \in \reglang(X^*) \Rightarrow L^* \in \reglang(X^*) \]
 \end{theorem}
 
 FIGURE (graph construction)
@@ -540,22 +547,22 @@ single final state are sufficient, but in the deterministic case, a single final
 state in insufficient in general.
 
 \begin{theorem}[Regular languages are closed under homomorphism]
-\[ L \in REG(X^*), \phi : X^* \to Y^* \mbox{ monoid homomorphism } \Rightarrow
+\[ L \in \reglang(X^*), \phi : X^* \to Y^* \mbox{ monoid homomorphism } \Rightarrow
 \]
-\[ \phi(L) := \setof{\phi(w) \mid w \in L} \in REG(X^*) \]
+\[ \phi(L) := \setof{\phi(w) \mid w \in L} \in \reglang(X^*) \]
 \end{theorem}
 
 Proof: Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite acceptor for $L$. Then \[
 \fa{B} = (G, Y, S, F, \beta)\] with $\beta_2(e) := \phi(\alpha_2(e)),\ e \in
 E(G)$, is an acceptor for $\phi(L)$ because \[\phi(L) =
 \phi(\alpha_2(\pathcat{G}(S, F))) = \beta_2(\pathcat{G}(S,F))\]
-Therefore \[ \phi(L) \in REG(Y^*) \]
+Therefore \[ \phi(L) \in \reglang(Y^*) \]
 
 After having proved closure properties, we prove some other important properties
 of regular sets.
 
 \begin{lemma}
-For $x \in X$ it holds $\setof{x} \in REG(X^*)$ and $\emptyset \in REG(X^*)$.
+For $x \in X$ it holds $\setof{x} \in \reglang(X^*)$ and $\emptyset \in \reglang(X^*)$.
 \end{lemma}
 
 Proof: Set $G = (\setof{S,F}, \setof{e})$ be a graph, then the finite acceptor
@@ -566,7 +573,7 @@ Set $G = (\setof{S,F}, \emptyset)$, then $\fa{A} = (G, \emptyset, \setof{S},
 \setof{F}, \emptyset)$ fulfills $\lang{A} = \emptyset$.
 
 \begin{lemma}
-Set $G = (V, E)$. Then $\pathcat{G}(S,F) \in REG(E^*)$.
+Set $G = (V, E)$. Then $\pathcat{G}(S,F) \in \reglang(E^*)$.
 \end{lemma}
 
 This means the set of paths of a graph which start in a start state and end in a
@@ -592,7 +599,7 @@ R & = & \setof{(e, e') \in E \times E \mid Z(e) = Q(e')}
 Then the claim is immediately proved.
 
 \begin{lemma}[local sets are regular]
-\[ L \mbox{ local over } X \Rightarrow L \in REG(X^*) \]
+\[ L \mbox{ local over } X \Rightarrow L \in \reglang(X^*) \]
 \end{lemma}
 
 Proof: Let $S$ and $F$ be the subsets of $X$ from the definition of a local
@@ -610,7 +617,7 @@ labeling $\alpha$ defined by $\alpha_2(e) = Z(e)$ for each edge $e \in E$.
 Then it is clear that $\lang{A} = L$.
 
 \begin{lemma}[Each regular set is homomorphic image of a local set]
-$L \in REG(X^*)$, then there exists a local set $R$ over $X$ and a monoid
+$L \in \reglang(X^*)$, then there exists a local set $R$ over $X$ and a monoid
 homomorphism $\phi$ such that \[ \phi(R) = L \]
 \end{lemma}
 
@@ -620,27 +627,27 @@ We want to summarize our results to some main theorems where we organize these
 results differently.
 
 Let $X_\infty = \setof{x_1, x_2, \ldots}$ be an infinite alphabet. Define 
-\[ REG(X_\infty^*) = \bigcup_{X	\subset X_\infty} REG(X^*), \mbox{$X$ is finite}
+\[ \reglang(X_\infty^*) = \bigcup_{X	\subset X_\infty} \reglang(X^*), \mbox{$X$ is finite}
 \]
 
 \begin{maintheorem}
 \begin{enumerate}
-  \item $REG(X_\infty^*)$ is closed under union, complex product and
+  \item $\reglang(X_\infty^*)$ is closed under union, complex product and
   Kleene-star $^*$.
   \item If $\phi : X_\infty^* \to X_\infty^*$ is a monoid homomorphism, then
-$REG(X_\infty^*)$ is closed under $\phi$.
-	\item Every $L \in REG(X_\infty^*)$ is the homomorphic image of a local set
+$\reglang(X_\infty^*)$ is closed under $\phi$.
+	\item Every $L \in \reglang(X_\infty^*)$ is the homomorphic image of a local set
 	over $X_\infty^*$.
-	\item $REG(X_\infty^*)$	 contains the sets $\setof{x}, x \in X_\infty^*$ and
+	\item $\reglang(X_\infty^*)$	 contains the sets $\setof{x}, x \in X_\infty^*$ and
 	the empty set $\emptyset$.
 \end{enumerate}
 \end{maintheorem}
 
 \begin{maintheorem}
 \begin{enumerate}
-  \item $REG(X_\infty^*)$ is a Boolean Algebra with operations union, intersection and
+  \item $\reglang(X_\infty^*)$ is a Boolean Algebra with operations union, intersection and
 complement. 
-	\item Every language $L \in REG(X_\infty^*)$ is accepted by some complete,
+	\item Every language $L \in \reglang(X_\infty^*)$ is accepted by some complete,
 deterministic automaton.
 \end{enumerate}
 \end{maintheorem}
@@ -649,13 +656,13 @@ To prove the first main theorem we don't need the fact that $X^*$ is a {\bf
 free} monoid. In the proof of main theorem 2 we used that fact.
 
 There exist examples of monoids $M$ for which the second main theorem does not
-hold for $REG(M)$, in both sentences (see exercises).
+hold for $\reglang(M)$, in both sentences (see exercises).
 
 Of special interest are the monoids $M = F(X)$, where $F(X)$ is the free group
 generated by $X$ (see chapter 1.3) and $M = X^\oplus$ where $X^\oplus$ is the
 free commutative group generated by $X$.
 
-Languages $L \in REG(X^\oplus)$ are also called {\bf semi-linear}.
+Languages $L \in \reglang(X^\oplus)$ are also called {\bf semi-linear}.
 
 Exercices:
 \begin{enumerate}
@@ -678,7 +685,7 @@ Exercices:
 	\item Show: The set $L = \setof{a^n b^n} \mid n \in \mathbb{N}$ is not
 	regular.
 	
-	\item Let $L \in REG(X^*), M \subset X^*$ finite. Show: $M^{-1}L \in REG(X^*)$.
-	What if $M \subset REG(X^*)$ is an arbitrary regular set?
+	\item Let $L \in \reglang(X^*), M \subset X^*$ finite. Show: $M^{-1}L \in \reglang(X^*)$.
+	What if $M \subset \reglang(X^*)$ is an arbitrary regular set?
 \end{enumerate}
 

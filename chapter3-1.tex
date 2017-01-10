@@ -8,12 +8,12 @@ For preparation we remember theorem 2 from chapter II.8
 
 \begin{theorem}
 For a finite automaton $\fa{A} = (G, \hgroup{X}, S, F, \alpha)$ it holds:
-\[ X^* \cap |L_{\fa{A}}| \in REG(X^*) \]
+\[ X^* \cap |L_{\fa{A}}| \in \reglang(X^*) \]
 \end{theorem}
 
 Remark: From this theorem the following claims can be derived (exercise):
 \begin{enumerate}
-  \item With the same assumptions it holds $|L_{\fa{A}}| \in REG((X\cup
+  \item With the same assumptions it holds $|L_{\fa{A}}| \in \reglang((X\cup
   X^{-1})^*)$
   \item Corresponding theorems hold for the free group $F(X)$ and the polycyclic
   monoid \pocymon{X} instead of \hgroup{X}.
@@ -156,7 +156,7 @@ It holds:
 \bigskip
 As our main result we get
 \begin{theorem}[Pushdown store languages are regular]
-\[ PSL(\kappa) \in REG(Y^*) \]
+\[ PSL(\kappa) \in \reglang(Y^*) \]
 \end{theorem}
 
 Before starting with the formal proof we want to explain the construction of the
@@ -204,7 +204,7 @@ where $Y_0 := Y \cup \setof{y_0},\ y_0 \notin Y$ and the property
 \[ Y_0^* \cap |L_{\fa{C}}| = y_0 \cdot KKL(\kappa) \]
 
 From theorem 1 then follows that $y_0 \cdot KKL(\kappa)$ is regular and from
-this follows immediately $KKL(\kappa) \in REG(Y^*)$.
+this follows immediately $KKL(\kappa) \in \reglang(Y^*)$.
 
 \transrem{The proof in the book was completely unreadable to me. Therefore I
 used new names, added comments and figures.}

@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (-2, -0) {$v_1$};
+		\node [style=state] (1) at (0, -0) {$v_2$};
+		\node [style=state] (2) at (2, -0) {$v_3$};
+		\node [style=state] (3) at (4, -0) {$f$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition, bend left, looseness=1.25] (0) to
+		node[auto]{$\epsilon$} (1); \draw [style=transition, bend left,
+		looseness=1.25] (1) to node[auto]{$x$} (2); \draw
+		[style=transition, bend left, looseness=1.25] (2) to
+		node[auto]{$\epsilon$} (3); \draw [style=transition, bend
+		right=60, looseness=1.00] (0) to node[auto]{$x$} (2); \draw
+		[style=transition, bend right=60, looseness=1.25] (0) to
+		node[auto]{$x$} (3);
+	\end{pgfonlayer}
+\end{tikzpicture}

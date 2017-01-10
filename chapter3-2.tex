@@ -7,7 +7,7 @@ The name ''algebraic languages'' remembers the fact that these languages can be
 defined as the solution of equation systems with non-commutative variables using
 formal power series. See for example \cite{SaSo} or \cite{Berstel77}.
 
-We will prove for $ALG(X^*)$ similar closure properties as for $REG(X^*)$.
+We will prove for $ALG(X^*)$ similar closure properties as for $\reglang(X^*)$.
 
 In this section we assume without loss of generality that the pushdown automata
 have the following properties:
@@ -320,7 +320,7 @@ This completes the proof of our theorem.
 \bigskip
 \begin{theorem}[Closure under intersection with regular language]
 \label{alg-lang-closure-reg-intersect}
-\[ L \in ALG(X^*),\ R \in REG(X^*)\Rightarrow L \cap R \in ALG(X^*) \]
+\[ L \in ALG(X^*),\ R \in \reglang(X^*)\Rightarrow L \cap R \in ALG(X^*) \]
 \end{theorem}
 
 \begin{proof}
@@ -416,7 +416,7 @@ Let $\tau: X^* \to Y^*$ be a rational transduction. Then
 As shown in chapter II.5 we can write $\tau(L)$ as
 \[ \tau(L)=\beta(\alpha^{-1}(L)\cap R) \]
 where $\alpha : X^*\to Z^*, \beta: X^*\to Y^*$ are monoid homomorphisms and
-$R\in REG(Z^*)$ is a regular language.
+$R\in \reglang(Z^*)$ is a regular language.
 
 \begin{eqnarray*}
 L\in ALG(X^*) &\Rightarrow& \alpha^{-1}(L)\in ALG(Z^*)\text{ by theorem
@@ -611,7 +611,7 @@ another important theorem which gives a characterization of the algebraic langua
 {\bf Exercises:}
 
 \begin{enumerate}
-  \item Let $L\in ALG(X^*),\ R\in REG(X^*)$. Show:
+  \item Let $L\in ALG(X^*),\ R\in \reglang(X^*)$. Show:
   \[ LR^{-1}\in ALG(X^*)\text{ and }R^{-1}L\in ALG(X^*) \]
   
   \item For $L\in X^*$ let

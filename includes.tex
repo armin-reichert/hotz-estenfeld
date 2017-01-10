@@ -1,4 +1,5 @@
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref}
 \usepackage{parskip}
 \usepackage{rotating}
 \usepackage{tikz}
@@ -19,6 +20,7 @@
 \tikzstyle{state}=[circle,fill=white,draw=black]
 \tikzstyle{oval_state}=[ellipse,fill=white,draw=black]
 \tikzstyle{transition}=[-latex,draw=black]
+\tikzstyle{path}=[-latex,draw=gray]
 
 % theorem environments
 \newtheorem{corollary}{Corollary}[section]
@@ -45,6 +47,7 @@
 \newcommand{\pocymon}[1]{\mbox{${#1}^{(*)}$}}
 \newcommand{\powset}[1]{\mathfrak{P}(#1)}
 \newcommand{\production}[1]{\xrightarrow{#1}}
+\newcommand{\reglang}{\mbox{{\bf REG}}}
 \newcommand{\setof}[1]{\mbox{$\{#1\}$}}
 \newcommand{\transrem}[1]{%
 \begin{center}%

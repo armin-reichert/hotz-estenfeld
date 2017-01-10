@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (-2, -0) {$v$};
+		\node [style=state] (1) at (2, -0) {$v'$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=path] (0) to node[auto]{$|\alpha(\pi)|=\epsilon$} (1);
+		\draw [style=transition, bend left=45, looseness=1.25] (0) to node[auto]{$\epsilon$} (1);
+	\end{pgfonlayer}
+\end{tikzpicture}

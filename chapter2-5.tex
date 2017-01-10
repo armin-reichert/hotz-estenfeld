@@ -68,9 +68,9 @@ with } (u, v) \in \tau(\fa{T})} \\
 The following theorem holds:
 
 \begin{theorem}[Regular languages are closed under rational transductions]
-Let $L \in REG(X^*)$ be a regular language and $\fa{T}$ be a finite transducer,
+Let $L \in \reglang(X^*)$ be a regular language and $\fa{T}$ be a finite transducer,
 then the image of $L$ under $\tau$ is a regular language over $Y^*$:
-\[ \tau(\fa{T})(L) \in REG(Y^*) \]
+\[ \tau(\fa{T})(L) \in \reglang(Y^*) \]
 \end{theorem}
 
 Proof: By definition, the image of $L$ can be presented as
@@ -81,22 +81,22 @@ over the edge set of graph $G$, into $X^*$.
 
 We already know:
 \begin{eqnarray*}
-\alpha^{-1}(L) \in REG(E^*)    & \mbox{Theorem 2, chapter 2.3} \\
-\pathcat{G}(S, F) \in REG(E^*) & \mbox{Lemma 4, chapter 2.1} \\
+\alpha^{-1}(L) \in \reglang(E^*)    & \mbox{Theorem 2, chapter 2.3} \\
+\pathcat{G}(S, F) \in \reglang(E^*) & \mbox{Lemma 4, chapter 2.1} \\
 \Rightarrow \alpha^{-1}(L) \cap \pathcat{G}(S, F) \in
-REG(E^*) & \mbox{Theorem 1, chapter 2.1} \\
+\reglang(E^*) & \mbox{Theorem 1, chapter 2.1} \\
 \Rightarrow \beta(\alpha^{-1}(L) \cap \pathcat{G}(S, F)) \in
-REG(Y^*) & \mbox{Theorem 7, chapter 2.1}
+\reglang(Y^*) & \mbox{Theorem 7, chapter 2.1}
 \end{eqnarray*}
 
 The next theorem gives an insight into the power of rational transductions.
 
 \begin{theorem}
-For each $L \in REG(Y^*)$ there exists a length-preserving transducer
+For each $L \in \reglang(Y^*)$ there exists a length-preserving transducer
 $\fa{T}_L$ with \[ \tau(\fa{T}_L)(\setof{x}^*) = L \]
 \end{theorem}
 
-Proof: $L \in REG(Y^*) \Rightarrow$ there exists a finite automaton $\fa{B} =
+Proof: $L \in \reglang(Y^*) \Rightarrow$ there exists a finite automaton $\fa{B} =
 (G, Y, S, F, \beta),\ G= (V, E)$ with $L = \beta(\pathcat{G}(S, F))$. For $X =
 \setof{x}$ set $\alpha(e) = x$ for all edges $e \in E$.
 

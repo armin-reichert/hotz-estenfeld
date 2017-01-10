@@ -14,10 +14,10 @@ is the class of {\bf recognizable sets} over $X$.
 \end{definition}
 
 \begin{lemma}
-\[ REG(X^*) \subset REC(^*) \]
+\[ \reglang(X^*) \subset REC(^*) \]
 \end{lemma}
 
-Proof: Let $L \in REG(X^*)$, then there exists a complete, deterministic finite
+Proof: Let $L \in \reglang(X^*)$, then there exists a complete, deterministic finite
 automaton $\fa{A} = (G, X, S, F, \alpha)$ with graph $G = (V, E)$ accepting $L$.
 
 We define 
@@ -37,7 +37,7 @@ We define further \[ T := \setof{f \in H \mid f(S) \in F} \]
 Then it holds $\lang{A} = \mu^{-1}(T)$ (exercise).
 
 \begin{lemma}
-\[ REC(X^*) \subset REG(X^*) \]
+\[ REC(X^*) \subset \reglang(X^*) \]
 \end{lemma}
 
 Proof: Sei $L \in REC(X^*)$, thus let $H$ be a finite monoid and $\mu : X^* \to
@@ -76,7 +76,7 @@ which the claim follows.
 From both lemmata immediately follows
 
 \begin{theorem}[Regular sets of free monoid are exactly the recognizable sets]
-\[ REG(X^*) = REC(X^*) \]
+\[ \reglang(X^*) = REC(X^*) \]
 \end{theorem}
 
 In the first section of this chapter we showed closure properties for regular

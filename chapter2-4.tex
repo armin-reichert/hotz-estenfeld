@@ -30,7 +30,7 @@ In the same way one defines the class of {\bf left-linear languages}.
 The following theorem holds:
 
 \begin{theorem}
-\[ REG(X^*) = r{-}LIN(X^*) \]
+\[ \reglang(X^*) = r{-}LIN(X^*) \]
 \end{theorem}
 
 Proof:
@@ -74,7 +74,7 @@ Together, we get $\lang{A} = L(G)$.
 
 ''$\subset$'':
 
-Let $L \in REG(X^*),\ L = \lang{A}$ with a finite acceptor with a single start
+Let $L \in \reglang(X^*),\ L = \lang{A}$ with a finite acceptor with a single start
 state $\fa{A} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha),\ G = (V, E)$ 
 and $|\alpha(e)| = 1$ for each edge $e \in E$.
 
@@ -90,8 +90,8 @@ E} \\
 It holds $L(RLG) = \lang{A}$ (exercise) which completes the proof of the
 theorem.
 
-Remark: It also holds $l{-}LIN(X^*) = REG(X^*)$. This can be seen by theorem 2
-in chapter 2.1 which states that $REG(X^*)$ is closed under the
+Remark: It also holds $l{-}LIN(X^*) = \reglang(X^*)$. This can be seen by theorem 2
+in chapter 2.1 which states that $\reglang(X^*)$ is closed under the
 mirror-operation.
 
 Given a right-linear grammar for $L$ one can directly define a left-linear
@@ -108,9 +108,9 @@ defined as before.
 
 \begin{maintheorem}\leavevmode
 \begin{enumerate}
-  \item $ REG(X_\infty^*) = RAT(X_\infty^*) = REC(X_\infty^*) =
+  \item $ \reglang(X_\infty^*) = RAT(X_\infty^*) = REC(X_\infty^*) =
   r{-}LIN(X_\infty^*) = l{-}LIN(X_\infty^*) $
-  \item $ REG(X_\infty^*)$ is closed under union, intersection,
+  \item $ \reglang(X_\infty^*)$ is closed under union, intersection,
   complement, Kleene-star, complex product, monoid homomorphisms and inverse
   homomorphisms
 \end{enumerate}

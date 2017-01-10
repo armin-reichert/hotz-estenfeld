@@ -4,15 +4,17 @@
 		\node [style=state] (1) at (0, -0) {$v_2$};
 		\node [style=state] (2) at (2, -0) {$v_3$};
 		\node [style=state] (3) at (4, -0) {$f$};
+		\node [style=none] (4) at (1, -0) {$e'$};
+		\node [style=none] (5) at (3, -0) {$e_{final}$};
+		\node [style=none] (6) at (-1, -0) {$e$};
+		\node [style=none] (7) at (1.5, -1) {$b$};
+		\node [style=none] (8) at (2.75, -2) {$b_{final}$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style=transition, bend left, looseness=1.25] (0) to
-		node[auto]{$\epsilon$} (1); \draw [style=transition, bend left,
-		looseness=1.25] (1) to node[auto]{$x$} (2); \draw
-		[style=transition, bend left, looseness=1.25] (2) to
-		node[auto]{$\epsilon$} (3); \draw [style=transition, bend
-		right=60, looseness=1.00] (0) to node[auto]{$x$} (2); \draw
-		[style=transition, bend right=60, looseness=1.25] (0) to
-		node[auto]{$x$} (3);
+		\draw [style=transition, bend left, looseness=1.25] (0) to node[auto]{$\epsilon$} (1);
+		\draw [style=transition, bend left, looseness=1.25] (1) to node[auto]{$x$} (2);
+		\draw [style=transition, bend left, looseness=1.25] (2) to node[auto]{$\epsilon$} (3);
+		\draw [style=transition, bend right=60, looseness=1.00] (0) to node[auto]{$x$} (2);
+		\draw [style=transition, bend right=60, looseness=1.25] (0) to node[auto]{$x$} (3);
 	\end{pgfonlayer}
 \end{tikzpicture}

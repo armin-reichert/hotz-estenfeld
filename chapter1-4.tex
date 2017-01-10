@@ -466,7 +466,7 @@ MAT(\mathbb{N}), \phi_1, \phi_2)$ is a functor.
 \bigskip
 We want to define now some special properties of functors.
 
-\begin{definition}[ordered functor]
+\begin{definition}
 Let $G_1, G_2$ be ordered graphs, $\phi = (\pathcat{G_1}, \pathcat{G_2},
 \phi_1, \phi_2)$ a functor. $\phi$ is called {\bf ordered} or {\bf order
 preserving} if it holds:
@@ -497,12 +497,12 @@ r'_5 \]
 Then $\phi$ respects the ordering in point $v$.
 
 \bigskip
-\begin{definition}[regular functor]
+\begin{definition}
 Let $G_1=(V_1,E_1),\ G_2=(V_2,E_2)$ be oriented graphs and 
 \[ \phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)\text{ a functor.}
 \]
 
-$\phi$ is called {\bf regular} $\iff$ the restriction of $\phi_2$
+$\phi$ is called {\bf regular functor} $\iff$ the restriction of $\phi_2$
 to the set \[ \setof{e \in E_1 \mid Q(e) = v}\text{ and }\setof{e' \in E_2 \mid
 Q(e') = \phi_1(v)} \] and to \[ \setof{e \in E_1 \mid Z(e) = v}\text{ and
 }\setof{e' \in E_2 \mid Z(e') = \phi_1(v)} \] for $v \in V_1$ is bijective.
@@ -515,12 +515,12 @@ In our example, $\phi$ was not regular. We slightly weaken the definition of a
 regular functor by only postulating regularity on the outgoing edges.
 
 \bigskip
-\begin{definition}[out-regular functor]
+\begin{definition}
 Let $G_1=(V_1,E_1),\ G_2=(V_2,E_2)$ be oriented graphs and
 \[ \phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)\text{ a functor.}
 \]
 
-$\phi$ is called {\bf out-regular} $\iff$ the restriction of $\phi_2$
+$\phi$ is called {\bf out-regular functor} $\iff$ the restriction of $\phi_2$
 to the set \[ \setof{e\in E_1 \mid Q(e) = v} \] and \[ \setof{e' \in E_2 \mid
 Q(e') = \phi_1(v)} \] for $v \in V_1$ is bijective.
 \end{definition}

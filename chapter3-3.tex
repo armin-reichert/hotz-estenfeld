@@ -32,14 +32,14 @@ language}.
 
 With our notations the following theorem holds:
 \begin{theorem}[Chomsky-Schützenberger]
-To each algebraic language $L\in ALG(X^*)$ there exists an alphabet $\Sigma
+To each algebraic language $L\in \alglang(X^*)$ there exists an alphabet $\Sigma
 \subset X_\infty$, a regular set $R\in \reglang((\unioninv{\Sigma})^*)$ and a monoid
 homomorphism $\phi: (\unioninv{\Sigma})^* \to X^*$ such that
 \[ L = \phi(D(\Sigma)\cap R) \]
 \end{theorem}
 
 \begin{proof}
-$L\in ALG(X^*) \Rightarrow$ it exists a PDA $\kappa=(\fa{A},\pdstore{K})$ with
+$L\in \alglang(X^*) \Rightarrow$ it exists a PDA $\kappa=(\fa{A},\pdstore{K})$ with
 $L = L_\kappa$, where $\fa{A}=(G, X, S, F, \alpha)$ is the corresponding finite
 automaton.
 
@@ -85,7 +85,7 @@ Let \[ <\kappa, w> := \card{\setof{\pi\in\pathcat{G}(S,F)\mid
 \alpha(\pi)=w,\ \delta(\pi,\epsilon)=\epsilon}}
 \]
 Problem: Is it possible to always find a PDA $\kappa$ accepting an algebraic
-language $L \in ALG(X^*)$ such that for each word $w$ it holds $<\kappa, w> <
+language $L \in \alglang(X^*)$ such that for each word $w$ it holds $<\kappa, w> <
 \infty$?
 
 If the definition of the pushdown store is generalized such that $\delta(X
@@ -95,7 +95,7 @@ If the definition of the pushdown store is generalized such that $\delta(X
 At the end of this section we want to mention the following (for the interested
 reader):
 
-Because $D(\Sigma) \in ALG(X_\infty^*)$ and by theorem 1 in section III.2 the
+Because $D(\Sigma) \in \alglang(X_\infty^*)$ and by theorem 1 in section III.2 the
 class of algebraic languages is closed under monoid homomorphism and by theorem
 3 in chapter III.2 under intersection with regular sets, from the theorem of
 Chomsky-Schützenberger follows that the class of algebraic languages over the

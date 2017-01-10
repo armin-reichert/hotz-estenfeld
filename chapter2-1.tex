@@ -268,7 +268,7 @@ For the resulting automaton $\fa{A'} = (G', X, S_{\fa{A}},
 F_{\fa{A}}, \alpha')$ with $\alpha'(e') = \alpha(e)$ for all edges of $G'$
 it holds: $\lang{A'} = \lang{A}^R = L^R \in \reglang(X^*)$.
 
-\begin{definition}[deterministic and complete automaton]
+\begin{definition}
 Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton with
 $\alpha(E(G)) \subset X$ (each edge is labeled with a single
 symbol).
@@ -543,20 +543,22 @@ Graph: Take the graph $G$ and add the following edges:
 For the finite acceptor $\fa{A'}$ it holds (exercise): \[ \lang{A'} = L^* \]
 
 We have seen (lemma 1) that for nondeterministic automata a single start and a
-single final state are sufficient, but in the deterministic case, a single final
-state in insufficient in general.
+single final state are sufficient but in the deterministic case a single final
+state is in general insufficient.
 
-\begin{theorem}[Regular languages are closed under homomorphism]
-\[ L \in \reglang(X^*), \phi : X^* \to Y^* \mbox{ monoid homomorphism } \Rightarrow
-\]
+\bigskip
+\begin{theorem}[The regular languages are closed under homomorphism]
+\[ L \in \reglang(X^*),\ \phi : X^* \to Y^* \mbox{ monoid homomorphism }
+\Rightarrow \]
 \[ \phi(L) := \setof{\phi(w) \mid w \in L} \in \reglang(X^*) \]
 \end{theorem}
-
-Proof: Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite acceptor for $L$. Then \[
+\begin{proof}
+Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite acceptor for $L$. Then \[
 \fa{B} = (G, Y, S, F, \beta)\] with $\beta_2(e) := \phi(\alpha_2(e)),\ e \in
 E(G)$, is an acceptor for $\phi(L)$ because \[\phi(L) =
 \phi(\alpha_2(\pathcat{G}(S, F))) = \beta_2(\pathcat{G}(S,F))\]
 Therefore \[ \phi(L) \in \reglang(Y^*) \]
+\end{proof}
 
 After having proved closure properties, we prove some other important properties
 of regular sets.
@@ -564,46 +566,55 @@ of regular sets.
 \begin{lemma}
 For $x \in X$ it holds $\setof{x} \in \reglang(X^*)$ and $\emptyset \in \reglang(X^*)$.
 \end{lemma}
-
-Proof: Set $G = (\setof{S,F}, \setof{e})$ be a graph, then the finite acceptor
-\[\fa{A}_x = (G, \setof{x}, \setof{S}, \setof{F}, \alpha)\] with $\alpha_2(e) =
+\begin{proof}
+If $G = (\setof{S,F}, \setof{e}),\ e: S \to F$ be a graph, then the finite
+acceptor \[\fa{A}_x = (G, \setof{x}, \setof{S}, \setof{F}, \alpha)\] with $\alpha_2(e) =
 x$ fulfills $\lang{A} = \setof{x}$.
 
-Set $G = (\setof{S,F}, \emptyset)$, then $\fa{A} = (G, \emptyset, \setof{S},
+If $G = (\setof{S,F}, \emptyset)$, then $\fa{A} = (G, \emptyset, \setof{S},
 \setof{F}, \emptyset)$ fulfills $\lang{A} = \emptyset$.
+\end{proof}
 
-\begin{lemma}
-Set $G = (V, E)$. Then $\pathcat{G}(S,F) \in \reglang(E^*)$.
+\bigskip
+\begin{lemma}[The set of accepting paths is regular]
+Let $G = (V, E)$. Then \[ \pathcat{G}(S,F) \in \reglang(E^*) \]
 \end{lemma}
+This means that the paths in a graph leading from a start state to a final state
+form a regular set over the free monoid of edge sequences. 
+\begin{proof}
+The proof is trivial, just label each edges with itself.
+\end{proof}
 
-This means the set of paths of a graph which start in a start state and end in a
-final state is a regular set over the set of edges of the graph. The proof is
-trivial, just label the edges with their name.
-
-\begin{definition}[local set]
-Let $S, F \subset X$ and $R \subset X \times X$ be a relation on $X$ with 
-\[ L = \setof{x_1 \cdots x_k \mid x_1 \in S, x_k \in F, (x_i, x_{i+1}) \in R,\ i
-= 1, \ldots, k - 1} \]
+\bigskip
+\begin{definition}
+$L \subset X^*$ is called {\bf local over $X$} if there exist subsets $S,\ F
+\subset X$ and a relation $R \subset X \times X$ with 
+\[ L = \setof{x_1 \cdots x_k \mid x_1 \in S,\ x_k \in F,\ (x_i, x_{i+1}) \in R,
+\quad i = 1, \ldots, k - 1} \]
 \end{definition}
 
-\begin{lemma}[The accepting path set of a FA is local]
+\bigskip
+\begin{lemma}[The set of accepting paths is local]
 Let $G = (V, E)$ be a graph. Then $\pathcat{G}(S, F)$ is local over $E$.
 \end{lemma}
 
-Proof: Let \begin{eqnarray*}
+\begin{proof}
+Let \begin{eqnarray*}
 S & = & \setof{e \in E \mid Q(e) \in S} \\ 
 F & = & \setof{e \in E \mid Z(e) \in F} \\
 R & = & \setof{(e, e') \in E \times E \mid Z(e) = Q(e')} 
 \end{eqnarray*}
-
 Then the claim is immediately proved.
+\end{proof}
 
-\begin{lemma}[local sets are regular]
+\bigskip
+\begin{lemma}[Every local set is regular]
 \[ L \mbox{ local over } X \Rightarrow L \in \reglang(X^*) \]
 \end{lemma}
 
-Proof: Let $S$ and $F$ be the subsets of $X$ from the definition of a local
-set. We define a graph $G = (V, E)$ as follows:
+\begin{proof}
+Let $S$ and $F$ be the subsets of $X$ from the definition of a local
+set. Define a graph $G = (V, E)$ as follows:
 \begin{eqnarray*}
 V & = & X \cup \setof{\bar{S}} \mbox{ with } X \cap \setof{\bar{S}} = \emptyset
 \\
@@ -615,25 +626,32 @@ Consider the finite acceptor $\fa{A} = (G, X, \setof{\bar{X}}, F, \alpha)$ with
 labeling $\alpha$ defined by $\alpha_2(e) = Z(e)$ for each edge $e \in E$.
 
 Then it is clear that $\lang{A} = L$.
+\end{proof}
 
-\begin{lemma}[Each regular set is homomorphic image of a local set]
-$L \in \reglang(X^*)$, then there exists a local set $R$ over $X$ and a monoid
-homomorphism $\phi$ such that \[ \phi(R) = L \]
+\bigskip
+\begin{lemma}[Every regular set is the homomorphic image of a local set]
+Let $L \in \reglang(X^*)$ be a regular set. Then there exists a local set
+$R$ over $X$ and a monoid homomorphism $\phi$ such that \[ \phi(R) = L \]
 \end{lemma}
 
-Proof: Exercise
+\begin{proof}
+Exercise.
+\end{proof}
 
+\bigskip
 We want to summarize our results to some main theorems where we organize these
 results differently.
 
 Let $X_\infty = \setof{x_1, x_2, \ldots}$ be an infinite alphabet. Define 
-\[ \reglang(X_\infty^*) = \bigcup_{X	\subset X_\infty} \reglang(X^*), \mbox{$X$ is finite}
-\]
+\[ \reglang(X_\infty^*) = \bigcup_{X \subset X_\infty} \reglang(X^*),\ X
+	\text{ is finite} \]
 
-\begin{maintheorem}
+\bigskip
+\begin{maintheorem}\ 
+
 \begin{enumerate}
   \item $\reglang(X_\infty^*)$ is closed under union, complex product and
-  Kleene-star $^*$.
+  star-operation.
   \item If $\phi : X_\infty^* \to X_\infty^*$ is a monoid homomorphism, then
 $\reglang(X_\infty^*)$ is closed under $\phi$.
 	\item Every $L \in \reglang(X_\infty^*)$ is the homomorphic image of a local set
@@ -643,10 +661,12 @@ $\reglang(X_\infty^*)$ is closed under $\phi$.
 \end{enumerate}
 \end{maintheorem}
 
-\begin{maintheorem}
+\bigskip
+\begin{maintheorem}\ 
+
 \begin{enumerate}
-  \item $\reglang(X_\infty^*)$ is a Boolean Algebra with operations union, intersection and
-complement. 
+  \item $\reglang(X_\infty^*)$ is a Boolean Algebra with operations union, 
+  intersection and complement. 
 	\item Every language $L \in \reglang(X_\infty^*)$ is accepted by some complete,
 deterministic automaton.
 \end{enumerate}
@@ -655,7 +675,7 @@ deterministic automaton.
 To prove the first main theorem we don't need the fact that $X^*$ is a {\bf
 free} monoid. In the proof of main theorem 2 we used that fact.
 
-There exist examples of monoids $M$ for which the second main theorem does not
+There exist monoids $M$ for which the second main theorem does not
 hold for $\reglang(M)$, in both sentences (see exercises).
 
 Of special interest are the monoids $M = F(X)$, where $F(X)$ is the free group

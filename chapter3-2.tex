@@ -1,13 +1,13 @@
-\section{Closure properties of $ALG(X^*)$}
+\section{Closure properties of $\alglang(X^*)$}
 
-In the last section we defined $ALG(X^*)$ as the class of languages over an
+In the last section we defined $\alglang(X^*)$ as the class of languages over an
 alphabet $X$ accepted by a pushdown automaton.
 
 The name ''algebraic languages'' remembers the fact that these languages can be
 defined as the solution of equation systems with non-commutative variables using
 formal power series. See for example \cite{SaSo} or \cite{Berstel77}.
 
-We will prove for $ALG(X^*)$ similar closure properties as for $\reglang(X^*)$.
+We will prove for $\alglang(X^*)$ similar closure properties as for $\reglang(X^*)$.
 
 In this section we assume without loss of generality that the pushdown automata
 have the following properties:
@@ -21,11 +21,11 @@ In a very easy way one gets
 \begin{theorem}[Closure under monoid homomorphism]
 \label{alg-lang-closure-hom}
 Let $\phi : X^* \to Y^*$ be a monoid homomorphism.
-\[ L \in ALG(X^*) \Rightarrow \phi(L) \in ALG(Y^*) \]
+\[ L \in \alglang(X^*) \Rightarrow \phi(L) \in \alglang(Y^*) \]
 \end{theorem} 
 
 \begin{proof}
-$L \in ALG(X^*) \Rightarrow$ there exists a PDA $\kappa = (\fa{A}, \pdstore{K})$
+$L \in \alglang(X^*) \Rightarrow$ there exists a PDA $\kappa = (\fa{A}, \pdstore{K})$
 with $L_{\kappa} = L$. Replace $\alpha$ by $\alpha' := \alpha \circ \phi$ in
 the definition of $\fa{A}$. 
 
@@ -38,11 +38,11 @@ the PDA $\kappa' = (\fa{A'}, \pdstore{K})$ accepts $\phi(L_{\kappa}) = \phi(L)$.
 
 \bigskip
 \begin{theorem}
-$ALG(X^*)$ is closed under union, concatenation and Kleene-star.
+$\alglang(X^*)$ is closed under union, concatenation and Kleene-star.
 \end{theorem}
 
 {\em Closure under union:}
-\[ L_1, L_2 \in ALG(X^*) \Rightarrow L_1 \cup L_2 \in ALG(X^*) \]
+\[ L_1, L_2 \in \alglang(X^*) \Rightarrow L_1 \cup L_2 \in \alglang(X^*) \]
 \begin{proof}
 Let
 \[ \kappa_1 = (\fa{A}_1,\pdstore{K}_1),\quad \fa{A}_1 = (G_1, X,
@@ -88,7 +88,7 @@ FIGURE
 \end{proof}
 
 {\em Closure under complex product:}
-\[ L_1, L_2 \in ALG(X^*) \Rightarrow L_1 \cdot L_2 \in ALG(X^*) \]
+\[ L_1, L_2 \in \alglang(X^*) \Rightarrow L_1 \cdot L_2 \in \alglang(X^*) \]
 \begin{proof}
 We construct the PDA $\kappa = (\fa{A}, \pdstore{K})$ with 
 \[\fa{A} = (G, X, \setof{s_1}, \setof{f_2}, \alpha)\]
@@ -199,7 +199,7 @@ So $w \in L_1 \cdot L_2$ and $L_1 \cdot L_2 \supset L_{\kappa}$.
 \end{proof}
 
 {\em Closure under Kleene-star:}
-\[ L \in ALG(X^*) \Rightarrow L^* \in ALG(X^*) \]
+\[ L \in \alglang(X^*) \Rightarrow L^* \in \alglang(X^*) \]
 \begin{proof}
 Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$. We construct a PDA
 $\kappa'$ accepting $L^*$ as follows:
@@ -320,7 +320,7 @@ This completes the proof of our theorem.
 \bigskip
 \begin{theorem}[Closure under intersection with regular language]
 \label{alg-lang-closure-reg-intersect}
-\[ L \in ALG(X^*),\ R \in \reglang(X^*)\Rightarrow L \cap R \in ALG(X^*) \]
+\[ L \in \alglang(X^*),\ R \in \reglang(X^*)\Rightarrow L \cap R \in \alglang(X^*) \]
 \end{theorem}
 
 \begin{proof}
@@ -356,7 +356,7 @@ The opposite direction is clear because of the construction of PDA $\kappa'$.
 \label{alg-lang-closure-inv-hom}
 Let $\phi : X^* \to Y^*$ be a monoid homomorphism and $\phi(x) \in Y \cup
 \setof{\epsilon}$. Then
-\[ L \in ALG(Y^*) \Rightarrow \phi^{-1}(L) \in ALG(X^*) \]
+\[ L \in \alglang(Y^*) \Rightarrow \phi^{-1}(L) \in \alglang(X^*) \]
 \end{theorem}
 
 \transrem{In the following proof some names have been changed and some comments
@@ -409,7 +409,7 @@ Remark: The theorem also holds for arbitrary homomorphisms ($\phi(x) \in Y^*$).
 
 \begin{corollary}
 Let $\tau: X^* \to Y^*$ be a rational transduction. Then
-\[ L\in ALG(X^*)\Rightarrow \tau(L)\in ALG(Y^*) \]
+\[ L\in \alglang(X^*)\Rightarrow \tau(L)\in \alglang(Y^*) \]
 \end{corollary}
 
 \begin{proof}
@@ -419,11 +419,11 @@ where $\alpha : X^*\to Z^*, \beta: X^*\to Y^*$ are monoid homomorphisms and
 $R\in \reglang(Z^*)$ is a regular language.
 
 \begin{eqnarray*}
-L\in ALG(X^*) &\Rightarrow& \alpha^{-1}(L)\in ALG(Z^*)\text{ by theorem
+L\in \alglang(X^*) &\Rightarrow& \alpha^{-1}(L)\in \alglang(Z^*)\text{ by theorem
 \ref{alg-lang-closure-inv-hom}}\\
-&\Rightarrow& \alpha^{-1}(L)\cap R\in ALG(Z^*)\text{ by theorem
+&\Rightarrow& \alpha^{-1}(L)\cap R\in \alglang(Z^*)\text{ by theorem
 \ref{alg-lang-closure-reg-intersect}}\\
-&\Rightarrow& \beta(\alpha^{-1(L)}\cap R)\in ALG(Y^*)\text{ by theorem
+&\Rightarrow& \beta(\alpha^{-1(L)}\cap R)\in \alglang(Y^*)\text{ by theorem
 \ref{alg-lang-closure-hom}}
 \end{eqnarray*}
 \end{proof}
@@ -434,19 +434,19 @@ To do so, we introduce the notion of {\bf substitution}.
 
 \begin{definition}
 Let $X_\infty$ be a countably infinite alphabet (see chapter II.4), let $X
-\subset X_\infty$ and $\sigma:X\to ALG(X_\infty^*)$ be a mapping.
-$ALG(X_\infty^*)$ is a monoid with the complex product as its operation.
+\subset X_\infty$ and $\sigma:X\to \alglang(X_\infty^*)$ be a mapping.
+$\alglang(X_\infty^*)$ is a monoid with the complex product as its operation.
 
 The continuation of $\sigma$ to a monoid homomorphism 
-\[ \sigma: X^*\to ALG(X_\infty^*) \]
+\[ \sigma: X^*\to \alglang(X_\infty^*) \]
 is called {\bf algebraic substitution}.
 \end{definition}
 
 It holds
 \begin{theorem}
-Let $L\in ALG(X^*)$ and $\sigma: X^*\to ALG(X_\infty^*)$ an algebraic
+Let $L\in \alglang(X^*)$ and $\sigma: X^*\to \alglang(X_\infty^*)$ an algebraic
 substitution. Then
-\[ \sigma(L) := \setof{\sigma(w)\mid w\in L} \in ALG(X_\infty*) \]
+\[ \sigma(L) := \setof{\sigma(w)\mid w\in L} \in \alglang(X_\infty*) \]
 \end{theorem}
 
 \begin{proof}
@@ -611,8 +611,8 @@ another important theorem which gives a characterization of the algebraic langua
 {\bf Exercises:}
 
 \begin{enumerate}
-  \item Let $L\in ALG(X^*),\ R\in \reglang(X^*)$. Show:
-  \[ LR^{-1}\in ALG(X^*)\text{ and }R^{-1}L\in ALG(X^*) \]
+  \item Let $L\in \alglang(X^*),\ R\in \reglang(X^*)$. Show:
+  \[ LR^{-1}\in \alglang(X^*)\text{ and }R^{-1}L\in \alglang(X^*) \]
   
   \item For $L\in X^*$ let
   \begin{eqnarray*}
@@ -620,10 +620,10 @@ another important theorem which gives a characterization of the algebraic langua
   FIN(L) &:=& \setof{u\mid vu\in L\text{ for }v\in X^*}\\
   SUBWORD(L) &:=& \setof{v\mid uvw\in L\text{ for }u,w\in X^*}
   \end{eqnarray*}
-  Show: $L\in ALG(X^*) \Rightarrow INIT(L), FIN(L), SUBWORD(L)\in ALG(X^*)$.
+  Show: $L\in \alglang(X^*) \Rightarrow INIT(L), FIN(L), SUBWORD(L)\in \alglang(X^*)$.
   
-  \item Show: There exist algebraic languages $L_1, L_2\in ALG(X^*)$ such that
-  $L_1^{-1} L_2 \notin ALG(X^*)$.
+  \item Show: There exist algebraic languages $L_1, L_2\in \alglang(X^*)$ such that
+  $L_1^{-1} L_2 \notin \alglang(X^*)$.
   
   Hint: Set $L_1 = a \setof{b^ia^i\mid i\geq 1}^*$ and $L_2 =
   \setof{a^{i}b^{2i}\mid i\geq 1}^*$. Prove that $L_1$ and $L_2$ are algebraic

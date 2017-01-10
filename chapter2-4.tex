@@ -1,4 +1,4 @@
-\section{Right-linear languages, $r{-}LIN(X^*)$}
+\section{Right-linear languages, $\rlinlang(X^*)$}
 
 In this section we investigate an additional method for defining special subsets
 of $X^*$. We use the mechanism introduced in chapter 1.6, the Chomsky grammars.
@@ -20,7 +20,7 @@ As in chapter 1.6 we have the notions of {\em derivation} and {\em generated
 language}.
 
 \begin{definition}[right-linear languages]
-\[ r{-}LIN(X^*) = \setof{L \subset X^* \mid \mbox{there exists a right-linear
+\[ \rlinlang(X^*) = \setof{L \subset X^* \mid \mbox{there exists a right-linear
 grammar $G$ with } L = L(G)} \]
 is the class of {\bf right-linear languages} in $X^*$.
 \end{definition}
@@ -30,12 +30,12 @@ In the same way one defines the class of {\bf left-linear languages}.
 The following theorem holds:
 
 \begin{theorem}
-\[ \reglang(X^*) = r{-}LIN(X^*) \]
+\[ \reglang(X^*) = \rlinlang(X^*) \]
 \end{theorem}
 
 Proof:
 
-''$\supset$'': Let $L \in r{-}LIN(X^*)$ with $L = L(G),\ G = (N, X, P, S)$.
+''$\supset$'': Let $L \in \rlinlang(X^*)$ with $L = L(G),\ G = (N, X, P, S)$.
 
 We construct a graph $G' = (V, E)$ with vertices $V = N \cup \setof{F}, F
 \notin N$ and we use the productions of the grammar as edge set $E$:
@@ -99,17 +99,17 @@ grammar for the mirror language $L^R$: Replace each production $X \to t \cdot Y$
 by a left-linear production $X \to Y \cdot t$. Because of ${L^R}^R = L$ it then
 holds $L \in l{-}LIN(X^*)$.
 
-We can therefore in all of the following results replace $r{-}LIN(X^*)$ by
+We can therefore in all of the following results replace $\rlinlang(X^*)$ by
 $l{-}LIN(X^*)$.
 
 We extend now our main theorems from section 1. Let $X_\infty$ again be the
-countably infinite alphabet and let $RAT(X_\infty^*)$ and $REC(X_\infty^*)$ be
+countably infinite alphabet and let $\ratlang(X_\infty^*)$ and $\reclang(X_\infty^*)$ be
 defined as before.
 
 \begin{maintheorem}\leavevmode
 \begin{enumerate}
-  \item $ \reglang(X_\infty^*) = RAT(X_\infty^*) = REC(X_\infty^*) =
-  r{-}LIN(X_\infty^*) = l{-}LIN(X_\infty^*) $
+  \item $ \reglang(X_\infty^*) = \ratlang(X_\infty^*) = \reclang(X_\infty^*) =
+  \rlinlang(X_\infty^*) = l{-}LIN(X_\infty^*) $
   \item $ \reglang(X_\infty^*)$ is closed under union, intersection,
   complement, Kleene-star, complex product, monoid homomorphisms and inverse
   homomorphisms

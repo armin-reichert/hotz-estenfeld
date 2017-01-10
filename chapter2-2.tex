@@ -1,4 +1,4 @@
-\section{Rational sets in $X^*, RAT(X^*)$}
+\section{Rational sets in $X^*, \ratlang(X^*)$}
 
 In this section we want to introduce a second characterization of regular sets
 over free monoids. We need the following definition.
@@ -9,7 +9,7 @@ closed} $\Leftrightarrow$ $K$ is closed unter union $\cup$, complex product $\cd
 \end{definition}
 
 \begin{definition}
-$RAT(M)$ is the smallest, rationally closed subset of $\powset{M}$ that
+$\ratlang(M)$ is the smallest, rationally closed subset of $\powset{M}$ that
 contains the single element sets $\setof{m}, m \in M$ and the empty set
 $\emptyset$.
 \end{definition}
@@ -17,7 +17,7 @@ $\emptyset$.
 From main theorem 1 immediately follows:
 
 \begin{lemma}
-$RAT(X^*) \subset \reglang(X^*)$.
+$\ratlang(X^*) \subset \reglang(X^*)$.
 \end{lemma}
 
 From the remark following the main theorems it follow that this also holds for
@@ -26,10 +26,10 @@ arbitray monoids $M$ because $\setof{m} \in \reglang(M)$ for $m \in M$.
 This lemma is the first part of the following theorem by Kleene:
 
 \begin{theorem}[Kleene]
-\[ \reglang(X^*) = RAT(X^*) \]
+\[ \reglang(X^*) = \ratlang(X^*) \]
 \end{theorem}
 
-Proof: We still have to proof the inclusion $\reglang(X^* \subset RAT(X^*))$.
+Proof: We still have to proof the inclusion $\reglang(X^* \subset \ratlang(X^*))$.
 
 Let $\fa{A}$ be a finite automaton. We show that \lang{A} can be generated
 from $\emptyset$ and $\setof{x}, x \in X$	using $\cup$, $\cdot$ and
@@ -57,12 +57,12 @@ can be written as \begin{eqnarray*}
 FIGURE
 
 By induction hypothesis it holds:
-\[ \alpha(\pathcat{G_k}(S, F)) \in RAT(X^*) \]
-\[ \alpha(\pathcat{G_k}(S, P)) \in RAT(X^*) \]
-\[ \alpha(\pathcat{G_k}(R, F)) \in RAT(X^*) \]
-\[ \alpha(\pathcat{G_k}(R, P)) \in RAT(X^*) \]
+\[ \alpha(\pathcat{G_k}(S, F)) \in \ratlang(X^*) \]
+\[ \alpha(\pathcat{G_k}(S, P)) \in \ratlang(X^*) \]
+\[ \alpha(\pathcat{G_k}(R, F)) \in \ratlang(X^*) \]
+\[ \alpha(\pathcat{G_k}(R, P)) \in \ratlang(X^*) \]
 
-From this we get $\alpha(\pathcat{G_{k+1}}(S, F)) \in RAT(X^*)$.
+From this we get $\alpha(\pathcat{G_{k+1}}(S, F)) \in \ratlang(X^*)$.
 
 This concludes the proof of Kleene's theorem.
 

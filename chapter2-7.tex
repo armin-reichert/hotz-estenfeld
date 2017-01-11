@@ -50,6 +50,9 @@ To do so, we first prove some lemmata.
 \]
 \end{lemma}
 
+\transrem{Because the following proof was hard to read in the original book,
+some names have been changed and figures been added.}
+
 \begin{proof}
 Let $\fa{A} = (G, \unioninv{X}, S, F, \alpha)$ be a finite acceptor of $L$. We
 construct in several steps an acceptor $\fa{A}'$ for $|L|$.
@@ -91,36 +94,41 @@ Because of our construction we get:
 \[ L_{\fa{A}_3} = \setof{v \mid v \mbox{ is reduced word of } w \in
 L_{\fa{A}} \mbox{ wrt. } x \cdot x^{-1} = 1} \]
 
-{\bf Step 4:} We cut all paths whose label contains $x \cdot y^{-1},\
-x\neq y$. To do so, we duplicate certain vertices and edges of $G_3$.
-
-Let $v$ be a vertex which is the target of an edge $e$ with $\alpha(e) \in X$
-and the source of an edge $e'$ with $\alpha(e') \in X^{-1}$.
-
-We replace vertex $v$ by vertices $v$ and $v^+$ and add edges as follows:
-
-All edges $e_1$ with $Z(e_1) = v$ and $\alpha(e_1) \in X$ will be rerouted to
-vertex $v^+$. Edges $e_2$ with $Z(e_2) = v$ and $\alpha(e_2) \in X^{-1}$ are
-left unchanged.
-
-All edges $e_3$ with $Q(e_3) = v$ and $\alpha(e_3) \in X$ will be duplicated
-into $e_3^+$ and $e_3^-$. One of them leads from $v^+$ and the other from $v$ to
-$Z(e_3)$.
-
-The labelling is defined by $\alpha(e_3^+) = \alpha(e_3^-) = \alpha(e_3)$.
-
-Edges $e_4$ with label $\alpha(e_4) \in X^{-1}$ and $Q(e_4) = v$ stay unchanged.
-
-The following figure shows the construction:
+{\bf Step 4:} We cut all paths whose label contains the word $a \cdot
+d^{-1},\ a, d \in X,\ a \neq d$.
 
 \begin{center}
 \input{figures/chapter2/chapter2-7-lemma1-step4.tikz}
 \end{center}
 
-We do this with every such vertex of $G_3$. The resulting graph shall be $G'$.
+To do so, we duplicate certain vertices and edges of $G_3$.
+
+
+Let $v$ be a vertex which is the target of an edge with label $a \in X$ and the
+source of an edge with label $d^{-1} \in X^{-1}$.
+
+We add a copy $v^{+}$ of vertex $v$ to the graph and add new edges:
+\begin{itemize}
+  \item All edges entering $v$ with label $a \in X$ are rerouted to the copy
+  $v^+$.
+  \item All edges entering $v$ with label $c^{-1} \in X^{-1}$ are left
+  unchanged.
+  \item All edges $e:v \edge{b} Z(e)$ leaving $v$ with label $b \in X$ will be
+  duplicated into edges $e^{+}$ and $e^{-}$. Edge $e^{+}$ leads from $v^+$ to $Z(e)$ and the
+other edge $e^{-}$ from $v$ to $Z(e)$. The labels are defined by $\alpha(e^{+})
+= \alpha(e^{-}) = \alpha(e) = b$.
+	\item All edges $e: v \edge{d^{-1}} Z(e)$ leaving $v$ with label $d^{-1} \in
+	X^{-1}$ stay unchanged.
+\end{itemize}
+We do this with every such vertex of $G_3$ and get a graph $G'$.
+
+\begin{center}
+\input{figures/chapter2/chapter2-7-lemma1-step4-after.tikz}
+\end{center}
+
 With start and final state sets $S' := S$ and $F' := F \cup \setof{v^+ \mid v
 \in F}$ we get a finite automaton
-\[ \fa{A}' = (G', \unioninv{X}, ', F', \alpha') \]
+\[ \fa{A}' = (G', \unioninv{X}, S', F', \alpha') \]
 
 It then holds: $\lang{A}' = |L|$!
 

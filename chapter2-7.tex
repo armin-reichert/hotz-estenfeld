@@ -101,59 +101,61 @@ d^{-1},\ a, d \in X,\ a \neq d$.
 \input{figures/chapter2/chapter2-7-lemma1-step4.tikz}
 \end{center}
 
-To do so, we duplicate certain vertices and edges of $G_3$.
-
-
-Let $v$ be a vertex which is the target of an edge with label $a \in X$ and the
-source of an edge with label $d^{-1} \in X^{-1}$.
-
-We add a copy $v^{+}$ of vertex $v$ to the graph and add new edges:
-\begin{itemize}
-  \item All edges entering $v$ with label $a \in X$ are rerouted to the copy
-  $v^+$.
-  \item All edges entering $v$ with label $c^{-1} \in X^{-1}$ are left
-  unchanged.
-  \item All edges $e:v \edge{b} Z(e)$ leaving $v$ with label $b \in X$ will be
-  duplicated into edges $e^{+}$ and $e^{-}$. Edge $e^{+}$ leads from $v^+$ to $Z(e)$ and the
-other edge $e^{-}$ from $v$ to $Z(e)$. The labels are defined by $\alpha(e^{+})
-= \alpha(e^{-}) = \alpha(e) = b$.
-	\item All edges $e: v \edge{d^{-1}} Z(e)$ leaving $v$ with label $d^{-1} \in
-	X^{-1}$ stay unchanged.
-\end{itemize}
-We do this with every such vertex of $G_3$ and get a graph $G'$.
+To do so, we duplicate vertices and edges of $G_3$. The graph structure
+above will be transformed into this structure:
 
 \begin{center}
 \input{figures/chapter2/chapter2-7-lemma1-step4-after.tikz}
 \end{center}
 
+Let $v$ be a vertex which is the target of an edge with label $a \in X$ and the
+source of an edge with label $d^{-1} \in X^{-1}$.
+
+For each vertex $v$ we add a copy $v_{+}$ to the graph and add new edges as
+follows:
+\begin{itemize}
+  \item All edges entering $v$ with label $a \in X$ are rerouted to the copy
+  $v_{+}$.
+  \item All edges entering $v$ with label $c^{-1} \in X^{-1}$ are left
+  unchanged.
+  \item All edges $e$ leaving $v$ with label $b \in X$ will be
+  duplicated into edges $e_{+}$ and $e_{-}$. Edge $e_{+}$ leads from $v_{+}$
+  to $Z(e)$ and the other edge $e_{-}$ from $v$ to $Z(e)$. The label for
+  both new edges is $\alpha(e) = b$.
+	\item All edges leaving $v$ with label $d^{-1} \in X^{-1}$ stay unchanged.
+\end{itemize}
+We do this with every such vertex of $G_3$ and get a graph $G'$.
+
 With start and final state sets $S' := S$ and $F' := F \cup \setof{v^+ \mid v
 \in F}$ we get a finite automaton
 \[ \fa{A}' = (G', \unioninv{X}, S', F', \alpha') \]
 
-It then holds: $\lang{A}' = |L|$!
+It then holds: $L_{\fa{A}'} \stackrel{!}{=} |L|$
 
-We observe that $\lang{A}'$ contains only reduced words which are different from
-zero. Additionally, the reversal of the construction of $G'$ from $G_3$ is a
-functor which preserves the labelling of the edges.
+We observe that $L_{\fa{A}'}$ contains only reduced words which are different
+from $0$. Additionally, the reversal of the construction of $G'$ from $G_3$ is a
+functor which preserves the edge labelling.
 
-Therefore $\lang{A}' \subset |L|$.
+Therefore $L_{\fa{A}'} \subset |L|$.
 
+\bigskip
 Let to the opposite $\pi$ be a path in $\pathcat{G_3}$ with label $\alpha(\pi)
-= |\alpha(\pi)|$, then there is no $(+, -)$-sequence in the label.
+= |\alpha(\pi)|$, then there is no $(+, -)$-change in the label of $\pi$.
 
-That means the path $\pi$ stays unchanged in $G'$ as long as the label of the
-edges is in $X^{-1}$.
+Therefore the path $\pi$ stays unchanged in $G'$ as long as the label
+of the edges is in $X^{-1}$.
 
-If the label changes, the path switches to the $+$-vertices and stays
-''positive'' until its target. If we denote this path that belongs to $\pi$ by
-$\pi'$, then $\alpha(\pi) = \alpha'(\pi')$ from which follows $|L| \subset
-\lang{A}'$.
+If the label changes, then the path switches to the $+$-vertices and stays
+''positive'' until its target vertex. Let $\pi' \in \pathcat{G'}$ denote this
+path belonging to $\pi$, then $\alpha(\pi) = \alpha'(\pi')$.
 
-Together we get $|L| = \lang{A'}$.
+Therefore it holds $|L| \subset L_{\fa{A}'}$.
+
+Together we get $|L| = L_{\fa{A}'}$.
 \end{proof}
 
-In this proof we even showed more which is summarized in the following
-corollary.
+\bigskip
+In this proof we showed even more, we summarize this in the following corollary.
 
 \begin{corollary}
 To each path
@@ -165,19 +167,19 @@ assigned a unique $\epsilon$-free path $\pi' \in \pathcat{G_3}(S, -)$ with $\alp
 Additionally, we can define a functor $\nu : \pathcat{G_3} \to \pathcat{G}$ such
 that the following holds:
 
-For each accepted word $w \in L$ there exists an accepting path $\pi = e_1
-\cdots e_n \in \pathcat{G_3}(S, F)$ with $e_i \in E_3,\ \alpha(e_i) \neq 
-\epsilon$ such that $\alpha(\nu(\pi)) = w$.
+For each accepted word $w \in L$ there exists an accepting path
+\[ \pi = e_1 \cdots e_n \in \pathcat{G_3}(S, F) \]
+with $e_i \in E_3,\ \alpha(e_i) \neq \epsilon$ such that $\alpha(\nu(\pi)) = w$.
 \end{corollary}
 
 \begin{proof}
-Exercise.
+Exercise for the reader.
 \end{proof}
 
-Our construction shows even more: the number of paths $\pi$ with $\alpha(\pi) =
-w$ for a given $w \in |L|$ is the same in $\pathcat{G_3}$ as in $\pathcat{G'}$.
-Therefore this number in $\pathcat{G'}$ is less or equal to the number in
-$\pathcat{G_2}$. A similar statement holds for $\pathcat{G_1}$ and
+Our construction shows even more: the number of paths $\pi$ with label
+$\alpha(\pi) = w$ for a given $w \in |L|$ is the same in $\pathcat{G_3}$ as in
+$\pathcat{G'}$. Therefore this number is in $\pathcat{G'}$ less or equal to
+the number in $\pathcat{G_2}$. A similar statement holds for $\pathcat{G_1}$ and
 $\pathcat{G}$.
 
 This fact, which will be of importance later in this book, is summarized in the
@@ -185,7 +187,7 @@ following corollary. We define
 
 \begin{definition}
 \[ \mathrm{INDEX}(|\fa{A}|, w) := \card{\setof{\pi \in \pathcat{G}(S, F) \mid
-|\alpha(\pi) = w}} \]
+|\alpha(\pi)| = w}} \]
 \end{definition}
 
 \bigskip
@@ -194,11 +196,12 @@ following corollary. We define
 L_{\fa{A}'} \]
 \end{corollary}
 
-Remark: Because $\lang{A}' = |\lang{A}'|$ it holds $\mathrm{INDEX}(|\fa{A}'|, w) =
-\mathrm{INDEX}(\fa{A}', w)$.
+Remark: Because of $L_{\fa{A}'} = |L_{\fa{A}'}|$ it holds
+\[ \mathrm{INDEX}(|\fa{A}'|, w) = \mathrm{INDEX}(\fa{A}', w) \]
 
 Now we can prove the announced theorem.
 
+\bigskip
 \begin{theorem}
 \[ |\reglang|(\pocymon{X}) = \setof{|L| \mid L \in \reglang((X\cup X^{-1})^*)} \]
 \end{theorem}
@@ -208,7 +211,8 @@ Now we can prove the announced theorem.
  
  ''$\subset$'': Every functor $\alpha : \pathcat{G} \to \pocymon{X}$ can be
  extended to a functor $\alpha' : \pathcat{G} \to (\unioninv{X})^*$ by
- defining $\alpha'(e) := |w|$ for each edge $e \in E$ and $\alpha(e) = [w]$.
+ defining $\alpha'(e) := |w|$ for each edge $e \in E$ with label $\alpha(e) =
+ [w]$.
  
  $\alpha'$ is continued to a functor and for the finite automaton
  \[ \fa{A}' = (G', \unioninv{X}, S', F', \alpha') \]
@@ -226,66 +230,75 @@ $|\reglang|(\pocymon{X})$.
 \begin{theorem}
 Let $\fa{A}$ be a finite automaton
 \[ \fa{A} = (G, \unioninv{X}, S, F, \alpha) \]
-where $G = (V, E)$ and $\card{E} = c \in \mathbb{N}$. Then there exist $c$ pairs
-$(L_i^+, L_i^-)$ with 
+where $G = (V, E)$ and $\card{E} = c \in \mathbb{N}$.
+
+Then there exist $c$ pairs $(L_i^+, L_i^-)$ with 
 \[ L_i^+ \in \reglang(X^*),\qquad L_i^- \in \reglang((X^{-1})^*) \]
 such that
-\[ |\lang{A}| = \bigcup_{i=1}^c L_i^- \cdot L_i^+ \]
+\[ |L_{\fa{A}}| = \bigcup_{i=1}^c L_i^- \cdot L_i^+ \]
 \end{theorem}
 
 \begin{proof}
-The proof follows directly from the construction of the automaton $\fa{A}'$. If
-$V'$ is the set of the vertices $v$ which have an associated vertex $v^+$ in
-$G'$, then every path $\pi \in \pathcat{G'}(S', F')$ can be uniquely split into
+The proof follows directly from the construction of the automaton $\fa{A}'$.
+
+If $V'$ is the set of those vertices $v$ which have an associated vertex $v^+$
+in $G'$, then every path $\pi \in \pathcat{G'}(S', F')$ can be uniquely split into
  a product $\pi_1 \cdot \pi_2$ where the target $Z(\pi_1)$ is such a vertex $v$.
 
 Therefore one can write
-\[ |\lang{A}| = \bigcup_{v \in V} L_{\fa{A}(S, v)}^- \cdot L_{\fa{A}(v, F)}^+
+\[ |L_{\fa{A}}| = \bigcup_{v \in V} \left( L_{\fa{A}(S, v)}^- 
+\cdot L_{\fa{A}(v, F)}^+ \right)
 \]
 \end{proof}
 
 \begin{corollary}
-\[ \mathrm{INDEX}(\fa{A}', w) = \sum_{v \in V' \atop w_1 \cdot w_2 = w}
-\mathrm{INDEX}(\fa{A}'(S, v), w_1) \cdot \mathrm{INDEX}(\fa{A}'(v, F), w_2) \]
+\[ \mathrm{INDEX}(\fa{A}', w) = \sum_{v \in V' \atop w_1 \cdot w_2 = w} \left(
+\mathrm{INDEX}(\fa{A}'(S, v), w_1) \cdot \mathrm{INDEX}(\fa{A}'(v, F), w_2)
+\right) \]
 \end{corollary}
 
+\bigskip
 \begin{lemma}
-Let $L = \lang{A}^+ \subset X^*$ and $L' = \lang{A}^- \subset (X^{-1})^*$. Then
-there exist $L_1^+,\ldots,L_p^+ \in \reglang(X^*),\ L_1,\ldots,L_q^- \in
-\reglang((X^{-1})^*)$ with
+Let $L = L_{\fa{A}}^+ \subset X^*$ and $L' = L_{\fa{A}}^- \subset (X^{-1})^*$.
+
+Then there exist 
+\[ L_1^+, \ldots, L_p^+ \in \reglang(X^*),\quad L_1^-, \ldots, L_q^- \in
+\reglang((X^{-1})^*) \]
+with
 \[ |L \cdot L'| = \bigcup_{i=1}^{p} L_i^+ \ \cup\ \bigcup_{j=1}^{q} L_j^- \]
 Here $p, q \leq \card{F(\fa{A'})}$.
 \end{lemma}
 
 \begin{proof}
-We construct $\fa{A} = \fa{A}^+ \circ \fa{A}^-$ with $\lang{A} = L \cdot L'$ and
-thereafter $\fa{A'}$ with $\lang{A'} = |\lang{A}|$.
+We construct $\fa{A} = \fa{A}^+ \circ \fa{A}^-$ with $L_{\fa{A}} = L \cdot L'$ and
+thereafter $\fa{A'}$ with $L_{\fa{A}'} = |L_{\fa{A}}|$.
 
 Because for every reduced word $w \in (X\cup X^{-1})^*$ it holds $w = w^- \cdot
-w^+$ where $w^- \in (X^{-1})^*, w^+ \in X^*$ the first part of the lemma is
-proven.
+w^+$ with $w^- \in (X^{-1})^*,\ w^+ \in X^*$, the first part of the lemma is
+proved.
 
-From our construction of $\fa{A'}$ it follows that the set $F(\fa{A'})$ of final
-states are divided into sets from $(X^{-1})^*$ and sets from $X^*$. From that
-follows the rest of the lemma.
+From our construction of $\fa{A'}$ it follows that the final state set
+$F(\fa{A'})$ is split into states for sets from $(X^{-1})^*$ and those
+for sets from $X^*$. From that follows the rest of the lemma.
 \end{proof}
 
-We want to investigate in the following the set of regular sets which can be
-defined with fixed graph and show two simple but important properties of these
-sets.
+\bigskip
+In the following we want to investigate the set of regular sets which can be
+defined with a fixed graph and prove two simple but important properties of
+these sets.
 
 Let $G = (V, E)$ be a graph and $\alpha : E \to (\unioninv{X})^*$. We may
-assume that $\alpha(e) \in \unioninv{X} \cup \setof{\epsilon}$.
+assume again that $\alpha(e) \in \unioninv{X} \cup \setof{\epsilon}$.
 
 We define
 \[ \mathcal{R}(G) := \setof{L_{\fa{A}(\tilde{S},\tilde{F})} \mid \fa{A} = (G, X
 \cup X^{-1}, S, F, \alpha),\ \tilde{S} \subset V,\ \tilde{F} \subset V} \]
 
-For $c := \card{V}$ then it trivially holds $\card{\mathcal{R}(G)} \leq 2^{2
-\cdot c}$.
+For $c := \card{V}$ it trivially holds 
+\[ \card{\mathcal{R}(G)} \leq 2^{2 \cdot c} \]
 
 Remark: The set $\mathcal{R}(G)$ is in general not closed under union but it
-contains a simple base for the closure $<\mathcal{R}(G)>$ under union.
+contains a simple base for the union-closure ${<}\mathcal{R}(G){>}$.
 
 For shorter notation we set $\mathcal{R}(\tilde{S},\tilde{F}) :=
 L_{\fa{A}(\tilde{S},\tilde{F})}$.
@@ -299,65 +312,75 @@ L_{\fa{A}(\tilde{S},\tilde{F})}$.
 Exercise for the reader.
 \end{proof}
 
-Let $\fa{A'}$ be the automaton constructed as in lemma 1. We construct a graph
+\bigskip
+Let $\fa{A'}$ be the automaton constructed as in lemma 1. We construct the graph
 $G' = (V', E')$ from the graph $G = (V, E)$. Define
 \[ \mathcal{B}(G') := \setof{L_{\fa{A'}(v, v')} \mid v, v' \in V'} \]
 
 \begin{lemma}
 Let $L^+ \subset X^*, L^- \subset (X^{-1})^*$ and $L^+, L^- \in
 \mathcal{B}(G')$. Then $|L^+ \cdot L^-|$ is contained in the union-closure
-$<\mathcal{B}(G')>$ of $\mathcal{B}(G')$.
+${<}\mathcal{B}(G'){>}$ of $\mathcal{B}(G')$.
 \end{lemma}
 
 \begin{proof}
-Let $L^+ = L_{\fa{A'}(v, v')}$ and $L^- = L_{\fa{A'}(q, q')}$. We create an
-automaton
+Let $L^+ = L_{\fa{A'}(v, v')}$ and $L^- = L_{\fa{A'}(q, q')}$. 
+
+We create an automaton
 \[ \fa{A}'' := \fa{A'}(v, v') \circ \fa{A'}(q, q') \]
 with $L_{\fa{A}''} = L^+ \cdot L^-$.
 
 We get $\fa{A}''$ by connecting an instance of $\fa{A'}(q, q')$ using an
-$\epsilon$-edge which leads from $v'$ to $q$ with another instance. Now all
-words $w \in L_{\fa{A}''}$ have the form $w = w^+ \cdot w^-$. We are only
-interested in the reduced words.
+$\epsilon$-edge which leads from $v'$ to $q$. Now all words $w \in L_{\fa{A}''}$
+have the form $w = w^+ \cdot w^-$. 
 
-We have the cases:
+But we are only interested in reduced words.
+
+There are three cases:
 \[ |w^+ \cdot w^-| = \begin{cases} w_1^+ \\ 0 \\ w_1^- \end{cases} \]
 
-Because every path $\pi$ of $\fa{A}''$ leading from $v$ to $q'$ is divided in
+Because every path $\pi$ of $\fa{A}''$ leading from $v$ to $q'$ is divided into
 two sections
-\[ \pi = \pi^+ e \pi^- \text{ where }\pi^+; v \to v' \in \fa{A'}(v, v') \text{
-and }\pi^- : q \to q' \in \fa{A'}(q, q') \]
-there exists for the case $|w^+ \cdot w^-|$ a division $\pi^+ = \pi_1^+ \cdot
-\pi_2^+$ with $\alpha(\pi_1^+) = w_1^+$ and $|\alpha(\pi_2^+ \cdot e \cdot
-\pi^-)| = \epsilon$.
+\[ \pi = \pi^+ \circ e \circ \pi^- \text{ where }\pi^+: v \to v' \in \fa{A'}(v,
+v')\text{ and }\pi^-: q \to q' \in \fa{A'}(q, q') \]
+there exists in case $|w^+ \cdot w^-| = w_1^+$ a decomposition $\pi^+ = \pi_1^+
+\cdot \pi_2^+$ with labels $\alpha(\pi_1^+) = w_1^+$ and $|\alpha(\pi_2^+ \circ
+e \circ \pi^-)| = \epsilon$.
 
+TODO: add figure
+
+\bigskip
 Opposite direction:
 
-If $\bar{\pi_1}$ is a path with $Q(\bar{\pi_1}) = Q(w_1^+),\ Z(\bar{\pi_1}) =
-Z(w_1^+)$, then $\alpha(\bar{\pi_1}) \in |L^+ \cdot L^-|$.
+If $\bar{\pi}_1$ is a path with $Q(\bar{\pi}_1) = Q(\pi_1^+),\ Z(\bar{\pi}_1) =
+Z(\pi_1^+)$, then $\alpha(\bar{\pi}_1) \in |L^+ \cdot L^-|$.
 
+\medskip
 The case for $|w^+ \cdot w^-| = w_1^-$ is symmetrical.
 
-Therefore there exist sets $V^+, V^- \subset V'$ with
-\[ |L^+ \cdot L^-| = \bigcup_{v^+ \in V^+} \mathcal{R}(v, v^+) \cup
+\bigskip
+Therefore there exist sets $V^+,\ V^- \subset V'$ with
+\[ |L^+ \cdot L^-| = \bigcup_{v^+ \in V^+} \mathcal{R}(v, v^+) \ \cup\ 
 \bigcup_{q^- \in V^-} \mathcal{R}(q^-, q') \]
 \end{proof}
 
-Remark: The facts proved above will be useful in connection to the normal-form
-theorems of context-free grammars (chapter IV). This is especially true for the
+Remark: These facts will be useful in connection to the normal-form
+theorems for context-free grammars (chapter IV). This is especially true for the
 following
 
 \begin{corollary}
-If $\mathcal{B}(G', S, F) = \setof{L^+_{\fa{A'}(S, v)},\ L^-_{\fa{A'}(q, F)}
-\mid v, q \in V}$. Then $\mathcal{B}(G', S, F)$ is a union base for
+If 
+\[ \mathcal{B}(G', S, F) = \setof{L^+_{\fa{A'}(S, v)},\ L^-_{\fa{A'}(q, F)}
+\mid v, q \in V} \]
+Then $\mathcal{B}(G', S, F)$ is a union-base for
 \[ \setof{|L^+ \cdot L^-| \mid L^+, L^- \in \mathcal{B}(G', S, F)} \]
 \end{corollary}
 
 This corollary gives us a smaller base. For fixed $S$ and $F$ we can represent
-each set $|L^+ \cdot L^-|$ as the union of at most $2 \cdot \card{V}$ sets of
+every set $|L^+ \cdot L^-|$ as the union of at most $2 \cdot \card{V}$ sets of
 type $L^+_{\fa{A}(S, v)}$ resp.\ $L^-_{\fa{A}(q, F)}$.
 
-We now assign to $\mathcal{B}(G)$ a system 
+We assign now to $\mathcal{B}(G)$ a system 
 \begin{eqnarray*} 
 \mathcal{P}(G) & \subset & \mathcal{B}(G) \times \mathcal{B}(G) \cdot \setof{;}
 \cdot \mathcal{B}(G) \\
@@ -367,10 +390,11 @@ in the following way:
 \begin{eqnarray*}
 L \to L^+ ; L^- \in \mathcal{P}(G) & \iff & \text{in the representation } L^+
   \cdot L^- = \cup L_i \text{ from lemma 2} \\
-  & & \text {there exists such an index $i$ with $L = L_i$} \\
+  & & \text {there exists an index $i$ with $L = L_i$} \\
 \epsilon \to L \in \mathcal{P}(G) & \iff & \epsilon \in L
 \end{eqnarray*}
 
+\bigskip
 \begin{lemma}
 $\epsilon \in |L_1 L_2 \cdots L_n|$ with $L_i \in \mathcal{B}(G) \iff
 L_1;L_2;\cdots ;L_n$ can be reduced to $\epsilon$ using the rules from
@@ -380,40 +404,44 @@ $\mathcal{P}(G)$.
 \begin{proof}
 
 ''$\Rightarrow$'':
+\begin{eqnarray*}
+\epsilon \in |L_1 L_2 \cdots L_n| & \Rightarrow & \text{ there exists } w_i \in
+L_i,\ i = 1, \ldots, n,\text{ with }|w_1 \cdots w_n| = \epsilon \\
+& \Rightarrow & \text{there exists an index $j$ with }L_j \subset X^*,\ L_{j+1}
+\subset (X^{-1})^*
+\end{eqnarray*}
+Because $|w_1 \cdots w_n| = \epsilon$ it holds $|w_j \cdot w_{j+1}| \neq 0$.
 
-$\epsilon \in |L_1 L_2 \cdots L_n| \Rightarrow$ there exists $w_i \in L_i$ for
-$i = 1, \ldots, n$ with $|w_1 \cdots w_n = \epsilon \Rightarrow$ there exists an
-index $j$ with $L_j \subset X^*,\ L_{j+1} \subset (X^{-1})^*$. Because $|w_1
-\cdots w_n = \epsilon$ it holds $|w_j w_{j+1}| \neq 0$. Therefore $w_j w_{j+1}$
-can be reduced to a word $\bar{w}_j$ with $\bar{w}_j \in X^*$ or $\bar{w}_j \in
-(X^{-1})^*$.
+Therefore $w_j \cdot w_{j+1}$ can be reduced to a word $\bar{w}_j$ with
+$\bar{w}_j \in X^*$ or $\bar{w}_j \in (X^{-1})^*$.
 
-In the decomposition $L_j L_{j+1} = \cup L'_i$ there exists ab $L'_j$ with
+In the decomposition $L_j \cdot L_{j+1} = \cup L'_i$ there exists an $L'_j$ with
 $\bar{w}_j \in L'_j$ and it holds $L'_j \to L_j;L_{j+1} \in \mathcal{P}(G)$.
 
-If we replace $L_j;L_{j+1}$ by $L'_j$ then we have again $\epsilon \in |L_1
-\cdots L_{j-1} L'_j L_{j+2} \cdots L_n|$.
+If we replace $L_j;L_{j+1}$ by $L'_j$ then we have again
+\[ \epsilon \in |L_1 \cdots L_{j-1} \cdot L'_j \cdot L_{j+2} \cdots L_n| \]
 
 Inductively we may assume that $L_1 \cdots L_n$ can be reduced using
-$\mathcal{P}(G)$ to some $L'$ and $\epsilon \in |L'|$ holds.
+$\mathcal{P}(G)$ to some $L'$ and that $\epsilon \in |L'|$ holds.
 
-Because $|L'| = L$ we get $\epsilon \in L$. So $L_1;\cdots;L_n$ can indeed be
-reduced to $\epsilon$.
+Because $|L'| = L$ it follows $\epsilon \in L$. Therefore $L_1; \cdots ;L_n$ can
+indeed be reduced to $\epsilon$.
 
 ''$\Leftarrow$'':
 
-Let $L_1;\cdots;L_n$ be reducible to $\epsilon$ using $\mathcal{P}(G)$ and let
+Let $L_1; \cdots ;L_n$ be reducible to $\epsilon$ using $\mathcal{P}(G)$ and let
 $L'_j \to L_j;L_{j+1} \in \mathcal{P}(G)$.
 
-Then for each $w_i \in L_i,\ i = 1,\ldots,j-1,j+2,\ldots,n$ and $\bar{w}_i \in
-L_j'$ there are $w_j \in L_j, w_{j+q} \in L_{j+1}$ with $|w_1 \cdots w_n| =
-|w_1 \cdots w_{j-1}\bar{w}_j w_{j+2} \cdots w_n|$.
-
+Then for each $w_i \in L_i,\ i = 1, \ldots, j-1, j+2, \ldots, n$ and $\bar{w}_i
+\in L_j'$ there exist $w_j \in L_j,\ w_{j+1} \in L_{j+1}$ with
+\[ |w_1 \cdots w_n| = |w_1 \cdots w_{j-1} \cdot \bar{w}_j \cdot w_{j+2} \cdots
+w_n|
+\]
 If $\epsilon \in L_j$ then $\epsilon \to L_j \in \mathcal{P}(G)$ and it holds
-$\bar{w}_j = \epsilon$. Therefore $|w_1 \cdots w_{j-1} w_{j+1} \cdots w_n| =
-|w_1 \cdots w_n|$.
+$\bar{w}_j = \epsilon$. Therefore
+\[ |w_1 \cdots w_{j-1} \cdot w_{j+1} \cdots w_n| = |w_1 \cdots w_n| \]
 
-By induction it follows: if $L_1; \cdots L_n$ can be derived in
+By induction it follows: if $L_1; \cdots ;L_n$ can be derived in
 $\mathcal{P}(G)$ from $\epsilon$, then $\epsilon \in |L_1 \cdots L_n|$.
 \end{proof}
 

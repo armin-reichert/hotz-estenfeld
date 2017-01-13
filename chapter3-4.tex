@@ -1,1 +1,349 @@
-\section{The finite automaton with monoid-storage}
+\section{The finite automaton with storage}
+
+In the following we slightly modify the notion of a pushdown-store by admitting
+arbitrary monoids instead of the free monoid $Y^*$.
+
+Doing so, the given definition of the pushdown-store cannot be used any longer
+because for arbitrary monoids the notion of a ''topmost'' factor cannot be
+defined in a meaningful way.
+
+In our finite automaton with storage the control unit puts symbols onto the
+store without caring about its current content which gives an even stronger
+separation between control unit and pushdown-store as we had for pushwon
+automata.
+
+With the finite automaton with storage we have a universal model of automata.
+
+\begin{definition}
+$\fa{P} = (\fa{A}, \pdstore{P})$ is called {\bf finite automaton with storage}
+$\iff$
+\begin{eqnarray*}
+& \fa{A}=(G, X, S, F, \alpha),\ (G=(V,E),\text{ is a finite automaton} \\
+& \fa{P}=(E, M, D, C, \gamma)\text{ is a storage with monoid }M \\
+& \gamma: E^* \to M\text{ is a monoidhomomorphism} \\
+& D,C \subset M\text{ ($D$=domain, $C$= codomain)}
+\end{eqnarray*}
+\end{definition}
+
+\[ L_{\fa{P}} = \setof{\alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ D\cdot
+\gamma(\pi) \cap C \neq \emptyset}
+\]
+is the {\bf language accepted by} $\fa{P}$.
+
+Remark: In the following we will also just write ''finite automaton with storage
+monoid $M$'' if this does not lead to any misunderstandings.
+
+\bigskip
+The following theorem gives a relation between the pushdown automaton and the
+finite automaton with storage.
+
+\begin{theorem}
+If $\kappa = (\fa{A}, \pdstore{K})$ is a pushdown automaton, then there exists a
+finite automaton with storage $\fa{P}$ with storage monoid $\hgroup{Y}$ such
+that $L_{\kappa} = L_{\fa{P}}$.
+\end{theorem}
+
+\begin{proof}
+We remember the proof of the Chomsky-Schützenberger theorem in the previous
+section.
+
+Let
+\[ \fa{A}'=(G', \hgroup{Y}, S_0, F, \gamma),\ G'=(V',E') \]
+be the finite automaton used in the proof with accepted language
+\[ L_\kappa = \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(S_0,F),\
+|\gamma(\pi)|=y_0} \]
+
+We set
+\[ M := \hgroup{Y},\qquad E' \to \hgroup{Y} \]
+
+Then for the automaton with storage $\fa{P}=(\fa{A}, \pdstore{P})$ with 
+\[ \pdstore{P} = (E', \hgroup{Y}, \setof{\epsilon}, \setof{y_0}, \gamma) \]
+it holds $L_\kappa = L_{\fa{P}}$.
+\end{proof}
+
+\bigskip
+It is now possible to prove similar closure properties for our new type of
+automaton as we did before for pushdown automata, in the corresponding
+constructions one has to complement these for the used monoids.
+
+We do not want to execute these constructions here.
+
+\bigskip
+\begin{theorem}[]
+Let $\fa{P}=(\fa{A}, \pdstore{P})$ be a finite automaton with storage monoid
+$\pocymon{Y},\ C = D = \setof{\epsilon}$. Then there exists a pushdown automaton
+$\kappa = (\fa{A}, \pdstore{K})$ with $L_{\fa{P}} = L_\kappa$.
+\end{theorem}
+
+\begin{proof}
+Let $\fa{P}=(\fa{A}, \pdstore{P})$ with
+\[ \fa{A}=(G, X, S, F, \alpha),\ G=(V,E),\quad \pdstore{P}=(E, \pocymon{Y},
+\setof{\epsilon}, \setof{\epsilon}, \gamma) \]
+
+Without loss of generality let $\gamma(e) \in Y \cup Y^{-1} \cup
+\setof{\epsilon}$ (this can be achieved by breaking the graph edges).
+
+We define the pushdown automaton $\kappa = (\fa{A}, \pdstore{K})$ as follows:
+\[ \pdstore{K} = (E, Y_1^*, \delta)\text{ with }Y_1 = Y \cup \setof{0} \]
+
+The pushdown computation $\delta$ is 
+\[ \delta: E \times Y_1 \to (Y_1 \times Y_1) \cup Y_1 \cup \setof{\epsilon} \]
+defined by
+\[ \delta(e, y) = \begin{cases}
+	|y \cdot \gamma(e)| & \text{if }\gamma(e) \in Y \cup \setof{\epsilon}\text{ or
+	} \gamma(e) = y^{-1} \\
+	y \cdot 0 & \text{else}
+\end{cases} \]
+
+Claim: $L_\kappa \stackrel{!}{=} L_{\fa{P}}$
+
+''$\supset$'': Let $w \in L_{\fa{P}}$, then there exists a path $\pi \in
+\pathcat{G}(S, F)$ with label $\alpha(\pi) = w$ and storage computation
+$\gamma(\pi) = \epsilon$ and for each prefix path $\pi'$ of $\pi$ holds:
+\[ |\gamma(\pi')| = \delta(\pi', \epsilon) \]
+This is easily proved by induction and left to the reader.
+
+Therefore $w \in L_\kappa$.
+
+\bigskip
+''$\subset$'': Let $w \in L_\kappa$, then there exists a path $\pi \in
+\pathcat{G(S, F)}$ with label $\alpha(\pi)=w$ and pushdown computation
+$\delta(\pi, \epsilon) = \epsilon$.
+
+Wit part 1 the claim holds again from which follows $w \in L_{\fa{P}}$.
+
+From both parts follows the claim.
+\end{proof}
+
+\bigskip
+Remark: The theorem also holds if we use the H-group $\hgroup{X}$ as storage
+monoid (exercise).
+
+From theorem 1 and theorem 2 it follows the equivalence of the automata models
+with storage monoid $\hgroup{X}$.
+
+\bigskip
+As an example we give a finite automaton with storage which accepts the language
+$L$ over the alphabet $X = \setof{a, b, c}$ defined as follows:
+\begin{enumerate}
+  \item $d \in L$
+  \item $x, y \in L \Rightarrow a\cdot x\cdot b\cdot y\cdot c\in L$
+  \item $L$ is minimal with 1) and 2)
+\end{enumerate}
+
+$L$ can be understood as the language of the bracketed arithmetic expressions.
+
+We create the following preliminary (infinite) graph $G$ for $L$:
+
+TODO insert figure
+
+We want to remove each edge labeled with $[G]$ by adding an $\epsilon$-edge
+from the source of this edge to $S$ and from $F$ to the target of this edge.
+
+We get the following graph:
+
+TODO insert figure
+
+The graph $G'=(V',E')$ is finite but the corresponding finite acceptor would
+also accept words which are not elements of $L$. This has to be corrected by defining a
+suitable storage monoid.
+
+Define $\gamma: E' \to \pocymon{\setof{a, b, s, t}}$ by
+\begin{eqnarray*}
+\gamma(e_a) & = & a \\
+\gamma(e) & = & s \\
+\gamma(e_d) & = & \epsilon \\
+\gamma(t) & = & t \\
+\gamma(e_b) & = & a^{-1} \cdot b \\
+\gamma(e_c) & = & b^{-1} \\
+\gamma(e'_d) & = & \epsilon \\
+\gamma(e''_d) & = & \epsilon \\
+\gamma(e^{-1}) & = & s^{-1} \\
+\gamma(t^{-1}) & = & t^{-1} \\
+\end{eqnarray*}
+
+Domain and codomain contain the empty word only, the storage monoid $M$ is the
+H-group over $X$:
+\[ D = C = \setof{\epsilon},\quad M = \hgroup{\setof{a, b, s, t}} \]
+
+For
+\[ \fa{A} = (G', \setof{a, b,c d}, \setof{S}, \setof{F}, \alpha) \]
+and storage 
+\[ \pdstore{P} = (E', M, D, C, \gamma) \]
+the finite automaton with storage $\fa{P} = (\fa{A}, \pdstore{P})$ accepts L:
+\[ L_{\fa{P}} = \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(S, F),\ D \cdot
+\gamma(\pi) \cap C \neq \emptyset} = L \]
+
+Proof: exercise.
+
+Now we want to remove the $\epsilon$-edges from the graph $G'$. To do so, we use
+the algorithm from chapter II, lemma 2 and get:
+
+\missingfigure
+
+The storage is given by
+
+\missingfigure
+
+We can simplify the graph even further and get
+
+\missingfigure
+
+This graph is deterministic and the storage has the following form:
+\[ \gamma(e_a) = a,\ \gamma(e_d) = \epsilon,\ \gamma(e_b) = a^{-1} b,\
+\gamma(e_c) = b^{-1} \]
+
+\bigskip
+We want to look at an example motivated by practical applications: we define
+parts of the syntax of the PASCAL programming language using finite automata
+with storage.
+
+Every programming language is based on some vocabular. Programs are constructed
+by linear composition of these basic symbols in a way defined by the syntax
+rules.
+
+The syntax rules are formulated such that is is easy to verify if a sequence of
+basic symbols is legal.
+
+The syntax rules are most often (with advantage over other ways) represented by
+flow diagrams which are called {\em syntax diagrams}.
+
+The possible paths in these syntax diagrams represent all possible symbol
+sequences.
+
+Starting with a diagram labeled ''program'', along the path one either switches
+to another diagram if a rectangle is met, one appends a basic symbol $w$ to the
+program text if a circle labelled with $w$ is met. A complete example for this
+kind of syntac definition can be found in \cite{Wirth}.
+
+We will present syntax diagrams slightly different. We use kind of a dual graph
+by making the vertices of the syntax diagrams to edges of our graphs.
+
+In the following example we always show first the syntax diagram as given in
+\cite{Wirth} and afterwards show the graph of our finite automaton with storage
+that accepts the language defined by the syntax diagram.
+
+\missingfigure
+
+Remark: A program in PASCAL by this definition is a block followed by a dot.
+
+\missingfigure
+
+[Block] may be interpreted as a procedure call of a procedure ''Block''
+(corresponds to the substitution of chapter III.2).
+
+Storage:
+\[ \gamma(e_1) = s,\quad \gamma(e_2) = s^{-1},\qquad D = C = \setof{\epsilon} \]
+
+In this very simple example no difficulties arise. We want to consider now a
+diagram in which the same diagram's name occurs again. This corresponds to a
+recursive procedure call. We have to copy the diagram at this location.
+
+\missingfigure
+
+This is the syntax diagram which describes a ''block'' in PASCAL. It consists of
+a declaration section and a statement section where the declaration section may
+be empty.
+
+$G_{\text{block}}$ is shown below:
+
+\missingfigure
+
+For simplicity the nonterminal symbols are shortened to single characters.
+
+$e$ and $e^{-1}$ are edges inverse to each other. In the storage we have to
+take care that the nesting depth of the block is correct. The edge $e$ takes
+care that in a function or procedure-declaration the body appears correctly and
+in case of multiple nesting the end of the block is always correct.
+
+In the way we described now every syntax diagram can be tranlated to a finite
+automaton with storage.
+
+For each edge whose label is enclosed by the brackets [ ] there exists a finite
+automaton with storage accepting the language associated with the edge.
+
+By substitution of these graphs into the original graph we can then produce
+graphs without bracket labels.
+
+With this construction we could construct a finite automaton wit storage for the
+complete syntax of the PASCAL programming language that accepts the
+syntactically correct PASCAL programs. We get exactly the syntactically correct
+programs as the labels of paths in our graph which additionally fulfill the
+codomain-condition of the storage.
+
+By the insertion of $\epsilon$-edges when resolving the recursion the automaton
+becomes non-deterministic.
+
+In the next section we want to transform the non-deterministic finite automaton
+with storage into a deterministic one.
+
+\bigskip
+\begin{exercise}
+Given the alphabet $X_k = \setof{a_1, \ldots, a_K}$ and the language $L_k :=
+\setof{a_1, \ldots, a_k}^{4^k}$.
+
+Define a finite automaton with storage accepting $L_k$ and prove its
+correctness.
+\end{exercise}
+
+\bigskip
+\begin{exercise}
+Let $X = \setof{(, ), [, ], \$, c},\ d \notin X$.
+\begin{eqnarray*}
+L_0 &=& \setof{\epsilon} \\
+&\cup& \{x_1 c y_1 c z_1 d \cdots d x_n c y_n c
+z_n d \mid n \geq 1,\ y_1 \cdots y_n \in \$ D_2 \\
+& & x_i, z_i \in X^*,\ i=1, \ldots, n \} 
+\end{eqnarray*}
+is called the {\em Greibach language}. ($D_2$ denotes the Dynck language over
+\setof{(, ), [, ]}).
+
+Show: There exists a finite automaton with storage accepting $L_0$.
+\end{exercise}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -33,28 +33,29 @@ here!}\end{center}}
 
 % custom commands
 \newcommand{\alglang}{\mbox{{\bf ALG}}}
-\newcommand{\card}[1]{\mathrm{card}(#1)}
+\newcommand{\card}[1]{\mathrm{card}({#1})}
 \newcommand{\category}[1]{\mbox{$\mathfrak{#1}$}}
 \newcommand{\cflang}{\mbox{{\bf CF}}}
 \newcommand{\dderives}[1]{\underset{#1}{\Rightarrow}}
-\newcommand{\derives}[1]{\underset{#1}{\overset{*}{\Rightarrow}}}
+\newcommand{\derives}[1]{\underset{{#1}}{\overset{*}{\Rightarrow}}}
 \newcommand{\edge}[1]{\xrightarrow{\ {#1}\ }}
 \newcommand{\faequiv}[1]{\underset{\fa{#1}}{\equiv}}
 \newcommand{\fa}[1]{\mbox{$\mathfrak{#1}$}}
-\newcommand{\generatedbyone}[1]{\mbox{${<}#1{>}$}}
-\newcommand{\generatedby}[2]{\mbox{${<}#1,#2{>}$}}
+\newcommand{\generatedbyone}[1]{\mbox{${<}{#1}{>}$}}
+\newcommand{\generatedby}[2]{\mbox{${<}{#1},{#2}{>}$}}
 \newcommand{\hgroup}[1]{\mbox{${#1}^{[*]}$}}
 \newcommand{\lang}[1]{\mbox{$L_{\mathfrak{#1}}$}}
-\newcommand{\pathcat}[1]{\mbox{$\mathfrak{W}(#1)$}}
+\newcommand{\pathcat}[1]{\mbox{$\mathfrak{W}({#1})$}}
 \newcommand{\pdstore}[1]{\mbox{$\mathcal{#1}$}}
 \newcommand{\pocymon}[1]{\mbox{${#1}^{(*)}$}}
-\newcommand{\powset}[1]{\mathfrak{P}(#1)}
-\newcommand{\production}[1]{\xrightarrow{#1}}
+\newcommand{\powset}[1]{\mathfrak{P}({#1})}
+\newcommand{\production}[1]{\xrightarrow{{#1}}}
 \newcommand{\ratlang}{\mbox{{\bf RAT}}}
 \newcommand{\reclang}{\mbox{{\bf REC}}}
 \newcommand{\reglang}{\mbox{{\bf REG}}}
 \newcommand{\rlinlang}{\mbox{{\bf r-LIN}}}
 \newcommand{\setof}[1]{\mbox{$\{#1\}$}}
+\newcommand{\strlen}[1]{\mathrm{length}({#1})}
 \newcommand{\transrem}[1]{%
 \begin{center}%
 \fboxrule0.1mm\fboxsep0.5em\fbox{\parbox{12cm}{Translator's remark: #1}}%

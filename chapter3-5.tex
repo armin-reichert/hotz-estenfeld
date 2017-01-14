@@ -1,1 +1,131 @@
 \section{The deterministic finite automaton with storage}
+
+In this section we will prove a very important theorem about the relation
+between non-determinism and determinism of finite automata with storage.
+
+To be able to construct the deterministic automaton we need some definitions.
+
+\begin{definition}
+A finite automaton with storage $\fa{P}=(\fa{A},\pdstore{P})$ is called
+\begin{itemize}
+  \item {\bf $\epsilon$-free} if $\fa{A}$ is $\epsilon$-free,
+  \item {\bf deterministic} if $\fa{A}$ is deterministic,
+  \item {\bf complete} if $\fa{A}$ is complete.
+\end{itemize}
+\end{definition}
+
+\bigskip
+\begin{definition}
+$(S, +, \cdot, 0, 1)$ is called a {\bf semi-ring} if
+\begin{enumerate}
+  \item $(S, +, 0)$ is a commutative monoid
+  \item $(S, \cdot, 1)$ is a monoid
+  \item The distributive laws hold:
+  \begin{eqnarray*}
+  a \cdot (b + c) &=& a \cdot b + a \cdot c\\
+  (a + b) \cdot c &=& a \cdot c + b \cdot c\\
+  \end{eqnarray*}
+  \item $0 \cdot a = a \cdot 0 = 0$ for all $a \in S$
+\end{enumerate}
+\end{definition}
+
+\bigskip
+\begin{definition}
+Let $M$ be a monoid and $S$ a semi-ring.
+\[ S(M) := \setof{\lambda: M \to S \mid \card{\setof{m \mid \lambda(m) \neq 0}}
+< \infty} \]
+is called the {\bf monoid-ring} of the monoid $M$ over the semi-ring $S$.
+\end{definition}
+
+Addition and multiplication on $S(M)$ are defined as follows: For $\lambda_1,
+\lambda_2 \in S(M)$
+\begin{eqnarray*}
+(\lambda_1 + \lambda_2)(m) &=& \lambda_1(m) + \lambda_2(m) \\
+(\lambda_1 \cdot \lambda_2)(m) &=& \sum_{m_1 \cdot m_2 = m} 
+\lambda_1(m) \cdot \lambda_2(m)
+\end{eqnarray*}
+
+One can see that $(S(M), +, \cdot)$ again is a semi-ring. We also write
+\[ \lambda := \sum_{\substack{m \in M\\\lambda(m)\neq 0}} m \cdot \lambda(m) \]
+or also
+\[ \sum_{\substack{m \in M\\\lambda(m)\neq 0}} m \cdot {<}\lambda, m{>} \]
+
+The operations are defined in a way that one can calculate with these
+expressions as usual.
+
+In the following we will most often consider the semi-ring $S = \mathbb{B}$, the
+{\bf Boolean semi-ring}.
+
+\bigskip
+Before proving our main theorem we will show some other results on finite
+automata with storage.
+
+\bigskip
+First we want to give a representation for graphs in the polycyclic monoid
+$\pocymon{Y}$.
+
+Let $G=(V, E)$ be a finite graph with $\card{E} = n$, let $\card{Y} = 2$ and
+$2^k \geq n$.
+
+Let $\beta: V \to Y^*$ be an injective mapping and let $\strlen{\beta(v)} = k$
+for each vertex $v \in V$.
+
+Further let $G' = (\setof{v_0}, E')$ be a single-vertex graph and $\phi: E \to
+E'$ a bijection on the edges, and let $Q(e') = Z(e') = v_0$ for each edge $e'
+\in E'$.
+
+The mapping $\phi$ can be uniquely continued to a functor $\phi : \pathcat{G}
+\to \pathcat{G'}$. As a functor, $\phi$ is also injective.
+
+We complement $G'$ by a storage $\gamma: E' \to \pocymon{Y}$ by setting
+\[ \gamma(e') := u^{-1} \cdot v\text{ where }u = \beta(Q(\phi^{-1}(e')))\text{
+and }v = \beta(Z(\phi^{-1}(e'))) \]
+
+In this way the storage ''characterizes'' the paths $\phi(\pathcat{G})$.
+
+Obviously it then holds
+\begin{lemma}
+\begin{eqnarray*}
+\pi \in \phi(\pathcat{G}) &\Leftrightarrow& \gamma(\pi) \neq 0 \\
+\gamma(\pi) \neq 0 &\Rightarrow& \gamma(\pi) = u^{-1} \cdot v \\
+&& \text{with }u = \beta(Q(\phi^{-1}(e'))) \\
+&& \text{and }v = \beta(Z(\phi^{-1}(e'))) \\
+&& \text{and }\pi = e'_1 \circ \pi' \circ e'_k
+\end{eqnarray*}
+\end{lemma}
+
+\begin{proof}
+''$\Rightarrow$'':
+
+Let $\pi \in \pathcat{G}$ be a path, $\pi = e'_1 \ldots e'_k \Rightarrow Z(e'_i)
+= Q(e'_{i+1})$.
+
+There exists a path $\psi \in \pathcat{G}$ such that $\psi = e_1 \ldots e_k$
+with $\phi(\psi) = \pi$.
+\begin{eqnarray*}
+&\Rightarrow& \beta(Z(\phi^{-1}(e'_i))) = \beta(Q(\phi^{-1}(e'_{i+1}))) \\
+&\Rightarrow& \beta(Z(\phi^{-1}(e'_i))) = \beta(Q(\phi^{-1}(e'_{i+1}))) \\
+\end{eqnarray*}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

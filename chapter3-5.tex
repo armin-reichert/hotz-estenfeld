@@ -104,9 +104,120 @@ There exists a path $\psi \in \pathcat{G}$ such that $\psi = e_1 \ldots e_k$
 with $\phi(\psi) = \pi$.
 \begin{eqnarray*}
 &\Rightarrow& \beta(Z(\phi^{-1}(e'_i))) = \beta(Q(\phi^{-1}(e'_{i+1}))) \\
-&\Rightarrow& \beta(Z(\phi^{-1}(e'_i))) = \beta(Q(\phi^{-1}(e'_{i+1}))) \\
+&\Rightarrow& \beta(Z(\phi^{-1}(e'_i)))^{-1} \cdot \beta(Q(\phi^{-1}(e'_{i+1})))
+= 1 \\
+&\Rightarrow& \gamma(e'_1 \ldots e'_k) = \beta(Q(\phi^{-1}(e'_1)))^{-1} \cdot
+\beta(Z(\phi^{-1}(e'_k)))
+\end{eqnarray*}
+
+''$\Leftarrow$'':
+
+Let $\pi \notin \phi(\pathcat{G}),\ \pi = e'_1 \ldots e'_k$ and there exists an
+index $i$ such that $Z(\phi^{-1}(e'_i)) \neq Q(\phi^{-1}(e'_{i+1}))$
+\begin{eqnarray*}
+&\Rightarrow& \beta(Z(\phi^{-1}(e'_i))) \neq \beta(Q(\phi^{-1}(s'_{i+1}))) \\
+&\Rightarrow& \beta(Z(\phi^{-1}(s'_i)))^{-1} \cdot \beta(Q(\phi^{-1}(e'_{i+1})))
+= 0
 \end{eqnarray*}
 \end{proof}
+
+We want to clarify the construction using an example. Let $G = (V, E)$ be the
+following graph:
+
+\begin{center}
+\input{figures/chapter3-5-lemma1-example.tikz}
+\end{center}
+
+It is $\card{V} = 4 \Rightarrow k = 2\ (= \log_2(4))$.
+
+The mapping $\beta: V \to Y^*,\ Y = \setof{(, [}$ shall be defined by
+\[ \beta(1) = [[,\quad \beta(2) = [(,\quad \beta(3) = ([,\quad \beta(4) = (( \]
+
+Let $\phi : E \to E'$ be a bijection and $\gamma: E' \to \pocymon{Y}$ with for
+example $\gamma(1) = )]([$.
+
+As a consequence to our construction we get
+
+\begin{theorem}
+For each regular language $L \in \reglang(X^*)$ there exists a homomorphism $h:
+X^* \to \mathbb{B}(\pocymon{Y})$ with
+\[ L = h^{-1}(u^{-1} \cdot v + \sum),\quad \sum \text{ finite sum in
+}\mathbb{B}(\pocymon{Y}) \]
+$h(x),\ x\in X$ contains only monomials of length $2 \cdot \log_2(n)$ where $n
+= \card{V}$.
+\end{theorem}
+
+\begin{proof}
+$L \in \reglang(X^*)$, then there exists a deterministic finite automaton
+\[ \fa{A} = (G, X, S, F, \alpha) \]
+with $\card{S} = \card{F} = 1$ which accepts $L$.
+
+To $G = (V, E)$ we construct the single-vertex graph $G' = (V', E')$ and the
+mapping $\phi:
+E \to E'$ as above. The labelling $\alpha$ is carried over to $E'$ by the
+bijection $\phi$. $\gamma$ shall also be defined as above.
+
+We merge all edges with the same label into a single edge $e'$ an define
+\[ \gamma'(e') := \sum_{s} \gamma(s) \quad\text{the edges $e$ have the same
+label and are merged to $s'$} \]
+and continue $\gamma'$ to a homomorphism.
+
+We define our homomorphism $h$ as
+\[ h: X^* \to \mathbb{B}(\pocymon{Y})\text{ defined by }h(x) := \gamma'(e'),\
+\alpha'(e') = x \]
+
+Then it holds: $w \in L_{\fa{A}} \Leftrightarrow h(w) = u^{-1} \cdot v + \sum$
+with $u = \beta(S)$ and $v = \beta(F)$ (exercise) and the length-condition is
+also fulfilled.
+\end{proof}
+
+\bigskip
+We want to use now our graph embedding construction to transform special finite
+automata with storage and to approach our goal, the deterministic finite
+automaton with storage.
+
+\begin{theorem}
+Let $\fa{P} = (\fa{A}, \pdstore{P})$ be an $\epsilon$-free automaton with
+storage monoid $\pocymon{Y}$, let the domain and co-domain be given by $D = C
+= \setof{\epsilon}$.
+
+Then there exists a deterministic finite automaton $\fa{P}' = (\fa{A}', \pdstore{P}')$
+with storage $\mathbb{B}(\pocymon{Y})$ (if $\card{Y} \geq 2$) and with
+\[ D' = \setof{\epsilon},\qquad C' = \setof{\beta(s)^{-1} \cdot \beta(f) +
+\mathbb{B}(\pocymon{Y}) \mid s\in S,\ f\in F} \]
+such that $L_{\fa{P}} = L_{\fa{P}'}$.
+
+If $\card{Y} = 1$ we add a second element to $Y$.
+\end{theorem}
+
+\begin{proof}
+In the first step we make $\fa{A} = (G, X, S, F, \alpha)$ deterministic as we
+have seen in chapter II.1. We also can assume without loss of generality that
+$\alpha(e) \in X$ and $\card{S} = 1$ (exercise).
+
+Let now
+\[ \fa{A}' = (G', X, S', F', \alpha') \]
+be the deterministic finite automaton where
+\[ G'=(V', E'),\quad V' = \powset{V} \]
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -33,7 +33,7 @@ We give an example for a rational transducer:
 Let $\fa{T} = (G, \setof{x}, \setof{a, b}, \setof{1}, \setof{3, 5}, \alpha,
 \beta)$ be given by the graph
 
-FIGURE
+\missingfigure
 
 The edges are labeled with the input/output symbols.
 
@@ -50,9 +50,11 @@ Let $\tau(\fa{T})$ be a rational transduction. Then $(\tau(\fa{T}))^{-1}$ is
 also a rational transduction.
 \end{lemma}
 
-Proof: Let \[ \fa{T} = (G, X, Y, S, F, \alpha, \beta) \] be a finite tranductor.
+\begin{proof}
+Let \[ \fa{T} = (G, X, Y, S, F, \alpha, \beta) \] be a finite tranductor.
 Then \[ \fa{T'} = (G, Y, X, S, F, \beta, \alpha) \] is a finite transducer and
 \[ \tau(\fa{T'}) = (\tau(\fa{T}))^{-1} \]
+\end{proof}
 
 We now define the image of a language under rational transduction:
 
@@ -73,7 +75,8 @@ then the image of $L$ under $\tau$ is a regular language over $Y^*$:
 \[ \tau(\fa{T})(L) \in \reglang(Y^*) \]
 \end{theorem}
 
-Proof: By definition, the image of $L$ can be presented as
+\begin{proof}
+By definition, the image of $L$ can be presented as
 \[ \tau(\fa{T})(L) = \beta\big( \alpha^{-1}(L) \cap \pathcat{G}(S, F) \big) \]
 
 $\alpha$ may be continued to a monoid homomorphism from $E^*$, the free monoid
@@ -88,6 +91,7 @@ We already know:
 \Rightarrow \beta(\alpha^{-1}(L) \cap \pathcat{G}(S, F)) \in
 \reglang(Y^*) & \mbox{Theorem 7, chapter 2.1}
 \end{eqnarray*}
+\end{proof}
 
 The next theorem gives an insight into the power of rational transductions.
 
@@ -96,21 +100,24 @@ For each $L \in \reglang(Y^*)$ there exists a length-preserving transducer
 $\fa{T}_L$ with \[ \tau(\fa{T}_L)(\setof{x}^*) = L \]
 \end{theorem}
 
-Proof: $L \in \reglang(Y^*) \Rightarrow$ there exists a finite automaton $\fa{B} =
+\begin{proof}
+$L \in \reglang(Y^*) \Rightarrow$ there exists a finite automaton $\fa{B} =
 (G, Y, S, F, \beta),\ G= (V, E)$ with $L = \beta(\pathcat{G}(S, F))$. For $X =
 \setof{x}$ set $\alpha(e) = x$ for all edges $e \in E$.
 
 Then $\alpha^{-1}(X^*) \cap \pathcat{G}(S, F) = \pathcat{G}(S, F)$, from which
 follows \[\beta(\alpha^{-1}(X^*) \cap \pathcat{G}(S, F)) = L\]
+\end{proof}
 
+\bigskip
 \begin{theorem}
 If $\tau_1 : X^* \to Y^*$ and $\tau_2 : Y^* \to Z^*$ are finite,
 length-preserving transductions, then $\tau_1 \circ \tau_2 : X^* \to Z^*$ is a
 finite transduction.
 \end{theorem}
 
-Proof: We want to illustrate the proof geometrically as shown in the following
-figure:
+\begin{proof}
+We want to illustrate the proof geometrically as shown in the following figure:
 
 \begin{center}
 \begin{tikzcd}[row sep=large]
@@ -120,8 +127,6 @@ figure:
 X^* \arrow[rr, "\tau_1"] & & Y^* \arrow[rr, "\tau_2"] & & Z^*
 \end{tikzcd}
 \end{center}
-
-(Translator's remark: I slightly changed names to make the proof more readable)
 
 We have the following situation:
 \[ \tau_1(u) = \beta^{(1)}\big( {\alpha^{(1)}}^{-1}(u) \cap R_1 \big) \]
@@ -166,6 +171,7 @@ Let $\omega_1 = \chi(\omega)$ and $\omega_2 = \rho(\omega)$ (''projections''), t
 
 By construction of $E_3$ it follows
 \[ \beta^{(1)}(\omega_1) = \alpha^{(2)}(\omega_2) \]
+\end{proof}
 
 \begin{corollary}
 Length-preserving transductions with composition form a category.
@@ -190,7 +196,8 @@ first transducer), then the composition $\tau(\fa{T}_1) \circ \tau(\fa{T}_2)$
 is a transduction.
 \end{theorem}
 
-Proof: Our assumption is described by the following figure:
+\begin{proof}
+Our assumption is described by the following figure:
 
 \begin{center}
 \begin{tikzcd}[row sep=large]
@@ -245,8 +252,8 @@ Then the composed transducer
 \beta^{(2)})\]
 computes the composition of transductions $\tau_1$ and $\tau_2$:
 \[ \tau(\fa{T}) = \tau(\fa{T}_1) \circ \tau(\fa{T}_2) \]
-
 (Exercise).
+\end{proof}
 
 In analogy to the corresponding result for finite automata it holds:
 
@@ -263,7 +270,8 @@ transducer \[\fa{T'} = (G', X, Y, S', F', \alpha', \beta')\] with
 which computes the same transduction as $\fa{T}$.
 \end{lemma}
 
-Proof: Let $\fa{T}$ be an arbitrary transducer. If an edge $e \in E$ has an
+\begin{proof}
+Let $\fa{T}$ be an arbitrary transducer. If an edge $e \in E$ has an
 input or output label longer than 1, that is $e \in E$ with $|\alpha(e)| = k >
 1$ or $|\beta(e)| = l > 1$ and $m := max(k, l)$, then a path of length $m$ is
 split as follows:
@@ -276,8 +284,9 @@ split as follows:
   \cdots e_m)$
 \end{enumerate}
 
-For the resulting transducer $\fa{T'}$ it holds \[ \tau(\fa{T}) = \tau(\fa{T}')
-\]
+For the resulting transducer $\fa{T'}$ it holds 
+\[ \tau(\fa{T}) = \tau(\fa{T}') \]
+\end{proof}
 
 The construction for making this transducer initial (single start state) is
 completely analog to the construction in lemma 1 in chapter 2.1.
@@ -285,8 +294,8 @@ completely analog to the construction in lemma 1 in chapter 2.1.
 From lemma 2 and theorem 4 we get directly
 
 \begin{theorem}[composition of rational transductions is a rational
-transduction] For rational transductions $\tau_1$ and $\tau_2$ the composition $\tau_1 \circ
-\tau_2$, if defined, is also a rational transduction.
+transduction] For rational transductions $\tau_1$ and $\tau_2$ the composition 
+$\tau_1 \circ \tau_2$, if defined, is also a rational transduction.
 \end{theorem}
 
 Remark: An equivalent definition of rational transductions can be given using
@@ -298,20 +307,4 @@ Multiplication of matrices corresponds to concatenation of paths in the graph of
 the transducer and to the union of sets of output words of these paths.
 
 The interested reader should refer to \cite{Berstel79} for more information.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

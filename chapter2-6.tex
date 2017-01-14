@@ -19,8 +19,7 @@ Let $\fa{A}$ be a finite automaton. Then the questions $\lang{A} = \emptyset?$
 and $\lang{A} = X^*?$ are decidable.
 \end{theorem}
 
-Proof:
-
+\begin{proof}
 ''$\lang{A} = \emptyset$?'':
 
 Because of $\lang{A} = \emptyset \Leftrightarrow \pathcat{G}(S, F) =
@@ -34,6 +33,7 @@ finite automaton $\fa{A}'$ from an automaton $\fa{A}$. From this deterministic
 automaton, one can construct an automaton $\fa{B}$ accepting the complement of
 $\lang{A}$. From $\lang{B} = \emptyset \Leftrightarrow \lang{A} = X^*$,
 and 1) follows the claim.
+\end{proof}
 
 \begin{definition}
 $\fa{A}$ is called {\bf weakly-equivalent} to an automaton $\fa{B}$ if the
@@ -45,8 +45,9 @@ For finite automata $\fa{A}$ and $\fa{B}$ it is decidable if $\lang{A} =
 \lang{B}$.
 \end{theorem}
 
-Proof: Without loss of generality we may assume that $\fa{A}$ and $\fa{B}$ are
-complete and deterministic. 
+\begin{proof}
+Without loss of generality we may assume that $\fa{A}$ and $\fa{B}$ are complete
+and deterministic.
 
 From $\fa{A}$ and $\fa{B}$ using our constructions we can directly give automata
 for 
@@ -58,7 +59,8 @@ and also for
 
 Because $\lang{A} = \lang{B} \Leftrightarrow \lang{C} = \emptyset$ which
 is decidable (theorem 1) we get the proof of theorem 2.
-
+\end{proof}
+ 
 We consider now the homomorphy between finite automata. Structure-preserving
 mappings between finite automata are called {\bf automata homomorphisms}.
 
@@ -98,8 +100,7 @@ Given an automata homomorphism $\beta: \fa{A} \to \fa{A'}$. If
 then $\beta''(\lang{A}) = \lang{A'}$.
 \end{theorem}
 
-Proof: 
-
+\begin{proof} 
 ''$\subset$'':
 
 Let $u \in \lang{A}$, then there exists a path $\pi \in \pathcat{G}(S, F)$
@@ -125,6 +126,7 @@ u'$, therefore $u' \in \beta''(\lang{A})$.
 \[ \Rightarrow  \beta''(\lang{A}) \supset \lang{A'} \]
 
 Together this proves \[ \lang{A'} = \beta''(\lang{A}) \]
+\end{proof}
 
 \begin{definition}[Reduction, closed homomorphism]
 Let $\fa{A}$ and $\fa{A'}$ be finite automata.
@@ -177,8 +179,9 @@ dashrightarrow, "\gamma_{\fa{B}}"]\\
 \end{center}
 \end{lemma}
 
-Proof: The idea of the proof is as follows: We create from $\fa{C}$ a new
-automaton $\fa{D}$ by putting those vertices and edges into classes which will
+\begin{proof}
+The idea of the proof is as follows: We create from $\fa{C}$ a
+new automaton $\fa{D}$ by putting those vertices and edges into classes which will
 be identified under the reductions $\beta_{\fa{A}}$ or $\beta_{\fa{B}}$. In that
 way we will get the reduction $\delta$. The difficulty that arises in
 identifying the edges is that the labelling of the edges has to be respected.
@@ -271,12 +274,12 @@ Finally we define the reductions $\gamma_{\fa{A}}$ and $\gamma_{\fa{B}}$ by
 \gamma_{\fa{A}}(e) & := & [\beta_{\fa{A}}^-1](e),\quad e \in E_{\fa{A}} \\
 \gamma_{\fa{B}}(e) & := & [\beta_{\fa{B}}^-1](e),\quad e \in E_{\fa{B}} \\
 \end{eqnarray*}
-\qed
+\end{proof}
 
 Remark: The requirement of our lemma, that the automata have to be complete, is
 essential, as the following example shows:
 
-FIGURE
+\missingfigure
 
 It holds: $\lang{A} = \lang{B} = \lang{C} = \setof{a^n \mid n \in \mathbb{N}}
 \cup \setof{b^n \mid n \in \mathbb{N}}$.
@@ -284,7 +287,7 @@ It holds: $\lang{A} = \lang{B} = \lang{C} = \setof{a^n \mid n \in \mathbb{N}}
 From our construction it follows $4 \equiv 2 \equiv 1 \equiv 3$ and the
 automaton $\fa{D}$ has the form
 
-FIGURE
+\missingfigure
 
 But $\lang{D} = \setof{a, b}^* \neq \lang{C}$. It follows:
 
@@ -421,7 +424,7 @@ At first, we want to start with an $\epsilon$-free automaton with $\alpha(e)
 Consider the step which makes this automaton initial (single start state). The
 construction was as follows:
 
-FIGURE
+\missingfigure
 
 Let $\fa{A}_1$ be the initial automaton with start state $Z_0$.
 
@@ -429,7 +432,7 @@ We construct an automaton $\fa{A}'_1$ by adding for each start state $i \in
 S_{\fa{A}}$ a state $i' \in V_G$ and setting $S_{\fa{A}'} = \setof{1', \ldots,
 k'}$:
 
-FIGURE
+\missingfigure
 
 The homomorphism $\phi : \fa{A}'_1 \to \fa{A}$ is defined by $\phi_1(i) =
 \phi_1(i') = i,\ i = 1, \ldots, k$ and the identity otherwise. Then $\phi$ is a
@@ -535,7 +538,7 @@ We now describe these reductions informally.
   properties are fulfilled.
   \item Removal of $\epsilon$-edges after insertion of bridges:
   
-  FIGURE
+  \missingfigure
   
   $\phi(e_1') = e_1 \cdot e_2,\quad Q(e_1') = Q(e_1),\quad Z(e_1') =
   Z(e_2),\quad \phi(e_2) = e_2$, identity otherwise.
@@ -573,7 +576,7 @@ We want to achieve the following:
 
 $\lang{A} = \lang{B}$, then there should exist a diagram
 
-FIGURE
+\missingfigure
 
 We specify for the complete, deterministic automaton a normal-form and define
 

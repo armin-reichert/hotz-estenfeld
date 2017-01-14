@@ -17,7 +17,8 @@ is the class of {\bf recognizable sets} over $X$.
 \[ \reglang(X^*) \subset \reclang(^*) \]
 \end{lemma}
 
-Proof: Let $L \in \reglang(X^*)$, then there exists a complete, deterministic finite
+\begin{proof}
+Let $L \in \reglang(X^*)$, then there exists a complete, deterministic finite
 automaton $\fa{A} = (G, X, S, F, \alpha)$ with graph $G = (V, E)$ accepting $L$.
 
 We define 
@@ -35,12 +36,15 @@ Let $\mu$ be the homomorphic continuation of mapping $\mu'$ where
 We define further \[ T := \setof{f \in H \mid f(S) \in F} \]
 
 Then it holds $\lang{A} = \mu^{-1}(T)$ (exercise).
+\end{proof}
 
+\bigskip
 \begin{lemma}
 \[ \reclang(X^*) \subset \reglang(X^*) \]
 \end{lemma}
 
-Proof: Sei $L \in \reclang(X^*)$, thus let $H$ be a finite monoid and $\mu : X^* \to
+\begin{proof}
+Sei $L \in \reclang(X^*)$, thus let $H$ be a finite monoid and $\mu : X^* \to
 H$ be a monoid homomorphism and $L = \mu^{-1}(T), T \subset H$.
 
 We construct a graph $G = (V, E)$:
@@ -50,7 +54,7 @@ Vertex set: $V := H$.
 Edges: $E := \setof{(h, a) \mid h \in H, a \in X}$ with $Q((h,a)) = h,
 Z((h,a)) = h \cdot \mu(a)$.
 
-FIGURE
+\missingfigure
 
 Let $\fa{A} = (G, X, S, F, \alpha)$ with $S = \setof{1_H},\ F = T,\ \alpha((h,
 a)) = a$.
@@ -72,6 +76,7 @@ $v \in \pathcat{G}$ with $\alpha(v) = x_1 \cdots x_n = w$. It even holds $v \in
 \pathcat{G}(\setof{1_h}, T)$ with $\alpha(v) = w$. For $w = x_1 \cdots x_n$
 then obviously holds $\mu(x_1 \cdots x_n) \in T$ thus $w \in \mu^{-1}(T) = L$ from
 which the claim follows.
+\end{proof}
 
 From both lemmata immediately follows
 
@@ -88,12 +93,14 @@ Let $\phi : X^* \to Y^*$ a monoid homomorphism, $L \in \reclang(Y^*) \Rightarrow
 \phi^{-1}(L) \in \reclang(X^*)$.
 \end{theorem}
 
+\begin{proof}
 Let $\phi : X^* \to Y^*$ and $L$ should be defined by monoid homomorphism $\mu'
 : Y^* \to H$ as $L = \mu'^{-1}(T)$ for a subset $T \subset H$.
 
 We set $\mu = \phi \circ \mu'$ and have $\mu : X^* \to H$ is a monoid
 homomorphism and $\phi^{-1}(L) = \mu^{-1}(T)$ from which follows $\phi^{-1}(L)
 \in \reclang(X^*)$.
+\end{proof}
 
 Exercise: For the integer numbers $\mathbb{Z}$ the set of recognizable sets
 $\reclang(\mathbb{Z})$ shall be defined in analogy to $\reclang(X^*)$.

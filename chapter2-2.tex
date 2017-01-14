@@ -29,7 +29,8 @@ This lemma is the first part of the following theorem by Kleene:
 \[ \reglang(X^*) = \ratlang(X^*) \]
 \end{theorem}
 
-Proof: We still have to proof the inclusion $\reglang(X^* \subset \ratlang(X^*))$.
+\begin{proof}
+We still have to proof the inclusion $\reglang(X^* \subset \ratlang(X^*))$.
 
 Let $\fa{A}$ be a finite automaton. We show that \lang{A} can be generated
 from $\emptyset$ and $\setof{x}, x \in X$	using $\cup$, $\cdot$ and
@@ -54,7 +55,7 @@ can be written as \begin{eqnarray*}
  e \Big)^* \cdot \pathcat{G_k}(R, F)
 \end{eqnarray*}
 
-FIGURE
+\missingfigure
 
 By induction hypothesis it holds:
 \[ \alpha(\pathcat{G_k}(S, F)) \in \ratlang(X^*) \]
@@ -65,30 +66,5 @@ By induction hypothesis it holds:
 From this we get $\alpha(\pathcat{G_{k+1}}(S, F)) \in \ratlang(X^*)$.
 
 This concludes the proof of Kleene's theorem.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\end{proof}
 

@@ -136,7 +136,8 @@ $\card{S'} = \card{F'} = 1$ and $\lang{A} = \lang{A'}$.
 
 An automaton with a single start state is called {\bf initial}.
 
-Proof: If $\card{S} = \card{F} = 1$ we are done.
+\begin{proof}
+If $\card{S} = \card{F} = 1$ we are done.
 
 \transrem{The proof in the original book was rather unreadable
 because of all these tildes, primes, indices etc. Therefore it has been
@@ -167,6 +168,7 @@ and the new labeling $\alpha'$ which is identical to $\alpha$ for all existing
 edges and is defined as shown above for the new edges.
 
 It is easily shown that $\lang{A'} = \lang{A}$.
+\end{proof}
 
 \begin{lemma}
 Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton. Then there
@@ -174,7 +176,8 @@ exists an automaton $\fa{A'} = (G', X, S', F', \alpha')$ with $\alpha'(e)
 \in X\ \forall e \in E(G)$ and $\lang{A} = \lang{A'}$.
 \end{lemma}
 
-Proof: We ''split'' all edges according to their labels.
+\begin{proof}
+We ''split'' all edges according to their labels.
 
 \begin{enumerate}
   \item Let $e \in E$ with $\alpha_2(e) = x_1 \cdots x_k,\ k > 1, x_i \in X$.\\
@@ -208,10 +211,11 @@ Proof: We ''split'' all edges according to their labels.
   finite. For the new automaton $\fa{A'}$ that results from this algorithm
   holds: $\lang{A'} = \lang{A}$.
 \end{enumerate}
+\end{proof}
 
 If we apply this algorithm to our automaton from example 1, we obtain:
 
-FIGURE
+\missingfigure
 
 Now we want to prove some closure properties of $\reglang(X^*)$.
 
@@ -220,7 +224,8 @@ Now we want to prove some closure properties of $\reglang(X^*)$.
 \reglang(X^*) \]
 \end{theorem}
 
-Proof: Let $L = \lang{A}$ and $L' = \lang{B}$ with automata \[
+\begin{proof}
+Let $L = \lang{A}$ and $L' = \lang{B}$ with automata \[
 \fa{A} = (G_A, X, S_A, F_A, \alpha) \] and \[ \fa{B} = (G_B, X, S_B,
 F_B, \beta).\]
 We may assume that the edge and point sets of both automata graphs are disjoint.
@@ -243,7 +248,7 @@ We may assume that the edge and point sets of both automata graphs are disjoint.
 	. \]
 	By lemma 2 we may assume that the edge labels are all single symbols from $X$.
 	
-	We define the new labeling $\delta_2$ by \[ \delta_2 : E' \to X,\
+	We define the new labelling $\delta_2$ by \[ \delta_2 : E' \to X,\
 	\delta_2((e_A, e_B) = \alpha_2(e_A)). \]
 	
 	For the automaton $\fa{A'} = (G', X, S_A \times S_B, F_A \times F_B,
@@ -251,12 +256,15 @@ We may assume that the edge and point sets of both automata graphs are disjoint.
 	and this automaton is called the {\bf cartesian product} of $\fa{A}$ and
 	$\fa{B}$.
 \end{enumerate}
+\end{proof}
 
+\bigskip
 \begin{theorem}[Regular languages are closed under mirror operation]
 \[ L \in \reglang(X^*) \Rightarrow L^R \in \reglang(X^*) \]
 \end{theorem}
 
-Proof: Let $\fa{A} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha)$ be a
+\begin{proof}
+Let $\fa{A} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha)$ be a
 finite acceptor for $L$.
 
 Create the graph $G' = (V(G), E')$ where $E'$ is a set with the same cardinality
@@ -267,7 +275,9 @@ which means we reverse the orientation of the edges.
 For the resulting automaton $\fa{A'} = (G', X, S_{\fa{A}},
 F_{\fa{A}}, \alpha')$ with $\alpha'(e') = \alpha(e)$ for all edges of $G'$
 it holds: $\lang{A'} = \lang{A}^R = L^R \in \reglang(X^*)$.
+\end{proof}
 
+\bigskip
 \begin{definition}
 Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton with
 $\alpha(E(G)) \subset X$ (each edge is labeled with a single
@@ -286,7 +296,8 @@ If \fa{A} is a finite automaton, then there exists a complete,
 deterministic automaton \fa{A'} which accepts the same language.
 \end{theorem}
 
-Proof: From our lemmata we may assume that $\card{S_{\fa{A}}} = 1$ and
+\begin{proof}
+From our lemmata we may assume that $\card{S_{\fa{A}}} = 1$ and
 $\alpha_2(e) \in X$ for all edges $e$ in the graph of \fa{A}.
 
 We construct an automaton \fa{A'} as follows (''subset construction''):
@@ -377,10 +388,13 @@ $x_1 \cdots x_k \in \lang{A} \Rightarrow \lang{A'} \subset \lang{A}$.
 \[ \Rightarrow \lang{A'} \subset \lang{A}\]
 
 From both inclusions we get $\lang{A} = \lang{A'}$.
+\end{proof}
 
+\bigskip
 Remark: The state set grows exponentially when the automaton is made
 deterministic. The following example will clarify this fact \cite{Commentz}.
 
+\bigskip
 Example: Let $X = \setof{a, b}$. Define for arbitrary, but fixed $n \in
 \mathbb{N}$ \[ L_n := \setof{w \mid w = w_1 \cdot w_2 \mbox{ with } w1 \neq w_2,
 |w_1| = |w_2| = n, w_1, w_2 \in X^*} \]
@@ -393,7 +407,7 @@ We want to give the automaton for $n = 3$:
 $\fa{A}_3 = (G_3, \setof{a,b}, \setof{1}, \setof{22}, \alpha)$ with the
 following graph $G_3$:
 
-FIGURE
+\missingfigure
 
 The labeling $\alpha$ is shown at the edges.
 
@@ -402,7 +416,7 @@ Exercise: Show that this automaton accepts $L_3$.
 If we construct for $L_3$ from the nondeterministic acceptor $\fa{A}_3$
 the deterministic acceptor $\fa{A'}_3$, the graph $G'_3$ looks as follows:
 
-FIGURE
+\missingfigure
 
 The edges pointing upwards are labeled with $a$ and the edges pointing downwards
 with $b$.
@@ -429,8 +443,7 @@ We want to state an important consequence from our last theorem.
 \[ L \in \reglang(X^*) \Rightarrow \bar{L} = X^* - L \in \reglang(X^*) \]
 \end{theorem}
 
-Proof: 
-
+\begin{proof}
 $L \in \reglang(X^*) \Rightarrow $ there exists a complete, deterministic
 finite acceptor $\fa{A}$ with $\lang{A} = L$.
 
@@ -446,12 +459,15 @@ This $w \in X^*$ uniquely determines a point $P \in V(G)$ with $w \in
 It is either $P \in F_{\fa{A}}$ or $P \in F_{\fa{A'}}$ and from $F_{\fa{A}}
 \cap F_{\fa{A}'} = \emptyset$ follows $w \in \lang{A} \Leftrightarrow w
 \notin \lang{A'}$ and therefore $\lang{A'} = \bar{\lang{A}}$.
+\end{proof}
 
+\bigskip
 \begin{theorem}[Regular languages are closed under concatenation]
 \[ L_1, L_2 \in \reglang(X^*) \Rightarrow L_1 \cdot L_2 \in \reglang(X^*) \]
 \end{theorem}
 
-Proof: $L_1, L_2 \in \reglang(X^*) \Rightarrow$\ there exist finite acceptors
+\begin{proof}
+$L_1, L_2 \in \reglang(X^*) \Rightarrow$\ there exist finite acceptors
 $\fa{A}_i = (G_i, X, S_i, F_i, \alpha_i)$ with $L_i = \lang{A}_i,\ i = 1,2$.
 
 We define a new acceptor
@@ -467,7 +483,7 @@ Edges:
 defined as follows:}
 \]
 
-FIGURE (bridge edge)
+\missingfigure (bridge edge)
 
 Here $R \in F1$ is a final state in $\fa{A}_1$, $x = \alpha_1(e_1)$ is the label
 of edge $e_1$, $P'$ is a start state in $\fa{A}_2$.
@@ -503,7 +519,7 @@ We now prove that $\lang{A} = \lang{A}_1 \cdot \lang{A}_2$.
   S_2$ and $P_j \in V(G_1)$ with $j < i$ because $V(G_1) \cap V(G_2) =
   \emptyset$.
   
-  FIGURE
+  \missingfigure
   
   Therefore the subpath \[ S_2 \ni P_i \edge{w_{i+1}} P_{i+1} \edge{} \ldots
   \edge{w_n} P_n \in F_2 \] contains only edges and vertices from $\fa{A}_2$ and
@@ -519,12 +535,15 @@ We now prove that $\lang{A} = \lang{A}_1 \cdot \lang{A}_2$.
 
 From (1) and (2) it follows $\lang{A} = \lang{A}_1 \cdot
 \lang{A}_2$.
+\end{proof}
 
+\bigskip
 \begin{theorem}[Regular languages are closed under Kleene-star]
 \[ L \in \reglang(X^*) \Rightarrow L^* \in \reglang(X^*) \]
 \end{theorem}
 
-FIGURE (graph construction)
+\begin{proof}
+\missingfigure (graph construction)
 
 Let $\fa{A} = (G, X, S, F, \alpha)$	be a finite acceptor for $L$, create the
 finite acceptor $\fa{A'} = (G', X, S, F, \alpha')$ as follows:
@@ -541,6 +560,7 @@ Graph: Take the graph $G$ and add the following edges:
 \end{enumerate}
 
 For the finite acceptor $\fa{A'}$ it holds (exercise): \[ \lang{A'} = L^* \]
+\end{proof}
 
 We have seen (lemma 1) that for nondeterministic automata a single start and a
 single final state are sufficient but in the deterministic case a single final

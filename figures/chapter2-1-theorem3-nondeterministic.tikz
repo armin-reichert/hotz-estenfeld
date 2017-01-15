@@ -1,0 +1,71 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$1$};
+		\node [style=state] (1) at (2, -2) {$2$};
+		\node [style=state] (2) at (2, 2) {$19$};
+		\node [style=state] (3) at (4, 3) {$20$};
+		\node [style=state] (4) at (4, 2) {$3$};
+		\node [style=state] (5) at (4, -0) {$7$};
+		\node [style=state] (6) at (4, -2) {$10$};
+		\node [style=state] (7) at (6, 2) {$4$};
+		\node [style=state] (8) at (6, 1) {$8$};
+		\node [style=state] (9) at (6, -0) {$11$};
+		\node [style=state] (10) at (6, -1) {$13$};
+		\node [style=state] (11) at (6, -2) {$16$};
+		\node [style=state] (12) at (6, 3) {$21$};
+		\node [style=state] (13) at (8, 2) {$5$};
+		\node [style=state] (14) at (8, 1) {$9$};
+		\node [style=state] (15) at (8, -0) {$12$};
+		\node [style=state] (16) at (8, -1) {$14$};
+		\node [style=state] (17) at (8, -2) {$17$};
+		\node [style=state] (18) at (10, 1) {$6$};
+		\node [style=state] (19) at (10, -0) {$15$};
+		\node [style=state] (20) at (10, -1) {$18$};
+		\node [style=state] (21) at (12, -0) {$22$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to (2);
+		\draw [style=transition, bend left=45, looseness=1.25] (2) to (3);
+		\draw [style=transition, bend left=45, looseness=1.75] (3) to (12);
+		\draw [style=transition] (12) to (13);
+		\draw [style=transition, bend left=45, looseness=1.25] (13) to (18);
+		\draw [style=transition, bend left=45, looseness=1.25] (18) to (21);
+		\draw [style=transition] (0) to (1);
+		\draw [style=transition] (1) to (6);
+		\draw [style=transition] (6) to (11);
+		\draw [style=transition, bend left, looseness=1.25] (11) to (17);
+		\draw [style=transition, bend left=15, looseness=1.00] (17) to (20);
+		\draw [style=transition] (20) to (21);
+		\draw [style=transition] (2) to (3);
+		\draw [style=transition] (3) to (12);
+		\draw [style=transition] (13) to (18);
+		\draw [style=transition] (18) to (21);
+		\draw [style=transition] (2) to (5);
+		\draw [style=transition] (2) to (6);
+		\draw [style=transition, bend left, looseness=1.00] (1) to (4);
+		\draw [style=transition] (1) to (4);
+		\draw [style=transition, bend left=45, looseness=1.25] (4) to (7);
+		\draw [style=transition] (4) to (7);
+		\draw [style=transition] (5) to (10);
+		\draw [style=transition] (5) to (11);
+		\draw [style=transition, bend left, looseness=1.25] (5) to (8);
+		\draw [style=transition, bend right=15, looseness=1.00] (5) to (8);
+		\draw [style=transition, bend left, looseness=1.00] (6) to (9);
+		\draw [style=transition, bend right=15, looseness=1.00] (6) to (9);
+		\draw [style=transition] (7) to (13);
+		\draw [style=transition, bend left, looseness=1.00] (8) to (14);
+		\draw [style=transition, bend right, looseness=1.00] (8) to (14);
+		\draw [style=transition, bend left, looseness=1.00] (9) to (15);
+		\draw [style=transition, bend right, looseness=1.00] (9) to (15);
+		\draw [style=transition, bend left, looseness=1.25] (10) to (16);
+		\draw [style=transition, bend right, looseness=1.00] (10) to (16);
+		\draw [style=transition, bend right, looseness=1.00] (11) to (17);
+		\draw [style=transition] (14) to (18);
+		\draw [style=transition] (15) to (18);
+		\draw [style=transition, in=180, out=60, looseness=1.00] (16) to (19);
+		\draw [style=transition, bend right=15, looseness=1.00] (16) to (19);
+		\draw [style=transition] (19) to (21);
+		\draw [style=transition, bend right, looseness=1.00] (17) to (20);
+		\draw [style=transition] (1) to (5);
+	\end{pgfonlayer}
+\end{tikzpicture}

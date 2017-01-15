@@ -164,7 +164,7 @@ derived.
 
 The new automaton $\fa{A'} = (G', X, \setof{S'}, \setof{F'}, \alpha')$ is
 defined by the graph $G' = (V \cup \setof{S', F'}, E \cup OUT' \cup IN')$
-and the new labeling $\alpha'$ which is identical to $\alpha$ for all existing 
+and the new labelling $\alpha'$ which is identical to $\alpha$ for all existing 
 edges and is defined as shown above for the new edges.
 
 It is easily shown that $\lang{A'} = \lang{A}$.
@@ -184,7 +184,7 @@ We ''split'' all edges according to their labels.
   Remove edge $e$ and add new edges $e'_1,
   \ldots, e'_k$ and new points $P'_1, \ldots, P'_{k-1}$ such that $(Q(e),
   e'_1, \ldots, e'_k, Z(e)) \in \pathcat{G'}$ and define a new graph $G' =
-  (V', E')$. The labeling of the new edges is defined by $\alpha'(e'_i) := x_i$
+  (V', E')$. The labelling of the new edges is defined by $\alpha'(e'_i) := x_i$
   for $i = 1, \ldots, k$.
   
   Then $\alpha_2(e) = \alpha'_2(e'_1) \cdots \alpha'_2(e'_k)$.
@@ -213,11 +213,15 @@ We ''split'' all edges according to their labels.
 \end{enumerate}
 \end{proof}
 
-If we apply this algorithm to our automaton from example 1, we obtain:
+If we apply this algorithm to our automaton from example 1, we obtain the
+following graph where the edge $k_5$ has disappeared:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-1-lemma2-example1.tikz}
+\end{center}
 
-Now we want to prove some closure properties of $\reglang(X^*)$.
+\bigskip
+We will prove now some closure properties of $\reglang(X^*)$.
 
 \begin{theorem}[Regular languages are closed under union and intersection]
 \[ L, L' \in \reglang(X^*) \Rightarrow L \cup L' \in \reglang(X^*) \wedge L \cap L' \in
@@ -396,20 +400,22 @@ deterministic. The following example will clarify this fact \cite{Commentz}.
 
 \bigskip
 Example: Let $X = \setof{a, b}$. Define for arbitrary, but fixed $n \in
-\mathbb{N}$ \[ L_n := \setof{w \mid w = w_1 \cdot w_2 \mbox{ with } w1 \neq w_2,
-|w_1| = |w_2| = n, w_1, w_2 \in X^*} \]
-
+\mathbb{N}$ \[ L_n := \setof{w \mid w = w_1 \cdot w_2 \mbox{ with } w_1 \neq
+w_2,\ |w_1| = |w_2| = n,\ w_1, w_2 \in X^*} 
+\]
 $L_n \in \reglang(X^*)$ because there exists a nondeterministic finite acceptor
 $\fa{A}_{n}$ with $L_n = L_{\fa{A}_{n}}$.
 
 We want to give the automaton for $n = 3$:
 
-$\fa{A}_3 = (G_3, \setof{a,b}, \setof{1}, \setof{22}, \alpha)$ with the
+Let $\fa{A}_3 = (G_3, \setof{a,b}, \setof{1}, \setof{22}, \alpha)$ with the
 following graph $G_3$:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-1-theorem3-nondeterministic.tikz}
+\end{center}
 
-The labeling $\alpha$ is shown at the edges.
+The labelling $\alpha$ is shown at the edges.
 
 Exercise: Show that this automaton accepts $L_3$.
 
@@ -643,7 +649,7 @@ E & = & \setof{e : \setof{\bar{S}} \to x \mid x \in S} \cup \setof{e : x \to y
 \end{eqnarray*}
 
 Consider the finite acceptor $\fa{A} = (G, X, \setof{\bar{X}}, F, \alpha)$ with
-labeling $\alpha$ defined by $\alpha_2(e) = Z(e)$ for each edge $e \in E$.
+labelling $\alpha$ defined by $\alpha_2(e) = Z(e)$ for each edge $e \in E$.
 
 Then it is clear that $\lang{A} = L$.
 \end{proof}

@@ -21,7 +21,7 @@ Remark: From this theorem the following claims can be derived (exercise):
   
 We want to introduce now the finite automaton with pushdown store. We define
 \begin{definition}
-$\pdstore{K} = (X, Y, \delta)$ is called {\bf simple pushdown store} with
+$\storage{K} = (X, Y, \delta)$ is called {\bf simple pushdown store} with
 input $X^*$ and stack-monoid $Y^*$ if
 \begin{itemize}
   \item[(K1)] $\delta: X \times Y^* \to Y^*$ is a mapping with
@@ -34,7 +34,7 @@ input $X^*$ and stack-monoid $Y^*$ if
 \end{itemize}
 \end{definition} 
 
-Obviously the simple pushdown store $\pdstore{K}$ is uniquely determined by
+Obviously the simple pushdown store $\storage{K}$ is uniquely determined by
 $\delta' = \delta |_{X \times (Y \cup \setof{\epsilon})}$. Each such mapping
 can be continued using (K2) onto $X \times Y^*$ such that one gets a simple
 pushdown store.
@@ -48,7 +48,7 @@ We extend $\delta$ onto $X^* \times Y^*$ by defining
 The following lemma holds:
 \begin{lemma}
 For $w \in \hgroup{X}$ there exists a pushdown store
-\[ \pdstore{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
+\[ \storage{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
 with $|w| = \delta(w, \epsilon)$.
 \end{lemma}
 
@@ -110,14 +110,10 @@ $\pocymon{X}$.
 We can now define the finite automaton with pushdown store.
 
 \begin{definition}[finite automaton with pushdown store, PDA]
-$\kappa = (\fa{A}, \pdstore{K})$ is called {\bf finite automaton with
-pushdown store} ({\bf PDA}) if $\fa{A} = (G, X, S, F, \alpha)$ is a
-finite automaton with graph $G = (V, E)$ and $\pdstore{K} = (E, Y,\delta)$ is a
-simple pushdown store.
+$\kappa = (\fa{A}, \storage{K})$ is called {\bf finite automaton with
+pushdown store} if $\fa{A} = (G, X, S, F, \alpha)$ is a finite automaton with
+graph $G = (V, E)$ and $\storage{K} = (E, Y,\delta)$ is a simple pushdown store.
 \end{definition}
-
-\transrem{In the original book, the pushdown store language ($PSL(\kappa)$) was
-called ''Kellerklasse'' (cellar class) and denoted by $KKL(\kappa)$.}
 
 Two sets are assigned to the PDA $\kappa$, the {\bf pushdown store language}
 $PSL(\kappa)$ which is the set of possible words on the pushdown store when
@@ -131,6 +127,9 @@ L_\kappa &:=& \setof{\alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
 \epsilon) = \epsilon}
 \end{eqnarray*}
 
+\transrem{In the original book, the pushdown store language $PSL(\kappa)$ was
+called ''Kellerklasse'' (cellar class) and denoted by $KKL(\kappa)$.}
+
 \begin{definition}
 \[ \alglang(X_\infty^*) := \setof{L \subset X_\infty^* \mid \text{there exists a PDA
 $\kappa$ with $L = L_\kappa$}}
@@ -141,7 +140,7 @@ is called the class of {\bf algebraic languages}.
 The pushdown store language $PSL(\kappa)$ is an example for our concept of
 generalizing finite automata by changing the monoid. 
 
-Let $\pdstore{K}=(X, Y, \delta)$ be a pushdown store. If to each $x\in X$ we
+Let $\storage{K}=(X, Y, \delta)$ be a pushdown store. If to each $x\in X$ we
 assign a mapping $\delta_x: Y^* \to Y^*,\ \delta_x(u) := \delta(x, u)$, then we can 
 represent a PDA $\kappa$ by the finite automaton
 \[ \fa{B} = (G, M, S, F, \beta),\quad G=(V,E) \]
@@ -201,18 +200,18 @@ We want to execute this idea formally:
 
 For the proof we construct an automaton $\fa{C}$ over the H-group $\hgroup{Y_0}$
 where $Y_0 := Y \cup \setof{y_0},\ y_0 \notin Y$ and the property
-\[ Y_0^* \cap |L_{\fa{C}}| = y_0 \cdot KKL(\kappa) \]
+\[ Y_0^* \cap |L_{\fa{C}}| = y_0 \cdot PSL(\kappa) \]
 
-From theorem 1 then follows that $y_0 \cdot KKL(\kappa)$ is regular and from
-this follows immediately $KKL(\kappa) \in \reglang(Y^*)$.
+From theorem 1 then follows that $y_0 \cdot PSL(\kappa)$ is regular and from
+this follows immediately $PSL(\kappa) \in \reglang(Y^*)$.
 
 \transrem{The proof in the book was completely unreadable to me. Therefore I
 used new names, added comments and figures.}
 
 \begin{proof}
-Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA with finite automaton
+Let $\kappa = (\fa{A}, \storage{K})$ be a PDA with finite automaton
 \[ \fa{A} = (G, X, S, F, \alpha) \]
-with graph $G = (V, E)$ and pushdown store $\pdstore{K}$.
+with graph $G = (V, E)$ and pushdown store $\storage{K}$.
 
 We define a finite automaton $\fa{C}$ with the H-group over $Y_0$ as its storage
 monoid:
@@ -279,7 +278,7 @@ This completes the definition of the finite automaton $\fa{C}$.
 
 We prove first that each accepting computation of the pushdown store may be
 simulated with the finite automaton $\fa{C}$:
-\[ y_0 \cdot KKL(\kappa) \subset |L_{\fa{C}}| \]
+\[ y_0 \cdot PSL(\kappa) \subset |L_{\fa{C}}| \]
 
 To prove this, we construct for each accepting path $\pi \in
 \pathcat{G}(S,F)$ an accepting path $\pi' \in
@@ -329,12 +328,12 @@ In $E'$ there exists an edge $e' : Q(e) \edge{y^{-1}z^{-1}z} Z(e) \in E
 We define $\psi' \circ e'$ as the path corresponding to $\psi \circ e$ and get
 $|y_0 \cdot \delta(\psi \circ e, \epsilon)| = |\gamma(\psi' \circ e')| = u$.
 
-This proves inductively the inclusion $y_0 \cdot KKL(\kappa) \subset
+This proves inductively the inclusion $y_0 \cdot PSL(\kappa) \subset
 |L_{\fa{C}}|$.
 
 
 We prove now:
-\[ y_0 \cdot Y^* \cap |L_{\fa{C}}| \subset y_0 \cdot KKL(\kappa) \]
+\[ y_0 \cdot Y^* \cap |L_{\fa{C}}| \subset y_0 \cdot PSL(\kappa) \]
 
 Let $\pi' \in \pathcat{G'}(\setof{s_0}, F)$ and $|\gamma(\pi')| \in y_0 \cdot
 Y^*$.
@@ -372,7 +371,7 @@ it holds also in this case $|\gamma(\psi' \circ e')| = y_0 \cdot |\delta(\psi
 \circ e, \epsilon)|$.
 
 By induction follows the inclusion $y_0 \cdot Y^* \cap |L_{\fa{C}}| \subset y_0
-\cdot KKL(\kappa)$.
+\cdot PSL(\kappa)$.
 
 Both inclusions give the proof of our theorem.
 \end{proof}

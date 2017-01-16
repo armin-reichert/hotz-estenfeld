@@ -13,11 +13,11 @@
 \newlength{\imagewidth}
 \newlength{\imagescale}
 \tikzstyle{none}=[inner sep=0pt]
-\tikzstyle{filled_vertex}=[circle,fill=black!50,minimum size=0.5cm] 
+\tikzstyle{filled_vertex}=[circle,fill=black!50,minimum size=2pt,inner sep=2pt] 
 \tikzstyle{state}=[circle,fill=white,draw=black]
 \tikzstyle{oval_state}=[ellipse,fill=white,draw=black]
 \tikzstyle{transition}=[-latex,draw=black]
-\tikzstyle{simple}=[-,draw=black,line width=2]
+\tikzstyle{simple}=[-,draw=black,line width=1pt]
 \tikzstyle{path}=[-latex,draw=gray]
 
 % theorem environments
@@ -45,17 +45,19 @@ here!}\end{center}}
 \newcommand{\generatedbyone}[1]{\mbox{${<}{#1}{>}$}}
 \newcommand{\generatedby}[2]{\mbox{${<}{#1},{#2}{>}$}}
 \newcommand{\hgroup}[1]{\mbox{${#1}^{[*]}$}}
+\newcommand{\inv}[1]{\mbox{${#1}^{-1}$}}
 \newcommand{\lang}[1]{\mbox{$L_{\mathfrak{#1}}$}}
 \newcommand{\pathcat}[1]{\mbox{$\mathfrak{W}({#1})$}}
-\newcommand{\pdstore}[1]{\mbox{$\mathcal{#1}$}}
 \newcommand{\pocymon}[1]{\mbox{${#1}^{(*)}$}}
 \newcommand{\powset}[1]{\mathfrak{P}({#1})}
 \newcommand{\production}[1]{\xrightarrow{{#1}}}
+\newcommand{\proj}[1]{\mathrm{proj}({#1})}
 \newcommand{\ratlang}{\mbox{{\bf RAT}}}
 \newcommand{\reclang}{\mbox{{\bf REC}}}
 \newcommand{\reglang}{\mbox{{\bf REG}}}
 \newcommand{\rlinlang}{\mbox{{\bf r-LIN}}}
 \newcommand{\setof}[1]{\mbox{$\{#1\}$}}
+\newcommand{\storage}[1]{\mbox{$\mathcal{#1}$}}
 \newcommand{\strlen}[1]{\mathrm{length}({#1})}
 \newcommand{\transrem}[1]{%
 \begin{center}%

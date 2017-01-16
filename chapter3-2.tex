@@ -25,13 +25,13 @@ Let $\phi : X^* \to Y^*$ be a monoid homomorphism.
 \end{theorem} 
 
 \begin{proof}
-$L \in \alglang(X^*) \Rightarrow$ there exists a PDA $\kappa = (\fa{A}, \pdstore{K})$
+$L \in \alglang(X^*) \Rightarrow$ there exists a PDA $\kappa = (\fa{A}, \storage{K})$
 with $L_{\kappa} = L$. Replace $\alpha$ by $\alpha' := \alpha \circ \phi$ in
 the definition of $\fa{A}$. 
 
 For
 \[ \fa{A'} = (G, Y, S, F, \alpha') \]
-the PDA $\kappa' = (\fa{A'}, \pdstore{K})$ accepts $\phi(L_{\kappa}) = \phi(L)$.
+the PDA $\kappa' = (\fa{A'}, \storage{K})$ accepts $\phi(L_{\kappa}) = \phi(L)$.
 \end{proof}
 
 \transrem{I changed names in the following proof for better readability.}
@@ -45,13 +45,13 @@ $\alglang(X^*)$ is closed under union, concatenation and Kleene-star.
 \[ L_1, L_2 \in \alglang(X^*) \Rightarrow L_1 \cup L_2 \in \alglang(X^*) \]
 \begin{proof}
 Let
-\[ \kappa_1 = (\fa{A}_1,\pdstore{K}_1),\quad \fa{A}_1 = (G_1, X,
-\setof{s_1}, \setof{f_1}, \alpha_1),\quad G_1 = (V_1, E_1),\quad \pdstore{K}_1 =
+\[ \kappa_1 = (\fa{A}_1,\storage{K}_1),\quad \fa{A}_1 = (G_1, X,
+\setof{s_1}, \setof{f_1}, \alpha_1),\quad G_1 = (V_1, E_1),\quad \storage{K}_1 =
 (X, Y_1, \delta_1)
 \]
 and
-\[ \kappa_2 = (\fa{A}_2,\pdstore{K}_2),\quad \fa{A}_2 = (G_2, X,
-\setof{s_2}, \setof{f_2}, \alpha_2),\quad G_2 = (V_2, E_2),\quad \pdstore{K}_2 =
+\[ \kappa_2 = (\fa{A}_2,\storage{K}_2),\quad \fa{A}_2 = (G_2, X,
+\setof{s_2}, \setof{f_2}, \alpha_2),\quad G_2 = (V_2, E_2),\quad \storage{K}_2 =
 (X, Y_2, \delta_2)
 \]
 be pushdown automata accepting $L_1$ resp.\ $L_2$.
@@ -63,7 +63,7 @@ Define the PDA $\kappa_1 \cup \kappa_2$ by
 \[ \fa{A}_1 \cup \fa{A}_2 := (G_1 \cup G_2, X, \setof{s_1}, \setof{f_2},
 \alpha_1 \cup \alpha_2) \]
 and pushdown store
-\[ \pdstore{K}_1 \cup \pdstore{K}_2 := (E_1 \cup E_2, Y_1 \cup Y_2 \cup
+\[ \storage{K}_1 \cup \storage{K}_2 := (E_1 \cup E_2, Y_1 \cup Y_2 \cup
 \setof{\infty}, \delta_1 \cup \delta_2) \]
 where
 \[ (\delta_1 \cup \delta_2)(e, y) = \begin{cases}
@@ -90,7 +90,7 @@ The following figure shows our construction:
 {\em Closure under complex product:}
 \[ L_1, L_2 \in \alglang(X^*) \Rightarrow L_1 \cdot L_2 \in \alglang(X^*) \]
 \begin{proof}
-We construct the PDA $\kappa = (\fa{A}, \pdstore{K})$ with 
+We construct the PDA $\kappa = (\fa{A}, \storage{K})$ with 
 \[\fa{A} = (G, X, \setof{s_1}, \setof{f_2}, \alpha)\]
 where
 \begin{eqnarray*}
@@ -111,7 +111,7 @@ The labelling of the graph $G$ is defined by
 
 \missingfigure
 
-The pushdown store $\pdstore{K} = (E, Y, \delta)$ is defined by
+The pushdown store $\storage{K} = (E, Y, \delta)$ is defined by
 \[ Y = Y_1 \cup Y_2 \cup \setof{\Join, \infty} \text{ with }\setof{\Join, \infty} \cap
 (Y_1 \cup Y_2) = \emptyset \]
 
@@ -201,7 +201,7 @@ So $w \in L_1 \cdot L_2$ and $L_1 \cdot L_2 \supset L_{\kappa}$.
 {\em Closure under Kleene-star:}
 \[ L \in \alglang(X^*) \Rightarrow L^* \in \alglang(X^*) \]
 \begin{proof}
-Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$. We construct a PDA
+Let $\kappa = (\fa{A}, \storage{K})$ be a PDA accepting $L$. We construct a PDA
 $\kappa'$ accepting $L^*$ as follows:
 \[ \fa{A}' = (G, X, \setof{s}, \setof{f}, \alpha')\]
 with
@@ -222,7 +222,7 @@ The new edges have the following source, target states and labelling:
 
 \missingfigure
 
-The pushdown store $\pdstore{K}' = (E', Y', \delta')$ is defined by $Y' = Y
+The pushdown store $\storage{K}' = (E', Y', \delta')$ is defined by $Y' = Y
 \cup \setof{y', y'', \infty}$ where $\setof{y', y'', \infty} \cap Y =
 \emptyset$ and $\delta'$ defined by
 \[ \delta'(e, y) = \begin{cases}
@@ -324,7 +324,7 @@ This completes the proof of our theorem.
 \end{theorem}
 
 \begin{proof}
-Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA with $L_{\kappa} = L$ and $\fa{B}$
+Let $\kappa = (\fa{A}, \storage{K})$ be a PDA with $L_{\kappa} = L$ and $\fa{B}$
 a complete, deterministic finite automaton accepting $R$. At each vertex, a loop
 labeled with $\epsilon$ should be attached.
 
@@ -338,7 +338,7 @@ $G = (V, E)$ where the vertex set $V$ is the cartesian product $V_{\fa{A}}
 Because $\fa{B}$ is complete and deterministic, it holds $L_{\fa{C}} =
 L_{\fa{A}} \cap L_{\fa{B}}$.
 
-Now let $\kappa' = (\fa{C}, \pdstore{K}')$ be a PDA with $\pdstore{K}' = (E,
+Now let $\kappa' = (\fa{C}, \storage{K}')$ be a PDA with $\storage{K}' = (E,
 Y, \delta')$ and $\delta'((e, e'), y) = \delta(e, y)$.
 For a word $w \in L_{\kappa'}$ there exists a path $\pi \in
 \pathcat{G}(S, F)$ with label $\alpha(\pi) = w$ and pushdown store
@@ -363,9 +363,9 @@ Let $\phi : X^* \to Y^*$ be a monoid homomorphism and $\phi(x) \in Y \cup
 been added}
 
 \begin{proof}
-Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$. For the language
+Let $\kappa = (\fa{A}, \storage{K})$ be a PDA accepting $L$. For the language
 \[ \phi^{-1}(L) = \setof{w \in X^* \mid \phi(w) \in L} \]
-we construct a PDA $\kappa' = (\fa{A}', \pdstore{K}')$ as follows (for
+we construct a PDA $\kappa' = (\fa{A}', \storage{K}')$ as follows (for
 simplicity, we construct the graph and the pushdown store in parallel):
 
 Let $\fa{A}$ be the finite automaton
@@ -400,8 +400,8 @@ form a cycle simulating the computation on the empty word. Formally:
   stack and popped again when $e''$ is traversed.
 \end{enumerate}
 
-The PDA $\kappa' = (\fa{A'}, \pdstore{K'})$ with pushdown store
-$\pdstore{K'} = (E', Y \cup \setof{\$}, \delta')$ with $\delta'$ defined as
+The PDA $\kappa' = (\fa{A'}, \storage{K'})$ with pushdown store
+$\storage{K'} = (E', Y \cup \setof{\$}, \delta')$ with $\delta'$ defined as
 above accepts the language $\phi^{-1}(L)$ (exercise).
 \end{proof}
 
@@ -450,15 +450,15 @@ substitution. Then
 \end{theorem}
 
 \begin{proof}
-Let $\kappa = (\fa{A}, \pdstore{K})$ be a PDA accepting $L$,
+Let $\kappa = (\fa{A}, \storage{K})$ be a PDA accepting $L$,
 \[ \fa{A}=(G, X, \setof{s}, \setof{f}, \alpha),\quad G=(V,E),\quad
-\pdstore{K}=(E, Y, \delta)
+\storage{K}=(E, Y, \delta)
 \]
 
-Let $\kappa_x = (\fa{A}_x, \pdstore{K}_x)$ be a PDA accepting $\sigma(x)$,
+Let $\kappa_x = (\fa{A}_x, \storage{K}_x)$ be a PDA accepting $\sigma(x)$,
 \[ \fa{A}_x = (G_x, A_x, \setof{s_x}, \setof{f_x}, \alpha_x),\quad G_x=(V_x,
 E_x) \] and
-\[ \pdstore{K}_x = (E_x, Y_x, \delta_x) \]
+\[ \storage{K}_x = (E_x, Y_x, \delta_x) \]
 
 We construct a PDA $\kappa'$ accepting $\sigma(L)$:
 
@@ -493,7 +493,7 @@ The pushdown computation is defined as follows:
 \delta'(e', y) &=& \infty\infty,\text{ else}
 \end{eqnarray*}
 
-We get a PDA $\kappa' = (\fa{A}', \pdstore{K}')$ with
+We get a PDA $\kappa' = (\fa{A}', \storage{K}')$ with
 \[ \fa{A}' = (G', X', \setof{s}, \setof{f}, ,\alpha'),\quad G'=(V',E') \]
 where the vertex set is
 \[ V' = V \cup \bigcup_{x \in X} V_x \cup \setof{p_e \mid e \in E} \]
@@ -510,7 +510,7 @@ The edge labels are defined by
 \end{cases} \]
 
 The pushdown store is defined as
-\[ \pdstore{K}' = (E', Y', \delta') \]
+\[ \storage{K}' = (E', Y', \delta') \]
 where the pushdown alphabet $Y'$ is
 \[ Y' = \bigcup_{x \in X} Y_x \cup \setof{{\$}_e \mid e \in E,\
 \alpha(e)\neq\epsilon} \cup \setof{\infty} \]

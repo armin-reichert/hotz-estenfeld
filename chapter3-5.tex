@@ -6,7 +6,7 @@ between non-determinism and determinism of finite automata with storage.
 To be able to construct the deterministic automaton we need some definitions.
 
 \begin{definition}
-A finite automaton with storage $\fa{P}=(\fa{A},\pdstore{P})$ is called
+A finite automaton with storage $\fa{P}=(\fa{A},\storage{P})$ is called
 \begin{itemize}
   \item {\bf $\epsilon$-free} if $\fa{A}$ is $\epsilon$-free,
   \item {\bf deterministic} if $\fa{A}$ is deterministic,
@@ -177,11 +177,11 @@ automata with storage and to approach our goal, the deterministic finite
 automaton with storage.
 
 \begin{theorem}
-Let $\fa{P} = (\fa{A}, \pdstore{P})$ be an $\epsilon$-free automaton with
+Let $\fa{P} = (\fa{A}, \storage{P})$ be an $\epsilon$-free automaton with
 storage monoid $\pocymon{Y}$, let the domain and co-domain be given by $D = C
 = \setof{\epsilon}$.
 
-Then there exists a deterministic finite automaton $\fa{P}' = (\fa{A}', \pdstore{P}')$
+Then there exists a deterministic finite automaton $\fa{P}' = (\fa{A}', \storage{P}')$
 with storage $\mathbb{B}(\pocymon{Y})$ (if $\card{Y} \geq 2$) and with
 \[ D' = \setof{\epsilon},\qquad C' = \setof{\beta(s)^{-1} \cdot \beta(f) +
 \mathbb{B}(\pocymon{Y}) \mid s\in S,\ f\in F} \]

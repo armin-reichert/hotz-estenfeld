@@ -15,7 +15,7 @@ automata.
 With the finite automaton with storage we have a universal model of automata.
 
 \begin{definition}
-$\fa{P} = (\fa{A}, \pdstore{P})$ is called {\bf finite automaton with storage}
+$\fa{P} = (\fa{A}, \storage{P})$ is called {\bf finite automaton with storage}
 $\iff$
 \begin{eqnarray*}
 & \fa{A}=(G, X, S, F, \alpha),\ (G=(V,E),\text{ is a finite automaton} \\
@@ -38,7 +38,7 @@ The following theorem gives a relation between the pushdown automaton and the
 finite automaton with storage.
 
 \begin{theorem}
-If $\kappa = (\fa{A}, \pdstore{K})$ is a pushdown automaton, then there exists a
+If $\kappa = (\fa{A}, \storage{K})$ is a pushdown automaton, then there exists a
 finite automaton with storage $\fa{P}$ with storage monoid $\hgroup{Y}$ such
 that $L_{\kappa} = L_{\fa{P}}$.
 \end{theorem}
@@ -56,8 +56,8 @@ be the finite automaton used in the proof with accepted language
 We set
 \[ M := \hgroup{Y},\qquad E' \to \hgroup{Y} \]
 
-Then for the automaton with storage $\fa{P}=(\fa{A}, \pdstore{P})$ with 
-\[ \pdstore{P} = (E', \hgroup{Y}, \setof{\epsilon}, \setof{y_0}, \gamma) \]
+Then for the automaton with storage $\fa{P}=(\fa{A}, \storage{P})$ with 
+\[ \storage{P} = (E', \hgroup{Y}, \setof{\epsilon}, \setof{y_0}, \gamma) \]
 it holds $L_\kappa = L_{\fa{P}}$.
 \end{proof}
 
@@ -70,21 +70,21 @@ We do not want to execute these constructions here.
 
 \bigskip
 \begin{theorem}[]
-Let $\fa{P}=(\fa{A}, \pdstore{P})$ be a finite automaton with storage monoid
+Let $\fa{P}=(\fa{A}, \storage{P})$ be a finite automaton with storage monoid
 $\pocymon{Y},\ C = D = \setof{\epsilon}$. Then there exists a pushdown automaton
-$\kappa = (\fa{A}, \pdstore{K})$ with $L_{\fa{P}} = L_\kappa$.
+$\kappa = (\fa{A}, \storage{K})$ with $L_{\fa{P}} = L_\kappa$.
 \end{theorem}
 
 \begin{proof}
-Let $\fa{P}=(\fa{A}, \pdstore{P})$ with
-\[ \fa{A}=(G, X, S, F, \alpha),\ G=(V,E),\quad \pdstore{P}=(E, \pocymon{Y},
+Let $\fa{P}=(\fa{A}, \storage{P})$ with
+\[ \fa{A}=(G, X, S, F, \alpha),\ G=(V,E),\quad \storage{P}=(E, \pocymon{Y},
 \setof{\epsilon}, \setof{\epsilon}, \gamma) \]
 
 Without loss of generality let $\gamma(e) \in Y \cup Y^{-1} \cup
 \setof{\epsilon}$ (this can be achieved by breaking the graph edges).
 
-We define the pushdown automaton $\kappa = (\fa{A}, \pdstore{K})$ as follows:
-\[ \pdstore{K} = (E, Y_1^*, \delta)\text{ with }Y_1 = Y \cup \setof{0} \]
+We define the pushdown automaton $\kappa = (\fa{A}, \storage{K})$ as follows:
+\[ \storage{K} = (E, Y_1^*, \delta)\text{ with }Y_1 = Y \cup \setof{0} \]
 
 The pushdown computation $\delta$ is 
 \[ \delta: E \times Y_1 \to (Y_1 \times Y_1) \cup Y_1 \cup \setof{\epsilon} \]
@@ -169,8 +169,8 @@ H-group over $X$:
 For
 \[ \fa{A} = (G', \setof{a, b,c d}, \setof{S}, \setof{F}, \alpha) \]
 and storage 
-\[ \pdstore{P} = (E', M, D, C, \gamma) \]
-the finite automaton with storage $\fa{P} = (\fa{A}, \pdstore{P})$ accepts L:
+\[ \storage{P} = (E', M, D, C, \gamma) \]
+the finite automaton with storage $\fa{P} = (\fa{A}, \storage{P})$ accepts L:
 \[ L_{\fa{P}} = \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(S, F),\ D \cdot
 \gamma(\pi) \cap C \neq \emptyset} = L \]
 

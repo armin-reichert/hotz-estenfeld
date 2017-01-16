@@ -21,72 +21,239 @@ local language.
 
 We want to formulate the theorem now.
 
-Let $D(X)$ be the Dyck language over the alphabet $X$ (see chapter I.3).
+Let $D(\Sigma)$ be the Dyck language over the alphabet $\Sigma$ (see chapter
+I.3).
 
-Remark: In the literature, often the language
-\[ \setof{w\in (\unioninv{X})^* \mid |w|= \epsilon\text{ in the free group
-}F(X)} 
-\] 
-is called Dyck language. We denote this language as {\em symmetric Dyck
-language}.
+Remark: In the literature, often the language \[ \setof{w\in
+(\unioninv{\Sigma})^* \mid |w|= \epsilon\text{ in the free group }F(\Sigma)} \]
+is called Dyck language. We denote that language as the {\em symmetric} Dyck
+language.
 
 With our notations the following theorem holds:
-\begin{theorem}[Chomsky-Schützenberger]
-To each algebraic language $L\in \alglang(X^*)$ there exists an alphabet $\Sigma
-\subset X_\infty$, a regular set $R\in \reglang((\unioninv{\Sigma})^*)$ and a monoid
-homomorphism $\phi: (\unioninv{\Sigma})^* \to X^*$ such that
+\begin{theorem}[Chomsky-Schützenberger] For each language $L\in \alglang(X^*)$
+there exists
+\begin{itemize}
+  \item an alphabet $\Sigma \subset X_\infty$
+  \item a regular set $R\in \reglang((\unioninv{\Sigma})^*)$
+  \item and a monoid homomorphism $\phi: (\unioninv{\Sigma})^* \to X^*$ such
+  that
+\end{itemize}
 \[ L = \phi(D(\Sigma)\cap R) \]
 \end{theorem}
 
+\transrem{The proof from the original book was hard to read, I tried to
+improve it a bit.}
+
 \begin{proof}
-$L\in \alglang(X^*) \Rightarrow$ it exists a PDA $\kappa=(\fa{A},\pdstore{K})$ with
+$L\in \alglang(X^*) \Rightarrow$ it exists a PDA $\kappa=(\fa{A},\storage{K})$ with
 $L = L_\kappa$, where $\fa{A}=(G, X, S, F, \alpha)$ is the corresponding finite
-automaton.
+automaton and $G=(V, E)$ the graph of $\fa{A}$.
 
-For the proof we use the graph $G'=(V',E')$ we constructed in theorem 2 of
-section III.1 and the mapping $\gamma: E' \to \hgroup{Y}$.
+For the proof we use the graph $G'=(V',E'),\ V' = V \cup \setof{s_0}$ we
+constructed in theorem 2 of section III.1 and the mapping $\gamma: E' \to \hgroup{Y}$.
 
-Our goal is to construct a graph $G''$ with edges from $\unioninv{\Sigma}$.
+Reminder: The graph $G'$ was constructed from $G$ by adding the following kinds
+of edges:
+\begin{itemize}
+  \item A start edge $e_0 \in \setof{s_0} \times S$ of the form 
+  \[e_0: s_0 \edge{y_0} s\] 
+  for each start vertex $s \in V$.
+  
+  \item ''PUSH''-edges $e' \in E \times Y$ of the form
+  \[e': Q(e) \edge{y^{-1} y z} Z(e)\]
+  for each edge $e \in E$ where the pushdown store computation ''pushes'' $z$,
+  i.e.\ $\delta(e, y) = z$. 
+  
+  The prefix $y^{-1} y$ realizes the non-deterministic guess of the topmost
+  stack symbol $y$.
+  
+  \item ''Empty-stack''-edges $e' \in E \times Y$ of the form
+  \[e': Q(e) \edge{y_0^{-1} y_0 \cdot \delta(e, \epsilon)} Z(e)\]
+  for each edge $e \in E$.
+  
+  The prefix $y_0^{-1} y_0$ realizes the non-deterministic guess of the
+  empty-stack symbol $y_0$.
+  
+  \item ''POP''-edges $e' \in E \times Y \times Y_0$ of the form
+  \[e': Q(e) \edge{y^{-1} z^{-1} z} Z(e)\]
+  for each edge $e \in E$ where the pushdown store ''pops'' $y$ from the stack,
+  i.e.\ $\delta(e, y) = \epsilon$.
+  
+  The suffix $z^{-1} z$ realizes the non-deterministic guess of the topmost
+  stack symbol $z$ after the ''pop'' has been executed.
+\end{itemize}
 
-To do so, we define a relation $\rho \subset E'\times E'$ on the edge set of
-$G'$ such that for edges $e_1, e_2\in E'$ it holds
-\[ e_1 \rho e_2 \iff e_1 = (e, y),\ e_2 = (e', y', y)\text{ with }\delta(e, y) =
-yy' \]
+Our goal is to construct a graph $\tilde{G}$ whose edges constitute the alphabet
+$\Sigma \cup \Sigma^{-1}$ of corresponding brackets.
 
-This relation can be represented by a bipartite graph that has the edges from
-$E'$ as its vertices and whose edges connect edges from $E'$ is these are
-related by $\rho$.
+We define a relation on the edge set of $E'$ which relates two edges if they
+constitute corresponding push/pop-operations in the computation path of $G'$.
 
-\transrem{TODO: write down the proof in a more readable form than in the book and
-illustrate its ideas using diagrams.}
+Formally define the relation $\rho \subset E' \times E'$ as
+\[ (e_1, e_2) \in \rho \iff e_1 = (e, y),\ e_2 = (e', z, y),\ \delta(e, y) = y
+z,\quad e \in E,\ y,z \in Y \]
+
+What does that mean?
+
+Consider a path in the graph $G$:
+
+\missingfigure
+
+In the graph $G'$ there exists a corresponding path
+
+\missingfigure
+
+Edges that are corresponding with respect to push and pop-operations are related
+to each other using the relation $\rho$. This relation (between edges) can be
+visualized as a bipartite graph:
+
+\missingfigure
+
+Edges in this relation graph point from ''opening brackets'' to ''closing
+brackets''. To each opening bracket a set of corresponding closing brackets is
+related. 
+
+To get a one-to-one relation the graph can be transformed by multiplying edges:
+
+\missingfigure
+
+In this graph each edge on the left representing a ''push''-operation
+(''opening bracket'') has exactly one edge on the right representing the
+corresponding ''pop''-operation (''closing bracket''). The edges on the right
+are called {\em parallel edges} and the new relation is denoted by $\rho'$.
+
+For edges $(e_1, e_2) \in \rho'$ we also write $e_2 = \inv{e_1}$ and call $e_2$
+the {\em inverse} edge to $e_1$. Both edges $e_1$ and $\inv{e_1}$ have the same
+source and target vertex in $G'$, i.e.\ $Q(e) = Q(\inv{e}),\ Z(e) = Z(\inv{e})$
+for each pair of edges $(e, \inv{e}) \in \rho'$.
+
+By our construction it holds: If $(e_1, e_2) \in \rho$ then there exists exactly
+one pair of parallel edges $(e'_1, e'_2)  \in \rho'$.
+
+From the graph $G'$ we construct a new graph $\tilde{G} = (\tilde{V},
+\tilde{E})$ by
+\begin{eqnarray*}
+\tilde{V} &=& V' \ (=V \cup \setof{s_0}) \\
+\tilde{E} &=& \setof{e_2 \mid e_2\text{ is parallel edge for some $e_1 \in E'$}}
+\end{eqnarray*}
+
+If $e_2 \in \tilde{E}$ is parallel edge to some $e_1 \in E'$ we write $e_1 =
+\proj{e_2}$ (projection). For each path $\tilde{\pi} \in \pathcat{\tilde{G}}$ it
+holds $\proj{\tilde{\pi}} \in \pathcat{G'}$.
+
+We define the set of {\em valid} paths in $\tilde{G}$ by
+\begin{eqnarray*}
+R &=& \{ e_1 \ldots e_k \in \pathcat{\tilde{G}} \mid e_i \in \tilde{E} \\
+& & \text{and for each pair }(e_i, e_{i+1})\text{ of consecutive edges it
+holds:}\\
+& & \gamma(\proj{e_i} \circ \proj{e_{i+1}}) \not\equiv 0\text{ in the
+polycyclic monoid }\pocymon{Y} \}
+\end{eqnarray*} 
+
+The path set $R$ contains exactly those paths in $\tilde{G}$ whose projections
+in $G'$ have valid pushdown store computations.
+
+We define the set of {\em valid accepting} paths in $\tilde{G}$ by
+\begin{equation*}
+R' = \setof{\pi \in R \mid Q(\pi) \in S,\quad Z(\pi) \in F}
+\end{equation*}
+
+Note that both, $R$ and $R'$ are local sets.
+
+We define the alphabet $\Sigma$ as 
+\begin{equation*}
+\Sigma := \tilde{E}^+ := \setof{e \in \tilde{E} \mid \proj{e} =
+\underbrace{(e,y)}_{\text{''PUSH''}-edge}}
+\end{equation*}
+
+Then the edge set of $\tilde{G}$ is divided into $\tilde{E} = \tilde{E}^+ \cup
+\tilde{E}^-$.
+
+The proof uses the following two lemmata which describe the relation between
+accepting paths in $\tilde{G}$ and accepting paths in $G'$.
+
+\begin{lemma}
+If $\tilde{\pi} \in R$ and $\pi \equiv \epsilon \pmod{{<}e\circ \inv{e} =
+\epsilon{>}}$ then for the projection $\pi = \proj{\tilde{\pi}}$ holds:
+\[ |\gamma(\pi)| = y \inv{y}\text{ for suitable }y \in Y \]
+\end{lemma}
+
+\begin{proof}
+TODO
 \end{proof}
 
+\begin{lemma}
+For each path $\pi \in \pathcat{G'}$ with
+\[ |\gamma(\pi)| = \inv{y} y \quad\text{for some }y \in Y \]
+there exists exactly one path $\tilde{\pi} \in \pathcat{\tilde{G}} \cap R$ with
+\[ |\tilde{\pi}| = \epsilon\text{ and }\pi = \proj{\tilde{\pi}} \] 
+\end{lemma}
+
+\begin{proof}
+TODO
+\end{proof}
+
+Similar as after lemma 1 one can conclude that for each path $\pi \in
+\pathcat{G'}(S, F)$ with $|\gamma(\pi) = \inv{y_0}y_0$ there exists exactly one
+path $\tilde{\pi} \in \pathcat{\tilde{G}}(S, F) \cap R'$ with
+$\proj{\tilde{\pi}} = \pi$ and $|\tilde{\pi} = \epsilon$.
+
+From both lemmata the theorem is proved:
+
+By definition
+\[ L_\kappa = \setof{\alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
+\epsilon) = \epsilon} \]
+
+By theorem 2 from chapter III.1 we get
+\begin{eqnarray*}
+L_\kappa &=& \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(s_0, F),\
+|\gamma(\pi)| = y_0} \\
+&=& \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(S, F),\
+|\gamma(\pi)| = \inv{y_0} y_0}\text{ (by construction of $G'$)}
+\end{eqnarray*}
+
+If we define $\tilde{R} := \pathcat{G}(S, F) \cap R'$ we get
+\[ \tilde{R} \in \reglang(\unioninv{\Sigma})^* \]
+because the intersection of regular language is again regular language.
+
+\medskip
+Together with lemma 1 and lemma 2 it follows
+\[ \proj{\tilde{R} \cap D(\underbrace{\tilde{E}^+}_{\Sigma})} = \setof{\pi \in
+\pathcat{G'}(s_0, F) \mid |\gamma(\pi)| = y_0} \]
+
+With homomorphism $\phi := \proj{} \circ \alpha : (\unioninv{\Sigma})^* \to X^*$
+we get
+\[ L_\kappa = \phi(D(\Sigma) \cap \tilde{R}) \]
+\end{proof}
+
+\bigskip
 We get the following
 \begin{corollary}
-Foe each PDA $\kappa$ there exists a Dyck language $D(\Sigma)$ and a local set
+For each PDA $\kappa$ there exists a Dyck language $D(\Sigma)$ and a local set
 $R$ over $\unioninv{\Sigma}$ and a monoid homomorphism $\phi:
 (\unioninv{\Sigma})^* \to X^*$ such that
 \begin{enumerate}
   \item $\phi(D(\Sigma\cap R)) = L_\kappa$
-  \item For $w\in X^*$ it holds $<\kappa, w> = \card{\phi^{-1}(w)}$
+  \item For $w\in X^*$ it holds ${<}\kappa, w{>} = \card{\phi^{-1}(w)}$
 \end{enumerate}
 \end{corollary}
 
-\begin{proof}
+\begin{proof}\ 
+
 \begin{enumerate}
-  \item Theorem of Chomsky-Schützenberger
-  \item Follows from the construction in the proof
+  \item Chomsky-Schützenberger theorem
+  \item Follows from the construction in the proof.
 \end{enumerate}
 \end{proof}
 
 We even proved slightly more:
 
-Let \[ <\kappa, w> := \card{\setof{\pi\in\pathcat{G}(S,F)\mid
-\alpha(\pi)=w,\ \delta(\pi,\epsilon)=\epsilon}}
-\]
+Let \[ {<}\kappa, w{>} := \card{\setof{\pi \in \pathcat{G}(S,F) \mid \alpha(\pi)
+= w,\ \delta(\pi, \epsilon) = \epsilon}} \]
+
 Problem: Is it possible to always find a PDA $\kappa$ accepting an algebraic
-language $L \in \alglang(X^*)$ such that for each word $w$ it holds $<\kappa, w> <
-\infty$?
+language $L \in \alglang(X^*)$ such that for each word $w$ it holds 
+${<}\kappa, w{>} < \infty$?
 
 If the definition of the pushdown store is generalized such that $\delta(X
 \times Y) \subset Y*$ is allowed, is then the condition $<\kappa, w> <
@@ -95,10 +262,11 @@ If the definition of the pushdown store is generalized such that $\delta(X
 At the end of this section we want to mention the following (for the interested
 reader):
 
-Because $D(\Sigma) \in \alglang(X_\infty^*)$ and by theorem 1 in section III.2 the
-class of algebraic languages is closed under monoid homomorphism and by theorem
-3 in chapter III.2 under intersection with regular sets, from the theorem of
-Chomsky-Schützenberger follows that the class of algebraic languages over the
-alphabet $X_\infty$ equals the class of context-free languages.
+Because the Dyck language $D(\Sigma) \in \alglang(X_\infty^*)$ and by theorem 1
+in section III.2 it follows that the class of algebraic languages is closed
+under monoid homomorphism and by theorem 3 in chapter III.2 under intersection 
+with regular sets, from the theorem of Chomsky-Schützenberger it follows that
+the class of algebraic languages over the alphabet $X_\infty$ equals the class 
+of context-free languages.
 
 The problem above will be investigated in a later chapter.

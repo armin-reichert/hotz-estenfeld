@@ -7,17 +7,17 @@ In the literature, the proof of this theorem is always based on grammars.
 
 We will give an automata-theoretic access to this theorem. We present this
 theorem at this place in the book because it can be very well appended to the
-section on pushdown classes (chapter III.1) from a proof technical point of
+section on pushdown languages (chapter III.1) from a proof technical point of
 view. A similar access to this theorem has been given by Goldstine
 \cite{Goldstine77} (?).
 
-The Chomsky-Schützenberger theorem characterizes the the context-free languages
+The Chomsky-Schützenberger theorem characterizes the context-free languages
 by a very simple subclass of context-free languages with the use of a
 homomorphism.
 
 In this respect the theorem is an analogon to lemma 7 in chapter II.1 where we
-proved that each regular language can be presented as a homomorphic image of a
-local language.
+proved that each regular language can be presented as the homomorphic image of
+a local language.
 
 We want to formulate the theorem now.
 
@@ -49,8 +49,9 @@ $L\in \alglang(X^*) \Rightarrow$ it exists a PDA $\kappa=(\fa{A},\storage{K})$ w
 $L = L_\kappa$, where $\fa{A}=(G, X, S, F, \alpha)$ is the corresponding finite
 automaton and $G=(V, E)$ the graph of $\fa{A}$.
 
-For the proof we use the graph $G'=(V',E'),\ V' = V \cup \setof{s_0}$ we
-constructed in theorem 2 of section III.1 and the mapping $\gamma: E' \to \hgroup{Y}$.
+For the proof we use the graph $G'=(V',E'),\ V' = V \cup \setof{s_0}$, which we
+constructed in theorem 2 of section III.1 and the mapping $\gamma: E' \to 
+\hgroup{Y}$.
 
 Reminder: The graph $G'$ was constructed from $G$ by adding the following kinds
 of edges:
@@ -87,7 +88,7 @@ Our goal is to construct a graph $\tilde{G}$ whose edges constitute the alphabet
 $\Sigma \cup \Sigma^{-1}$ of corresponding brackets.
 
 We define a relation on the edge set of $E'$ which relates two edges if they
-constitute corresponding push/pop-operations in the computation path of $G'$.
+constitute corresponding push/pop-operations in computation paths of $G'$.
 
 Formally define the relation $\rho \subset E' \times E'$ as
 \[ (e_1, e_2) \in \rho \iff e_1 = (e, y),\ e_2 = (e', z, y),\ \delta(e, y) = y
@@ -109,11 +110,12 @@ visualized as a bipartite graph:
 
 \missingfigure
 
-Edges in this relation graph point from ''opening brackets'' to ''closing
+Edges in this relation graph go from ''opening brackets'' to ''closing
 brackets''. To each opening bracket a set of corresponding closing brackets is
 related. 
 
-To get a one-to-one relation the graph can be transformed by multiplying edges:
+To get a one-to-one relation the graph can be transformed by multiplying edges
+if needed:
 
 \missingfigure
 
@@ -124,8 +126,8 @@ are called {\em parallel edges} and the new relation is denoted by $\rho'$.
 
 For edges $(e_1, e_2) \in \rho'$ we also write $e_2 = \inv{e_1}$ and call $e_2$
 the {\em inverse} edge to $e_1$. Both edges $e_1$ and $\inv{e_1}$ have the same
-source and target vertex in $G'$, i.e.\ $Q(e) = Q(\inv{e}),\ Z(e) = Z(\inv{e})$
-for each pair of edges $(e, \inv{e}) \in \rho'$.
+source and target vertex in $G'$, i.e.\ $Q(e_1) = Q(\inv{e_1}),\ Z(e_1) =
+Z(\inv{e_1})$.
 
 By our construction it holds: If $(e_1, e_2) \in \rho$ then there exists exactly
 one pair of parallel edges $(e'_1, e'_2)  \in \rho'$.
@@ -134,11 +136,12 @@ From the graph $G'$ we construct a new graph $\tilde{G} = (\tilde{V},
 \tilde{E})$ by
 \begin{eqnarray*}
 \tilde{V} &=& V' \ (=V \cup \setof{s_0}) \\
-\tilde{E} &=& \setof{e_2 \mid e_2\text{ is parallel edge for some $e_1 \in E'$}}
+\tilde{E} &=& \setof{e_2 \mid e_2\text{ is the parallel edge for some $e_1 \in
+E'$}}
 \end{eqnarray*}
 
-If $e_2 \in \tilde{E}$ is parallel edge to some $e_1 \in E'$ we write $e_1 =
-\proj{e_2}$ (projection). For each path $\tilde{\pi} \in \pathcat{\tilde{G}}$ it
+If $e_2 \in \tilde{E}$ is the parallel edge for some $e_1 \in E'$ we write $e_1
+= \proj{e_2}$ (projection). For each path $\tilde{\pi} \in \pathcat{\tilde{G}}$ it
 holds $\proj{\tilde{\pi}} \in \pathcat{G'}$.
 
 We define the set of {\em valid} paths in $\tilde{G}$ by
@@ -155,7 +158,7 @@ in $G'$ have valid pushdown store computations.
 
 We define the set of {\em valid accepting} paths in $\tilde{G}$ by
 \begin{equation*}
-R' = \setof{\pi \in R \mid Q(\pi) \in S,\quad Z(\pi) \in F}
+R' = \setof{\pi \in R \mid Q(\pi) \in S,\ Z(\pi) \in F}
 \end{equation*}
 
 Note that both, $R$ and $R'$ are local sets.
@@ -194,11 +197,11 @@ TODO
 \end{proof}
 
 Similar as after lemma 1 one can conclude that for each path $\pi \in
-\pathcat{G'}(S, F)$ with $|\gamma(\pi) = \inv{y_0}y_0$ there exists exactly one
+\pathcat{G'}(S, F)$ with $|\gamma(\pi)| = \inv{y_0}y_0$ there exists exactly one
 path $\tilde{\pi} \in \pathcat{\tilde{G}}(S, F) \cap R'$ with
-$\proj{\tilde{\pi}} = \pi$ and $|\tilde{\pi} = \epsilon$.
+$\proj{\tilde{\pi}} = \pi$ and $|\tilde{\pi}| = \epsilon$.
 
-From both lemmata the theorem is proved:
+From both lemmata the proof of the theorem follows:
 
 By definition
 \[ L_\kappa = \setof{\alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
@@ -214,15 +217,15 @@ L_\kappa &=& \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(s_0, F),\
 
 If we define $\tilde{R} := \pathcat{G}(S, F) \cap R'$ we get
 \[ \tilde{R} \in \reglang(\unioninv{\Sigma})^* \]
-because the intersection of regular language is again regular language.
+because the intersection of regular languages is again regular language.
 
 \medskip
 Together with lemma 1 and lemma 2 it follows
 \[ \proj{\tilde{R} \cap D(\underbrace{\tilde{E}^+}_{\Sigma})} = \setof{\pi \in
 \pathcat{G'}(s_0, F) \mid |\gamma(\pi)| = y_0} \]
 
-With homomorphism $\phi := \proj{} \circ \alpha : (\unioninv{\Sigma})^* \to X^*$
-we get
+With homomorphism $\phi := \mathrm{proj} \circ \alpha : (\unioninv{\Sigma})^*
+\to X^*$ we get
 \[ L_\kappa = \phi(D(\Sigma) \cap \tilde{R}) \]
 \end{proof}
 
@@ -256,7 +259,7 @@ language $L \in \alglang(X^*)$ such that for each word $w$ it holds
 ${<}\kappa, w{>} < \infty$?
 
 If the definition of the pushdown store is generalized such that $\delta(X
-\times Y) \subset Y*$ is allowed, is then the condition $<\kappa, w> <
+\times Y) \subset Y*$ is allowed, is then the condition ${<}\kappa, w{>} <
 \infty$ always satisfiable?
 
 At the end of this section we want to mention the following (for the interested

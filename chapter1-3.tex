@@ -66,18 +66,18 @@ is called the {\bf polycyclic monoid}.
 \end{definition}
 
 Using the naming of the previous section we get:
-\[ X^{(*)} = synt_{X^*}(D(X)) \]
+\[ \pocymon{X} = synt_{X^*}(D(X)) \]
 which means:
 
 The polycyclic monoid is the syntactic monoid of the Dyck language (exercise).
 
 \begin{definition}
 \[ F(X) := (\unioninv{X})^*\ /\ \setof{x \cdot x^{-1} = x^{-1} \cdot x = 1 \mid
-x \in X}
-\]
+x \in X} \]
 \end{definition}
 is the {\bf free group} over $X$.
 
+\label{dyck-language}
 Remark: It holds $D(X) = [1]_{\pocymon{X}}$ and $D(X) = [1]_{\hgroup{X}}$ which
 means the Dyck language is the set of words from $(\unioninv{X})^*$ which can be
 reduced to the empty word either using the equations of the H-group or the

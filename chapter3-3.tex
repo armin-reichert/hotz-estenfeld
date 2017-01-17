@@ -7,7 +7,7 @@ In the literature, the proof of this theorem is always based on grammars.
 
 We will give an automata-theoretic access to this theorem. We present this
 theorem at this point in the book because from a proof technical point of
-view it can be very well be appended to the section on pushdown languages
+view it can very well be appended to the section on pushdown languages
 (chapter III.1). A similar access to this theorem has been given by Goldstine
  \cite{Goldstine77,Goldstine79,Goldstine80}.
 
@@ -22,7 +22,7 @@ a local language.
 We want to formulate the theorem now.
 
 Let $D(\Sigma)$ be the Dyck language over the alphabet $\Sigma$ (see chapter
-I.3).
+I.3, page \pageref{dyck-language}).
 
 Remark: In the literature, often the language \[ \setof{w\in
 (\unioninv{\Sigma})^* \mid |w|= \epsilon\text{ in the free group }F(\Sigma)} \]
@@ -87,20 +87,21 @@ of edges:
 Our goal is to construct a graph $\tilde{G}$ whose edges constitute the alphabet
 $\Sigma \cup \Sigma^{-1}$ of corresponding brackets.
 
-We define a relation on the edge set of $E'$ which relates two edges if they
-constitute corresponding push/pop-operations in computation paths of $G'$.
+We define a relation $\rho$ on the edge set $E'$ which relates two edges if they
+carry corresponding push/pop-operations in computation paths of $G'$.
 
-Formally define the relation $\rho \subset E' \times E'$ as
-\[ (e_1, e_2) \in \rho \iff e_1 = (e, y),\ e_2 = (e', z, y),\ \delta(e, y) = y
-z,\quad e \in E,\ y,z \in Y \]
+Formally, the relation $\rho \subset E' \times E'$ is defined as follows: For
+edges $e', f' \in E'$
+\[ e' \,\rho\, f' \iff e' = (e, y)\text{ with }\delta(e, y) = y z,\quad f' = (f,
+z, y),\quad e, f \in E,\ y,z \in Y \]
 
-What does that mean? Consider a path in the graph $G$:
+Consider a path in the graph $G$:
 
 \begin{center}
 \input{figures/chapter3-3-theorem1-path-in-g.tikz}
 \end{center}
 
-In the graph $G'$ there exists a corresponding path
+The corresponding path in the graph $G'$:
 
 \begin{center}
 \input{figures/chapter3-3-theorem1-path-in-gprime.tikz}
@@ -114,21 +115,20 @@ visualized as a bipartite graph:
 \input{figures/chapter3-3-theorem1-bipartite-1.tikz}
 \end{center}
 
-Edges in this relation graph go from ''opening brackets'' to ''closing
-brackets''. To each opening bracket a set of corresponding closing brackets is
-related. 
+Edges in this relation graph connect edges from $G'$ representing ''opening
+brackets'' (PUSH) with corresponding edges from $G'$ representing
+''closing brackets'' (POP).
 
-To get a one-to-one relation the graph is transformed by multiplying edges
-as needed:
+To get a one-to-one relation, the edges of $\rho$ are multiplied (if
+needed) which yields a new relation $\rho'$ in which each opening bracket has a
+unique closing bracket:
 
 \begin{center}
 \input{figures/chapter3-3-theorem1-bipartite-2.tikz}
 \end{center}
 
-In this graph, each edge on the left representing a ''push''-operation
-(''opening bracket'') has exactly one edge on the right representing the
-corresponding ''pop''-operation (''closing bracket''). The edges on the right
-are called {\em parallel edges} and the new relation is denoted by $\rho'$.
+The edges that are created from an edge $e$ by multiplying are called {\em
+parallel edges} of $e$.
 
 For edges $(e_1, e_2) \in \rho'$ we also write $e_2 = \inv{e_1}$ and call $e_2$
 the {\em inverse} edge to $e_1$.

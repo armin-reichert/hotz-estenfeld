@@ -6,10 +6,10 @@ theory of formal languages, especially the context-free languages \cite{ChSch}.
 In the literature, the proof of this theorem is always based on grammars.
 
 We will give an automata-theoretic access to this theorem. We present this
-theorem at this place in the book because it can be very well appended to the
-section on pushdown languages (chapter III.1) from a proof technical point of
-view. A similar access to this theorem has been given by Goldstine
-\cite{Goldstine77} (?).
+theorem at this point in the book because from a proof technical point of
+view it can be very well be appended to the section on pushdown languages
+(chapter III.1). A similar access to this theorem has been given by Goldstine
+ \cite{Goldstine77,Goldstine79,Goldstine80}.
 
 The Chomsky-Schützenberger theorem characterizes the context-free languages
 by a very simple subclass of context-free languages with the use of a
@@ -94,9 +94,7 @@ Formally define the relation $\rho \subset E' \times E'$ as
 \[ (e_1, e_2) \in \rho \iff e_1 = (e, y),\ e_2 = (e', z, y),\ \delta(e, y) = y
 z,\quad e \in E,\ y,z \in Y \]
 
-What does that mean?
-
-Consider a path in the graph $G$:
+What does that mean? Consider a path in the graph $G$:
 
 \begin{center}
 \input{figures/chapter3-3-theorem1-path-in-g.tikz}
@@ -112,29 +110,42 @@ Edges that are corresponding with respect to push and pop-operations are related
 to each other using the relation $\rho$. This relation (between edges) can be
 visualized as a bipartite graph:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-3-theorem1-bipartite-1.tikz}
+\end{center}
 
 Edges in this relation graph go from ''opening brackets'' to ''closing
 brackets''. To each opening bracket a set of corresponding closing brackets is
 related. 
 
-To get a one-to-one relation the graph can be transformed by multiplying edges
-if needed:
+To get a one-to-one relation the graph is transformed by multiplying edges
+as needed:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-3-theorem1-bipartite-2.tikz}
+\end{center}
 
-In this graph each edge on the left representing a ''push''-operation
+In this graph, each edge on the left representing a ''push''-operation
 (''opening bracket'') has exactly one edge on the right representing the
 corresponding ''pop''-operation (''closing bracket''). The edges on the right
 are called {\em parallel edges} and the new relation is denoted by $\rho'$.
 
 For edges $(e_1, e_2) \in \rho'$ we also write $e_2 = \inv{e_1}$ and call $e_2$
-the {\em inverse} edge to $e_1$. Both edges $e_1$ and $\inv{e_1}$ have the same
-source and target vertex in $G'$, i.e.\ $Q(e_1) = Q(\inv{e_1}),\ Z(e_1) =
-Z(\inv{e_1})$.
+the {\em inverse} edge to $e_1$.
 
-By our construction it holds: If $(e_1, e_2) \in \rho$ then there exists exactly
-one pair of parallel edges $(e'_1, e'_2)  \in \rho'$.
+In the graph $\tilde{G}$ to be constructed we replace the edges of $G'$ by
+parallel edges as shown in the following figure:
+
+\begin{center}
+\input{figures/chapter3-3-theorem1-parallel-edges.tikz}
+\end{center}
+
+The parallel edges $e^{i}$ have the same source and target as the original
+vertex from $G'$, i.e.\ $Q(e^{i}) = Q(e),\ Z(e^{i}) = Z(e)$.
+
+By our construction it holds:
+If $(e_1, e_2) \in \rho$ then there exists exactly one pair of parallel edges $(e'_1, e'_2)  \in \rho'$ such that $e'_2 =
+\inv{e'_1}$.
 
 From the graph $G'$ we construct a new graph $\tilde{G} = (\tilde{V},
 \tilde{E})$ by
@@ -234,6 +245,11 @@ With homomorphism $\phi := \mathrm{proj} \circ \alpha : (\unioninv{\Sigma})^*
 \end{proof}
 
 \bigskip
+We even proved slightly more:
+
+Let \[ {<}\kappa, w{>} := \card{\setof{\pi \in \pathcat{G}(S,F) \mid \alpha(\pi)
+= w,\ \delta(\pi, \epsilon) = \epsilon}} \]
+
 We get the following
 \begin{corollary}
 For each PDA $\kappa$ there exists a Dyck language $D(\Sigma)$ and a local set
@@ -253,11 +269,6 @@ $R$ over $\unioninv{\Sigma}$ and a monoid homomorphism $\phi:
 \end{enumerate}
 \end{proof}
 
-We even proved slightly more:
-
-Let \[ {<}\kappa, w{>} := \card{\setof{\pi \in \pathcat{G}(S,F) \mid \alpha(\pi)
-= w,\ \delta(\pi, \epsilon) = \epsilon}} \]
-
 Problem: Is it possible to always find a PDA $\kappa$ accepting an algebraic
 language $L \in \alglang(X^*)$ such that for each word $w$ it holds 
 ${<}\kappa, w{>} < \infty$?
@@ -266,8 +277,8 @@ If the definition of the pushdown store is generalized such that $\delta(X
 \times Y) \subset Y*$ is allowed, is then the condition ${<}\kappa, w{>} <
 \infty$ always satisfiable?
 
-At the end of this section we want to mention the following (for the interested
-reader):
+At the end of this section we want to mention the following for the interested
+reader:
 
 Because the Dyck language $D(\Sigma) \in \alglang(X_\infty^*)$ and by theorem 1
 in section III.2 it follows that the class of algebraic languages is closed

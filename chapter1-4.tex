@@ -44,11 +44,10 @@ We introduce an orientation for the edges.
 A graph $G = (V,E)$ is called an {\bf oriented graph} if there are two mappings
 $Q : E \to V$ and $Z : E \to V$ with $\rho(e) = \setof{Q(e), Z(e)}$ for all $e
 \in E$.
-$Q(e)$ is called the {\bf source} and $Z(e)$ the {\bf target} point of $e$.
+$Q(e)$ is called the {\bf source} and $Z(e)$ the {\bf target} of $e$
+\footnote{The letters $Q$ and $Z$ stem from the German words for source
+(''Quelle'') and target (''Ziel'').}.
 \end{definition}
-
-\transrem{The letters $Q$ and $Z$ come from the German words for source
-(''Quelle'') and target (''Ziel'').}
 
 The notions of loop and line are naturally transferred to oriented graphs.
 
@@ -200,12 +199,14 @@ start point of the second path. Obviously it holds:
   	\end{eqnarray*}
 \end{enumerate}
 
-We denote the set of paths of a graph $G$ with $\pathcat{G}$. $\pathcat{G}$ is 
-called the {\bf path category} of $G$ and in this context $G$ is also called a {\bf
-schema}. $\pathcat{G}$ is an important special case of a category.
+We denote the set of paths of a graph $G$ with $\pathcat{G}$.
 
-\transrem{The letter $\mathfrak{W}$ comes from the German word ''Wegekategorie''
-(path category).}
+(The letter $\mathfrak{W}$ stems from the German word ''Wegekategorie'' (path
+category.) 
+
+$\pathcat{G}$ is called the {\bf path category} of $G$ and in this 
+context $G$ is also called a {\bf schema}. $\pathcat{G}$ is an important special 
+case of a category.
 
 Notation: 
 \[ \pathcat{G}(v, v') := \setof{\pi \in \pathcat{G} \mid Q(\pi) = v,\ Z(\pi) =

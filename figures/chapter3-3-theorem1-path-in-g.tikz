@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {};
+		\node [style=state] (1) at (2, -0) {};
+		\node [style=state] (2) at (3, -0) {};
+		\node [style=state] (3) at (5, -0) {};
+		\node [style=state] (4) at (6, -0) {};
+		\node [style=none] (5) at (2.5, 0.75) {$\delta(e, y )= yz$};
+		\node [style=none] (6) at (5.5, 0.75) {$\delta(e', z)=\epsilon$};
+		\node [style=state] (7) at (8, -0) {};
+		\node [style=none] (8) at (2.5, -0.5) {PUSH};
+		\node [style=none] (9) at (5.5, -0.5) {POP};
+		\node [style=none] (10) at (2.5, -1) {};
+		\node [style=none] (11) at (5.5, -1) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (1) to node[auto]{$e$} (2);
+		\draw [style=transition] (3) to node[auto]{$e'$} (4);
+		\draw [style=simple] (0) to (1);
+		\draw [style=simple] (2) to (3);
+		\draw [style=simple] (4) to (7);
+		\draw [style=simple, bend right=15, looseness=1.00] (10.center) to node[auto]{corresponding} (11.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,114 +1,103 @@
-\section{The finite automaton, regular sets in $X^*$,\ $\reglang(X^*)$}
-
-Let $G = (V, E)$ be a finite, oriented graph, $X$ a finite set and $\alpha =
-(\pathcat{G}, X^*,\alpha_1, \alpha_2)$ a functor with $\alpha_1 : V \to
-\setof{X^*},\ \alpha_2 : \pathcat{G} \to X^*$.
+\section{The finite automaton, regular sets in $X^*, \reglang(X^*)$}
 
 \begin{definition}
-$\fa{A} = (G, X^*, \alpha)$ is called a {\bf nondeterministic finite
-automaton}.
+Let $G = (V, E)$ be a finite, oriented graph, $X$ a finite set and
+\[\alpha = (\pathcat{G}, X^*,\alpha_1, \alpha_2)\]
+a functor. $\alpha_1 : V \to \setof{X^*},\ \alpha_2 : \pathcat{G} \to X^*$.
+
+(The free monoid $X^*$ is considered as the single-object category
+$(\setof{X^*}, X^*, Q, Z, \cdot)$ with string concatenation as category
+operation and strings as morphisms.)
+\[ \fa{A} = (G, X^*, \alpha) \]
+is called {\bf non-deterministic finite automaton}.
+
+For subsets $S, F \subset V$, we call 
+\[ \fa{A} = (G, X^*, S, F, \alpha) \]
+{\bf finite automaton with start and final states} or {\bf finite acceptor}.
 \end{definition}
-
-\transrem{Here the free monoid $X^*$ is regarded as a category
-$X^* = (\setof{X^*}, X^*, Q, Z, \cdot \})$ where $\cdot$ is the monoid
-operation (word concatenation). Words are treated as morphisms with source and target
-$X^*$.}
-
-If $S, F \subset V$, we call 
-\[ \fa{A} = (G, X^*, s, f, \alpha) \]
-a finite automaton with start and final states or shortly a {\bf finite
-acceptor}.
 
 In the following we will use the terms {\em acceptor} and {\em finite automaton}
 as synonyms.
 
-If the finite automaton works over the free monoid $X^*$ we write shorter just
-$X$ instead of $X^*$, otherwise we specify the monoid explicitly.
+If the finite automaton works over the free monoid $X^*$ we write also just $X$
+instead of $X^*$, otherwise we specify the monoid explicitly.
 
-If we define 
+For the set of paths from start to final states 
 \[ \pathcat{G}(S, F) := \setof{\pi \in \pathcat{G} \mid Q(\pi) \in S,\ Z(\pi)
-\in F}
-\] 
-then $L_{\fa{A}} := \alpha_2(\pathcat{G}(S, F))$ is called the {\bf set accepted
-by} \fa{A}.
+\in F} \]
+the set of path labels
+\[ L_{\fa{A}} := \alpha_2(\pathcat{G}(S, F)) \]
+is called the {\bf set accepted by} \fa{A}.
 
-We will also write shortly $\alpha$ instead of $\alpha_2$ and $\pathcat{}(S,F)$
+We will also write just $\alpha$ instead of $\alpha_2$ and $\pathcat{}(S,F)$
 instead of $\pathcat{G}(S,F)$.
 
 \begin{definition}
-Let $X$ be an alphabet. 
+Let $X$ be an alphabet. The set
 \[ \reglang(X^*) := \setof{L \subset X^* \mid \mbox{ there exists a finite acceptor
 }\fa{A} \mbox{ with } L = L_{\fa{A}}} \]
-
-$\reglang(X^*)$ is called the {\bf set of regular languages} over the free monoid
-$X^*$.
+is called the {\bf set of regular languages} over the free monoid $X^*$.
 \end{definition}
 
 Remark: We defined the finite automaton via its ''state graph''. Most
-often, the definition is given using the ''next state relation'' as follows:
+often, the definition is given using the ''next state relation'' $\delta$:
 \begin{eqnarray*}
 \delta &=& \{(a, v_1, v_2) \in X \times V \times V) \mid \\
-&& \mbox{there exists an edge } e \mbox{ with } Q(e) = v_1,\ Z(e) = v_2 \mbox{
-and } \alpha(e) = a \in X \}
+&& \mbox{there exists an edge $e$ with $Q(e) = v_1,\ Z(e) = v_2$ and }
+\alpha(e) = a \in X \}
 \end{eqnarray*}
 
 $\delta$ my be regarded as a relation between $X \times V$ and $V$ where $X$ is
 the input alphabet and $V$ the state set of the automaton \[ \fa{B} = (X,
 V, \delta, S, F) \]
-
-The elements of $V$ denote the current state of the automaton $\fa{B}$.
+The elements of $V$ denote the states of the automaton $\fa{B}$.
 
 If the automaton $\fa{B}$ is in state $v \in V$ and reads the symbol $x
-\in X$ then it changes into state $v' \in V$ where $(x, v, v') \in \delta$. If
-there doesn't exist such a $v'$ the automaton halts.
+\in X$ then it changes into state $v' \in V$ if $(x, v, v') \in \delta$. If
+there doesn't exist such a $v'$ the automaton ''halts''.
 
 This interpretation can be visualized as follows:
 
 \missingfigure
 
-Let's return to our definition of the finite automaton. We explain its
-working based on our definition:
+Let's return to our definition of the finite automaton. We explain its working
+based on our definition:
 
 The automaton $\fa{A} = (G, X, S, F, \alpha)$ may be interpreted as a
-nondeterministic algorithm. The points (vertices) of the graph $G$ define the
+non-deterministic algorithm. The points (vertices) of the graph $G$ define the
 possible states of the algorithm, the elements of $X$ are the input alphabet.
 
-The nondeterministic automaton $\fa{A}$ which reads a symbol $x \in X$
+The non-deterministic automaton $\fa{A}$ which reads a symbol $x \in X$
 while in state $v \in V$ changes into state $v'$ if there exists an edge $e$
-from $v$ to $v'$ with label $\alpha(e) = x$. If the graph has no such edge
-originating in $v$ the automaton is set ''out of service''.
+from $v$ to $v'$ with label $\alpha(e) = x$. If the graph has no such edge the
+automaton goes ''out of service''.
 
 A finite acceptor accepts a word $w \in X^*$ if there exists a path from a point
 in $S$ to a point in $F$ which is labelled with the word $w$.
 
-Let's consider some examples for finite automata:
-
+Let's look at some examples of finite automata:
 \begin{example}
 Let $X = \setof{a, b}$ and $L = \setof{(a b)^{2n} \mid n \in
 \mathbb{N}}$.
 
-It holds: $L \in \reglang(\setof{a, b}^*)$.
-
-The acceptor $\fa{A} = (G, \setof{a, b}, {1}, {1}, \alpha)$ accepts $L$
-(exercise):
+It holds: $L \in \reglang(\setof{a, b}^*)$. The acceptor $\fa{A} = (G, \setof{a,
+b}, {1}, {1}, \alpha)$ accepts $L$ (exercise):
 \begin{center}
 \input{figures/chapter2-1-example1.tikz}
 \end{center}
 \end{example}
 
 \bigskip
-Example 2: Lexical analysis, check for special characters.
+\begin{example}
+Lexical analysis, check for special characters.
 
 In every programming language there exist special character combinations
 (reserved words) that mark certain program actions. These have to be identified
-during the lexical analysis. We give a finite acceptor which realizes such a check for a selection
-of reserved words:
-
-Let the set of reserved words be 
-\begin{center}
-\{\,'BEGIN',\ 'END',\ 'ELSE',\ 'IF',\ FI',\ 'FOR',\ 'INTEGER',\ 'THEN',\
-'LOOP',\ 'POOL',\ 'PROCEDURE'\,\}
-\end{center}
+during the lexical analysis. We give a finite acceptor which realizes such a 
+check for a selection of reserved words. Let the set of reserved words be
+ 
+\{ 'BEGIN',\ 'END',\ 'ELSE',\ 'IF',\ FI',\ 'FOR',\ 'INTEGER',\ 'THEN',\
+'LOOP',\ 'POOL',\ 'PROCEDURE' \}
 
 The following acceptor accepts this set:
 
@@ -117,6 +106,7 @@ The following acceptor accepts this set:
 \input{figures/chapter2-1-example2.tikz}
 \end{sideways}
 \end{minipage}
+\end{example}
 
 The images of the edges under the mapping $\alpha$ are shown as edge labels. The
 points of the graph are the ovals with their labels. Start and final states are
@@ -137,11 +127,10 @@ $\card{S'} = \card{F'} = 1$ and $\lang{A} = \lang{A'}$.
 An automaton with a single start state is called {\bf initial}.
 
 \begin{proof}
-If $\card{S} = \card{F} = 1$ we are done.
+(The proof from the original book has been slightly reformulated for better
+readability.)
 
-\transrem{The proof in the original book was rather unreadable
-because of all these tildes, primes, indices etc. Therefore it has been
-reformulated.}
+If $\card{S} = \card{F} = 1$ we are done.
 
 Let $\card{S} > 1$ or $\card{F} > 1$.
 
@@ -403,7 +392,7 @@ Example: Let $X = \setof{a, b}$. Define for arbitrary, but fixed $n \in
 \mathbb{N}$ \[ L_n := \setof{w \mid w = w_1 \cdot w_2 \mbox{ with } w_1 \neq
 w_2,\ |w_1| = |w_2| = n,\ w_1, w_2 \in X^*} 
 \]
-$L_n \in \reglang(X^*)$ because there exists a nondeterministic finite acceptor
+$L_n \in \reglang(X^*)$ because there exists a non-deterministic finite acceptor
 $\fa{A}_{n}$ with $L_n = L_{\fa{A}_{n}}$.
 
 We want to give the automaton for $n = 3$:
@@ -412,14 +401,14 @@ Let $\fa{A}_3 = (G_3, \setof{a,b}, \setof{1}, \setof{22}, \alpha)$ with the
 following graph $G_3$:
 
 \begin{center}
-\input{figures/chapter2-1-theorem3-nondeterministic.tikz}
+\input{figures/chapter2-1-theorem3-non-deterministic.tikz}
 \end{center}
 
 The labelling $\alpha$ is shown at the edges.
 
 Exercise: Show that this automaton accepts $L_3$.
 
-If we construct for $L_3$ from the nondeterministic acceptor $\fa{A}_3$
+If we construct for $L_3$ from the non-deterministic acceptor $\fa{A}_3$
 the deterministic acceptor $\fa{A'}_3$, the graph $G'_3$ looks as follows:
 
 \missingfigure
@@ -439,7 +428,7 @@ program simulating finite automata based on the given state graph is fast for
 a deterministic graph. However it needs more space because of the possibly very
 large representation of the deterministic graph.
 
-If the program uses the nondeterministic graph, it can follow all alternatives
+If the program uses the non-deterministic graph, it can follow all alternatives
 in parallel similar to our construction of the deterministic automaton. It needs
 less memory but the computing time can grow linear for each simulation step.
 
@@ -568,7 +557,7 @@ Graph: Take the graph $G$ and add the following edges:
 For the finite acceptor $\fa{A'}$ it holds (exercise): \[ \lang{A'} = L^* \]
 \end{proof}
 
-We have seen (lemma 1) that for nondeterministic automata a single start and a
+We have seen (lemma 1) that for non-deterministic automata a single start and a
 single final state are sufficient but in the deterministic case a single final
 state is in general insufficient.
 

@@ -20,19 +20,15 @@ the cardinality of $A$.
 Logical implication is denoted by $\Rightarrow$.
 
 {\bf Mappings} are denoted by $f : A \to B$ in which case $f$ is a
-total mapping. We write $Q(f) = A, Z(f) = B$. 
-
-\transrem{The letters $Q, Z$ stem from the German words ''Quelle'' (source)
-and ''Ziel'' (target).}
+total mapping. We write $Q(f) = A,\ Z(f) = B$.\footnote{The letters $Q, Z$ stem 
+from the German words ''Quelle'' (source) and ''Ziel'' (target).}
 
 If $f: A \to B,\ g : B \to C$ are mappings, then $f \circ g : A
-\to C$ is the {\bf composition} which one gets by applying
-\boldmath $f$ {\bf first and then} $g$ \unboldmath: 
+\to C$ is the {\bf composition} which one gets by applying $f$ first and then 
+$g$:
 \[(f \circ g)(a) = g(f(a))\]
-If $f:A \to B$ and $C \subset A$, then $f(C) = \setof{f(c) \mid c \in C }$.
 
-\transrem{Note that this is backwards to the usual definition of function
-composition but makes perfect sense in the category theoretic framework.}
+If $f:A \to B$ and $C \subset A$, then $f(C) = \setof{f(c) \mid c \in C }$.
 
 A subset $R \subset A \times B$ is called a {\bf relation} between $A$ and $B$.
 \[R_f = \setof{(a,b) \mid b = f(a) } \subset A \times B\] 
@@ -109,8 +105,8 @@ also holds in the sense of the first definition of $A^*$.
 If $w = (w_1, \ldots, w_n)$ we call $|w| := n$ the {\bf length} of $w$.
 Obviously \[|w \cdot v| = |w| + |v|\text{ and }|\epsilon| = 0\]
 
-\transrem{Later in this book, the notation $|w|$ is also used for reduced
-words, but that should not lead to confusion.}
+(Later in this book, the notation $|w|$ is mainly used for reduced words and
+the string length is then denoted by $\strlen{w}$.)
 
 The {\bf reverse} of a word $w = (w_1,\ldots,w_n)$ is the word $w^R =
 (w_n,\ldots,w_1)$. It holds:

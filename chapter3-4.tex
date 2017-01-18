@@ -135,18 +135,23 @@ $L$ can be understood as the language of the bracketed arithmetic expressions.
 
 We create the following preliminary (infinite) graph $G$ for $L$:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-4-example1-graph-g.tikz}
+\end{center}
 
 We want to remove each edge labeled with $[G]$ by adding an $\epsilon$-edge
-from the source of this edge to $S$ and from $F$ to the target of this edge.
+from the source of this edge to $s$ and from $f$ to the target of the $[G]$-
+edges.
 
-We get the following graph:
+We get the following graph $G'$:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-4-example1-graph-gprime.tikz}
+\end{center}
 
 The graph $G'=(V',E')$ is finite but the corresponding finite acceptor would
-also accept words which are not elements of $L$. This has to be corrected by defining a
-suitable storage monoid.
+also accept words which are not elements of $L$. This has to be corrected by 
+defining a suitable storage.
 
 Define $\gamma: E' \to \pocymon{\setof{a, b, s, t}}$ by
 \begin{eqnarray*}
@@ -167,11 +172,11 @@ H-group over $X$:
 \[ D = C = \setof{\epsilon},\quad M = \hgroup{\setof{a, b, s, t}} \]
 
 For
-\[ \fa{A} = (G', \setof{a, b,c d}, \setof{S}, \setof{F}, \alpha) \]
+\[ \fa{A} = (G', \setof{a, b,c d}, \setof{s}, \setof{f}, \alpha) \]
 and storage 
 \[ \storage{P} = (E', M, D, C, \gamma) \]
 the finite automaton with storage $\fa{P} = (\fa{A}, \storage{P})$ accepts L:
-\[ L_{\fa{P}} = \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(S, F),\ D \cdot
+\[ L_{\fa{P}} = \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(s, f),\ D \cdot
 \gamma(\pi) \cap C \neq \emptyset} = L \]
 
 Proof: exercise.
@@ -179,15 +184,21 @@ Proof: exercise.
 Now we want to remove the $\epsilon$-edges from the graph $G'$. To do so, we use
 the algorithm from chapter II, lemma 2 and get:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-4-example1-graph-gprime-epsfree.tikz}
+\end{center}
 
 The storage is given by
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-4-example1-storage.tikz}
+\end{center}
 
 We can simplify the graph even further and get
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-4-example1-graph-simplified.tikz}
+\end{center}
 
 This graph is deterministic and the storage has the following form:
 \[ \gamma(e_a) = a,\ \gamma(e_d) = \epsilon,\ \gamma(e_b) = a^{-1} b,\

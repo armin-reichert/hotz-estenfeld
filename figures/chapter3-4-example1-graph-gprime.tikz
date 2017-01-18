@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$s$};
+		\node [style={filled_vertex}] (1) at (2, -0) {};
+		\node [style={filled_vertex}] (2) at (4, -0) {};
+		\node [style={filled_vertex}] (3) at (6, -0) {};
+		\node [style={filled_vertex}] (4) at (8, -0) {};
+		\node [style=state] (5) at (10, -0) {$f$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to node[auto]{$e_a/a$} (1);
+		\draw [style=transition] (1) to node[auto]{$e_d/d$} (2);
+		\draw [style=transition] (2) to node[auto]{$e_b/b$} (3);
+		\draw [style=transition] (3) to node[auto]{$e'_d/d$} (4);
+		\draw [style=transition] (4) to node[auto]{$e_c/c$} (5);
+		\draw [style=transition, bend right=45, looseness=1.00] (0) to node[auto]{$e''_d/d$} (5);
+		\draw [style=transition, bend right=45, looseness=1.25] (2) to node[auto]{$e/\epsilon$} (0);
+		\draw [style=transition, bend right=45, looseness=1.00] (5) to node[auto]{$e^{-1}/\epsilon$} (2);
+		\draw [style=transition, bend left=45, looseness=1.25] (5) to node[auto]{$t^{-1}/\epsilon$} (4);
+		\draw [style=transition, bend left, looseness=1.00] (3) to node[auto]{$t/\epsilon$} (0);
+	\end{pgfonlayer}
+\end{tikzpicture}

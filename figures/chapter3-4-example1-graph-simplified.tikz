@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$s$};
+		\node [style=state] (1) at (4, -0) {$f$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition, bend left=45, looseness=1.00] (0) to node[auto]{$d$} (1);
+		\draw [style=transition, bend left=45, looseness=1.00] (1) to node[auto]{$b$} (0);
+		\draw [style=transition, in=-135, out=135, loop] (0) to node[auto]{$a$} ();
+		\draw [style=transition, in=-45, out=45, loop] (1) to node[auto]{$c$} ();
+	\end{pgfonlayer}
+\end{tikzpicture}

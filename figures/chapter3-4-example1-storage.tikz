@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={filled_vertex}] (0) at (0, -0) {};
+		\node [style={filled_vertex}] (1) at (2, -0) {};
+		\node [style={filled_vertex}] (2) at (4, -0) {};
+		\node [style={filled_vertex}] (3) at (7, -0) {};
+		\node [style={filled_vertex}] (4) at (9, -0) {};
+		\node [style={filled_vertex}] (5) at (11, -0) {};
+		\node [style=none] (6) at (5.25, -0) {becomes};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition, bend left=45, looseness=1.25] (0) to node[auto]{$e/\epsilon$} (1);
+		\draw [style=transition, bend left=60, looseness=1.00] (1) to node[auto]{$e'/a$} (2);
+		\draw [style=transition, bend left=45, looseness=1.25] (4) to node[auto]{$e'/a$} (5);
+		\draw [style=transition, bend right=45, looseness=1.00] (3) to node[auto]{$e''/a$} (5);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -24,6 +24,7 @@ From what has been said we see that we may use a concrete geometric imagination
 of a graph without getting our intuition mistaken. The following definition of a
 graph nevertheless does not contain any geometry.
 
+\bigskip
 \begin{definition}
 A {\bf graph} $G = (V, E)$ consists of a non-empty set $V$ of points
 (vertices), a set $E$ of edges and a mapping $\rho: E \to \powset{V}$ with
@@ -34,12 +35,14 @@ of $e$.
 Border points of an edge do not need to be different. If $\card{\rho(e)} = 2$ we
 call $e$ a {\bf line}, if $\card{\rho(e)} = 1$ we call it a {\bf loop}.
 
+\bigskip
 \begin{definition}
 A graph is called {\bf loop-free} if it does not contain any loops.
 \end{definition}
 
 We introduce an orientation for the edges. 
 
+\bigskip
 \begin{definition}
 A graph $G = (V,E)$ is called an {\bf oriented graph} if there are two mappings
 $Q : E \to V$ and $Z : E \to V$ with $\rho(e) = \setof{Q(e), Z(e)}$ for all $e
@@ -56,6 +59,7 @@ defining two edges $(v_1,e,v_2)$ and $(v_2,e,v_1)$ for each edge $e$ with
 border points $v_1$ and $v_2$ and defining $Q((v_1,e,v_2)) = v_1 =
 Z((v_2,e,v_1))$ and $Q((v_2,e,v_1)) = v_2 = Z((v_1,e,v_2))$.
 
+\bigskip
 \begin{definition}
 A graph $G = (V,E)$ is called {\bf connected} if in the corresponding oriented
 graph $\hat{G}$ for each pair of points $v$ and $v'$ there exist edge sequences
@@ -63,6 +67,7 @@ $e_1, \ldots, e_k$ with $Q(e_1) = v,\ Z(e_k) = v'$ and $Z(e_i) = Q(e_{i+1})$ for
 $i = 1, \ldots, k-1$.
 \end{definition}
 
+\bigskip
 \begin{definition}
 A loop-free graph $G = (V,E)$ is called {\bf ordered} if for each point $v \in
 V$ holds: There exists a unique (up-to cyclic permutation) ordering on the set
@@ -87,6 +92,7 @@ In this figure the orderings for $\setof{e_1,e_2,e_3,e_4,e_5}$ are:
 & e_5, e_1, e_2, e_3, e_4
 \end{eqnarray*}
 
+\bigskip
 \begin{definition}
 A loop-free, oriented graph $G$ is called {\bf ordered} if for all points
 $v \in V$ it	holds: In the cycle of $v$ there exists an ordering 
@@ -112,6 +118,7 @@ $e_1,e_2,e_3$ is the ordering of the incoming edges.
 
 $e_6,e_5,e_4$ is the ordering of the outgoing edges.
 
+\bigskip
 \begin{definition}
 A {\bf path} in an oriented graph $G$ is a sequence 
 \[ \pi = (q, e_1, \ldots, e_k, z),\ k \geq 1 \]
@@ -134,6 +141,7 @@ $v$ to $v$.
 Paths in arbitrary graphs are defined by switching to the oriented graph
 $\hat{G}$.
 
+\bigskip
 \begin{definition}
 Let $\pi = (q, e_1, \ldots, e_k, z)$ be a path. A path $\pi' = (q', e'_1,
 \ldots, e'_m, z')$ is called a {\bf subpath} of $\pi$ if there exists an $i$
@@ -145,6 +153,7 @@ A path is called {\bf closed} if $Q(\pi) = Z(\pi)$, it is called a {\bf circle}
 if it is closed and does not contain any closed subpath $\pi'$ with $L(\pi') >
 0$.
 
+\bigskip
 \begin{definition}
 A graph $G = (V, E)$ is called {\bf circle-free} if there are no circles in $G$.
 \end{definition}
@@ -152,6 +161,7 @@ A graph $G = (V, E)$ is called {\bf circle-free} if there are no circles in $G$.
 For our purposes we will only consider oriented graphs. For these graphs the
 following definition reflects a special connectivity property.
 
+\bigskip
 \begin{definition}
 Let $G = (V, E)$ be an oriented graph and $v \in V$. $G$ is called a {\bf star
 relative to $v$} if for each $v' \in V$ there exists a path $\pi_{v'}$ with
@@ -161,6 +171,7 @@ $Q(\pi_{v'}) = v$ and $Z(pi_{v'}) = v'$. $v$ is called the {\bf center} of $G$.
 We want to introduce now a special kind of graph that plays a central role in
 the theory of formal languages.
 
+\bigskip
 \begin{definition}
 A {\bf tree} is a circle-free star where for all $v \in V$ it holds
 \[ \card{\setof{e \in E \mid Z(e) = v}} \leq 1 \]
@@ -214,6 +225,7 @@ v'}
 \]
 {\em Categories} are algebraic structures with a {\em partial} operation.
 
+\bigskip
 \begin{definition}
 $C = (O, M, Q, Z, \circ)$ is called a {\bf category} if the axioms (K1) to
 (K4) are fulfilled:
@@ -284,6 +296,7 @@ We explain the notion of a category with some examples:
 In analogy to the monoid homomorphisms we introduce structure-preserving
 mappings between categories called {\bf functors}.
 
+\bigskip
 \begin{definition}
 Let $C_i = (O_i, M_i, Q_i, Z_i, \circ_i), i = 1, 2$ be two categories and
 $\phi_1: O_1 \to O_2$ and $\phi_2: M_1 \to M_2$ mappings.

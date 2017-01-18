@@ -1,8 +1,8 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=state] (0) at (-5, -0) {$4$};
-		\node [style=state] (1) at (5, -0) {$2$};
-		\node [style=state] (2) at (0, 5) {$3$};
+		\node [style=state] (0) at (-2, -0) {$4$};
+		\node [style=state] (1) at (2, -0) {$2$};
+		\node [style=state] (2) at (0, 2) {$3$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=transition, in=135, out=-135, loop] (0) to node[auto]{$e$} ();
@@ -10,6 +10,6 @@
 		\draw [style=transition] (0) to node[auto]{$d$} (1);
 		\draw [style=transition] (1) to node[auto]{$c$} (2);
 		\draw [style=transition, bend right, looseness=1.00] (2) to node[auto]{$a$} (0);
-		\draw [style=transition] (0) to node[auto]{$b$} (2);
+		\draw [style=transition, bend right, looseness=1.00] (0) to node[auto]{$b$} (2);
 	\end{pgfonlayer}
 \end{tikzpicture}

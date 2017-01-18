@@ -1,10 +1,10 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=state] (0) at (0, -0) {};
-		\node [style=state] (1) at (-6, -0) {$s$};
-		\node [style=state] (2) at (6, -0) {$f$};
-		\node [style=none] (3) at (-3, 0.25) {$\vdots$};
-		\node [style=none] (4) at (3, 0.25) {$\vdots$};
+		\node [style=state] (1) at (-4, -0) {$s$};
+		\node [style=state] (2) at (4, -0) {$f$};
+		\node [style=none] (3) at (-2, 0.25) {$\vdots$};
+		\node [style=none] (4) at (2, 0.25) {$\vdots$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=transition, in=120, out=60, looseness=1.25] (1) to node[auto]{$e_4/\epsilon$} (2);

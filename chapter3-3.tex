@@ -243,7 +243,7 @@ Then
 &=& \inv{y} y
 \end{eqnarray*}
 
-\medski
+\medskip
 {\em Induction step:}
 
 {\em Case 1:} Let the claim be true for a well-nested path $\tilde{\pi}$. Then
@@ -295,20 +295,20 @@ $|\tilde{\pi}_1| = |\tilde{\pi}_2| = \epsilon$.
 
 Consider 
 \begin{eqnarray*}
-\gamma(\proj{\tilde{\pi}}) &=& \gamma(\proj{\tilde{\pi}_1 \cdot \tilde{\pi}_2})
-\\
+|\gamma(\proj{\tilde{\pi}})| &=& |\gamma(\proj{\tilde{\pi}_1 \cdot
+\tilde{\pi}_2})| \\
 &=& |\gamma(\proj{\tilde{\pi}_1}) \cdot \gamma(\proj{\tilde{\pi}_2})| \\
 &=& (\inv{y_1} \cdot y_1) \cdot (\inv{y_2} \cdot y_2),\ y_1, y_2 \in
 Y\qquad\text{by induction}
 \end{eqnarray*}
 
 Because $\tilde{\pi}_1 \cdot \tilde{\pi}_2 \in R$ is well-nested, it must hold
-$y_1 = y_2$. Otherwise $y_1 \cdot \inv{y_2} \equiv 0$ which is a contradiction
-to our assumptions.
+$y_1 = y_2$. Otherwise $y_1 \cdot \inv{y_2} \equiv 0$ which would contradict our
+ assumptions.
 
 Therefore we get
 \begin{eqnarray*}
-\gamma(\proj{\tilde{\pi}}) &=& (\inv{y_1} \cdot y_1) \cdot (\inv{y_2} \cdot
+|\gamma(\proj{\tilde{\pi}})| &=& (\inv{y_1} \cdot y_1) \cdot (\inv{y_2} \cdot
 y_2)\\
 &=& \inv{y_1} \cdot y_1 \cdot \inv{y_1} \cdot y_1 \\
 &=& \inv{y_1} \cdot y_1
@@ -316,10 +316,10 @@ y_2)\\
 \end{proof}
 
 We assumed the path $\tilde{\pi}$ to be valid, i.e.\ $\tilde{\pi} \in R$.
-Therefore the lemma also holds for valid accepting paths with correct nesting,
-$\tilde{\pi} \in R'$ and $|\tilde{\pi}| = \epsilon$. Therefore it holds for
-$\pi = \proj{\tilde{\pi}} \in \pathcat{G'}(S, F)$: $|\gamma(\pi)| = \inv{y_0}
-y_0$.
+Therefore the lemma also holds for valid, well-nested {\em accepting} paths
+$\tilde{\pi} \in R',\ |\tilde{\pi}| = \epsilon$. Therefore for the
+projection $\pi = \proj{\tilde{\pi}} \in \pathcat{G'}(S, F)$ holds
+\[ |\gamma(\pi)| = \inv{y_0} y_0 \]
 
 \bigskip
 \begin{lemma}

@@ -193,16 +193,126 @@ Then the edge set of $\tilde{G}$ is $\tilde{E} = \tilde{E}^+ \cup
 To prove the theorem we need the following lemmata which describe the
 relation between accepting paths in $\tilde{G}$ and $G'$.
 
+Let's call a path from $G'$ {\em well-nested} if it can be
+reduced to the empty path using the relations
+\[ e\circ \inv{e} = \epsilon,\quad e, \inv{e} \in E' \]
+In the same way we define well-nested paths in the graph $\tilde{G}$.
+
 \begin{lemma}
-If $\tilde{\pi} \in R$ is a non-empty accepting path in $\tilde{G}$ and the
-path is correctly nested with respect to the relation $\rho'$, i.e.\ 
-$\tilde{\pi} \equiv \epsilon \pmod{e\circ \inv{e} = \epsilon,\ e\in E'}$
-then for the projected path $\pi = \proj{\tilde{\pi}}$ it holds:
-\[ |\gamma(\pi)| = y \inv{y}\text{ for some suitable }y \in Y \]
+If $\tilde{\pi} \in R$ is a valid, well-nested, non-empty path in
+$\tilde{G}$ then for the projected path $\pi = \proj{\tilde{\pi}}$ holds:
+\[ |\gamma(\pi)| = y \inv{y}\text{ for some }y \in Y \]
 \end{lemma}
 
+(The lemma has been reformulated for better readability.)
 \begin{proof}
-TODO
+The proof is done by induction over the path length. Observe that a well-nested
+path has even length, therefore a well-nested non-empty path has length at least
+two.
+
+Remember the definition of the Dyck language $D(\Sigma)$ over an alphabet
+$\Sigma$:
+\begin{eqnarray*}
+d \in D(\Sigma) &\Rightarrow& e \cdot d \cdot \inv{e} \in D(\Sigma)\text{ for
+each }e \in \Sigma \\
+d_1, d_2 \in D(\Sigma) &\Rightarrow& d_1 \cdot d_2 \in D(\Sigma)
+\end{eqnarray*}
+
+{\em Induction base:} $\len{\tilde{\pi}}=2$
+\begin{eqnarray*}
+\tilde{\pi} = e \cdot \inv{e} &\Rightarrow& (e, \inv{e}) \in \rho' \\
+&\Rightarrow& (\proj{e}, \proj{\inv{e}}) \in \rho \\
+&& \text{where }\proj{e} \in E \times Y\text{ is a ''push''-edge} \\
+&& \text{and }\proj{\inv{e}} \in E \times Y \times Y_0\text{ is the
+corresponding ''pop''-edge}
+\end{eqnarray*}
+
+$\proj{\tilde{\pi}} = \proj{e} \cdot \proj{\inv{e}}$. Let
+\begin{eqnarray*}
+\gamma(\proj{e}) &=& \inv{y} y z \qquad\text{(''guess $y$;\ push $z$'')} \\
+\gamma(\proj{\inv{e}}) &=& \inv{z} \inv{y} y \qquad\text{(''pop $z$;\ guess
+$y$'')}
+\end{eqnarray*}
+
+Then
+\begin{eqnarray*}
+|\gamma(\proj{\tilde{\pi}})| &=& |\gamma(\proj{e}) \cdot \gamma(\proj{\inv{e}})|
+\\
+&=& |\inv{y} y z \cdot \inv{z} \inv{y} y| \\
+&=& |\inv{y} y| \\
+&=& \inv{y} y
+\end{eqnarray*}
+
+\medski
+{\em Induction step:}
+
+{\em Case 1:} Let the claim be true for a well-nested path $\tilde{\pi}$. Then
+$|\tilde{\pi}| = \epsilon$ and for the projection of $\tilde{\pi}$ it holds
+\[ |\gamma(\proj{\tilde{\pi}})| = \inv{y_1} \cdot y_1\text{ for some }y_1 \in Y
+\]
+
+Let $e \cdot \tilde{\pi} \cdot \inv{e} \in R$ be a well-nested, valid path. Then
+$|e \cdot \tilde{\pi} \cdot \inv{e}| = \epsilon$.
+
+Consider the projection
+\[ \proj{e \cdot \tilde{\pi} \cdot \inv{e}} = \proj{e} \cdot \proj{\tilde{\pi}}
+\cdot \proj{\inv{e}} \in \pathcat{G'} \]
+where
+\begin{eqnarray*}
+\proj{e} &=& (e_1, z) \qquad\text{''push $z$-edge''}\\
+\proj{\inv{e}} &=& (e_2, z, y) \qquad\text{''pop $z$-edge''}\\
+\end{eqnarray*}
+This gives
+\begin{eqnarray*}
+|\gamma(\proj{e} \cdot \proj{\tilde{\pi}} \cdot \proj{\inv{e}})|&=&
+|\gamma(\proj{e}) \cdot \gamma(\proj{\tilde{\pi}}) \cdot \gamma(\proj{\inv{e}})|
+\\
+&=&|\gamma((e_1, z)) \cdot  (\inv{y_1} y_1) \cdot \gamma((e_2, z, y))| \\
+&=& |(\inv{y} \cdot y \cdot z) \cdot (\inv{y_1} \cdot y_1) \cdot (\inv{z} \cdot
+\inv{y} \cdot y)| \\
+\end{eqnarray*}
+Because $e \cdot \tilde{\pi} \cdot \inv{e}$ is well-nested, it must hold
+$z = y_1$. Otherwise we had $z \cdot \inv{y_1} \equiv 0$ and therefore $e \cdot
+\tilde{\pi} \cdot \inv{e} \equiv 0$ which would be a contradiction to our
+assumption.
+
+Therefore
+\begin{eqnarray*}
+|(\inv{y} \cdot y \cdot z) \cdot (\inv{y_1} \cdot y_1) \cdot (\inv{z} \cdot
+\inv{y} \cdot y)| &=&
+|(\inv{y} \cdot y \cdot z) \cdot (\inv{z} \cdot z) \cdot (\inv{z} \cdot
+\inv{y} \cdot y)| \\
+&=& |\inv{y} \cdot (y \cdot (z \cdot \inv{z}) \cdot (z \cdot \inv{z}) \cdot
+\inv{y}) \cdot y| \\
+&=& |\inv{y} \cdot y| \\
+&=& \inv{y}  \cdot y
+\end{eqnarray*}
+
+\medskip
+{\em Case 2:} Let $R \ni \tilde{\pi} = \tilde{\pi}_1 \cdot \tilde{\pi}_2$ be a
+valid, well-nested path which is the product of two well-nested paths, i.e.\
+$|\tilde{\pi}_1| = |\tilde{\pi}_2| = \epsilon$.
+
+Consider 
+\begin{eqnarray*}
+\gamma(\proj{\tilde{\pi}}) &=& \gamma(\proj{\tilde{\pi}_1 \cdot \tilde{\pi}_2})
+\\
+&=& |\gamma(\proj{\tilde{\pi}_1}) \cdot \gamma(\proj{\tilde{\pi}_2})| \\
+&=& (\inv{y_1} \cdot y_1) \cdot (\inv{y_2} \cdot y_2),\ y_1, y_2 \in
+Y\qquad\text{by induction}
+\end{eqnarray*}
+
+Because $\tilde{\pi}_1 \cdot \tilde{\pi}_2 \in R$ is well-nested, it must hold
+$y_1 = y_2$. Otherwise $y_1 \cdot \inv{y_2} \equiv 0$ which is a contradiction
+to our assumptions.
+
+Therefore we get
+\begin{eqnarray*}
+\gamma(\proj{\tilde{\pi}}) &=& (\inv{y_1} \cdot y_1) \cdot (\inv{y_2} \cdot
+y_2)\\
+&=& \inv{y_1} \cdot y_1 \cdot \inv{y_1} \cdot y_1 \\
+&=& \inv{y_1} \cdot y_1
+\end{eqnarray*}
 \end{proof}
 
 We assumed the path $\tilde{\pi}$ to be valid, i.e.\ $\tilde{\pi} \in R$.

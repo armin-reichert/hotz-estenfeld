@@ -57,45 +57,45 @@ Reminder: The graph $G'$ was constructed from $G$ by adding the following kinds
 of edges:
 \begin{itemize}
   \item A start edge $e_0 \in \setof{s_0} \times S$ of the form 
-  \[e_0: s_0 \edge{y_0} s\] 
+  \[ e_0: s_0 \edge{y_0} s \] 
   for each start vertex $s \in S$.
   
-  \item ''PUSH''-edges $e'=(e, y) \in E \times Y$ of the form
-  \[e': Q(e) \edge{y^{-1} y z} Z(e)\]
-  for each edge $e \in E$ where the pushdown store computation ''pushes'' $z$,
+  \item ''PUSH($z$)''-edges $e'=(e, y) \in E \times Y$ of the form
+  \[ e': Q(e) \edge{y^{-1} y z} Z(e) \]
+  for each edge $e \in E$ where the pushdown store ''pushes'' $z$,
   i.e.\ $\delta(e, y) = yz$ and $|yz| \neq \epsilon$. 
   
   The prefix $y^{-1} y$ realizes the non-deterministic guess of the topmost
   stack symbol $y$.
   
   \item ''Empty-stack''-edges $e'=(e, y) \in E \times Y$ of the form
-  \[e': Q(e) \edge{y_0^{-1} y_0 \cdot \delta(e, \epsilon)} Z(e)\]
+  \[ e': Q(e) \edge{y_0^{-1} y_0 \cdot \delta(e, \epsilon)} Z(e) \]
   for each edge $e \in E$.
   
   The prefix $y_0^{-1} y_0$ realizes the non-deterministic guess of the
   empty-stack symbol $y_0$.
   
-  \item ''POP''-edges $e'=(e, y, z) \in E \times Y \times Y_0$ of the form
-  \[e': Q(e) \edge{y^{-1} z^{-1} z} Z(e)\]
-  for each edge $e \in E$ where the pushdown store ''pops'' $y$ from the stack,
-  i.e.\ $\delta(e, y) = \epsilon$.
+  \item ''POP($z$)''-edges $e'=(e, z, y) \in E \times Y \times Y_0$ of the form
+  \[ e': Q(e) \edge{z^{-1} y^{-1} y} Z(e) \]
+  for each edge $e \in E$ where the pushdown store ''pops'' $z$ from the stack,
+  i.e.\ $\delta(e, z) = \epsilon$.
   
-  The suffix $z^{-1} z$ realizes the non-deterministic guess of the topmost
-  stack symbol $z$ after the ''pop'' has been executed.
+  The suffix $y^{-1} y$ realizes the non-deterministic guess of the topmost
+  stack symbol $y$ after the symbol $z$ has been popped.
 \end{itemize}
 
-Our goal is to construct a graph $\tilde{G}$ whose edges constitute the alphabet
-$\Sigma \cup \Sigma^{-1}$ of corresponding brackets.
+Our goal is to construct a graph $\tilde{G}$ whose edges will constitute the
+alphabet $\Sigma \cup \Sigma^{-1}$ of the Dyck language.
 
-We define a relation $\rho$ on the edge set $E'$ which relates two edges if they
-execute corresponding push/pop-operations.
+First we define a relation $\rho' \subset E' \times E'$ on the edges of the
+graph $G'$ which relates two edges if they execute corresponding 
+push/pop-operations.
 
-Formally, the relation $\rho \subset E' \times E'$ is defined as follows: For
-edges $e', f' \in E'$
-\[ e' \,\rho\, f' \iff e' = (e, y)\text{ with }\delta(e, y) = y z,\quad f' = (f,
-z, y),\quad e, f \in E,\ y,z \in Y \]
+For edges $e', f' \in E'$ define
+\[ (e', f') \in \rho \iff e' = (e, y)\text{ with }\delta(e, y) = y z,\quad
+f' = (f, z, y),\quad e, f \in E,\ y,z \in Y \]
 
-Consider a path in the graph $G$:
+Consider a path in the graph $G$ of the original pushdown automaton:
 
 \begin{center}
 \input{figures/chapter3-3-theorem1-path-in-g.tikz}
@@ -107,30 +107,30 @@ The corresponding path in the graph $G'$:
 \input{figures/chapter3-3-theorem1-path-in-gprime.tikz}
 \end{center}
 
-The relation $\rho$ between the edges of $G'$ can be visualized as a bipartite
+The relation $\rho'$ between the edges of $G'$ can be visualized as a bipartite
 graph:
 
 \begin{center}
 \input{figures/chapter3-3-theorem1-bipartite-1.tikz}
 \end{center}
 
-Edges in this relation graph connect edges representing ''opening
-brackets'' (push-operations) with edges representing corresponding ''closing
-brackets'' (pop-operations).
+The graph of this relation connects each push-edge from $E'$ representing an 
+''opening bracket'' with the corresponding pop-edges from $E'$ representing the
+corresponding ''closing brackets''.
 
-To get a one-to-one relation, the edges of $\rho$ are multiplied (if
-needed). This defines a new relation $\rho'$ in which each opening bracket
-has a unique closing bracket:
+To get a one-to-one relation, the edges of the relation $\rho'$ are multiplied
+as needed. The result is a new relation $\tilde{\rho}$ in which each
+opening bracket now has a unique closing bracket:
 
 \begin{center}
 \input{figures/chapter3-3-theorem1-bipartite-2.tikz}
 \end{center}
 
-The edges that are created from an edge $e$ by multiplying are called {\em
-parallel edges} of $e$.
+The edges that have been created by multiplying an edge $e' \in E'$ are called
+the {\em parallel edges} of $e'$.
 
-For edges $(e, f) \in \rho'$ we also write $f = \inv{e}$ and call $f$
-the {\em inverse edge} to $e$.
+For edges $(\tilde{e}, \tilde f) \in \tilde{\rho}$ we also write $\tilde f =
+\inv{\tilde e}$ and call $\tilde f$ the {\em inverse edge} to $\tilde e$.
 
 In the graph $\tilde{G}$ to be constructed we replace the edges of $G'$ by their
 parallel edges:
@@ -139,104 +139,108 @@ parallel edges:
 \input{figures/chapter3-3-theorem1-parallel-edges.tikz}
 \end{center}
 
-A parallel edge $e^{(i)}$ has the same source and target as the original
-edge $e \in G'$:
-\[ Q(e^{(i)}) = Q(e),\quad Z(e^{(i)}) = Z(e) \]
+A parallel edge $\tilde{e}^{(i)} \in \tilde E$ has the same source and target as
+the original edge $e' \in G'$:
+\[ Q(\tilde{e}^{(i)}) = Q(e'),\quad Z(\tilde{e}^{(i)}) = Z(e') \]
 
 By our construction it holds:
-If $(e, f) \in \rho$ then there exists exactly one pair of parallel edges
-$(e', f')  \in \rho'$ such that $f' = \inv{e'}$.
+If $(e', f') \in \rho'$ then there exists exactly one pair of parallel edges
+$(\tilde e, \tilde f) \in \tilde\rho$ such that $\tilde f = \inv{\tilde e}$.
 
 From the graph $G'$ we construct the graph $\tilde{G} = (\tilde{V}, \tilde{E})$
 by
 \begin{eqnarray*}
 \tilde{V} &=& V' \ (=V \cup \setof{s_0}) \\
-\tilde{E} &=& \setof{f \mid f\text{ is the parallel edge for some $e \in E'$}}
+\tilde{E} &=& \setof{\tilde f \mid \tilde f \text{ is the parallel edge for some
+}\tilde e \in E'}
 \end{eqnarray*}
 
-If $f \in \tilde{E}$ is the parallel edge for some $e \in E'$ we write $e =
-\proj{f}$ ($e$ is the {\em projection} of $f$). 
+If $\tilde f \in \tilde{E}$ is the parallel edge for some $e' \in E'$ we write
+$e' = \proj{\tilde f}$ ($e'$ is the {\em projection} of $\tilde f$). 
 
 For each path $\tilde{\pi} \in \pathcat{\tilde{G}}$ it then holds
-$\proj{\tilde{\pi}} \in \pathcat{G'}$ which means that each path using parallel
-edges is projected to a path of original edges in $G'$.
+$\proj{\tilde{\pi}} \in \pathcat{G'}$ which means that each path of parallel
+edges is mapped by the projection to a path of edges in $G'$.
 
-We define the set of {\em valid} paths in $\tilde{G}$ by
+\newcommand{\validpaths}{\mathrm{VALID}}
+We define the set of {\em valid paths} in $\tilde{G}$ by
 \begin{eqnarray*}
-R &=& \{ e_1 \circ \ldots \circ e_k \in \pathcat{\tilde{G}} \mid e_i \in
-\tilde{E} \\
-& & \text{and for each pair }(e_i, e_{i+1})\text{ of consecutive edges holds:}\\
-& & \gamma(\proj{e_i} \circ \proj{e_{i+1}}) \not\equiv 0\text{ in the
-polycyclic monoid }\pocymon{Y} \}
+\validpaths &=& \{ \tilde e_1 \cdots \tilde e_k \in \pathcat{\tilde{G}}
+\mid e_i \in \tilde{E} \\
+& & \text{and for each pair }(\tilde e_i, \tilde e_{i+1})\text{ of consecutive
+edges holds:}\\
+& & \gamma(\proj{\tilde{e}_i} \cdot \proj{\tilde{e}_{i+1}}) \not\equiv 0\text{
+in the polycyclic monoid }\pocymon{Y} \,\}
 \end{eqnarray*} 
 
-The path set $R$ contains exactly those paths in $\tilde{G}$ whose projections
-in $G'$ have valid local pushdown store computations.
-
-We define the set of {\em valid accepting} paths in $\tilde{G}$ by
+\newcommand{\acceptedpaths}{\mathrm{ACCEPTED}}
+We define the set of {\em valid accepted} paths in $\tilde{G}$ by
 \begin{equation*}
-R' = \setof{\pi \in R \mid Q(\pi) \in S,\ Z(\pi) \in F} \subset R
+\acceptedpaths = \setof{\tilde\pi \in \validpaths \mid Q(\tilde\pi) \in
+S,\ Z(\tilde\pi) \in F} \subset \validpaths
 \end{equation*}
 
-Note that $R$ and $R'$ both are {\em local} sets.
+Note that $\validpaths$ and $\acceptedpaths$ both are {\em local} sets.
 
-We define the alphabet $\Sigma$ as those (parallel) edges that are projected to
-edges in $G'$ performing a push-operation:
+We define the alphabet $\Sigma$ as the set of those parallel edges that are
+projected to edges which execute a push-operation:
 \begin{equation*}
-\Sigma := \tilde{E}^+ := \setof{e \in \tilde{E} \mid \proj{e} =
-\underbrace{(e,y)}_{\text{''PUSH''}-edge}}
+\Sigma := \tilde{E}^+ := \setof{\tilde e \in \tilde{E} \mid \proj{\tilde e} =
+(e, y)}
 \end{equation*}
 
-Then the edge set of $\tilde{G}$ is $\tilde{E} = \tilde{E}^+ \cup
-\tilde{E}^-$.
+Then the edge set of the graph $\tilde{G}$ is the union $\tilde{E} =
+\tilde{E}^+ \cup \tilde{E}^-$.
 
-To prove the theorem we need the following lemmata which describe the
-relation between accepting paths in $\tilde{G}$ and $G'$.
+For the proof of the theorem we need two lemmata.
 
-Let's call a path from $G'$ {\em well-nested} if it can be
-reduced to the empty path using the relations
-\[ e\circ \inv{e} = \epsilon,\quad e, \inv{e} \in E' \]
+A path from $G'$ is called {\em well-nested} if it can be reduced to the empty
+path using the relations 
+\[ e' \cdot \inv{e'} = \epsilon,\quad e', \inv{e'} \in E' \]
 In the same way we define well-nested paths in the graph $\tilde{G}$.
 
 \begin{lemma}
-If $\tilde{\pi} \in R$ is a valid, well-nested, non-empty path in
-$\tilde{G}$ then for the projected path $\pi = \proj{\tilde{\pi}}$ holds:
-\[ |\gamma(\pi)| = y \inv{y}\text{ for some }y \in Y \]
+If $\tilde{\pi} \in \validpaths$ is a valid path that is well-nested and
+non-empty, then for the projection $\pi' = \proj{\tilde{\pi}}$ holds:
+\[ |\gamma(\pi')| = y \inv{y}\text{ for some }y \in Y \]
 \end{lemma}
 
-(The lemma has been reformulated for better readability.)
+(The lemma from the original book has been reformulated.)
 \begin{proof}
-The proof is done by induction over the path length. Observe that a well-nested
-path has even length, therefore a well-nested non-empty path has length at least
-two.
+The proof uses induction over the path length. Observe that a well-nested
+path has even length, therefore a well-nested, non-empty path has length at
+least two.
 
 Remember the definition of the Dyck language $D(\Sigma)$ over an alphabet
 $\Sigma$:
 \begin{eqnarray*}
-d \in D(\Sigma) &\Rightarrow& e \cdot d \cdot \inv{e} \in D(\Sigma)\text{ for
-each }e \in \Sigma \\
+d \in D(\Sigma) &\Rightarrow& \sigma \cdot d \cdot \inv{\sigma} \in
+D(\Sigma)\text{ for each }\sigma \in \Sigma \\
 d_1, d_2 \in D(\Sigma) &\Rightarrow& d_1 \cdot d_2 \in D(\Sigma)
 \end{eqnarray*}
 
 {\em Induction base:} $\len{\tilde{\pi}}=2$
 \begin{eqnarray*}
-\tilde{\pi} = e \cdot \inv{e} &\Rightarrow& (e, \inv{e}) \in \rho' \\
-&\Rightarrow& (\proj{e}, \proj{\inv{e}}) \in \rho \\
-&& \text{where }\proj{e} \in E \times Y\text{ is a ''push''-edge} \\
-&& \text{and }\proj{\inv{e}} \in E \times Y \times Y_0\text{ is the
+\tilde{\pi} = \tilde e \cdot \inv{\tilde e} &\Rightarrow& (\tilde e, \inv{\tilde
+e}) \in \tilde{\rho} \\
+&\Rightarrow& (\proj{\tilde e}, \proj{\inv{\tilde e}}) \in \rho' \\
+&& \text{where }\proj{\tilde e} \in E \times Y\text{ is a ''push''-edge} \\
+&& \text{and }\proj{\inv{\tilde e}} \in E \times Y \times Y_0\text{ is the
 corresponding ''pop''-edge}
 \end{eqnarray*}
 
-$\proj{\tilde{\pi}} = \proj{e} \cdot \proj{\inv{e}}$. Let
+$\proj{\tilde{\pi}} = \proj{\tilde e} \cdot \proj{\inv{\tilde e}}$. Let
 \begin{eqnarray*}
-\gamma(\proj{e}) &=& \inv{y} y z \qquad\text{(''guess $y$;\ push $z$'')} \\
-\gamma(\proj{\inv{e}}) &=& \inv{z} \inv{y} y \qquad\text{(''pop $z$;\ guess
-$y$'')}
+\gamma(\proj{\tilde e}) &=& \inv{y} y z \qquad\text{(''guess $y$;\ push $z$'')}
+\\
+\gamma(\proj{\inv{\tilde e}}) &=& \inv{z} \inv{y} y \qquad\text{(''pop $z$;\
+guess $y$'')}
 \end{eqnarray*}
 
 Then
 \begin{eqnarray*}
-|\gamma(\proj{\tilde{\pi}})| &=& |\gamma(\proj{e}) \cdot \gamma(\proj{\inv{e}})|
+|\gamma(\proj{\tilde{\pi}})| &=& |\gamma(\proj{\tilde e}) \cdot
+\gamma(\proj{\inv{\tilde e}})|
 \\
 &=& |\inv{y} y z \cdot \inv{z} \inv{y} y| \\
 &=& |\inv{y} y| \\
@@ -251,30 +255,31 @@ $|\tilde{\pi}| = \epsilon$ and for the projection of $\tilde{\pi}$ it holds
 \[ |\gamma(\proj{\tilde{\pi}})| = \inv{y_1} \cdot y_1\text{ for some }y_1 \in Y
 \]
 
-Let $e \cdot \tilde{\pi} \cdot \inv{e} \in R$ be a well-nested, valid path. Then
-$|e \cdot \tilde{\pi} \cdot \inv{e}| = \epsilon$.
+Let $\tilde e \cdot \tilde{\pi} \cdot \inv{\tilde e} \in \validpaths$ be a valid
+path which is well-nested, then $|\tilde e \cdot \tilde{\pi} \cdot \inv{\tilde
+e}| = \epsilon$.
 
 Consider the projection
-\[ \proj{e \cdot \tilde{\pi} \cdot \inv{e}} = \proj{e} \cdot \proj{\tilde{\pi}}
-\cdot \proj{\inv{e}} \in \pathcat{G'} \]
+\[ \proj{\tilde e \cdot \tilde{\pi} \cdot \inv{\tilde e}} = \proj{\tilde e}
+\cdot \proj{\tilde{\pi}} \cdot \proj{\inv{\tilde e}} \in \pathcat{G'} \]
 where
 \begin{eqnarray*}
-\proj{e} &=& (e_1, z) \qquad\text{''push $z$-edge''}\\
-\proj{\inv{e}} &=& (e_2, z, y) \qquad\text{''pop $z$-edge''}\\
+\proj{\tilde e} &=& (e_1, z) \qquad\text{''push $z$-edge''}\\
+\proj{\inv{\tilde e}} &=& (e_2, z, y) \qquad\text{''pop $z$-edge''}\\
 \end{eqnarray*}
 This gives
 \begin{eqnarray*}
-|\gamma(\proj{e} \cdot \proj{\tilde{\pi}} \cdot \proj{\inv{e}})|&=&
-|\gamma(\proj{e}) \cdot \gamma(\proj{\tilde{\pi}}) \cdot \gamma(\proj{\inv{e}})|
-\\
+|\gamma(\proj{\tilde e} \cdot \proj{\tilde{\pi}} \cdot \proj{\inv{\tilde
+e}})|&=& |\gamma(\proj{\tilde e}) \cdot \gamma(\proj{\tilde{\pi}}) \cdot
+\gamma(\proj{\inv{\tilde e}})| \\
 &=&|\gamma((e_1, z)) \cdot  (\inv{y_1} y_1) \cdot \gamma((e_2, z, y))| \\
 &=& |(\inv{y} \cdot y \cdot z) \cdot (\inv{y_1} \cdot y_1) \cdot (\inv{z} \cdot
 \inv{y} \cdot y)| \\
 \end{eqnarray*}
-Because $e \cdot \tilde{\pi} \cdot \inv{e}$ is well-nested, it must hold
-$z = y_1$. Otherwise we had $z \cdot \inv{y_1} \equiv 0$ and therefore $e \cdot
-\tilde{\pi} \cdot \inv{e} \equiv 0$ which would be a contradiction to our
-assumption.
+Because $\tilde e \cdot \tilde{\pi} \cdot \inv{\tilde e}$ is well-nested, it
+must hold $z = y_1$. Otherwise we had $z \cdot \inv{y_1} \equiv 0$ and therefore
+$e \cdot \tilde{\pi} \cdot \inv{e} \equiv 0$ which would be a contradiction to 
+our assumption.
 
 Therefore
 \begin{eqnarray*}
@@ -299,12 +304,12 @@ Consider
 \tilde{\pi}_2})| \\
 &=& |\gamma(\proj{\tilde{\pi}_1}) \cdot \gamma(\proj{\tilde{\pi}_2})| \\
 &=& (\inv{y_1} \cdot y_1) \cdot (\inv{y_2} \cdot y_2),\ y_1, y_2 \in
-Y\qquad\text{by induction}
+Y\qquad\text{by induction assumption}
 \end{eqnarray*}
 
-Because $\tilde{\pi}_1 \cdot \tilde{\pi}_2 \in R$ is well-nested, it must hold
-$y_1 = y_2$. Otherwise $y_1 \cdot \inv{y_2} \equiv 0$ which would contradict our
- assumptions.
+Because $\tilde{\pi}_1 \cdot \tilde{\pi}_2 \in \validpaths$ is well-nested it 
+must hold $y_1 = y_2$. Otherwise $y_1 \cdot \inv{y_2} \equiv 0$ which would 
+contradict our assumptions.
 
 Therefore we get
 \begin{eqnarray*}
@@ -315,48 +320,51 @@ y_2)\\
 \end{eqnarray*}
 \end{proof}
 
-We assumed the path $\tilde{\pi}$ to be valid, i.e.\ $\tilde{\pi} \in R$.
-Therefore the lemma also holds for valid, well-nested {\em accepting} paths
-$\tilde{\pi} \in R',\ |\tilde{\pi}| = \epsilon$. Therefore for the
-projection $\pi = \proj{\tilde{\pi}} \in \pathcat{G'}(S, F)$ holds
+Of course, the lemma also holds for valid, well-nested {\em accepted}
+paths $\tilde{\pi} \in \acceptedpaths,\ |\tilde{\pi}| = \epsilon$. 
+
+Therefore for the projection
+\[ \pi = \proj{\tilde{\pi}} \in \pathcat{G'}(S, F) \]
+holds
 \[ |\gamma(\pi)| = \inv{y_0} y_0 \]
 
 \bigskip
 \begin{lemma}
-For each path $\pi \in \pathcat{G'}$ with
-\[ |\gamma(\pi)| = \inv{y} y \quad\text{for some }y \in Y \]
-there exists exactly one path $\tilde{\pi} \in \pathcat{\tilde{G}} \cap R$ with
-\[ |\tilde{\pi}| = \epsilon\text{ and }\pi = \proj{\tilde{\pi}} \] 
+For each path $\pi' \in \pathcat{G'}$ with
+\[ |\gamma(\pi')| = \inv{y} y \quad\text{for some }y \in Y \]
+there exists exactly one path $\tilde{\pi} \in \pathcat{\tilde{G}} \cap \validpaths$
+with 
+\[ |\tilde{\pi}| = \epsilon\text{ and }\pi' = \proj{\tilde{\pi}} \] 
 \end{lemma}
 
 \begin{proof}
 TODO
 \end{proof}
 
-Similar as after lemma 1 one can conclude that for each path $\pi \in
-\pathcat{G'}(S, F)$ with $|\gamma(\pi)| = \inv{y_0}y_0$ there exists exactly one
-path $\tilde{\pi} \in \pathcat{\tilde{G}}(S, F) \cap R'$ with
-$\proj{\tilde{\pi}} = \pi$ and $|\tilde{\pi}| = \epsilon$.
+Similar as after lemma 1 one can conclude that for each path $\pi' \in
+\pathcat{G'}(S, F)$ with $|\gamma(\pi')| = \inv{y_0} y_0$ there exists exactly
+one path $\tilde{\pi} \in \pathcat{\tilde{G}}(S, F) \cap \acceptedpaths$ with
+$\proj{\tilde{\pi}} = \pi'$ and $|\tilde{\pi}| = \epsilon$.
 
-From both lemmata the proof of the theorem follows:
+Using both lemmata the theorem can now be proved:
 \begin{eqnarray*}
 L_\kappa &=& \setof{\alpha(\pi) \mid \pi \in \pathcat{G}(S, F),\ \delta(\pi,
-\epsilon) = \epsilon}\text{ (by definition)} \\
-&=& \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(s_0, F),\ |\gamma(\pi)| =
+\epsilon) = \epsilon}\text{ (by definition of PDA)} \\
+&=& \setof{\alpha(\pi') \mid \pi' \in \pathcat{G'}(s_0, F),\ |\gamma(\pi')| =
 y_0}\text{ (by theorem 2, chapter III.1)} \\
-&=& \setof{\alpha(\pi) \mid \pi \in \pathcat{G'}(S, F),\
-|\gamma(\pi)| = \inv{y_0} y_0}\text{ (by construction of $G'$)}
+&=& \setof{\alpha(\pi') \mid \pi' \in \pathcat{G'}(S, F),\
+|\gamma(\pi')| = \inv{y_0} y_0}\text{ (by construction of $G'$)}
 \end{eqnarray*}
 
-If we define $\tilde{R} := \pathcat{G}(S, F) \cap R'$, we get $\tilde{R} \in
-\reglang(\unioninv{\Sigma})^*$ because the intersection of regular (local)
-languages is a regular (local) language.
+If we define $\tilde{R} := \pathcat{\tilde G}(S, F) \cap \acceptedpaths$, 
+we get $\tilde{R} \in \reglang(\unioninv{\Sigma})^*$ because the intersection of
+regular (local) languages yields again a regular (local) language.
 
 Together with lemma 1 and lemma 2 it follows
-\[ \proj{\tilde{R} \cap D(\underbrace{\tilde{E}^+}_{\Sigma})} = \setof{\pi \in
-\pathcat{G'}(s_0, F) \mid |\gamma(\pi)| = y_0} \]
+\[ \proj{\tilde{R} \cap D(\underbrace{\tilde{E}^+}_{\Sigma})} = \setof{\pi' \in
+\pathcat{G'}(s_0, F) \mid |\gamma(\pi')| = y_0} \]
 
-With homomorphism $\phi := \mathrm{proj} \circ \alpha : (\unioninv{\Sigma})^*
+With homomorphism $\phi := \mathbf{p} \circ \alpha : (\unioninv{\Sigma})^*
 \to X^*$ we finally get
 \[ L_\kappa = \phi(D(\Sigma) \cap \tilde{R}) \]
 \end{proof}

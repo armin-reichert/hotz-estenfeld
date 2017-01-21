@@ -16,9 +16,9 @@
 		\node [style=none] (13) at (-1, 2) {$\vdots$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style=transition] (0) to (2);
-		\draw [style=transition] (1) to (3);
-		\draw [style=transition] (6) to (7);
-		\draw [style=transition] (8) to (9);
+		\draw [style=bijection] (0) to (2);
+		\draw [style=bijection] (1) to (3);
+		\draw [style=bijection] (6) to (7);
+		\draw [style=bijection] (8) to (9);
 	\end{pgfonlayer}
 \end{tikzpicture}

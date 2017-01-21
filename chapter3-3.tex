@@ -53,11 +53,10 @@ For the proof we use the graph $G'=(V',E'),\ V' = V \cup \setof{s_0}$, which we
 constructed in theorem 2 of section III.1 and the mapping $\gamma: E' \to 
 \hgroup{Y}$.
 
-Reminder: The graph $G'$ was constructed from $G$ by adding the following kinds
-of edges:
+Reminder: The graph $G'$ has the following types of edges:
 \begin{itemize}
-  \item A start edge $e_0 \in \setof{s_0} \times S$ of the form 
-  \[ e_0: s_0 \edge{y_0} s \] 
+  \item A start edge $e'_s \in \setof{s_0} \times S$ labelled by $y_0$ 
+  \[ e'_s: s_0 \edge{y_0} s \] 
   for each start vertex $s \in S$.
   
   \item ''PUSH($z$)''-edges $e'=(e, y) \in E \times Y$ of the form
@@ -88,7 +87,7 @@ Our goal is to construct a graph $\tilde{G}$ whose edges will constitute the
 alphabet $\Sigma \cup \Sigma^{-1}$ of the Dyck language.
 
 First we define a relation $\rho' \subset E' \times E'$ on the edges of the
-graph $G'$ which relates two edges if they execute corresponding 
+graph $G'$ which relates two edges if they represent a pair of corresponding
 push/pop-operations.
 
 For edges $e', f' \in E'$ define
@@ -132,8 +131,7 @@ the {\em parallel edges} of $e'$.
 For edges $(\tilde{e}, \tilde f) \in \tilde{\rho}$ we also write $\tilde f =
 \inv{\tilde e}$ and call $\tilde f$ the {\em inverse edge} to $\tilde e$.
 
-In the graph $\tilde{G}$ to be constructed we replace the edges of $G'$ by their
-parallel edges:
+In the graph $\tilde{G}$ the edges of $G'$ are replaced by their parallel edges:
 
 \begin{center}
 \input{figures/chapter3-3-theorem1-parallel-edges.tikz}
@@ -152,7 +150,7 @@ by
 \begin{eqnarray*}
 \tilde{V} &=& V' \ (=V \cup \setof{s_0}) \\
 \tilde{E} &=& \setof{\tilde f \mid \tilde f \text{ is the parallel edge for some
-}\tilde e \in E'}
+}e' \in E'}
 \end{eqnarray*}
 
 If $\tilde f \in \tilde{E}$ is the parallel edge for some $e' \in E'$ we write

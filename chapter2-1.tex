@@ -121,7 +121,7 @@ some basic properties for finite automata.
 \begin{lemma}
 Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton. Then there
 exists a finite automaton $\fa{A'} = (G', X, S', F', \alpha')$ such that
-$\card{S'} = \card{F'} = 1$ and $\lang{A} = \lang{A'}$.
+$\card{S'} = \card{F'} = 1$ and $L_{\fa{A}} = L_{\fa{A}'}$.
 \end{lemma}
 
 An automaton with a single start state is called {\bf initial}.
@@ -156,13 +156,13 @@ defined by the graph $G' = (V \cup \setof{S', F'}, E \cup OUT' \cup IN')$
 and the new labelling $\alpha'$ which is identical to $\alpha$ for all existing 
 edges and is defined as shown above for the new edges.
 
-It is easily shown that $\lang{A'} = \lang{A}$.
+It is easily shown that $L_{\fa{A}'} = L_{\fa{A}}$.
 \end{proof}
 
 \begin{lemma}
 Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton. Then there
 exists an automaton $\fa{A'} = (G', X, S', F', \alpha')$ with $\alpha'(e)
-\in X\ \forall e \in E(G)$ and $\lang{A} = \lang{A'}$.
+\in X\ \forall e \in E(G)$ and $L_{\fa{A}} = L_{\fa{A}'}$.
 \end{lemma}
 
 \begin{proof}
@@ -198,7 +198,7 @@ We ''split'' all edges according to their labels.
   Continue this algorithm inductively until no more $\epsilon$-edges remain in
   the graph. The algorithm terminates because the point and edge sets are
   finite. For the new automaton $\fa{A'}$ that results from this algorithm
-  holds: $\lang{A'} = \lang{A}$.
+  holds: $L_{\fa{A}'} = L_{\fa{A}}$.
 \end{enumerate}
 \end{proof}
 
@@ -218,12 +218,13 @@ We will prove now some closure properties of $\reglang(X^*)$.
 \end{theorem}
 
 \begin{proof}
-Let $L = \lang{A}$ and $L' = \lang{B}$ with automata \[
+Let $L = L_{\fa{A}}$ and $L' = L_{\fa{B}}$ with automata \[
 \fa{A} = (G_A, X, S_A, F_A, \alpha) \] and \[ \fa{B} = (G_B, X, S_B,
 F_B, \beta).\]
 We may assume that the edge and point sets of both automata graphs are disjoint.
 
 \begin{enumerate}
+  
   \item Closure under union: Define
 	\[ \gamma_2(e) := \left\{
 		\begin{array}{l} 
@@ -233,7 +234,11 @@ We may assume that the edge and point sets of both automata graphs are disjoint.
 	 \right. \]
 
 	Then the automaton $\fa{C} = (G_A \cup G_B, X, S_A \cup S_B, F_A \cup
-	F_B, \gamma)$ accepts the language $\lang{A} \cup \lang{B}$.
+	F_B, \gamma)$ accepts the language $L_{\fa{A}} \cup L_{\fa{B}}$.
+	
+	\begin{center}
+	\input{figures/chapter2-1-closure-union.tikz}
+	\end{center}
 	
 	\item Closure under intersection: Define $G' = (V', E')$ where
 	\[ V' = V_A \times V_B \]
@@ -245,7 +250,7 @@ We may assume that the edge and point sets of both automata graphs are disjoint.
 	\delta_2((e_A, e_B) = \alpha_2(e_A)). \]
 	
 	For the automaton $\fa{A'} = (G', X, S_A \times S_B, F_A \times F_B,
-	\delta)$ then holds: $\lang{G'} = \lang{A} \cap \lang{B}$
+	\delta)$ then holds: $L_{\fa{A}'} = L_{\fa{A}} \cap L_{\fa{B}}$
 	and this automaton is called the {\bf cartesian product} of $\fa{A}$ and
 	$\fa{B}$.
 \end{enumerate}
@@ -267,7 +272,7 @@ which means we reverse the orientation of the edges.
 
 For the resulting automaton $\fa{A'} = (G', X, S_{\fa{A}},
 F_{\fa{A}}, \alpha')$ with $\alpha'(e') = \alpha(e)$ for all edges of $G'$
-it holds: $\lang{A'} = \lang{A}^R = L^R \in \reglang(X^*)$.
+it holds: $L_{\fa{A}'} = L_{\fa{A}}^R = L^R \in \reglang(X^*)$.
 \end{proof}
 
 \bigskip
@@ -352,9 +357,9 @@ L_{\fa{A}}$:
 \end{eqnarray*}
 
 That means $\tilde{P_k} \cap F_{\fa{A}} \neq \emptyset \Rightarrow \tilde{P}_k \
-\in F_{\fa{A'}} \Rightarrow w \in \lang{A'}.$
+\in F_{\fa{A'}} \Rightarrow w \in L_{\fa{A}'}.$
 
-\[ \Rightarrow \lang{A} \subset \lang{A'}\]
+\[ \Rightarrow L_{\fa{A}} \subset L_{\fa{A}'}\]
 
 ''$\supset$'': Here we use diagrams  
 \begin{eqnarray*}
@@ -366,7 +371,7 @@ which are to be understood as follows: For $\tilde{P} \edge{x} \tilde{R} \in
 E(G')$ and $R \in \tilde{R}$ there exists $P \in \tilde{P}$ with $P \edge{x} R
 \in E(G)$.
 
-For $x_1 \cdots x_K \in \lang{A'}$ we start with $F_{\fa{A'}}$ and continue
+For $x_1 \cdots x_K \in L_{\fa{A}'}$ we start with $F_{\fa{A'}}$ and continue
 the diagram from right to left. For $P_k \in \tilde{P}_k \cap F_{\fa{A}}$ we get
 \begin{eqnarray*}
  & S_{\fa{A'}} \ni & \tilde{P}_0 \edge{x_1} \tilde{P}_1 \edge{x_2} \tilde{P}_2 \edge{} \ldots
@@ -376,11 +381,11 @@ the diagram from right to left. For $P_k \in \tilde{P}_k \cap F_{\fa{A}}$ we get
 \end{eqnarray*}
 
 Because of $S_{\fa{A'}} = \setof{S_{\fa{A}}} = \setof{\setof{P_0}}$ it holds:
-$x_1 \cdots x_k \in \lang{A} \Rightarrow \lang{A'} \subset \lang{A}$.
+$x_1 \cdots x_k \in L_{\fa{A}} \Rightarrow L_{\fa{A}'} \subset L_{\fa{A}}$.
 
-\[ \Rightarrow \lang{A'} \subset \lang{A}\]
+\[ \Rightarrow L_{\fa{A}'} \subset L_{\fa{A}}\]
 
-From both inclusions we get $\lang{A} = \lang{A'}$.
+From both inclusions we get $L_{\fa{A}} = L_{\fa{A}'}$.
 \end{proof}
 
 \bigskip
@@ -440,7 +445,7 @@ We want to state an important consequence from our last theorem.
 
 \begin{proof}
 $L \in \reglang(X^*) \Rightarrow $ there exists a complete, deterministic
-finite acceptor $\fa{A}$ with $\lang{A} = L$.
+finite acceptor $\fa{A}$ with $L_{\fa{A}} = L$.
 
 Define $\fa{A'} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha)$ where $F_{\fa{A}} :=
 V(G) - F_{\fa{A}}$.
@@ -452,8 +457,8 @@ This $w \in X^*$ uniquely determines a point $P \in V(G)$ with $w \in
 \alpha(\pathcat{W}(S_{\fa{A}}, P))$.
 
 It is either $P \in F_{\fa{A}}$ or $P \in F_{\fa{A'}}$ and from $F_{\fa{A}}
-\cap F_{\fa{A}'} = \emptyset$ follows $w \in \lang{A} \Leftrightarrow w
-\notin \lang{A'}$ and therefore $\lang{A'} = \bar{\lang{A}}$.
+\cap F_{\fa{A}'} = \emptyset$ follows $w \in L_{\fa{A}} \Leftrightarrow w
+\notin L_{\fa{A}'}$ and therefore $L_{\fa{A}'} = \bar{L_{\fa{A}}}$.
 \end{proof}
 
 \bigskip
@@ -462,74 +467,70 @@ It is either $P \in F_{\fa{A}}$ or $P \in F_{\fa{A'}}$ and from $F_{\fa{A}}
 \end{theorem}
 
 \begin{proof}
-$L_1, L_2 \in \reglang(X^*) \Rightarrow$\ there exist finite acceptors
-$\fa{A}_i = (G_i, X, S_i, F_i, \alpha_i)$ with $L_i = \lang{A}_i,\ i = 1,2$.
+$L_1, L_2 \in \reglang(X^*)$, there exist finite acceptors
+\[ \fa{A}_i = (G_i, X, S_i, F_i, \alpha_i),\quad G_i = (V_i, E_i),\ i=1,2 \]
+such that $L_i = L_{\fa{A}_i}$.
 
 We define a new acceptor
-\[\fa{A} = (G, X, S, F, \alpha) \]
-as follows:
-
-Vertices:
-\[ V(G) := V(G_{\fa{A}_1}) \cup V(G_{\fa{A}_2})\mbox{ where }V(G_{\fa{A}_1})
-\cap V(G_{\fa{A}_2}) = \emptyset \]
-
-Edges:
-\[ E(G) = E(G_{\fa{A}_1}) \cup E(G_{\fa{A}_2}) \cup \mbox{ 'bridge'' edges
-defined as follows:}
+\[ \fa{A}_1 \circ \fa{A}_2 := (G, X, S, F, \alpha),\quad G = (V, E) \]
+with vertex set
+\[ V := V_1 \cup V_2\text{ where }V_1 \cap V_2 = \emptyset \]
+and edge set
+\[ E := E_1 \cup E_2 \cup \underbrace{\setof{Q(e) \edge{x} s' \mid \exists
+e \in E_1,\ e: Q(e) \edge{x} f,\ f \in F_1,\ s' \in S_2}}_{\text{bridge edges}}
 \]
 
-\missingfigure (bridge edge)
+This means for each edge $e$ that ends in a final state of the first automaton 
+$f$ we create a ''bridge'' from the source of this edge to the start state of
+the second automaton.
 
-Here $R \in F1$ is a final state in $\fa{A}_1$, $x = \alpha_1(e_1)$ is the label
-of edge $e_1$, $P'$ is a start state in $\fa{A}_2$.
+Start and final states of the new automaton: $S := S_1$ and $F := F_2$.
 
-For each such configuration, a new ''bridge''	edge $e$ is added to $E(G)$ where
-\[ Q(e) := P,\ Z(e) := P' \mbox{ and } \alpha(e) := x.\]
+\begin{center}
+\input{figures/chapter2-1-closure-concatenation.tikz}
+\end{center}
 
-Start and final states: $S := S_{\fa{A}_1}$ and $F := F_{\fa{A}_2}$.
-
-We now prove that $\lang{A} = \lang{A}_1 \cdot \lang{A}_2$.
+We prove that $L_{\fa{A}} = L_{\fa{A}_1} \cdot L_{\fa{A}_2}$.
 
 \begin{enumerate}
-  \item $\lang{A} \supset \lang{A}_1 \cdot \lang{A}_2$
+  \item $L_{\fa{A}} \supset L_{\fa{A}_1} \cdot L_{\fa{A}_2}$
   
-  Let $u = u_1 \cdots u_n \in \lang{A}_1$ and $v = v_1 \cdots v_m \in
-  \lang{A}_2$. Then there exist accepting paths
-  \[ S_1 \ni P_0 \edge{u_1} P_1 \edge{u_2} \ldots \edge{u_n} P_n \in F_1 \]
+  Let $u = u_1 \cdots u_n \in L_{\fa{A}_1}$ and $v = v_1 \cdots v_m \in
+  L_{\fa{A}_2}$. Then there exist accepting paths
+  \[ S_1 \ni p_0 \edge{u_1} p_1 \edge{u_2} \ldots \edge{u_n} p_n \in F_1 \]
   and 
-  \[ S_2 \ni Q_0 \edge{v_1} Q_1 \edge{v_2} \ldots \edge{v_m} Q_m \in F_2 \]
+  \[ S_2 \ni q_0 \edge{v_1} q_1 \edge{v_2} \ldots \edge{v_m} q_m \in F_2 \]
   
-  By construction of graph $G$ there exists a path in $\pathcat{G}(S1, F2)$ of
+  By construction of $G$ there exists a path in $\pathcat{G}(S_1, F_2)$ of
   the form
-  \[ S_1 \ni P_0 \edge{u_1} P_1 \edge{u_2} \ldots P_{n-1} \edge{u_n} Q_0
-  \edge{v_1} Q_1 \edge{v_2} \ldots \edge{v_m} Q_m \in F_2 \]
+  \[ S_1 \ni p_0 \edge{u_1} p_1 \edge{u_2} \ldots \underbrace{p_{n-1} \edge{u_n}
+  q_0}_{\text{bridge}} \edge{v_1} q_1 \edge{v_2} \ldots \edge{v_m} q_m \in F_2
+  \]
+  It follows $u = u_1 \cdot u_2 \cdots u_n \cdot v_1 \cdots v_m \in L_{\fa{A}}$
+  therefore $L_{\fa{A}_1} \cdot L_{\fa{A}_2} \subset L_{\fa{A}}$.
+  \medskip
   
-  It follows $u = u_1 \cdots u_n \cdot v_1 \cdots v_m \in \lang{A}$ thus
-  $\lang{A}_1 \cdot \lang{A}_2 \subset \lang{A}$.
+  \item $L_{\fa{A}} \subset L_{\fa{A}_1} \cdot L_{\fa{A}_2}$
   
-  \item $\lang{A} \subset \lang{A}_1 \cdot \lang{A}_2$
-  
-  Let \[ S \ni P_0 \edge{w_1} P_1 \edge{w_2} \ldots \edge{w_n} P_n \in F \] be
-  an accepting path in $\pathcat{G}(S, F)$. Then there exist states $P_i \in
-  S_2$ and $P_j \in V(G_1)$ with $j < i$ because $V(G_1) \cap V(G_2) =
-  \emptyset$.
+  Let \[ S \ni p_0 \edge{w_1} p_1 \edge{w_2} \ldots \edge{w_n} p_n \in F \]
+  be an accepting path in $\pathcat{G}(S, F)$. Then there exist vertices $p_i
+  \in S_2$ and $p_j \in V_1$ with $j < i$ because $V_1 \cap V_2 = \emptyset$.
   
   \missingfigure
   
-  Therefore the subpath \[ S_2 \ni P_i \edge{w_{i+1}} P_{i+1} \edge{} \ldots
-  \edge{w_n} P_n \in F_2 \] contains only edges and vertices from $\fa{A}_2$ and
-  is an accepting path for the word $w_{i+1} \cdots w_n \in \lang{A}_2$.
+  Therefore the subpath 
+  \[ S_2 \ni p_i \edge{w_{i+1}} p_{i+1} \edge{} \ldots \edge{w_n} _n \in F_2 \]
+  contains only edges from $\fa{A}_2$ and is an accepting path for 
+  $w_{i+1} \cdots w_n \in L_{\fa{A}_2}$.
   
-  It holds $P_{i-1} \in V_1$ and by construction of the graph $G$ there exists
-  an edge labeled with $w_i$ which ends in a final state of $\fa{A}_1$. So $w_1
-  \cdots w_i \in \lang{A}_1$.
-  
-  Together we get \[ w_1 \cdots w_i \cdots w_n \in \lang{A}_1 \cdot
-  \lang{A}_2 \Rightarrow \lang{A} \subset \lang{A}_1 \cdot \lang{A}_2.\]
+  It is $p_{i-1} \in V_1$ and by construction of the graph $G$ there exists
+  an edge labelled $w_i$ which ends in a final state of $\fa{A}_1$. Therefore
+  $w_1 \cdots w_i \in L_{\fa{A}_1}$ and it holds 
+  \[ w_1 \cdots w_i \cdots w_n \in L_{\fa{A}_1} \cdot L_{\fa{A}_2} \Rightarrow
+  L_{\fa{A}} \subset L_{\fa{A}_1} \cdot L_{\fa{A}_2} \]
 \end{enumerate}
 
-From (1) and (2) it follows $\lang{A} = \lang{A}_1 \cdot
-\lang{A}_2$.
+From (1) and (2) it follows $L_{\fa{A}} = L_{\fa{A}_1} \cdot L_{\fa{A}_2}$.
 \end{proof}
 
 \bigskip
@@ -554,7 +555,7 @@ Graph: Take the graph $G$ and add the following edges:
   labeled by $\alpha'(e') := \epsilon$.
 \end{enumerate}
 
-For the finite acceptor $\fa{A'}$ it holds (exercise): \[ \lang{A'} = L^* \]
+For the finite acceptor $\fa{A'}$ it holds (exercise): \[ L_{\fa{A}'} = L^* \]
 \end{proof}
 
 We have seen (lemma 1) that for non-deterministic automata a single start and a
@@ -584,10 +585,10 @@ For $x \in X$ it holds $\setof{x} \in \reglang(X^*)$ and $\emptyset \in \reglang
 \begin{proof}
 If $G = (\setof{S,F}, \setof{e}),\ e: S \to F$ be a graph, then the finite
 acceptor \[\fa{A}_x = (G, \setof{x}, \setof{S}, \setof{F}, \alpha)\] with $\alpha_2(e) =
-x$ fulfills $\lang{A} = \setof{x}$.
+x$ fulfills $L_{\fa{A}} = \setof{x}$.
 
 If $G = (\setof{S,F}, \emptyset)$, then $\fa{A} = (G, \emptyset, \setof{S},
-\setof{F}, \emptyset)$ fulfills $\lang{A} = \emptyset$.
+\setof{F}, \emptyset)$ fulfills $L_{\fa{A}} = \emptyset$.
 \end{proof}
 
 \bigskip
@@ -640,7 +641,7 @@ E & = & \setof{e : \setof{\bar{S}} \to x \mid x \in S} \cup \setof{e : x \to y
 Consider the finite acceptor $\fa{A} = (G, X, \setof{\bar{X}}, F, \alpha)$ with
 labelling $\alpha$ defined by $\alpha_2(e) = Z(e)$ for each edge $e \in E$.
 
-Then it is clear that $\lang{A} = L$.
+Then it is clear that $L_{\fa{A}} = L$.
 \end{proof}
 
 \bigskip
@@ -704,17 +705,17 @@ Exercices:
   \item Let $\phi : (\setof{x, y}^*, \cdot) \to (\mathbb{Z} / 3 \mathbb{Z}
   \times \mathbb{Z} / 4 \mathbb{Z}, +)$ be given by $\phi(x) = (0,1), \phi(y) = (1,0)$.
   
-  Construct a finite automaton \fa{A} with $\lang{A} = \phi^{-1}((0,0))$ and
+  Construct a finite automaton \fa{A} with $L_{\fa{A}} = \phi^{-1}((0,0))$ and
   present $\phi^{-1}((0,0))$ as a rational set.
   
   \item Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton with $n$
   states. Prove:
   \begin{enumerate}
-    \item If $x \in \lang{A}$ with $|x| >= n$, then there exists words $u, v
+    \item If $x \in L_{\fa{A}}$ with $|x| >= n$, then there exists words $u, v
     w \in X^*$ with $x = u \cdot v \cdot w, v \neq \epsilon$ and $u \cdot v^m
     \cdot w \in falang{A}\ \forall m \geq 1$ (''pumping lemma'').
-    \item \lang{A} infinite $\Leftrightarrow \exists x \in X^*$ with $n \leq
-    |x| \leq 2n$ and $x \in \lang{A}$.
+    \item $L_{\fa{A}}$ is infinite $\Leftrightarrow \exists x \in X^*$ with $n
+    \leq |x| \leq 2n$ and $x \in L_{\fa{A}}$.
    \end {enumerate}
 
 	\item Show: The set $L = \setof{a^n b^n} \mid n \in \mathbb{N}$ is not

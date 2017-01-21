@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$s$};
+		\node [style=state] (1) at (2, 1.5) {$s_{\fa{A}}$};
+		\node [style=state] (2) at (2, -1.5) {$s_{\fa{B}}$};
+		\node [style=state] (3) at (6, 1.5) {$f_{\fa{A}}$};
+		\node [style=state] (4) at (6, -1.5) {$f_{\fa{B}}$};
+		\node [style=state] (5) at (8, -0) {$f$};
+		\node [style=none] (6) at (4, 1.5) {$\fa{A}$};
+		\node [style=none] (7) at (4, -1.5) {$\fa{B}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to node[auto]{$\epsilon$} (1);
+		\draw [style=transition] (0) to node[auto]{$\epsilon$} (2);
+		\draw [style=transition] (3) to node[auto]{$\epsilon$} (5);
+		\draw [style=transition] (4) to node[auto]{$\epsilon$} (5);
+		\draw [style=simple, bend left=45, looseness=1.25] (1) to (3);
+		\draw [style=simple, bend right=45, looseness=1.25] (2) to (4);
+		\draw [style=simple, bend right=45, looseness=1.25] (1) to (3);
+		\draw [style=simple, bend left=45, looseness=1.25] (2) to (4);
+	\end{pgfonlayer}
+\end{tikzpicture}

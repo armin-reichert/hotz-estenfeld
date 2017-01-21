@@ -539,21 +539,23 @@ From (1) and (2) it follows $L_{\fa{A}} = L_{\fa{A}_1} \cdot L_{\fa{A}_2}$.
 \end{theorem}
 
 \begin{proof}
-\missingfigure (graph construction)
-
-Let $\fa{A} = (G, X, S, F, \alpha)$	be a finite acceptor for $L$, create the
-finite acceptor $\fa{A'} = (G', X, S, F, \alpha')$ as follows:
-
-Graph: Take the graph $G$ and add the following edges: 
+Let $\fa{A} = (G, X, S, F, \alpha),\quad G=(V,E)$	be a finite acceptor for $L$,
+create the finite acceptor
+\[ \fa{A'} = (G', X, S, F, \alpha'),\quad G'=(V',E') \]
+from $G$ by adding the following edges: 
 
 \begin{enumerate}
-  \item For each edge \[e : P \edge{x} R \in E(G),\ R \in F\] leading to a
-  final state and each start state $P_0$ add an edge \[e' : P \edge{x} P_0 \]
-  labeled by $\alpha'(e') := x$.
-  \item For each state $P_0 \in S$ and each final state $R \in F$ add an edge
-  (if not already existing) \[ e' : P_0 \edge{\epsilon} R \]
-  labeled by $\alpha'(e') := \epsilon$.
+  \item For each edge $e : Q(e) \edge{x} f \in E,f \in F$ that ends in a final 
+  state and for each start state $s$ add a backward edge $e' : Q(e) \edge{x} s$ 
+  with label $\alpha'(e') = x$.
+  \item For each start state $s \in S$ and each final state $f \in F$ add a
+  forward edge (if not already existing) $e' : s \edge{\epsilon} f$ with
+  label $\alpha'(e') = \epsilon$.
 \end{enumerate}
+
+\begin{center}
+\input{figures/chapter2-1-closure-star.tikz}
+\end{center}
 
 For the finite acceptor $\fa{A'}$ it holds (exercise): \[ L_{\fa{A}'} = L^* \]
 \end{proof}

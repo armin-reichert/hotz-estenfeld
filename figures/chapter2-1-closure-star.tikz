@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (0, -0) {$s \in S$};
+		\node [style=state] (1) at (6, -0) {$f \in F$};
+		\node [style=none] (2) at (2, -0) {$\fa{A}$};
+		\node [style={filled_vertex}] (3) at (3, 1.5) {};
+		\node [style={filled_vertex}] (4) at (3, -1.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=simple, bend left=90, looseness=0.75] (0) to (1);
+		\draw [style=transition, bend right=105, looseness=1.75] (0) to node[auto]{$\epsilon$} (1);
+		\draw [style=transition] (3) to node[auto]{$x$} (1);
+		\draw [style=transition] (4) to node[auto]{$x$} (1);
+		\draw [style=transition, bend right=75, looseness=1.75] (3) to node[auto]{$x$} (0);
+		\draw [style=transition, bend left=75, looseness=1.50] (4) to node[auto]{$x$} (0);
+		\draw [style=transition, bend right=90, looseness=0.75] (0) to (1);
+	\end{pgfonlayer}
+\end{tikzpicture}

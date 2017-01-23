@@ -1,24 +1,25 @@
 \section{Graphs, categories and functors}
 
-Before defining graphs formally we want to describe what we mean by a graph. A
-graph consists of points and edges. Each edge connects two points which are not
-necessarily different. You can imagine a graph as streetmap, the cities are the
-points and the streets are the edges of the graph. The edges may be oriented
-such that they have a one-way direction. Paths in graphs are sequences of edges
-that you could drive for example with a car without violating the traffic rules.
+Before defining graphs formally we want to explain informally what we mean by a
+graph. A graph consists of points and edges. Each edge connects two points which
+are not necessarily different. You can imagine a graph as streetmap, the cities
+are the points and the streets are the edges of the graph. The edges may be
+oriented such that they have a one-way direction. Paths in graphs are sequences
+of edges that you could drive for example with a car without violating the
+traffic rules.
 
-One can show that every graph, as we will formally define, has (with a certain
-restriction) a faithful image in $\mathbb{R}^3$, see \cite{Wagner}. The points
-of the graph become points in $\mathbb{R}^3$, the edges become connecting lines
-in $\mathbb{R}^3$ which do not pairwise intersect.
+One can show that every graph, as we will formally define it, possesses (with a
+certain restriction) a faithful image in $\mathbb{R}^3$, see e.g.\
+\cite{Wagner}. The points of the graph become points in $\mathbb{R}^3$, the
+edges become connecting lines in $\mathbb{R}^3$ which pairwise do not intersect.
 
-The mentioned restriction concerning the points is that the graph must not have
-more points than the cardinality of $\mathbb{R}^3$ which is the cardinality of
-the continuum.
+The restriction concerning the points of the graph is that the graph must not
+have more points than there exist in $\mathbb{R}^3$ (cardinality of the
+continuum).
 
-The restriction concerning the edges is more severe: It tells that there is at
-most one edge between two points and that the graph has no loops.
-Loops are edges with just a single border point.
+The restriction concerning the edges is more essential: It tells that there is
+at most one edge between two points and that the graph has no loops. Loops are
+edges with just a single border point.
 
 From what has been said we see that we may use a concrete geometric imagination
 of a graph without getting our intuition mistaken. The following definition of a
@@ -26,14 +27,14 @@ graph nevertheless does not contain any geometry.
 
 \bigskip
 \begin{definition}
-A {\bf graph} $G = (V, E)$ consists of a non-empty set $V$ of points
-(vertices), a set $E$ of edges and a mapping $\rho: E \to \powset{V}$ with
-$\card{\rho(e)} <= 2$ for $e \in E$. $\rho(e)$ is the set of {\em border points}
-of $e$.
+A {\bf graph} $G = (V, E)$ consists of a non-empty set $V$ of vertices (points),
+a set $E$ of edges and a mapping 
+\[ \rho: E \to \powset{V}\text{ with }\card{\rho(e)} <= 2\text{ for }e \in E \]
+$\rho(e)$ is the set of {\em border points} of $e$.
 \end{definition}
 
-Border points of an edge do not need to be different. If $\card{\rho(e)} = 2$ we
-call $e$ a {\bf line}, if $\card{\rho(e)} = 1$ we call it a {\bf loop}.
+The border points of an edge do not need to be different. If $\card{\rho(e)} =
+2$ we call $e$ a {\bf line}, if $\card{\rho(e)} = 1$ we call it a {\bf loop}.
 
 \bigskip
 \begin{definition}
@@ -42,60 +43,68 @@ A graph is called {\bf loop-free} if it does not contain any loops.
 
 We introduce an orientation for the edges. 
 
-\bigskip
 \begin{definition}
-A graph $G = (V,E)$ is called an {\bf oriented graph} if there are two mappings
-$Q : E \to V$ and $Z : E \to V$ with $\rho(e) = \setof{Q(e), Z(e)}$ for all $e
-\in E$.
-$Q(e)$ is called the {\bf source} and $Z(e)$ the {\bf target} of $e$
-\footnote{The letters $Q$ and $Z$ stem from the German words for source
-(''Quelle'') and target (''Ziel'').}.
+A graph $G = (V,E)$ is called {\bf oriented graph} if there are two mappings
+$Q : E \to V$ and $Z : E \to V$ with
+\[ \rho(e) = \setof{Q(e), Z(e)}\text{ for all }e \in E \]
 \end{definition}
+
+$Q(e)$ is called the {\bf source vertex} and $Z(e)$ the {\bf target vertex} of
+$e$ \footnote{The letters $Q$ and $Z$ stem from the German words for source
+(''Quelle'') and target (''Ziel'').}.
 
 The notions of loop and line are naturally transferred to oriented graphs.
 
 To each graph one can assign the corresponding oriented graph $\hat{G}$ by
-defining two edges $(v_1,e,v_2)$ and $(v_2,e,v_1)$ for each edge $e$ with
-border points $v_1$ and $v_2$ and defining $Q((v_1,e,v_2)) = v_1 =
-Z((v_2,e,v_1))$ and $Q((v_2,e,v_1)) = v_2 = Z((v_1,e,v_2))$.
+defining two edges
+\[ (v_1, e, v_2)\text{ and }(v_2,e,v_1) \]
+for each edge $e$ with border points $v_1$ and $v_2$ and defining
+\begin{eqnarray*}
+& Q((v_1, e, v_2)) = v_1 = Z((v_2, e, v_1)) \\
+& Q((v_2, e, v_1)) = v_2 = Z((v_1, e, v_2))
+\end{eqnarray*}
 
 \bigskip
 \begin{definition}
 A graph $G = (V,E)$ is called {\bf connected} if in the corresponding oriented
 graph $\hat{G}$ for each pair of points $v$ and $v'$ there exist edge sequences
-$e_1, \ldots, e_k$ with $Q(e_1) = v,\ Z(e_k) = v'$ and $Z(e_i) = Q(e_{i+1})$ for
-$i = 1, \ldots, k-1$.
+$e_1, \ldots, e_k$ with
+\[ Q(e_1) = v,\ Z(e_k) = v'\text{ and }Z(e_i) = Q(e_{i+1})\text{ for }i = 1,
+\ldots, k-1 \]
 \end{definition}
 
 \bigskip
 \begin{definition}
 A loop-free graph $G = (V,E)$ is called {\bf ordered} if for each point $v \in
-V$ holds: There exists a unique (up-to cyclic permutation) ordering on the set
-$\setof{e \in E \mid v \in \rho(e)}$.
+V$ holds:
+
+There exists a unique (up-to cyclic permutation) ordering on the set
+\[ \mathrm{cycle}(v) := \setof{e \in E \mid v \in \rho(e)} \]
 \end{definition}
 
-Notation: $\setof{e \in E \mid v \in \rho(e)}$ is called the {\bf cycle} of
-$v$.
+The set $\mathrm{cycle}(v)$ is called the {\bf cycle} that belongs to $v$.
 
 Explanation: Imagine each point and its adjacent edges to be stuck on a litte
-circle as in the following figure:
+disk as shown in the following figure:
 
 \begin{center}
 \input{figures/chapter1-4-graph_cycle.tikz}
 \end{center}
 
-In this figure the orderings for $\setof{e_1,e_2,e_3,e_4,e_5}$ are:
+In this figure the orderings for $\setof{e_1, e_2, e_3, e_4, e_5}$ are:
 \begin{eqnarray*}
 & e_1, e_2, e_3, e_4, e_5 \\
 & e_2, e_3, e_4, e_5, e_1 \\
-& \ldots & \\
+& \vdots & \\
 & e_5, e_1, e_2, e_3, e_4
 \end{eqnarray*}
 
 \bigskip
 \begin{definition}
 A loop-free, oriented graph $G$ is called {\bf ordered} if for all points
-$v \in V$ it	holds: In the cycle of $v$ there exists an ordering 
+$v \in V$ it holds: 
+
+In the cycle of $v$ there exists an ordering 
 \[ e_1, \ldots, e_k, e_m', \ldots, e_1'\]
 such that
 \[ \setof{e_1, \ldots, e_k} = \setof{e \in E \mid Z(e) = v} \]
@@ -106,17 +115,18 @@ and
 $e_1, \ldots, e_k$ is called the {\bf ordering} of the incoming edges of $v$ and
 $e_1', \ldots, e_m'$ the ordering of the outgoing edges of $v$.
 
+\medskip
 {\bf Example:}
 
 \begin{center}
 \input{figures/chapter1-4-edge_ordering.tikz}
 \end{center}
 
-$e_1,e_2,e_3,e_4,e_5,e_6$ is the ordering of vertex $v$.
+$e_1, e_2, e_3, e_4, e_5, e_6$ is the ordering of vertex $v$.
 
-$e_1,e_2,e_3$ is the ordering of the incoming edges.
+$e_1, e_2, e_3$ is the ordering of the incoming edges.
 
-$e_6,e_5,e_4$ is the ordering of the outgoing edges.
+$e_6, e_5, e_4$ is the ordering of the outgoing edges.
 
 \bigskip
 \begin{definition}
@@ -130,28 +140,28 @@ Z(e_k) & = & z
 \end{eqnarray*}
 \end{definition}
 
-We extend the source and target mappings $Q$ and $Z$ onto paths by defining
-$Q(\pi) := q$ and $Z(\pi) := z$. $q$ is called the {\bf start point} and $z$ the {\bf end
-point} of the path $\pi$.
+We continue the source and target mappings $Q$ and $Z$ onto paths by defining
+\[ Q(\pi) := q,\quad Z(\pi) := z \]
+$q$ is called the {\bf start point} and $z$ the {\bf end point} of $\pi$.
 
-$L(\pi) := k$ is called the {\bf length} of the path $\pi$. For $k = 0$ we
+$\len{\pi} := k$ is called the {\bf length} of the path $\pi$. For $k = 0$ we
 define for all points $v \in V$ that $\pi = (v, v)$ is the path of length 0 from
 $v$ to $v$.
 
-Paths in arbitrary graphs are defined by switching to the oriented graph
+Paths in arbitrary graphs are defined by turning to the oriented graph
 $\hat{G}$.
 
 \bigskip
 \begin{definition}
 Let $\pi = (q, e_1, \ldots, e_k, z)$ be a path. A path $\pi' = (q', e'_1,
 \ldots, e'_m, z')$ is called a {\bf subpath} of $\pi$ if there exists an $i$
-with $1 \leq i \leq k$ and $e'_j = e_{i+j-1},\ j = 1, \ldots, m$ and $i + m -
-1 \leq k$.
+with $1 \leq i \leq k$ such that
+\[ e'_j = e_{i+j-1},\ j = 1, \ldots, m,\ i + m - 1 \leq k \]
 \end{definition}
 
 A path is called {\bf closed} if $Q(\pi) = Z(\pi)$, it is called a {\bf circle}
-if it is closed and does not contain any closed subpath $\pi'$ with $L(\pi') >
-0$.
+if it is closed and does not contain any closed subpath $\pi'$ with $\len(\pi')
+> 0$.
 
 \bigskip
 \begin{definition}
@@ -161,17 +171,15 @@ A graph $G = (V, E)$ is called {\bf circle-free} if there are no circles in $G$.
 For our purposes we will only consider oriented graphs. For these graphs the
 following definition reflects a special connectivity property.
 
-\bigskip
 \begin{definition}
-Let $G = (V, E)$ be an oriented graph and $v \in V$. $G$ is called a {\bf star
-relative to $v$} if for each $v' \in V$ there exists a path $\pi_{v'}$ with
-$Q(\pi_{v'}) = v$ and $Z(pi_{v'}) = v'$. $v$ is called the {\bf center} of $G$.
-\end{definition} 
+Let $G = (V, E)$ be an oriented graph and $c \in V$. $G$ is called a {\bf star
+relative to $c$} if for each $v \in V$ there exists a path $\pi_{v}$ with
+$Q(\pi_{v}) = c$ and $Z(\pi_{v}) = v$. $c$ is called the {\bf center} of $G$.
+\end{definition}
 
 We want to introduce now a special kind of graph that plays a central role in
 the theory of formal languages.
 
-\bigskip
 \begin{definition}
 A {\bf tree} is a circle-free star where for all $v \in V$ it holds
 \[ \card{\setof{e \in E \mid Z(e) = v}} \leq 1 \]
@@ -179,130 +187,136 @@ A {\bf tree} is a circle-free star where for all $v \in V$ it holds
 
 The following lemma holds:
 \begin{lemma}
-A tree has exactly one center which is called its {\bf root}.
+A tree has exactly one center (called {\bf root}).
 \end{lemma}
 
 Historical remark: Leonard Euler (1735) at a walk in Königsberg asked himself if
-he could traverse each of the seven bridges over the Memel in such
-a way that he would traverse each bridge exactly once. In the figure below you
-can see a graph describing the situation. Euler gave a simple condition for the
-existence of paths that traverse each edge of a graph exactly once (the so
-called Euler paths).
+he could walk in such a way that he would traverse each of the seven bridges
+over the Memel river exactly once. In the figure below you can see a graph
+describing the situation. Euler stated a simple condition for the existence of
+paths that traverse each edge of a graph exactly once ({\em Euler paths}).
 
 \begin{center}
 \input{figures/chapter1-4-koenigsberger_bruecken.tikz}
 \end{center}
 
-Now we want to concatenate paths or mathematically, define a product operation
-on paths. We define:
+We want to {\em concatenate} paths, we define the {\em product of paths}:
 \[ (q, e_1, \ldots, e_k, z) \cdot (q', e_{k+1}, \ldots, e_n, z') := (q, e_1,
 \ldots, e_n, z')\text{ if } z = q' \]
 
-That means you can concatenate two paths if the end point of the first is the
-start point of the second path. Obviously it holds:
+That means you can concatenate two paths if the end point of the first path is
+the start point of the second path.
+
+Obviously it holds:
 \begin{enumerate}
-  \item The product of paths (if defined) is associative
-  \item For each point $v$ of a graph $G$ there exists exactly one path $1_v :=
-  (v, v)$ such that for each path $\pi$ it holds:
-  	\begin{eqnarray*}
-    	\pi \cdot 1_v = \pi,\text{ if }Z(\pi) = v \\
-    	1_v \cdot \pi = \pi,\text{ if }Q(\pi) = v
-  	\end{eqnarray*}
+\item The product of paths (if defined) is associative
+\item For each point $v$ of a graph $G$ there exists exactly one path $1_v :=
+(v, v)$ such that for each path $\pi$ it holds:
+	\begin{eqnarray*}
+  	\pi \cdot 1_v = \pi\quad\text{if }Z(\pi) = v \\
+  	1_v \cdot \pi = \pi\quad\text{if }Q(\pi) = v
+	\end{eqnarray*}
 \end{enumerate}
 
-We denote the set of paths of a graph $G$ with $\pathcat{G}$.
-
-(The letter $\mathfrak{W}$ stems from the German word ''Wegekategorie'' (path
-category.) 
-
-$\pathcat{G}$ is called the {\bf path category} of $G$ and in this 
-context $G$ is also called a {\bf schema}. $\pathcat{G}$ is an important special 
-case of a category.
+We denote the set of paths of a graph $G$ with $\pathcat{G}$. 
+$\pathcat{G}$\footnote{The letter
+$\mathfrak{W}$ stems from the German word ''Wegekategorie'' (path category).} 
+is called the {\bf path category} of $G$ and in this context $G$ is also called 
+a {\bf schema}. $\pathcat{G}$ is an important special case of a {\em category}.
 
 Notation: 
 \[ \pathcat{G}(v, v') := \setof{\pi \in \pathcat{G} \mid Q(\pi) = v,\ Z(\pi) =
-v'}
-\]
-{\em Categories} are algebraic structures with a {\em partial} operation.
+v'} \]
 
 \bigskip
+Categories are algebraic structures with a {\em partial} operation.
+
 \begin{definition}
 $C = (O, M, Q, Z, \circ)$ is called a {\bf category} if the axioms (K1) to
-(K4) are fulfilled:
+(K4) hold:
 \begin{enumerate}
-  \item[(K1)] $O$ and $M$ are sets and $Q: M \to O$ and $Z: M \to O$ are
-  mappings.\\
-  $Q(f)$ is the {\bf source} of $f$ and $Z(f)$ is the {\bf target} of $f$, $O$
-  is the set of {\bf objects} and $M$ the set of {\bf morphisms} of the category $C$.
-  \item[(K2)] For $f, g \in M$ the operation $\circ$ is defined iff $Q(g) =
-  Z(f)$. In this case it holds $f \circ g \in M,\ Q(f \circ g) = Q(f),\ Z(f
-  \circ g) = Z(g)$.
-  \item[(K3)] The associative law $f \circ (g \circ h) = (f \circ g) \circ h$
-  holds in the sense that each of both sides is defined if one of both is.
-  \item[(K4)] For each object $w \in O$ there exists a unit morphism $1_w \in M$
-  with $Q(1_w) = Z(1_w) = w$ and for all morphisms $f, g \in M$ with $Q(f) =
-  Z(g) = w$: $1_w \circ f = f$ and $g \circ 1_w = g$. It can be easily shown
-  that there exists exactly one unit morphism for each object $w$.
+	\item[(K1)] $O$ and $M$ are sets and $Q: M \to O$ and $Z: M \to O$ are
+	mappings.\\
+	$Q(f)$ is the {\bf source} of $f$ and $Z(f)$ is the {\bf target} of $f$.\\
+	$O$ is the set of {\bf objects} and $M$ the set of {\bf morphisms} of the
+	category $C$.
+	
+	\item[(K2)] For morphisms $f, g \in M$ the operation $\circ$ is defined
+	exactly if $Q(g) = Z(f)$. In this case it holds $f \circ g \in M,\ Q(f \circ g)
+	= Q(f),\ Z(f \circ g) = Z(g)$.
+	
+	\item[(K3)] The associative law $f \circ (g \circ h) = (f \circ g) \circ h$
+	holds in the sense that each of both sides is defined if one of them is.
+	
+	\item[(K4)] For each object $w \in O$ there exists a {\em unit morphism} $1_w
+	\in M$ with $Q(1_w) = Z(1_w) = w$ and for all morphisms $f, g \in M$ with 
+	$Q(f) = Z(g) = w$ holds:
+	\[ 1_w \circ f = f\text{ and }g \circ 1_w = g \]
+	It can easily be shown that there exists exactly one unit morphism for each
+	object $w$.
 \end{enumerate}
 \end{definition}
 
 Notations: $Obj(C) := O$ is called the {\bf set of objects} and $Mor(C) := M$
 the {\bf set of morphisms} of the category $C$.
 
-Historical remark: Euler was already interested in graphs and paths in graphs
-(see above). The notion {\em path category} of a graph had already been used
-before the notion {\em category} even existed. The axiomatic formulation of
-categories and its importance for many areas of mathematics was elaborated by
-S.\ Eilenberg and S.\ MacLane in 1945 \cite{EiMa}. Their work has stimulated a broad, 
-very abstract theory of categories. We will use here only the notations for
-structures which are categories and some elementary concepts which also in the theory of formal 
-languages lead to fruitful questions.
+Historical remark: Already Euler was interested in graphs and paths in
+graphs (see above). The path category of a graph had already been used
+before the notion of a {\em category} even existed.
+
+The axiomatic formulation of categories and its importance for many areas of
+mathematics has been elaborated by S.\ Eilenberg and S.\ MacLane in 1945
+\cite{EiMa}. Their work produced a broad, very abstract theory of categories. We
+will use here only the notations for structures which are categories and some 
+elementary concepts which also in the theory of formal languages lead to 
+fruitful questions.
 
 We explain the notion of a category with some examples:
 \begin{enumerate}
-  \item {\bf The category of relations on sets} \\
-  Let $O$ be a set of sets ($O \notin O)$. 
+  \item {\bf The category of relations}
   
-  Define $REL(O) := (O, M, Q, Z,\circ)$ by:
+  Let $O$ be a set of sets ($O \notin O)$. Define 
+  \[ \mathrm{REL}(O) := (O, M, Q, Z,\circ) \] by:
   \begin{itemize}
-  	\item $M := \setof{(A,B,R) \mid A \in O,\ B \in O,\ R \subset A \times B}$
-  	\item $Q(A,B,R) := A, \ Z(A,B,R) := B$
-  	\item $(A,B,R_1) \circ (B,C,R_2) := (A,C,R')\\
-  	\text{where }R'= \setof{(a,c) \mid \exists b \in B: (a,b)\in R_1\text{ and
-  	}(b,c)\in R_2}$
+  	\item[] $M := \setof{(A,B,R) \mid A \in O,\ B \in O,\ R \subset A \times B}$
+  	\item[] $Q(A,B,R) := A, \ Z(A,B,R) := B$
+  	\item[] $(A,B,R_1) \circ (B,C,R_2) := (A,C,R')\\
+  	\text{where }R'= \setof{(a, c) \mid \exists\, b \in B: (a, b)\in R_1\text{
+  	and }(b, c)\in R_2}$
   \end{itemize}
-  With these definitions $REL(O)$ becomes a category (exercise) and the
-  morphisms $(A, A, \setof{(a, a) \mid a\in A})$ are the units for each set $A
+  With these definitions $\mathrm{REL}(O)$ becomes a category (exercise). The
+  morphisms $(A, A, \setof{(a, a) \mid a \in A})$ are the units for each set $A
   \in O$.
 
-  \item {\bf The category of matrices over the rational numbers} \\
-  Define $MAT(\mathbb{Q}) := (O. M, Q, Z, \circ)$ by:
+  \item {\bf The category of matrices}
+  
+  Define 
+  \[ \mathrm{MAT}(\mathbb{Q}) := (O. M, Q, Z, \circ) \]
+  by:
   \begin{itemize}
-    \item $O := \mathbb{N}$
-    \item $M :=$ the set of $k \times n$ matrices with entries from
-    $\mathbb{Q} (k, n \in \mathbb{N})$.
-    \item For a $k \times n$ matrix $A_{k,n}$ define source and target mappings
-    by
+    \item[] $O := \mathbb{N}$
+    \item[] $M :=$ the set of $k \times n$-matrices with entries from
+    $\mathbb{Q}\ (k, n \in \mathbb{N})$.
+    \item[] For a $k \times n$-matrix $A_{k,n}$ define source and target
+    mapping by
     \begin{itemize}
 	    \item[] $Q(A_{k,n}) := k$ (the number of rows)
   	  \item[] $Z(A_{k,n}) := n$ (the number of columns)
     \end{itemize}
   \end{itemize}
-	With the matrix multiplication as category operation $\circ$, $MAT(\mathbb{Q})$ 
-	becomes a category. Units in this category are the $n\times n$ unit matrices.
+	With the matrix multiplication as category operation $\circ$,
+	$\mathrm{MAT}(\mathbb{Q})$ becomes a category. Units in this category are
+	the $n\times n$ unit matrices, $n \in \mathbb{N}$.
 \end{enumerate}
 
-\bigskip
-In analogy to the monoid homomorphisms we introduce structure-preserving
-mappings between categories called {\bf functors}.
+In analogy to the monoid homomorphisms we want to introduce
+now structure-preserving mappings between categories called {\bf functors}.
 
-\bigskip
 \begin{definition}
 Let $C_i = (O_i, M_i, Q_i, Z_i, \circ_i), i = 1, 2$ be two categories and
 $\phi_1: O_1 \to O_2$ and $\phi_2: M_1 \to M_2$ mappings.
-
-$\phi = (C_1, C_2, \phi_1, \phi_2)$ is called a {\bf functor} from $C_1$ to
-$C_2$ if the axioms (F1) to (F3) hold:
+\[ \phi = (C_1, C_2, \phi_1, \phi_2) \]
+is called a {\bf functor} from $C_1$ to $C_2$ if the axioms (F1) to (F3) hold:
 \begin{itemize}
   \item[(F1)] The diagram
 	\begin{tikzcd}[column sep=large,row sep=large]
@@ -331,35 +345,34 @@ $G_1$:
 \begin{center}
 \input{figures/chapter1-4-bin_tree.tikz}
 \end{center}
-
 $G_1 = (V_1, E_1)$ represents an infinite binary tree. From each point of the
-tree two edges go out which are labeled with $f$ and $g$.
+tree two edges go out which are labelled with $f$ and $g$.
 
 $G_2$:
 \begin{center}
 \input{figures/chapter1-4-two_loops.tikz}
 \end{center}
-
 $G_2 = (V_2, E_2)$ consists of a single point $v_0$ and two loops labeled $f$ and $g$ respectively.
 
 Consider the path categories $\pathcat{G_1}$ and $\pathcat{G_2}$. For $v
-\in V_1$ define $\phi_1(v) := v_0$ and $\phi_2(1_P) := 1_{P_0}$.
+\in V_1$ define $\phi_1(v) := v_0$ and $\phi_2(1_v) := 1_{v_0}$.
 
 For the edges $e \in E_1$ define
-\[ \phi'_2(e) = \begin{cases}
+\[ \phi'_2(e) = 
+\begin{cases}
 	f & \text{if $e$ is marked with $f$} \\ 
 	g & \text{if $e$ is marked with $g$}
-\end{cases} \]
-
+\end{cases} 
+\]
 Now we define for the paths $(v, e_1, \ldots, e_n, v') \in \pathcat{G_1}$:
 \[ \phi_2((v, e_1, \ldots, e_n, v')) := (v_0, \phi'_2(e_1), \ldots,
-\phi'_2(e_n), v_0) \]
-
+\phi'_2(e_n), v_0) 
+\]
 Obviously $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi1, \phi_2)$ is a
-functor. It is even a special functor because
+functor. It is even a particular functor because
 \begin{enumerate}
   \item $\phi$ is surjective
-  \item If $v_1$ is a point in $G_1$ and $\bar{\pi}$ is a path in $G_2$, then
+  \item If $v_1$ is a point in $G_1$ and $\bar{\pi}$ a path in $G_2$ then
   there exists exactly one path $\pi$ in $G_1$ with $Q(\pi) = v_1$ such that
   $\phi_2(\pi) = \bar{\pi}$.
 \end{enumerate}
@@ -378,28 +391,28 @@ $G_2:$
 \begin{center}
 \input{figures/chapter1-4-two_loops.tikz}
 \end{center}
-
-Then there exists a surjective functor from $\pathcat{G_1}$ to $\pathcat{G_2}$.
+Then there exists a surjective functor from $\pathcat{G_1}$ to $\pathcat{G_2}$
+(exercise).
 
 It is possible to construct surjective functors which fulfill (2) from example 1
-and other surjective functors which don't.
+and other surjective functors which don't (exercise).
 \end{example}
 
 \bigskip
 \begin{example}
 Let $G_1$ and $G_2$ be given as:
+\[ G_1:\ p_1 \edge{s} p_2 \qquad p_3 \edge{r} p_4 \]
+\[ G_2:\ q_1 \edge{f} q_2 \edge{g} q_3 \]
 
-$G_1:\ p_1 \edge{s} p_2 \qquad p_3 \edge{r} p_4$.
+We define:
+\[ \phi_1(p_1) = q_1,\ \phi_1(p_2) = q_2,\ \phi_1(p_3) =
+q_2,\ \phi_1(p_4) = q_3 \]
+and
+\[ \phi_2((p_1, s, p_2)) = (q_1, f, q_2),\ \phi_2((p_3, r, p_4)) = (q_2, g,
+q_3)\]
 
-$G_2:\ q_1 \edge{f} q_2 \edge{g} q_3$
-
-We define: $\phi_1(p_1) = q_1,\ \phi_1(p_2) = q_2,\ \phi_1(p_3) =
-q_2,\ \phi_1(p_4) = q_3,\ \phi_2((p_1, s, p_2)) = (q_1, f, q_2),\ \phi_2((p_3,
-r, p_4)) = (q_2, g, q_3)$.
-
-For the units, the definition of $\phi_2$ is clear. 
-
-One can see that $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$
+For the units, the definition of $\phi_2$ is clear. One can see that 
+\[ \phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2) \]
 is a functor.
 
 It is remarkable that $\phi_2(\pathcat{G_1})$ is not a category because this
@@ -421,25 +434,24 @@ $G_2$:
 \end{center}
 
 We define a functor $\phi$ by:
+\[ \phi_1(1) = 1',\ \phi_1(2) = 2',\ \phi_1(3) = 3',\ \phi_1(4) = 3',\ \phi_1(5)
+= 3' \]
+and
+\[ \phi_2(a) = a',\ \phi_2(b) = b',\ \phi_2(c) = c',\ \phi_2(d) = d',\]
+\[ \phi_2(e) = \phi_2(f) = \phi_2(g) = 1_{3'} \]
 
-$\phi_1(1) = 1',\ \phi_1(2) = 2',\ \phi_1(3) = 3',\ \phi_1(4) = 3',\ \phi_1(5) =
-3'$,
-
-$\phi_2(a) = a',\ \phi_2(b) = b',\ \phi_2(c) = c',\ \phi_2(d) = d',\ \phi_2(e) =
-1_3,\ \phi_2(f) = 1_3,\ \phi_2(g) = 1_3$.
-
-$\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$ is a functor.
+Then $\phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)$ is a functor.
 \end{example}
 
+\bigskip
 \begin{example}
-The graph $G$ shall be defined by
+Let the graph $G$ be defined by
 
 \begin{center}
 \input{figures/chapter1-4-example5.tikz}
 \end{center}
 
-Additionally, the following matrices are given:
-
+Additionally, let the following matrices be given:
 \[
 a' = \left( \begin{array}{cccc}
 1 & 0 & 2 & 1 \\ 0 & 1 & 2 & 5 \\ 1 & 1 & 2 & 1
@@ -468,15 +480,18 @@ f' = \left( \begin{array}{cc}
 \end{array} \right)
 \]
 
-Consider $\pathcat{G}$, the path category of $G$, and $MAT(\mathbb{N})$,
-the category of matrices over $\mathbb{N}$.
+We consider the categories $\pathcat{G}$, the path category of $G$, and
+$\mathrm{MAT}(\mathbb{N})$, the category of matrices over $\mathbb{N}$.
 
-We define $\phi_1(i) = i$ for $i = 2,3,4$ and $\phi'_2(x) = x'$ for $x \in
-\setof{a, b, c, d, e, f}$.
+Define
+\[ \phi_1(i) = i\text{ for }i = 2, 3, 4 \]
+and
+\[ \phi'_2(x) = x'\text{ for }x \in \setof{a, b, c, d, e, f} \]
 
-$\phi'_2$ can be extended in a unique way to a mapping $\phi_2 :
-\pathcat{G} \to MAT(\mathbb{N})$ such that $\phi = (\pathcat{G},
-MAT(\mathbb{N}), \phi_1, \phi_2)$ is a functor.
+Then $\phi'_2$ can be extended in a unique way to a mapping $\phi_2 :
+\pathcat{G} \to MAT(\mathbb{N})$ such that
+\[ \phi = (\pathcat{G}, \mathrm{MAT}(\mathbb{N}), \phi_1, \phi_2) \]
+is a functor.
 \end{example}
 
 \bigskip
@@ -487,29 +502,33 @@ Let $G_1, G_2$ be ordered graphs, $\phi = (\pathcat{G_1}, \pathcat{G_2},
 \phi_1, \phi_2)$ a functor. $\phi$ is called {\bf ordered} or {\bf order
 preserving} if it holds:
 
-Let $\phi_1(v) = v' \in V_2$ for any $v \in V_1$, then for the ordering $e_1,
-\ldots, e_k, e'_m, \ldots, e'_1$ which belongs to $v$ it holds:
-
-$\phi_2(e_1), \ldots, \phi_2(e_k), \phi_2(e'_m), \ldots, \phi_2(e'_1)$ is
-contained in the ordering that belongs to $v'$ in the given order. 
+Let $\phi_1(v) = v' \in V_2$ for any $v \in V_1$, then for the ordering
+\[ e_1, \ldots, e_k, e'_m, \ldots, e'_1 \]
+which belongs to $v$ it holds:
+\[ \phi_2(e_1), \ldots, \phi_2(e_k), \phi_2(e'_m), \ldots, \phi_2(e'_1) \]
+is contained in the ordering that belongs to $v'$ in the given order. 
 \end{definition}
 
-It is possible that lines coincide which are counted only once in that case.
+It is possible that edges coincide which are counted only once in that case.
 
-Let's give an example for this definition:
+We explain this definition at the following example:
 
-Let $v \in V_1$ be a point with ordering $e_1, e_2, e_3, e'_4, e'_3, e'_2,
-e'_1$ and $v' \in V_2$ be a point with ordering $r_1, r_2, r'_5,
-r'_4, r'_3, r'_2, r'_1$ as shown in the following figure:
+Let $v \in V_1$ be a point with ordering 
+\[ s_1, s_2, s_3, s'_4, s'_3, s'_2, s'_1 \]
+and $v' \in V_2$ be a point with ordering
+\[ r_1, r_2, r'_5, r'_4, r'_3, r'_2, r'_1 \]
+as shown in the following figure:
 
 \begin{center}
 \input{figures/chapter1-4-ordered_functor.tikz}
 \end{center}
 
-Define $\phi$ by $\phi_1(p) = p'$ and 
-\[ \phi_2(s_1) = r_1, \phi_2(s_2) = r_2, \phi_2(s_3) = r_2 \]
-\[ \phi_2(s'_1) = r'_1, \phi_2(s'_2) = r'_3, \phi_2(s'_3) = r'_4, \phi_2(s'_4) =
-r'_5 \]
+Define $\phi$ by $\phi_1(v) = v'$ and
+\begin{eqnarray*}
+& \phi_2(s_1) = r_1,\ \phi_2(s_2) = r_2,\ \phi_2(s_3) = r_2 \\
+& \phi_2(s'_1) = r'_1,\ \phi_2(s'_2) = r'_3,\ \phi_2(s'_3) = r'_4,\ \phi_2(s'_4)
+= r'_5
+\end{eqnarray*}
 Then $\phi$ respects the ordering in point $v$.
 
 \bigskip
@@ -518,7 +537,7 @@ Let $G_1=(V_1,E_1),\ G_2=(V_2,E_2)$ be oriented graphs and
 \[ \phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)\text{ a functor.}
 \]
 
-$\phi$ is called {\bf regular functor} $\iff$ the restriction of $\phi_2$
+$\phi$ is called {\bf regular} $\iff$ the restriction of $\phi_2$
 to the set \[ \setof{e \in E_1 \mid Q(e) = v}\text{ and }\setof{e' \in E_2 \mid
 Q(e') = \phi_1(v)} \] and to \[ \setof{e \in E_1 \mid Z(e) = v}\text{ and
 }\setof{e' \in E_2 \mid Z(e') = \phi_1(v)} \] for $v \in V_1$ is bijective.
@@ -528,7 +547,7 @@ To each incoming (outgoing) edge of a point $v \in V_1$ corresponds exactly
 one incoming (outgoing) edge of $\phi_1(v) \in V_2$.
 
 In our example, $\phi$ was not regular. We slightly weaken the definition of a
-regular functor by only postulating regularity on the outgoing edges.
+regular functor by postulating regularity only for the {\em outgoing} edges.
 
 \bigskip
 \begin{definition}
@@ -536,9 +555,11 @@ Let $G_1=(V_1,E_1),\ G_2=(V_2,E_2)$ be oriented graphs and
 \[ \phi = (\pathcat{G_1}, \pathcat{G_2}, \phi_1, \phi_2)\text{ a functor.}
 \]
 
-$\phi$ is called {\bf out-regular functor} $\iff$ the restriction of $\phi_2$
-to the set \[ \setof{e\in E_1 \mid Q(e) = v} \] and \[ \setof{e' \in E_2 \mid
-Q(e') = \phi_1(v)} \] for $v \in V_1$ is bijective.
+$\phi$ is called {\bf out-regular} $\iff$ the restriction of $\phi_2$
+to the set 
+\[ \setof{e\in E_1 \mid Q(e) = v} \] and \[ \setof{e' \in E_2 \mid
+Q(e') = \phi_1(v)} \]
+for $v \in V_1$ is bijective.
 \end{definition}
 
 The following lemma holds (exercise):
@@ -552,9 +573,14 @@ Our next lemma describes a well-known fact from graph theory that has found many
 applications.
 
 \begin{lemma}
-To each circle-free star $G = (V, E)$ relative to a point $v \in V$ there exists
+To each circle-free star $G = (V, E)$ relative to a point $c \in V$ there exists
 a tree $B$ and an out-regular functor $(\pathcat{B}, \pathcat{G},
-\phi_1, \phi_2)$ mapping the root of the tree $B$ to the point $v$. 
+\phi_1, \phi_2)$ mapping the root of the tree $B$ to the point $c$. $B$ is 
+uniquely determined up to isomorphisms.
 \end{lemma}
 
-$B$ is uniquely determined up to isomorphisms.
+\begin{proof}
+Exercise.
+\end{proof}
+
+

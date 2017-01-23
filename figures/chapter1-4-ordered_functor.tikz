@@ -1,7 +1,7 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=state] (0) at (0, -0) {$p$};
-		\node [style=state] (1) at (7, -0) {$p'$};
+		\node [style=state] (0) at (0, -0) {$v$};
+		\node [style=state] (1) at (7, -0) {$v'$};
 		\node [style=none] (2) at (-3, 2) {};
 		\node [style=none] (3) at (-0.5, 2) {};
 		\node [style=none] (4) at (2, 2) {};

@@ -1,4 +1,4 @@
-\begin{tikzpicture}[scale=8.0]
+\begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=state] (0) at (0, -0) {$v_0$};
 	\end{pgfonlayer}

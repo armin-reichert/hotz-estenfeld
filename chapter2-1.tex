@@ -1,4 +1,5 @@
-\section{The finite automaton, regular sets in $X^*, \reglang(X^*)$}
+\section{The finite automaton, regular sets in \texorpdfstring{$X^*,
+\reglang(X^*)$}{X*, REG(X*)}}
 
 \begin{definition}
 Let $G = (V, E)$ be a finite, oriented graph, $X$ a finite set and
@@ -416,10 +417,15 @@ Exercise: Show that this automaton accepts $L_3$.
 If we construct for $L_3$ from the non-deterministic acceptor $\fa{A}_3$
 the deterministic acceptor $\fa{A'}_3$, the graph $G'_3$ looks as follows:
 
-\missingfigure
+\begin{center}
+\begin{tiny}
+\input{figures/chapter2-1-theorem3-deterministic.tikz}
+\end{tiny}
+\end{center}
 
 The edges pointing upwards are labeled with $a$ and the edges pointing downwards
-with $b$.
+with $b$. From each of the vertices $32 \ldots 63$ two edges lead to the final
+state vertex $64$ except the edges shown leading to the $\emptyset$-vertices.
 
 $G'_3$ is the graph of the complete (up to loops in the final state and state
 $\emptyset$), deterministic acceptor $\fa{A'}_3$ and accepts the language $L_3$

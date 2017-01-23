@@ -1,4 +1,4 @@
-\section{Right-linear languages, $\rlinlang(X^*)$}
+\section{Right-linear languages, \texorpdfstring{$\rlinlang(X^*)$}{r-LIN(X*)}}
 
 In this section we investigate an additional method for defining special subsets
 of $X^*$. We use the mechanism introduced in chapter 1.6, the Chomsky grammars.
@@ -6,11 +6,11 @@ of $X^*$. We use the mechanism introduced in chapter 1.6, the Chomsky grammars.
 We consider only a very restricted type of productions and obtain the {\bf
 right-linear} grammars.
 
-\begin{definition}[right-linear Chomsky grammar]
+\begin{definition}
 A Chomsky grammar $G = (N, X, P, S)$ is called
 \begin{eqnarray*}
-\mbox{\bf right-linear} & & \mbox{if } P \subset N \times (X \cdot N \cup X) \\
-\mbox{\bf left-linear}  & & \mbox{if } P \subset N \times (N \cdot X \cup X)
+\text{\bf right-linear} & & \text{if } P \subset N \times (X \cdot N \cup X) \\
+\text{\bf left-linear}  & & \text{if } P \subset N \times (N \cdot X \cup X)
 \end{eqnarray*}
 \end{definition}
 
@@ -20,7 +20,7 @@ As in chapter 1.6 we have the notions of {\em derivation} and {\em generated
 language}.
 
 \begin{definition}[right-linear languages]
-\[ \rlinlang(X^*) = \setof{L \subset X^* \mid \mbox{there exists a right-linear
+\[ \rlinlang(X^*) = \setof{L \subset X^* \mid \text{there exists a right-linear
 grammar $G$ with } L = L(G)} \]
 is the class of {\bf right-linear languages} in $X^*$.
 \end{definition}
@@ -49,7 +49,7 @@ v, \ Z(e) = v',\ \alpha(e) = x$)
 This defines a finite acceptor $\fa{A} = (G', X, S, F, \alpha)$.
 
 It is easily seen that
-\[ w \in \pathcat{G'} \Rightarrow Q(w) \derives{G} \alpha(w) \cdot Z(w) \mbox{
+\[ w \in \pathcat{G'} \Rightarrow Q(w) \derives{G} \alpha(w) \cdot Z(w) \text{
  , if } Z(w) \in N\]
 
 For paths $w \in \pathcat{G'}(S, F)$ we get $\alpha(w) \in L$.
@@ -80,9 +80,9 @@ and $|\alpha(e)| = 1$ for each edge $e \in E$.
 We define a right-linear grammar $RLG = (N, X, P, S)$ with $N = E, S =
 S_{\fa{A}}$ and production set
 \begin{eqnarray*}
-P & = & \setof{(q, \alpha(e) \cdot r) \mid \exists \mbox{ edge } e : q \to r \in
+P & = & \setof{(q, \alpha(e) \cdot r) \mid \exists \text{ edge } e : q \to r \in
 E} \\
-& \cup & \setof{(q, \alpha(e)) \mid \exists \mbox{ edge } e : q \to r \in E,\ r
+& \cup & \setof{(q, \alpha(e)) \mid \exists \text{ edge } e : q \to r \in E,\ r
 \in F_{\fa{A}}}
 \end{eqnarray*}
 

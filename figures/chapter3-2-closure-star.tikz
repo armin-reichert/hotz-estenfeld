@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (-2, -0) {$s$};
+		\node [style=state] (1) at (2, -0) {$f$};
+		\node [style=none] (2) at (0, -0) {$G$};
+		\node [style=state] (3) at (0, 2) {$p$};
+		\node [style=state] (4) at (0, -2) {$q$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=simple, bend left=75, looseness=0.75] (0) to (1);
+		\draw [style=simple, bend right=90, looseness=0.75] (0) to (1);
+		\draw [style=transition, bend left=45, looseness=1.25] (0) to node[auto]{$e_0$} (3);
+		\draw [style=transition, bend left=45, looseness=1.00] (3) to node[auto]{$e'_0$} (1);
+		\draw [style=transition, bend left=45, looseness=1.25] (1) to node[auto]{$e_1$} (4);
+		\draw [style=transition, bend left=45, looseness=1.25] (4) to node[auto]{$e'_1$} (0);
+	\end{pgfonlayer}
+\end{tikzpicture}

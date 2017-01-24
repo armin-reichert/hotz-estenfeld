@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (-3, -0) {$s$};
+		\node [style=state] (1) at (3, -0) {$f$};
+		\node [style=none] (2) at (0, 2) {$G_1 \cup G_2$};
+		\node [style=none] (3) at (0, 1) {$G_1$};
+		\node [style=none] (4) at (0, -1) {$G_2$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=simple, bend left=45, looseness=1.25] (0) to (1);
+		\draw [style=simple, bend left=15, looseness=1.00] (0) to (1);
+		\draw [style=simple, bend right=60, looseness=1.00] (0) to (1);
+		\draw [style=simple, bend right=15, looseness=1.00] (0) to (1);
+	\end{pgfonlayer}
+\end{tikzpicture}

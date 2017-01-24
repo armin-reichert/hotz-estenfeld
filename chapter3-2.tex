@@ -81,8 +81,9 @@ It holds: $L_{\kappa_1 \cup \kappa_2} = L_{\kappa_1} \cup L_{\kappa_2}$
 
 The following figure shows our construction:
 
-\missingfigure
-
+\begin{center}
+\input{figures/chapter3-2-closure-union.tikz}
+\end{center}
 \end{proof}
 
 {\em Closure under complex product:}
@@ -107,7 +108,9 @@ The labelling of the graph $G$ is defined by
 \epsilon 			& e \in \setof{b_1, b_2} 
 \end{cases}\]
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-2-closure-concatenation.tikz}
+\end{center}
 
 The pushdown store $\store{K} = (E, Y, \delta)$ is defined by
 \[ Y = Y_1 \cup Y_2 \cup \setof{\Join, \infty} \text{ with }\setof{\Join, \infty} \cap
@@ -213,12 +216,14 @@ E' &=& E \cup \setof{e_0, e_0', e_1, e_1'},\ \setof{e_0, e_0', e_1, e_1'} \cap E
 The new edges have the following source, target states and labelling:
 \begin{eqnarray*}
 & e_0: s \edge{\epsilon} p \\
-& e_0': s \edge{\epsilon} f \\
+& e_0': p \edge{\epsilon} f \\
 & e_1: f \edge{\epsilon} q \\
 & e_1': q \edge{\epsilon} s \\
 \end{eqnarray*}
 
-\missingfigure
+\begin{center} 
+\input{figures/chapter3-2-closure-star.tikz}
+\end{center}
 
 The pushdown store $\store{K}' = (E', Y', \delta')$ is defined by $Y' = Y
 \cup \setof{y', y'', \infty}$ where $\setof{y', y'', \infty} \cap Y =
@@ -462,7 +467,9 @@ a separate copy of the graph $G_x$ together with 3 auxiliary edges. These edges
 are used to ensure that the resulting graph cannot accept more words that those
 from $\sigma(L)$.
 
-\missingfigure
+\begin{center}
+\input{figures/chapter3-2-theorem5.tikz}
+\end{center}
 
 Consider an edge $e: p \edge{x} r \in E,\ \alpha(e)=x\in X$.
 
@@ -603,8 +610,7 @@ languages.
 In the next section we investigate the theorem of Chomsky-Schützenberger,
 another important theorem which gives a characterization of the algebraic languages.
 
-{\bf Exercises:}
-
+\begin{exercise}
 \begin{enumerate}
   \item Let $L\in \alglang(X^*),\ R\in \reglang(X^*)$. Show:
   \[ LR^{-1}\in \alglang(X^*)\text{ and }R^{-1}L\in \alglang(X^*) \]
@@ -626,3 +632,5 @@ another important theorem which gives a characterization of the algebraic langua
   theorem: If $X$ contains a single element, then each algebraic language over
   $X$ is regular. From this the claim immediately follows.
 \end{enumerate}
+\end{exercise}
+

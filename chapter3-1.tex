@@ -21,7 +21,7 @@ Remark: From this theorem the following claims can be derived (exercise):
   
 We want to introduce now the finite automaton with pushdown store. We define
 \begin{definition}
-$\storage{K} = (X, Y, \delta)$ is called {\bf simple pushdown store} with
+$\store{K} = (X, Y, \delta)$ is called {\bf simple pushdown store} with
 input $X^*$ and stack-monoid $Y^*$ if
 \begin{itemize}
   \item[(K1)] $\delta: X \times Y^* \to Y^*$ is a mapping with
@@ -34,7 +34,7 @@ input $X^*$ and stack-monoid $Y^*$ if
 \end{itemize}
 \end{definition} 
 
-Obviously the simple pushdown store $\storage{K}$ is uniquely determined by
+Obviously the simple pushdown store $\store{K}$ is uniquely determined by
 $\delta' = \delta |_{X \times (Y \cup \setof{\epsilon})}$. Each such mapping
 can be continued using (K2) onto $X \times Y^*$ such that one gets a simple
 pushdown store.
@@ -48,7 +48,7 @@ We extend $\delta$ onto $X^* \times Y^*$ by defining
 The following lemma holds:
 \begin{lemma}
 For $w \in \hgroup{X}$ there exists a pushdown store
-\[ \storage{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
+\[ \store{K} =(\unioninv{X}, \unioninv{X}, \delta) \]
 with $|w| = \delta(w, \epsilon)$.
 \end{lemma}
 
@@ -108,9 +108,9 @@ $\pocymon{X}$.
 We can now define the finite automaton with pushdown store.
 
 \begin{definition}[finite automaton with pushdown store, PDA]
-$\kappa = (\fa{A}, \storage{K})$ is called {\bf finite automaton with
+$\kappa = (\fa{A}, \store{K})$ is called {\bf finite automaton with
 pushdown store} if $\fa{A} = (G, X, S, F, \alpha)$ is a finite automaton with
-graph $G = (V, E)$ and $\storage{K} = (E, Y,\delta)$ is a simple pushdown store.
+graph $G = (V, E)$ and $\store{K} = (E, Y,\delta)$ is a simple pushdown store.
 \end{definition}
 
 Two sets are assigned to the PDA $\kappa$, the {\bf pushdown store language}
@@ -138,7 +138,7 @@ is called the class of {\bf algebraic languages}.
 The pushdown store language $PSL(\kappa)$ is an example for our concept of
 generalizing finite automata by changing the monoid. 
 
-Let $\storage{K}=(X, Y, \delta)$ be a pushdown store. If to each $x\in X$ we
+Let $\store{K}=(X, Y, \delta)$ be a pushdown store. If to each $x\in X$ we
 assign a mapping $\delta_x: Y^* \to Y^*,\ \delta_x(u) := \delta(x, u)$, then we can 
 represent a PDA $\kappa$ by the finite automaton
 \[ \fa{B} = (G, M, S, F, \beta),\quad G=(V,E) \]
@@ -207,9 +207,9 @@ this follows immediately $PSL(\kappa) \in \reglang(Y^*)$.
 by adding comments and figures.)
 
 \begin{proof}
-Let $\kappa = (\fa{A}, \storage{K})$ be a PDA with finite automaton
+Let $\kappa = (\fa{A}, \store{K})$ be a PDA with finite automaton
 \[ \fa{A} = (G, X, S, F, \alpha) \]
-with graph $G = (V, E)$ and pushdown store $\storage{K}$.
+with graph $G = (V, E)$ and pushdown store $\store{K}$.
 
 We define a finite automaton $\fa{C}$ with the H-group over $Y_0$ as its storage
 monoid:

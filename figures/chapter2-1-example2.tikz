@@ -1,6 +1,6 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style={oval_state}] (0) at (-14.5, -0) {START};
+		\node [style={oval_state}] (0) at (-14.25, -0) {START};
 		\node [style={oval_state}] (1) at (-13, -0) {'};
 		\node [style={oval_state}] (2) at (-12.25, -0) {'I};
 		\node [style={oval_state}] (3) at (-7.75, 1.5) {'IF};
@@ -10,7 +10,7 @@
 		\node [style={oval_state}] (7) at (-4.5, -0) {'INTEG};
 		\node [style={oval_state}] (8) at (-1.5, -0) {'INTEGE};
 		\node [style={oval_state}] (9) at (1.5, -0) {'INTEGER};
-		\node [style={oval_state}] (10) at (7.5, -0) {STOP};
+		\node [style={oval_state}] (10) at (7, -0) {STOP};
 		\node [style={oval_state}] (11) at (-10.5, 2.75) {'F};
 		\node [style={oval_state}] (12) at (-8.25, 4) {'FI};
 		\node [style={oval_state}] (13) at (-9, 2.75) {'FO};
@@ -99,7 +99,7 @@
 		\draw [style=transition] (42) to (43);
 		\draw [style=transition] (43) to (44);
 		\draw [style=transition] (44) to (45);
-		\draw [style=transition, bend right, looseness=1.00] (45) to (10);
+		\draw [style=transition, bend right=15, looseness=1.00] (45) to (10);
 		\draw (29) to (10);
 		\draw (41) to (10);
 	\end{pgfonlayer}

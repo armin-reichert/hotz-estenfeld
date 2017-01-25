@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (-1, -0) {};
+		\node [style=none] (1) at (0, -0) {};
+		\node [style=none] (2) at (-1, -0.5) {};
+		\node [style=none] (3) at (0, -0.5) {};
+		\node [style=none] (4) at (-3, -0) {};
+		\node [style=none] (5) at (-3, -0.5) {};
+		\node [style=none] (6) at (2, -0) {};
+		\node [style=none] (7) at (2, -0.5) {};
+		\node [style=none] (8) at (-1, -0.5) {};
+		\node [style=none] (9) at (0, -0.5) {};
+		\node [style=none] (10) at (-1.5, -1.75) {};
+		\node [style=none] (11) at (0.5, -1.75) {};
+		\node [style=none] (12) at (-1.5, -3.25) {};
+		\node [style=none] (13) at (0.5, -3.25) {};
+		\node [style=none] (14) at (-0.5, -1) {};
+		\node [style=none] (15) at (-0.5, -1.75) {};
+		\node [style=none] (16) at (-2, -0.25) {$u$};
+		\node [style=none] (17) at (-0.5, -0.25) {$x$};
+		\node [style=none] (18) at (1, -0.25) {$v$};
+		\node [style=none] (19) at (-0.5, -2.5) {$v$};
+		\node [style=none] (20) at (3, -0.25) {Input tape};
+		\node [style=none] (21) at (3, -1.5) {Reading head};
+		\node [style=none] (22) at (3, -2.5) {Finite state control in state $v$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=simple] (4.center) to (0.center);
+		\draw [style=simple] (0.center) to (1.center);
+		\draw [style=simple] (1.center) to (6.center);
+		\draw [style=simple] (5.center) to (2.center);
+		\draw [style=simple] (2.center) to (3.center);
+		\draw [style=simple] (3.center) to (7.center);
+		\draw [style=simple] (0.center) to (2.center);
+		\draw [style=simple] (1.center) to (3.center);
+		\draw [style=simple, bend right=90, looseness=1.50] (8.center) to (9.center);
+		\draw [style=simple] (8.center) to (9.center);
+		\draw [style=simple] (10.center) to (11.center);
+		\draw [style=simple] (11.center) to (13.center);
+		\draw [style=simple] (13.center) to (12.center);
+		\draw [style=simple] (12.center) to (10.center);
+		\draw [style=simple] (14.center) to (15.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

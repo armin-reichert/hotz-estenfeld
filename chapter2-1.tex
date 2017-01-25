@@ -1,10 +1,10 @@
-\section{The finite automaton, regular sets in \texorpdfstring{$X^*,
+\section{The finite automaton, regular sets in \texorpdfstring{$X^*,\ 
 \reglang(X^*)$}{X*, REG(X*)}}
 
 \begin{definition}
 Let $G = (V, E)$ be a finite, oriented graph, $X$ a finite set and
 \[\alpha = (\pathcat{G}, X^*,\alpha_1, \alpha_2)\]
-a functor. $\alpha_1 : V \to \setof{X^*},\ \alpha_2 : \pathcat{G} \to X^*$.
+a functor with $\alpha_1 : V \to \setof{X^*},\ \alpha_2 : \pathcat{G} \to X^*$.
 
 (The free monoid $X^*$ is considered as the single-object category
 $(\setof{X^*}, X^*, Q, Z, \cdot)$ with string concatenation as category
@@ -12,15 +12,15 @@ operation and strings as morphisms.)
 \[ \fa{A} = (G, X^*, \alpha) \]
 is called {\bf non-deterministic finite automaton}.
 
-For subsets $S, F \subset V$, we call 
+For subsets $S, F \subset V$ we call 
 \[ \fa{A} = (G, X^*, S, F, \alpha) \]
 {\bf finite automaton with start and final states} or {\bf finite acceptor}.
 \end{definition}
 
-In the following we will use the terms {\em acceptor} and {\em finite automaton}
-as synonyms.
+In the following we will use the terms {\em finite acceptor} and {\em finite
+automaton} as synonyms.
 
-If the finite automaton works over the free monoid $X^*$ we write also just $X$
+If the finite automaton works over the free monoid $X^*$, we write also just $X$
 instead of $X^*$, otherwise we specify the monoid explicitly.
 
 For the set of paths from start to final states 
@@ -30,13 +30,13 @@ the set of path labels
 \[ L_{\fa{A}} := \alpha_2(\pathcat{G}(S, F)) \]
 is called the {\bf set accepted by} \fa{A}.
 
-We will also write just $\alpha$ instead of $\alpha_2$ and $\pathcat{}(S,F)$
-instead of $\pathcat{G}(S,F)$.
+We will also simply write $\alpha$ instead of $\alpha_2$ and $\mathfrak{W}(S,
+F)$ instead of $\pathcat{G}(S, F)$.
 
 \begin{definition}
 Let $X$ be an alphabet. The set
-\[ \reglang(X^*) := \setof{L \subset X^* \mid \mbox{ there exists a finite acceptor
-}\fa{A} \mbox{ with } L = L_{\fa{A}}} \]
+\[ \reglang(X^*) := \setof{L \subset X^* \mid \text{ there exists a finite acceptor
+}\fa{A} \text{ with } L = L_{\fa{A}}} \]
 is called the {\bf set of regular languages} over the free monoid $X^*$.
 \end{definition}
 
@@ -44,45 +44,50 @@ Remark: We defined the finite automaton via its ''state graph''. Most
 often, the definition is given using the ''next state relation'' $\delta$:
 \begin{eqnarray*}
 \delta &=& \{(a, v_1, v_2) \in X \times V \times V) \mid \\
-&& \mbox{there exists an edge $e$ with $Q(e) = v_1,\ Z(e) = v_2$ and }
+&& \text{there exists an edge $e \in E$ with $Q(e) = v_1,\ Z(e) = v_2$ and }
 \alpha(e) = a \in X \}
 \end{eqnarray*}
 
-$\delta$ my be regarded as a relation between $X \times V$ and $V$ where $X$ is
-the input alphabet and $V$ the state set of the automaton \[ \fa{B} = (X,
-V, \delta, S, F) \]
-The elements of $V$ denote the states of the automaton $\fa{B}$.
+$\delta$ my be seen as a relation between $X \times V$ and $V$. $X$ is
+the input alphabet and $V$ the set of {\em states} of the automaton
+\[ \fa{B} = (X, V, \delta, S, F) \]
+The elements of $V$ contain the possible states of the automaton $\fa{B}$.
 
 If the automaton $\fa{B}$ is in state $v \in V$ and reads the symbol $x
-\in X$ then it changes into state $v' \in V$ if $(x, v, v') \in \delta$. If
-there doesn't exist such a $v'$ the automaton ''halts''.
+\in X$, then it changes its state into $v' \in V$ if $(x, v, v') \in \delta$. If
+there doesn't exist such a $v'$, the automaton ''halts''.
 
 This interpretation can be visualized as follows:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-1-automaton-idea.tikz}
+\end{center}
 
 Let's return to our definition of the finite automaton. We explain its working
 based on our definition:
 
 The automaton $\fa{A} = (G, X, S, F, \alpha)$ may be interpreted as a
 non-deterministic algorithm. The points (vertices) of the graph $G$ define the
-possible states of the algorithm, the elements of $X$ are the input alphabet.
+possible states of the algorithm, the elements of $X$ constitute the input
+alphabet.
 
 The non-deterministic automaton $\fa{A}$ which reads a symbol $x \in X$
 while in state $v \in V$ changes into state $v'$ if there exists an edge $e$
 from $v$ to $v'$ with label $\alpha(e) = x$. If the graph has no such edge the
 automaton goes ''out of service''.
 
-A finite acceptor accepts a word $w \in X^*$ if there exists a path from a point
-in $S$ to a point in $F$ which is labelled with the word $w$.
+A finite acceptor accepts a word $w \in X^*$ if there exists a path from a
+vertex in $S$ to a vertex in $F$ which is labelled with $w$.
 
-Let's look at some examples of finite automata:
+We want to look at some examples of finite automata:
 \begin{example}
-Let $X = \setof{a, b}$ and $L = \setof{(a b)^{2n} \mid n \in
-\mathbb{N}}$.
+Let $X = \setof{a, b}$ and $L = \setof{(a b)^{2n} \mid n \in \mathbb{N}}$.
 
-It holds: $L \in \reglang(\setof{a, b}^*)$. The acceptor $\fa{A} = (G, \setof{a,
-b}, {1}, {1}, \alpha)$ accepts $L$ (exercise):
+It holds $L \in \reglang(\setof{a, b}^*)$.
+
+The following acceptor $\fa{A} = (G, X, \setof{1}, \setof{1}, \alpha)$ accepts
+$L$ (exercise):
+
 \begin{center}
 \input{figures/chapter2-1-example1.tikz}
 \end{center}
@@ -96,28 +101,35 @@ In every programming language there exist special character combinations
 (reserved words) that mark certain program actions. These have to be identified
 during the lexical analysis. We give a finite acceptor which realizes such a 
 check for a selection of reserved words. Let the set of reserved words be
- 
-\{ 'BEGIN',\ 'END',\ 'ELSE',\ 'IF',\ FI',\ 'FOR',\ 'INTEGER',\ 'THEN',\
-'LOOP',\ 'POOL',\ 'PROCEDURE' \}
+
+\begin{rm}
+'BEGIN',\ 'END',\ 'ELSE',\ 'IF',\ FI',\ 'FOR',\ 'INTEGER',\ 'THEN',\
+'LOOP',\ 'POOL',\ 'PROCEDURE'
+\end{rm}
 
 The following acceptor accepts this set:
 
 \begin{minipage}{\textwidth}
 \begin{sideways}
+\begin{rm}
+\begin{tiny}
 \input{figures/chapter2-1-example2.tikz}
+\end{tiny}
+\end{rm}
 \end{sideways}
 \end{minipage}
 \end{example}
 
-The images of the edges under the mapping $\alpha$ are shown as edge labels. The
-points of the graph are the ovals with their labels. Start and final states are
-given by $S = \{$ START $\}$ and $F = \{$ STOP $\}$.
+The mappings $\alpha(e)$ are shown as edge labels. The vertices of the
+graph are shown as ovals with labels. Start and final states are
+given by $S$ = \{START\} and $F$ = \{STOP\}.
 
-The labels at the vertices are chosen such that one can see the information
-stored by the automaton.
+The labels for the vertices are chosen such that one can see the information
+''stored'' by the automaton.
 
+\bigskip
 Now we want to prove some properties of $\reglang(X^*)$. To do that, we need
-some basic properties for finite automata.
+some basic properties of finite automata.
 
 \begin{lemma}
 Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton. Then there
@@ -135,276 +147,290 @@ If $\card{S} = \card{F} = 1$ we are done.
 
 Let $\card{S} > 1$ or $\card{F} > 1$.
 
-1. Add new edges leaving the new start state $S'$:
+\newcommand{\startedges}{\mathrm{START}}
+\newcommand{\newstartedges}{\mathrm{NEWSTART}}
+\newcommand{\finaledges}{\mathrm{FINAL}}
+\newcommand{\newfinaledges}{\mathrm{NEWFINAL}}
+\begin{enumerate}
+  \item Add a new vertex $s'$ which will become the new start vertex and a new 
+  vertex $f'$ which will become the new final vertex.
+  
+  \item Let	\[ \startedges := \setof{e \in E \mid Q(e) \in S} \]
+	Add new start edges 
+	\[ \newstartedges := \setof{e' \mid Q(e') = s',\ Z(e') = Z(e),\ \alpha'(e') =
+	\alpha(e),\ e \in \startedges} \]
 
-Define the set of all edges leaving an old start state by
-\[ OUT := \setof{e \in E \mid Q(e) \in S} \]
-Add the following new edges to the graph:
-\[ OUT' := \setof{e' = (S', Z(e)) \mid e \in OUT,\ \alpha'(e') := \alpha(e)} \]
+	\item	Let	\[ \finaledges := \setof{e \in E \mid Z(e) \in F} \]
+	Add new final edges
+	\[ \newfinaledges := \setof{e' \mid Q(e') = Q(e),\ Z(e') = f',\ \alpha'(e') =
+	\alpha(e),\ e \in \finaledges} \]
+\end{enumerate}
 
-2. Add new edges reaching the new final state $F'$:
+The new automaton 
+\[ \fa{A'} = (G', X, \setof{S'}, \setof{F'}, \alpha') \]
+is defined by the graph
+\[ G' = (V \cup \setof{S', F'}, E \cup \newstartedges \cup \newfinaledges) \]
+and the labelling $\alpha'$ which is identical to $\alpha$ for all existing 
+edges and defined as above for the new edges.
 
-Define the set of all edges reaching an old final state by
-\[ IN := \setof{e \in E \mid Z(e) \in F} \]
-Add the following new edges to the graph:
-\[ IN' := \setof{e' = (Q(e), F') \mid e \in IN,\ \alpha'(e') := \alpha(e)} \]
-
-To each new edge we assign the same label as the edge from which it has been
-derived.
-
-The new automaton $\fa{A'} = (G', X, \setof{S'}, \setof{F'}, \alpha')$ is
-defined by the graph $G' = (V \cup \setof{S', F'}, E \cup OUT' \cup IN')$
-and the new labelling $\alpha'$ which is identical to $\alpha$ for all existing 
-edges and is defined as shown above for the new edges.
-
-It is easily shown that $L_{\fa{A}'} = L_{\fa{A}}$.
+It can easily be shown that $L_{\fa{A}'} = L_{\fa{A}}$.
 \end{proof}
 
+\bigskip
 \begin{lemma}
-Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton. Then there
-exists an automaton $\fa{A'} = (G', X, S', F', \alpha')$ with $\alpha'(e)
-\in X\ \forall e \in E(G)$ and $L_{\fa{A}} = L_{\fa{A}'}$.
+Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton with graph $G = (V,
+E$. Then there exists an automaton $\fa{A'} = (G', X, S', F', \alpha')$ with
+$\alpha'(e) \in X$ for each edge $e \in E$ that accepts the same language.
 \end{lemma}
 
 \begin{proof}
-We ''split'' all edges according to their labels.
+We ''split'' the edges according to their labels.
 
 \begin{enumerate}
-  \item Let $e \in E$ with $\alpha_2(e) = x_1 \cdots x_k,\ k > 1, x_i \in X$.\\
-  Remove edge $e$ and add new edges $e'_1,
-  \ldots, e'_k$ and new points $P'_1, \ldots, P'_{k-1}$ such that $(Q(e),
-  e'_1, \ldots, e'_k, Z(e)) \in \pathcat{G'}$ and define a new graph $G' =
-  (V', E')$. The labelling of the new edges is defined by $\alpha'(e'_i) := x_i$
-  for $i = 1, \ldots, k$.
+  \item Split edges labelled with a word into edges labelled with single
+  symbols:
+  
+  Let $e \in E$ with $\alpha_2(e) = x_1 \cdots x_k,\ k > 1,\ x_i \in X$.\\
+  Remove the edge $e$ and add new edges $e'_1, \ldots, e'_k$ and new
+  vertices $v'_1, \ldots, v'_{k-1}$ such that $(Q(e), e'_1, \ldots, e'_k,
+  Z(e)) \in \pathcat{G'}$ and define a new graph $G' = (V', E')$. The labelling 
+  of the new edges will be defined by $\alpha'(e'_i) := x_i$ for $i = 1, \ldots,
+  k$.
   
   Then $\alpha_2(e) = \alpha'_2(e'_1) \cdots \alpha'_2(e'_k)$.
   
-  \item Let $e \in E$ be an edge labeled with $\epsilon$.
+  \item Handle edges labelled with the empty word.
+  
+  Let $e \in E$ be an edge labeled with $\epsilon$.
   \begin{enumerate}
-    \item  (Remove $\epsilon$-loops) \\
-    If $Q(e) = Z(e) : E' := E - e$
-    \item (Remove
-    $\epsilon$-edges which cannot be continued to a longer path)\\
-    If there is
-    not $e' \in E$ with $Q(e') = Z(e') : E' := E - e$
-    \item  (Skip $\epsilon$-edges that can be continued and remove the
-    $\epsilon$-edge)\\
-    If there exists an edge $e' \in E$ with $Q(e') = Z(e) : E'' := E - e$.
-    Add new edges: $E' := E'' \cup \setof{\tilde{e} \mid Q(\tilde{e}) = Q(e), 
-    Z(\tilde{e}) = Z(e'),\ alpha'(\tilde{e}) := \alpha(e')}$
+    \item Remove $\epsilon$-loops: \\
+    If for an edge $e$ it holds $Q(e) = Z(e)$, remove $e$.
+    \item Remove $\epsilon$-edges which are dead-ends: \\
+    If there is no $e' \in E$ with $Q(e') = Z(e)$, remove $e$.
+    \item Bridge remaining $\epsilon$-edges and remove them:\\
+    If there exists an edge $e' \in E$ with $Q(e') = Z(e)$, remove $e$ and
+    add new edges $\tilde{e}$ with $ Q(\tilde{e}) = Q(e),\ Z(\tilde{e}) =
+    Z(e')$ and label $\alpha'(\tilde{e}) = \alpha(e')$.
   \end{enumerate}
   If in step (b) or (c) the target of the edge is a final state, then add the
   source of the edge to the set of final states.
   
   Continue this algorithm inductively until no more $\epsilon$-edges remain in
-  the graph. The algorithm terminates because the point and edge sets are
-  finite. For the new automaton $\fa{A'}$ that results from this algorithm
-  holds: $L_{\fa{A}'} = L_{\fa{A}}$.
+  the graph. The algorithm terminates because the vertex and edge sets are
+  finite. For the new automaton $\fa{A'}$ which results from this algorithm
+  it holds: $L_{\fa{A}'} = L_{\fa{A}}$.
 \end{enumerate}
 \end{proof}
 
 If we apply this algorithm to our automaton from example 1, we obtain the
-following graph where the edge $k_5$ has disappeared:
+following graph where the edge $e_5$ has disappeared:
 
 \begin{center}
 \input{figures/chapter2-1-lemma2-example1.tikz}
 \end{center}
 
 \bigskip
-We will prove now some closure properties of $\reglang(X^*)$.
+We want to prove now some closure properties of $\reglang(X^*)$.
 
-\begin{theorem}[Regular languages are closed under union and intersection]
-\[ L, L' \in \reglang(X^*) \Rightarrow L \cup L' \in \reglang(X^*) \wedge L \cap L' \in
-\reglang(X^*) \]
+\begin{theorem}[Closure under union and intersection]
+\[ L, L' \in \reglang(X^*) \Rightarrow L \cup L' \in \reglang(X^*)\text{ and }
+L \cap L' \in \reglang(X^*) \]
 \end{theorem}
 
 \begin{proof}
-Let $L = L_{\fa{A}}$ and $L' = L_{\fa{B}}$ with automata \[
-\fa{A} = (G_A, X, S_A, F_A, \alpha) \] and \[ \fa{B} = (G_B, X, S_B,
-F_B, \beta).\]
-We may assume that the edge and point sets of both automata graphs are disjoint.
+Let $L = L_{\fa{A}}$ and $L' = L_{\fa{B}}$ with automata
+\[ \fa{A} = (G_{\fa{A}}, X, S_{\fa{A}}, F_{\fa{A}}, \alpha) \]
+and
+\[ \fa{B} = (G_{\fa{B}}, X, S_{\fa{B}}, F_{\fa{B}}, \beta) \]
+We may assume that the edge and vertex sets of both graphs are disjoint.
 
 \begin{enumerate}
   
-  \item Closure under union: Define
-	\[ \gamma_2(e) := \left\{
-		\begin{array}{l} 
-		\alpha_2(e),\ e \in E(G_A) \\
-		\beta_2(e),\ e \in E(G_B)
-		\end{array}
-	 \right. \]
-
-	Then the automaton $\fa{C} = (G_A \cup G_B, X, S_A \cup S_B, F_A \cup
-	F_B, \gamma)$ accepts the language $L_{\fa{A}} \cup L_{\fa{B}}$.
+  \item {\bf Closure under union:} Define
+	\[ \gamma_2(e) := \begin{cases}
+		\alpha_2(e),\ e \in E_{\fa{A}} \\
+		\beta_2(e),\ e \in E_{\fa{B}}
+	\end{cases} \]
 	
+	Then the automaton
+	\[ \fa{C} (G_{\fa{A}} \cup G_{\fa{B}}, X, S_{\fa{A}} \cup
+	S_{\fa{B}}, F_{\fa{A}} \cup F_{\fa{B}}, \gamma) \]
+	accepts the language $L_{\fa{A}} \cup L_{\fa{B}}$.
+
+	If we make $\fa{A}$ and $\fa{B}$ initial, then the following initial automaton
+	also accepts $L_{\fa{A}} \cup L_{\fa{B}}$:
+		
 	\begin{center}
 	\input{figures/chapter2-1-closure-union.tikz}
 	\end{center}
 	
-	\item Closure under intersection: Define $G' = (V', E')$ where
-	\[ V' = V_A \times V_B \]
-	\[ E' = \setof{(e_A, e_B) \in E_A \times E_B \mid \alpha_2(e_A) = \beta_2(e_B)}
-	. \]
-	By lemma 2 we may assume that the edge labels are all single symbols from $X$.
+	\item {\bf Closure under intersection:} Define $G' = (V', E')$ where
+	\[ V' = V_{\fa{A}} \times V_{\fa{B}} \]
+	\[ E' = \setof{(e_A, e_B) \in E_{\fa{A}} \times E_{\fa{B}} \mid \alpha_2(e_A) =
+	\beta_2(e_B)} \]
+	By lemma 2 we may assume that all edge labels are single symbols from $X$.
 	
-	We define the new labelling $\delta_2$ by \[ \delta_2 : E' \to X,\
-	\delta_2((e_A, e_B) = \alpha_2(e_A)). \]
+	We define the new labelling $\delta_2 : E' \to X$ by
+	\[ \delta_2((e_A, e_B)) = \alpha_2(e_A)). \]
 	
-	For the automaton $\fa{A'} = (G', X, S_A \times S_B, F_A \times F_B,
-	\delta)$ then holds: $L_{\fa{A}'} = L_{\fa{A}} \cap L_{\fa{B}}$
-	and this automaton is called the {\bf cartesian product} of $\fa{A}$ and
-	$\fa{B}$.
+	For the automaton
+	\[ \fa{A'} = \fa{A} \times \fa{B} := (G', X, S_{\fa{A}} \times S_{\fa{B}},
+	F_{\fa{A}} \times F_{\fa{B}}, \delta) \]
+	then holds	$L_{\fa{A}'} = L_{\fa{A}} \cap L_{\fa{B}}$. This automaton is called
+	the {\bf cartesian product} of $\fa{A}$ and $\fa{B}$.
 \end{enumerate}
 \end{proof}
 
 \bigskip
-\begin{theorem}[Regular languages are closed under mirror operation]
+\begin{theorem}[Closure under mirror operation]
 \[ L \in \reglang(X^*) \Rightarrow L^R \in \reglang(X^*) \]
 \end{theorem}
 
 \begin{proof}
 Let $\fa{A} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha)$ be a
-finite acceptor for $L$.
+finite acceptor for $L$ with graph $G = (V, E)$.
 
-Create the graph $G' = (V(G), E')$ where $E'$ is a set with the same cardinality
+Create the graph $G' = (V, E')$ where $E'$ is a set with the same cardinality
 as $E$. There exists a bijection from $E$ to $E'$ mapping edges as follows:
-\[ e : P \to P' \in E \Leftrightarrow e' : P' \to P \in E' \]
-which means we reverse the orientation of the edges.
+\[ e' : v \to v' \in E' \Leftrightarrow e : v' \to v \in E \]
+which means that we reverse the orientation of the edges of $G$ to get the
+edges of $G'$.
 
-For the resulting automaton $\fa{A'} = (G', X, S_{\fa{A}},
-F_{\fa{A}}, \alpha')$ with $\alpha'(e') = \alpha(e)$ for all edges of $G'$
-it holds: $L_{\fa{A}'} = L_{\fa{A}}^R = L^R \in \reglang(X^*)$.
+For the automaton $\fa{A'} = (G', X, S_{\fa{A}}, F_{\fa{A}}, \alpha')$ with
+$\alpha'(e') = \alpha(e)$ for all edges of $G'$ it holds $L_{\fa{A}'} = 
+L_{\fa{A}}^R \Rightarrow L^R \in \reglang(X^*)$.
 \end{proof}
 
 \bigskip
 \begin{definition}
-Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton with
-$\alpha(E(G)) \subset X$ (each edge is labeled with a single
+Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton with graph $G=(V, E)$
+and labelling $\alpha(E) \subset X$ (each edge is labeled with a single
 symbol).
 
-$\fa{A}$ is called {\bf deterministic} $\Leftrightarrow$ for all $e, e'
-\in E(G)$ with $Q(e) = Q(e')$ and $\alpha(e) = \alpha(e')$ it holds: $e$ = $e'$.
+$\fa{A}$ is called {\bf deterministic} $\iff$ for all $e, e' \in E$ with
+$Q(e) = Q(e')$ and $\alpha(e) = \alpha(e')$ it holds $e$ = $e'$.
 
-$\fa{A}$ is called {\bf complete} $\Leftrightarrow$ for each $P \in V(G)$
-and $x \in X$ there exists an edge $e \in E(G)$ with $Q(e) = P$ and $\alpha(e)
-= x$.
+$\fa{A}$ is called {\bf complete} $\iff$ for each $v \in V$ and $x \in X$ there
+exists an edge $e \in E$ with $Q(e) = v$ and $\alpha(e) = x$.
 \end{definition}
 
+\bigskip
 \begin{theorem}[Existence of complete, deterministic acceptor]
-If \fa{A} is a finite automaton, then there exists a complete,
-deterministic automaton \fa{A'} which accepts the same language.
+If \fa{A} is a finite automaton, then there exists a complete, deterministic
+automaton \fa{A'} which accepts the same language.
 \end{theorem}
 
 \begin{proof}
-From our lemmata we may assume that $\card{S_{\fa{A}}} = 1$ and
+Using our lemmata we may assume that $\card{S_{\fa{A}}} = 1$ and
 $\alpha_2(e) \in X$ for all edges $e$ in the graph of \fa{A}.
 
 We construct an automaton \fa{A'} as follows (''subset construction''):
 
-Instead of the points of the graph $G$ our new graph has the power set
-$\powset{V(G)}$ of $V(G)$ as its point set.
+Let $G = (V,E)$ be the graph of $\fa{A}$.
 
-For $\tilde{P} \in \powset{V(G)}$ we define 
+Instead of the vertices of $G$ our new graph has the power set $\powset{V}$ of
+$V$ as its vertex set.
+
+For $\tilde{v} \in \powset{V}$ we define 
 \begin{eqnarray*}
-& N(x, \tilde{P}) := & \{ P \in V(G) \mid \mbox{there exists an edge } e \in
-E(G) \mbox{ with } \\
-& & \ Q(e) \in \tilde{P}, Z(e) = \tilde{P} \mbox{ and } \alpha(e) = x \} 
+N(x, \tilde{v}) &:=& \{ v \in V \mid \text{there exists an edge } e \in E
+\text{ with }Q(e) \in \tilde{v},\ Z(e) = v \\
+&& \text{ and } \alpha(e) = x \}
 \end{eqnarray*}
 
-The empty set $\emptyset$ is also an element of the power set such that it will
-also become a point of the new graph.
+The empty set $\emptyset \in \powset{V}$ will also become a vertex of the new
+graph.
 
-Let $\tilde{P}, \tilde{R} \in \powset{V(G)}$. These points are connected by an
-edge $e$ with label $\alpha'_s(e) = x \Leftrightarrow \tilde{R} = N(x, \tilde{P})$.
+Vertices $\tilde{q}, \tilde{r} \in \powset{V}$ will be connected by an edge $e$
+with label $\alpha'_2(e) = x \Leftrightarrow \tilde{r} = N(x, \tilde{q})$.
 
 This defines our new graph $G' = (V', E')$.
 
 The start and final states are defined as follows:
-\[ S_{\fa{A'}} = \setof{S_{\fa{A}}} \]
-\[ F_{\fa{A'}} = \setof{\tilde{R} \in \powset{V(G)} \mid \tilde{R} \cap
-F_{\fa{A}} \neq \emptyset} \]
+\begin{eqnarray*}
+S_{\fa{A'}} &=& \setof{S_{\fa{A}}} \\
+F_{\fa{A'}} &=& \setof{\tilde{r} \in \powset{V} \mid \tilde{r} \cap F_{\fa{A}}
+\neq \emptyset}
+\end{eqnarray*}
 
-This completes the definition of automaton $\fa{A'} = (G', X,
-S_{\fa{A'}}, F_{\fa{A'}}, \alpha')$.
+This completes the definition of the automaton
+\[ \fa{A'} = (G', X, S_{\fa{A'}}, F_{\fa{A'}}, \alpha') \]
 
-We first prove that
-\fa{A'} is complete and deterministic:
+We prove first that \fa{A'} is complete and deterministic:
 
 \fa{A'} has a single start state $S_{\fa{A'}} = \setof{S_{\fa{A}}}$, 
 the edge labels are all single symbols and 
-\[ \card{\setof{e \in E' \mid Q(e) = \tilde{P}, \alpha'_2(e) = x}} = 1 \]
-for all $\tilde{P} \in V(G')$.
+\[ \card{\setof{e \in E' \mid Q(e) = \tilde{v}, \alpha'_2(e) = x}} = 1 \]
+for all $\tilde{v} \in V'$.
 
 Now we prove that the accepted languages are equal:
 
 ''$\subset$'': We use diagrams of the following form:
 \begin{eqnarray*}
-& P \edge{x} R & \\
-& \tilde{P} \edge{x} \tilde{R} &
+& q \edge{x} r & \\
+& \tilde{q} \edge{x} \tilde{r} &
 \end{eqnarray*}
+which are interpreted as follows: For $q \edge{x} r \in E$ there exists by
+construction $\tilde{q} \edge{x} \tilde{r} \in E'$ with $q \in \tilde{q}$ and
+$r \in \tilde{r}$.
 
-which are to be understood as follows: For $P \edge{x} R \in E(G)$
-there exists by construction $\tilde{P} \edge{x} \tilde{R} \in
-E(G')$ with $P \in \tilde{P}$ and $R \in \tilde{R}$.
-
-Starting with $S_{\fa{A'}} = \setof{S_{\fa{A}}} = \setof{\setof{P_0 }}$ and
-concatenating these diagrams, we get for $x_1 \cdots x_k \in
-L_{\fa{A}}$:
+Starting with $S_{\fa{A'}} = \setof{S_{\fa{A}}} = \setof{\setof{q_0 }}$ and
+concatenating these diagrams, we get for $x_1 \cdots x_k \in L_{\fa{A}}$:
 \begin{eqnarray*}
- & & P_0 \edge{x_1} P_1 \edge{x_2} P_2 \edge{} \ldots \edge{} P_{k-1} \edge{x_k}
- P_k \in F_{\fa{A}} \\
- & & \tilde{P}_0 \edge{x_1} \tilde{P}_1 \edge{x_2} \tilde{P}_2 \edge{} \ldots
- \edge{} \tilde{P}_{k-1} \edge{x_k} \tilde{P_k}
+ & & q_0 \edge{x_1} q_1 \edge{x_2} q_2 \edge{} \ldots \edge{} q_{k-1} \edge{x_k}
+ q_k \in F_{\fa{A}} \\
+ & & \tilde{q}_0 \edge{x_1} \tilde{q}_1 \edge{x_2} \tilde{q}_2 \edge{} \ldots
+ \edge{} \tilde{q}_{k-1} \edge{x_k} \tilde{q_k}
 \end{eqnarray*}
 
-That means $\tilde{P_k} \cap F_{\fa{A}} \neq \emptyset \Rightarrow \tilde{P}_k \
+That means $\tilde{q}_k \cap F_{\fa{A}} \neq \emptyset \Rightarrow \tilde{q}_k
 \in F_{\fa{A'}} \Rightarrow w \in L_{\fa{A}'}.$
-
 \[ \Rightarrow L_{\fa{A}} \subset L_{\fa{A}'}\]
 
 ''$\supset$'': Here we use diagrams  
 \begin{eqnarray*}
-& \tilde{P} \edge{x} \tilde{R} & \\
-& P \edge{x} R & 
+& \tilde{q} \edge{x} \tilde{r} & \\
+& q \edge{x} r & 
 \end{eqnarray*}
+which are interpreted as follows: For $\tilde{q} \edge{x} \tilde{r} \in E'$ and
+$r \in \tilde{r}$ there exists $q \in \tilde{q}$ with $q \edge{x} r \in E$.
 
-which are to be understood as follows: For $\tilde{P} \edge{x} \tilde{R} \in
-E(G')$ and $R \in \tilde{R}$ there exists $P \in \tilde{P}$ with $P \edge{x} R
-\in E(G)$.
-
-For $x_1 \cdots x_K \in L_{\fa{A}'}$ we start with $F_{\fa{A'}}$ and continue
-the diagram from right to left. For $P_k \in \tilde{P}_k \cap F_{\fa{A}}$ we get
+For $x_1 \cdots x_k \in L_{\fa{A}'}$ we start with $F_{\fa{A'}}$ and continue
+the diagram from right to left. For $q_k \in \tilde{q}_k \cap F_{\fa{A}}$ we get
 \begin{eqnarray*}
- & S_{\fa{A'}} \ni & \tilde{P}_0 \edge{x_1} \tilde{P}_1 \edge{x_2} \tilde{P}_2 \edge{} \ldots
- \edge{} \tilde{P}_{k-1} \edge{x_k} \tilde{P_k} \in F_{\fa{A'}} \\
- & & P_0 \edge{x_1} P_1 \edge{x_2} P_2 \edge{} \ldots \edge{}
- P_{k-1} \edge{x_k} P_k \in F_{\fa{A}} 
+ & S_{\fa{A'}} \ni & \tilde{q}_0 \edge{x_1} \tilde{q}_1 \edge{x_2} \tilde{q}_2
+ \edge{} \ldots \edge{} \tilde{q}_{k-1} \edge{x_k} \tilde{q_k} \in F_{\fa{A'}}
+ \\
+ & & q_0 \edge{x_1} q_1 \edge{x_2} q_2 \edge{} \ldots \edge{} q_{k-1} \edge{x_k}
+ q_k \in F_{\fa{A}}
 \end{eqnarray*}
+Here $q_i \in \tilde{q}_i$ for $i = 0, \ldots, k$.
 
-Because of $S_{\fa{A'}} = \setof{S_{\fa{A}}} = \setof{\setof{P_0}}$ it holds:
-$x_1 \cdots x_k \in L_{\fa{A}} \Rightarrow L_{\fa{A}'} \subset L_{\fa{A}}$.
-
-\[ \Rightarrow L_{\fa{A}'} \subset L_{\fa{A}}\]
+Because of $S_{\fa{A'}} = \setof{S_{\fa{A}}} = \setof{\setof{q_0}}$ it holds 
+$x_1 \cdots x_k \in L_{\fa{A}}$
+\[ \Rightarrow L_{\fa{A}'} \subset L_{\fa{A}} \]
 
 From both inclusions we get $L_{\fa{A}} = L_{\fa{A}'}$.
 \end{proof}
 
-\bigskip
+\medskip
 Remark: The state set grows exponentially when the automaton is made
-deterministic. The following example will clarify this fact \cite{Commentz}.
+deterministic. The following example will show this fact \cite{Commentz}.
 
 \bigskip
 Example: Let $X = \setof{a, b}$. Define for arbitrary, but fixed $n \in
-\mathbb{N}$ \[ L_n := \setof{w \mid w = w_1 \cdot w_2 \mbox{ with } w_1 \neq
-w_2,\ |w_1| = |w_2| = n,\ w_1, w_2 \in X^*} 
-\]
-$L_n \in \reglang(X^*)$ because there exists a non-deterministic finite acceptor
-$\fa{A}_{n}$ with $L_n = L_{\fa{A}_{n}}$.
+\mathbb{N}$ 
+\[ L_n := \setof{w \mid w = w_1 \cdot w_2 \text{ with } w_1 \neq w_2,\ |w_1| =
+|w_2| = n,\ w_1, w_2 \in X^*} \]
+
+$L_n \in \reglang(X^*)$ is regular because there exists a non-deterministic
+finite acceptor $\fa{A}_{n}$ with $L_n = L_{\fa{A}_{n}}$.
 
 We want to give the automaton for $n = 3$:
 
-Let $\fa{A}_3 = (G_3, \setof{a,b}, \setof{1}, \setof{22}, \alpha)$ with the
-following graph $G_3$:
+Let 
+\[ \fa{A}_3 = (G_3, \setof{a,b}, \setof{1}, \setof{22}, \alpha) \]
+defined by the following graph $G_3$:
 
 \begin{center}
 \input{figures/chapter2-1-theorem3-non-deterministic.tikz}
@@ -412,10 +438,12 @@ following graph $G_3$:
 
 The labelling $\alpha$ is shown at the edges.
 
-Exercise: Show that this automaton accepts $L_3$.
+\begin{exercise}
+Show that this automaton accepts $L_3$.
+\end{exercise}
 
-If we construct for $L_3$ from the non-deterministic acceptor $\fa{A}_3$
-the deterministic acceptor $\fa{A'}_3$, the graph $G'_3$ looks as follows:
+If we construct for $L_3$ from $\fa{A}_3$ the deterministic acceptor
+$\fa{A'}_3$, the graph $G'_3$ looks as follows:
 
 \begin{center}
 \begin{tiny}
@@ -423,8 +451,8 @@ the deterministic acceptor $\fa{A'}_3$, the graph $G'_3$ looks as follows:
 \end{tiny}
 \end{center}
 
-The edges pointing upwards are labeled with $a$ and the edges pointing downwards
-with $b$. From each of the vertices $32 \ldots 63$ two edges lead to the final
+The edges pointing upwards are labelled with $a$ and the edges pointing
+downwards with $b$. From each of the vertices $32 \ldots 63$ two edges lead to the final
 state vertex $64$ except the edges shown leading to the $\emptyset$-vertices.
 
 $G'_3$ is the graph of the complete (up to loops in the final state and state
@@ -434,63 +462,70 @@ $\emptyset$), deterministic acceptor $\fa{A'}_3$ and accepts the language $L_3$
 In \cite{Commentz} it is proved that this automaton is minimal in the number of
 states.
 
-Making a state graph deterministic brings advantages as well as disadvantages. A
-program simulating finite automata based on the given state graph is fast for
+\bigskip
+Making a state graph deterministic may have advantages as well as disadvantages.
+A program simulating finite automata based on the given state graph is fast for
 a deterministic graph. However it needs more space because of the possibly very
 large representation of the deterministic graph.
 
 If the program uses the non-deterministic graph, it can follow all alternatives
-in parallel similar to our construction of the deterministic automaton. It needs
-less memory but the computing time can grow linear for each simulation step.
+in parallel, similarly to our construction of the deterministic automaton. It
+needs less memory but the computing time can grow linear for each simulation step.
 
 We want to state an important consequence from our last theorem.
 
-\begin{theorem}[Regular languages are closed under complement]
-\[ L \in \reglang(X^*) \Rightarrow \bar{L} = X^* - L \in \reglang(X^*) \]
+\begin{theorem}[Closure under complement]
+\[ L \in \reglang(X^*) \Rightarrow \bar{L} = X^* \setminus L \in \reglang(X^*)
+\]
 \end{theorem}
 
 \begin{proof}
-$L \in \reglang(X^*) \Rightarrow $ there exists a complete, deterministic
-finite acceptor $\fa{A}$ with $L_{\fa{A}} = L$.
+$L \in \reglang(X^*)$, then there exists a complete, deterministic finite
+acceptor $\fa{A}$ with $L_{\fa{A}} = L$.
 
-Define $\fa{A'} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha)$ where $F_{\fa{A}} :=
-V(G) - F_{\fa{A}}$.
+Define
+\[ \fa{A'} = (G, X, S_{\fa{A}}, F_{\fa{A}}, \alpha) \]
+where $F_{\fa{A}} := V \setminus F_{\fa{A}}$.
 
 Because \fa{A} is complete and deterministic, every word $w \in X^*$ determines
 a unique path starting in $S_{\fa{A}}$.
 
-This $w \in X^*$ uniquely determines a point $P \in V(G)$ with $w \in
-\alpha(\pathcat{W}(S_{\fa{A}}, P))$.
+This $w \in X^*$ uniquely determines a vertex $q \in V$ with $w \in
+\alpha(\pathcat{W}(S_{\fa{A}}, q))$.
 
-It is either $P \in F_{\fa{A}}$ or $P \in F_{\fa{A'}}$ and from $F_{\fa{A}}
-\cap F_{\fa{A}'} = \emptyset$ follows $w \in L_{\fa{A}} \Leftrightarrow w
+It is either $q \in F_{\fa{A}}$ or $q \in F_{\fa{A'}}$ and from $F_{\fa{A}}
+\cap F_{\fa{A}'} = \emptyset$ it follows $w \in L_{\fa{A}} \Leftrightarrow w
 \notin L_{\fa{A}'}$ and therefore $L_{\fa{A}'} = \bar{L_{\fa{A}}}$.
 \end{proof}
 
 \bigskip
-\begin{theorem}[Regular languages are closed under concatenation]
+\begin{theorem}[Closure under complex product]
 \[ L_1, L_2 \in \reglang(X^*) \Rightarrow L_1 \cdot L_2 \in \reglang(X^*) \]
 \end{theorem}
 
 \begin{proof}
-$L_1, L_2 \in \reglang(X^*)$, there exist finite acceptors
+For $L_1, L_2 \in \reglang(X^*)$ there exist finite acceptors
 \[ \fa{A}_i = (G_i, X, S_i, F_i, \alpha_i),\quad G_i = (V_i, E_i),\ i=1,2 \]
 such that $L_i = L_{\fa{A}_i}$.
 
-We define a new acceptor
+We define an acceptor
 \[ \fa{A}_1 \circ \fa{A}_2 := (G, X, S, F, \alpha),\quad G = (V, E) \]
 with vertex set
-\[ V := V_1 \cup V_2\text{ where }V_1 \cap V_2 = \emptyset \]
+\[ V := V_1 \cup V_2\text{ where without loss of generality }V_1 \cap V_2 =
+\emptyset \]
 and edge set
-\[ E := E_1 \cup E_2 \cup \underbrace{\setof{Q(e) \edge{x} s' \mid \exists
-e \in E_1,\ e: Q(e) \edge{x} f,\ f \in F_1,\ s' \in S_2}}_{\text{bridge edges}}
-\]
+\begin{eqnarray*}
+E &:=& E_1 \cup E_2 \cup \\
+&& \underbrace{\setof{Q(e) \edge{x} s' \mid \exists e \in E_1,\ e: Q(e) \edge{x}
+f,\ f \in F_1,\ s' \in S_2}}_{\text{bridge edges}}
+\end{eqnarray*}
 
-This means for each edge $e$ that ends in a final state of the first automaton 
-$f$ we create a ''bridge'' from the source of this edge to the start state of
-the second automaton.
+This means for each edge $e$ ending in a final state $f$ of the first
+automaton, we create a ''bridge'' from the source of this edge to the start
+state of the second automaton.
 
-Start and final states of the new automaton: $S := S_1$ and $F := F_2$.
+Start and final states of the new automaton are given by $S := S_1$ and $F :=
+F_2$.
 
 \begin{center}
 \input{figures/chapter2-1-closure-concatenation.tikz}
@@ -522,8 +557,6 @@ We prove that $L_{\fa{A}} = L_{\fa{A}_1} \cdot L_{\fa{A}_2}$.
   be an accepting path in $\pathcat{G}(S, F)$. Then there exist vertices $p_i
   \in S_2$ and $p_j \in V_1$ with $j < i$ because $V_1 \cap V_2 = \emptyset$.
   
-  \missingfigure
-  
   Therefore the subpath 
   \[ S_2 \ni p_i \edge{w_{i+1}} p_{i+1} \edge{} \ldots \edge{w_n} _n \in F_2 \]
   contains only edges from $\fa{A}_2$ and is an accepting path for 
@@ -540,21 +573,21 @@ From (1) and (2) it follows $L_{\fa{A}} = L_{\fa{A}_1} \cdot L_{\fa{A}_2}$.
 \end{proof}
 
 \bigskip
-\begin{theorem}[Regular languages are closed under Kleene-star]
+\begin{theorem}[Closure under Kleene-star]
 \[ L \in \reglang(X^*) \Rightarrow L^* \in \reglang(X^*) \]
 \end{theorem}
 
 \begin{proof}
-Let $\fa{A} = (G, X, S, F, \alpha),\quad G=(V,E)$	be a finite acceptor for $L$,
-create the finite acceptor
-\[ \fa{A'} = (G', X, S, F, \alpha'),\quad G'=(V',E') \]
+Let $\fa{A} = (G, X, S, F, \alpha),\ G = (V, E)$	be a finite acceptor for $L$.
+Create the finite acceptor
+\[ \fa{A}^* = (G^*, X, S, F, \alpha^*),\ G'=(V', E') \]
 from $G$ by adding the following edges: 
 
 \begin{enumerate}
-  \item For each edge $e : Q(e) \edge{x} f \in E,f \in F$ that ends in a final 
-  state and for each start state $s$ add a backward edge $e' : Q(e) \edge{x} s$ 
+  \item For each edge $e : Q(e) \edge{x} f \in E,\ f \in F$ ending in a final 
+  state and for each start state $s$, add a backward edge $e' : Q(e) \edge{x} s$ 
   with label $\alpha'(e') = x$.
-  \item For each start state $s \in S$ and each final state $f \in F$ add a
+  \item For each start state $s \in S$ and each final state $f \in F$, add a
   forward edge (if not already existing) $e' : s \edge{\epsilon} f$ with
   label $\alpha'(e') = \epsilon$.
 \end{enumerate}
@@ -563,62 +596,77 @@ from $G$ by adding the following edges:
 \input{figures/chapter2-1-closure-star.tikz}
 \end{center}
 
-For the finite acceptor $\fa{A'}$ it holds (exercise): \[ L_{\fa{A}'} = L^* \]
+For the finite acceptor $\fa{A^*}$ then holds (exercise):
+\[ L_{\fa{A}^*} = L^* \]
 \end{proof}
 
 We have seen (lemma 1) that for non-deterministic automata a single start and a
-single final state are sufficient but in the deterministic case a single final
+single final state are sufficient, but in the deterministic case a single final
 state is in general insufficient.
 
 \bigskip
-\begin{theorem}[The regular languages are closed under homomorphism]
-\[ L \in \reglang(X^*),\ \phi : X^* \to Y^* \mbox{ monoid homomorphism }
+\begin{theorem}[Closure under homomorphism]
+\[ L \in \reglang(X^*),\ \phi : X^* \to Y^* \text{ monoid homomorphism }
 \Rightarrow \]
 \[ \phi(L) := \setof{\phi(w) \mid w \in L} \in \reglang(X^*) \]
 \end{theorem}
 \begin{proof}
-Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite acceptor for $L$. Then \[
-\fa{B} = (G, Y, S, F, \beta)\] with $\beta_2(e) := \phi(\alpha_2(e)),\ e \in
-E(G)$, is an acceptor for $\phi(L)$ because \[\phi(L) =
-\phi(\alpha_2(\pathcat{G}(S, F))) = \beta_2(\pathcat{G}(S,F))\]
+Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite acceptor for $L$ with graph $G
+= (V, E)$. Then
+\[ \fa{B} = (G, Y, S, F, \beta) \]
+with $\beta_2(e) := \phi(\alpha_2(e)),\ e \in E(G)$ is an acceptor for $\phi(L)$
+because
+\begin{eqnarray*}
+\phi(L) &=& \phi(\alpha_2(\pathcat{G}(S, F))) \\
+        &=& \beta_2(\pathcat{G}(S,F))
+\end{eqnarray*}
 Therefore \[ \phi(L) \in \reglang(Y^*) \]
 \end{proof}
 
-After having proved closure properties, we prove some other important properties
-of regular sets.
+\bigskip
+We prove some more important properties of regular sets.
 
 \begin{lemma}
-For $x \in X$ it holds $\setof{x} \in \reglang(X^*)$ and $\emptyset \in \reglang(X^*)$.
+For $x \in X$ it holds
+\[ \setof{x} \in \reglang(X^*)\text{ and }\emptyset \in \reglang(X^*) \]
 \end{lemma}
-\begin{proof}
-If $G = (\setof{S,F}, \setof{e}),\ e: S \to F$ be a graph, then the finite
-acceptor \[\fa{A}_x = (G, \setof{x}, \setof{S}, \setof{F}, \alpha)\] with $\alpha_2(e) =
-x$ fulfills $L_{\fa{A}} = \setof{x}$.
 
-If $G = (\setof{S,F}, \emptyset)$, then $\fa{A} = (G, \emptyset, \setof{S},
-\setof{F}, \emptyset)$ fulfills $L_{\fa{A}} = \emptyset$.
+\begin{proof}
+For $G = (\setof{s, f}, \setof{e})$ with $Q(e)=s,\ Z(e)=f$, the finite acceptor
+\[\fa{A}_x = (G, \setof{x}, \setof{s}, \setof{f}, \alpha)\]
+with $\alpha_2(e) = x$ accepts $L_{\fa{A}} = \setof{x}$.
+
+For $G = (\setof{s, f}, \emptyset)$ the finite acceptor 
+\[ \fa{A} = (G, \emptyset, \setof{s}, \setof{f}, \emptyset) \]
+accepts $L_{\fa{A}} = \emptyset$.
 \end{proof}
 
 \bigskip
 \begin{lemma}[The set of accepting paths is regular]
-Let $G = (V, E)$. Then \[ \pathcat{G}(S,F) \in \reglang(E^*) \]
+Let $G = (V, E)$. Then
+\[ \pathcat{G}(S, F) \in \reglang(E^*) \]
 \end{lemma}
-This means that the paths in a graph leading from a start state to a final state
-form a regular set over the free monoid of edge sequences. 
+
+This lemma states that the paths in a graph leading from a start state to a
+final state form a regular set over the free monoid of edge sequences.
+ 
 \begin{proof}
-The proof is trivial, just label each edges with itself.
+The proof is trivial, just label each edge with itself and you get a finite
+acceptor for the path set.
 \end{proof}
 
 \bigskip
 \begin{definition}
-$L \subset X^*$ is called {\bf local over $X$} if there exist subsets $S,\ F
-\subset X$ and a relation $R \subset X \times X$ with 
+$L \subset X^*$ is called {\bf local over $X$} $\iff$ there exist subsets $S,\
+F \subset X$ and a relation $R \subset X \times X$ with 
 \[ L = \setof{x_1 \cdots x_k \mid x_1 \in S,\ x_k \in F,\ (x_i, x_{i+1}) \in R,
 \quad i = 1, \ldots, k - 1} \]
 \end{definition}
 
+The relation $R$ specifies the ''allowed'' sequences.
+
 \bigskip
-\begin{lemma}[The set of accepting paths is local]
+\begin{lemma}[The set of accepting paths is a local set]
 Let $G = (V, E)$ be a graph. Then $\pathcat{G}(S, F)$ is local over $E$.
 \end{lemma}
 
@@ -628,21 +676,23 @@ S & = & \setof{e \in E \mid Q(e) \in S} \\
 F & = & \setof{e \in E \mid Z(e) \in F} \\
 R & = & \setof{(e, e') \in E \times E \mid Z(e) = Q(e')} 
 \end{eqnarray*}
-Then the claim is immediately proved.
+Then the claim is immediately clear.
 \end{proof}
 
 \bigskip
-\begin{lemma}[Every local set is regular]
-\[ L \mbox{ local over } X \Rightarrow L \in \reglang(X^*) \]
+\begin{lemma}[Every local set is a regular set]
+\[ L \text{ local over } X \Rightarrow L \in \reglang(X^*) \]
 \end{lemma}
 
 \begin{proof}
 Let $S$ and $F$ be the subsets of $X$ from the definition of a local
-set. Define a graph $G = (V, E)$ as follows:
+set. 
+
+Define a graph $G = (V, E)$ as follows:
 \begin{eqnarray*}
-V & = & X \cup \setof{\bar{S}} \mbox{ with } X \cap \setof{\bar{S}} = \emptyset
+V & := & X \cup \setof{\bar{S}} \text{ with } X \cap \setof{\bar{S}} = \emptyset
 \\
-E & = & \setof{e : \setof{\bar{S}} \to x \mid x \in S} \cup \setof{e : x \to y
+E & := & \setof{e : \setof{\bar{S}} \to x \mid x \in S} \cup \setof{e : x \to y
 \mid (x, y) \in R}
 \end{eqnarray*}
 
@@ -655,7 +705,8 @@ Then it is clear that $L_{\fa{A}} = L$.
 \bigskip
 \begin{lemma}[Every regular set is the homomorphic image of a local set]
 Let $L \in \reglang(X^*)$ be a regular set. Then there exists a local set
-$R$ over $X$ and a monoid homomorphism $\phi$ such that \[ \phi(R) = L \]
+$R$ over $X$ and a monoid homomorphism $\phi$ such that
+\[ \phi(R) = L \]
 \end{lemma}
 
 \begin{proof}
@@ -663,25 +714,25 @@ Exercise.
 \end{proof}
 
 \bigskip
-We want to summarize our results to some main theorems where we organize these
-results differently.
+We want to summarize our results to a number of main theorems, here we organize
+these results differently.
 
 Let $X_\infty = \setof{x_1, x_2, \ldots}$ be an infinite alphabet. Define 
-\[ \reglang(X_\infty^*) = \bigcup_{X \subset X_\infty} \reglang(X^*),\ X
-	\text{ is finite} \]
+\[ \reglang(X_\infty^*) = \bigcup_{\substack{X \subset X_\infty\\X\text finite}}
+\reglang(X^*) \]
 
 \bigskip
 \begin{maintheorem}\ 
 
 \begin{enumerate}
   \item $\reglang(X_\infty^*)$ is closed under union, complex product and
-  star-operation.
+  star-operator.
   \item If $\phi : X_\infty^* \to X_\infty^*$ is a monoid homomorphism, then
 $\reglang(X_\infty^*)$ is closed under $\phi$.
 	\item Every $L \in \reglang(X_\infty^*)$ is the homomorphic image of a local set
 	over $X_\infty^*$.
-	\item $\reglang(X_\infty^*)$	 contains the sets $\setof{x}, x \in X_\infty^*$ and
-	the empty set $\emptyset$.
+	\item $\reglang(X_\infty^*)$	 contains the sets $\setof{x},\ x \in X_\infty^*$
+	and the empty set $\emptyset$.
 \end{enumerate}
 \end{maintheorem}
 
@@ -689,29 +740,31 @@ $\reglang(X_\infty^*)$ is closed under $\phi$.
 \begin{maintheorem}\ 
 
 \begin{enumerate}
-  \item $\reglang(X_\infty^*)$ is a Boolean Algebra with operations union, 
-  intersection and complement. 
+  \item $\reglang(X_\infty^*)$ is a Boolean Algebra with the operations union, 
+  intersection and complement.
 	\item Every language $L \in \reglang(X_\infty^*)$ is accepted by some complete,
 deterministic automaton.
 \end{enumerate}
 \end{maintheorem}
 
-To prove the first main theorem we don't need the fact that $X^*$ is a {\bf
-free} monoid. In the proof of main theorem 2 we used that fact.
+To prove the first main theorem we didn't need the fact that $X^*$ is a {\bf
+free} monoid. In the proof of main theorem 2 we needed that fact.
 
 There exist monoids $M$ for which the second main theorem does not
-hold for $\reglang(M)$, in both sentences (see exercises).
+hold for $\reglang(M)$, in both statements (see exercises).
 
 Of special interest are the monoids $M = F(X)$, where $F(X)$ is the free group
-generated by $X$ (see chapter 1.3) and $M = X^\oplus$ where $X^\oplus$ is the
+generated by $X$ (see chapter 1.3), and $M = X^\oplus$, where $X^\oplus$ is the
 free commutative group generated by $X$.
 
 Languages $L \in \reglang(X^\oplus)$ are also called {\bf semi-linear}.
 
-Exercices:
+\begin{exercise}\ 
+
 \begin{enumerate}
   \item Let $\phi : (\setof{x, y}^*, \cdot) \to (\mathbb{Z} / 3 \mathbb{Z}
-  \times \mathbb{Z} / 4 \mathbb{Z}, +)$ be given by $\phi(x) = (0,1), \phi(y) = (1,0)$.
+  \times \mathbb{Z} / 4 \mathbb{Z}, +)$ be given by $\phi(x) = (0,1),\ \phi(y) =
+  (1,0)$.
   
   Construct a finite automaton \fa{A} with $L_{\fa{A}} = \phi^{-1}((0,0))$ and
   present $\phi^{-1}((0,0))$ as a rational set.
@@ -719,17 +772,19 @@ Exercices:
   \item Let $\fa{A} = (G, X, S, F, \alpha)$ be a finite automaton with $n$
   states. Prove:
   \begin{enumerate}
-    \item If $x \in L_{\fa{A}}$ with $|x| >= n$, then there exists words $u, v
+    \item If $x \in L_{\fa{A}}$ with $|x| >= n$, then there exists words $u, v, 
     w \in X^*$ with $x = u \cdot v \cdot w, v \neq \epsilon$ and $u \cdot v^m
-    \cdot w \in falang{A}\ \forall m \geq 1$ (''pumping lemma'').
-    \item $L_{\fa{A}}$ is infinite $\Leftrightarrow \exists x \in X^*$ with $n
+    \cdot w \in L_{\fa{A}}\ \forall m \geq 1$ (''pumping lemma'').
+    \item $L_{\fa{A}}$ is infinite $\iff \exists\, x \in X^*$ with $n
     \leq |x| \leq 2n$ and $x \in L_{\fa{A}}$.
    \end {enumerate}
 
-	\item Show: The set $L = \setof{a^n b^n} \mid n \in \mathbb{N}$ is not
+	\item Show: The set $L = \setof{a^n b^n \mid n \in \mathbb{N}}$ is not
 	regular.
 	
-	\item Let $L \in \reglang(X^*), M \subset X^*$ finite. Show: $M^{-1}L \in \reglang(X^*)$.
+	\item Let $L \in \reglang(X^*),\ M \subset X^*$ finite. Show: $M^{-1}L \in
+	\reglang(X^*)$.
 	What if $M \subset \reglang(X^*)$ is an arbitrary regular set?
 \end{enumerate}
+\end{exercise}
 

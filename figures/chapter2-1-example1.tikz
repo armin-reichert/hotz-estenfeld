@@ -1,4 +1,5 @@
 \begin{tikzpicture}
+	\path [use as bounding box] (-3,-2) rectangle (3,2);
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=state] (0) at (-1.75, -0) {$1$};
 		\node [style=state] (1) at (2, -0) {$3$};
@@ -6,10 +7,10 @@
 		\node [style=state] (3) at (0, -1) {$4$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style=transition] (0) to node[auto]{$k_1$} (2);
-		\draw [style=transition] (2) to node[auto]{$k_2$} (1);
-		\draw [style=transition] (1) to node[auto]{$k_3$} (3);
-		\draw [style=transition] (3) to node[auto]{$k_4$} (0);
-		\draw [style=transition, in=-135, out=135, loop] (0) to node[auto]{$k_5$} ();
+		\draw [style=transition] (0) to node[auto]{$e_1$} (2);
+		\draw [style=transition] (2) to node[auto]{$e_2$} (1);
+		\draw [style=transition] (1) to node[auto]{$e_3$} (3);
+		\draw [style=transition] (3) to node[auto]{$e_4$} (0);
+		\draw [style=transition, in=135, out=-135, loop] (0) to node[auto]{$e_5$} ();
 	\end{pgfonlayer}
 \end{tikzpicture}

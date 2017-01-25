@@ -1,28 +1,30 @@
-\section{Rational sets in \texorpdfstring{$X^*, \ratlang(X^*)$}{X*,
+\section{Rational sets in \texorpdfstring{$X^*,\ \ratlang(X^*)$}{X*,
 RAT(X*)}}
 
-In this section we want to introduce a second characterization of regular sets
-over free monoids. We need the following definition.
-
-\begin{definition}[rationally closed]
-If $M$ is a monoid, then $K \in \powset{M}$ is called is called {\bf rationally
-closed} $\Leftrightarrow$ $K$ is closed unter union $\cup$, complex product $\cdot$ and Kleene-star $^*$.
-\end{definition}
+In this section we want to introduce a second characterization of the regular
+sets over free monoids. We need the following definition.
 
 \begin{definition}
-$\ratlang(M)$ is the smallest, rationally closed subset of $\powset{M}$ that
-contains the single element sets $\setof{m}, m \in M$ and the empty set
+If $M$ is a monoid, then $K \subset \powset{M}$ is called is called {\bf
+rationally closed} $\iff K$ is closed unter union $\cup$, complex product
+$\cdot$ and Kleene-star $^*$.
+\end{definition}
+
+\bigskip
+\begin{definition}
+$\ratlang(M)$ is the smallest rationally closed subset of $\powset{M}$ which
+contains the single element sets $\setof{m},\ m \in M$, and the empty set
 $\emptyset$.
 \end{definition}
 
-From main theorem 1 immediately follows:
+From main theorem 1 it immediately follows:
 
 \begin{lemma}
 $\ratlang(X^*) \subset \reglang(X^*)$.
 \end{lemma}
 
 From the remark following the main theorems it follow that this also holds for
-arbitray monoids $M$ because $\setof{m} \in \reglang(M)$ for $m \in M$.
+arbitrary monoids $M$ because $\setof{m} \in \reglang(M)$ for $m \in M$.
 
 This lemma is the first part of the following theorem by Kleene:
 
@@ -31,41 +33,49 @@ This lemma is the first part of the following theorem by Kleene:
 \end{theorem}
 
 \begin{proof}
-We still have to proof the inclusion $\reglang(X^* \subset \ratlang(X^*))$.
+We only have to proof the inclusion $\reglang(X^*) \subset \ratlang(X^*)$.
 
-Let $\fa{A}$ be a finite automaton. We show that \lang{A} can be generated
-from $\emptyset$ and $\setof{x}, x \in X$	using $\cup$, $\cdot$ and
-$^*$-operations.
+Let $\fa{A} = (G, X, S, F, \alpha),\ G=(V, E)$ be a finite automaton. We show
+that $L_{\fa{A}}$ can be generated from $\emptyset$ and $\setof{x},\ x \in X$ 
+using the $\cup,\ \cdot$ and $^*$-operations.
 
 We prove this by induction over the number $k$ of edges in the graph of the
 automaton when the number of vertices is fixed.
 
-We may assume that the automaton has a single start state, $\card{S} = 1$.
+By lemma 1 from chapter II.1, we may assume that the automaton has a single
+start state, $\card{S} = 1$.
 
-$k = 0$: Without loss of generality, we may assume $S \cap F = \emptyset$. It
-follows $\lang{A} = \emptyset$ which is a rational set over $X^*$.
+{\em Induction base:}\\
+$k = 0$: Without loss of generality, we may assume $S
+\cap F = \emptyset$. It follows $\lang{A} = \emptyset \in \ratlang{X^*}$.
 
-Induction step: Let the claim be true for $i \leq k, k > 1$ and let $G_k$ be a
-graph with $k$ edges.
+{\em Induction step:}\\
+Let the claim be true for $i \leq k,\ k > 1$, and let $G_k$ be a graph with $k$
+edges.
 
-Add a new edge $e : P \edge{x} R$ labeled with $x \in X$ to the graph $G_k$. The
-resulting graph shall be $G_{k+1}$. Then the set of accepting paths in $G_{k+1}$
-can be written as \begin{eqnarray*}
- \pathcat{G_{k+1}}(S, F) & = & \pathcat{G_k}(S, F) \\
- & \cup & \pathcat{G_k}(S, P) \cdot e \cdot \Big( \pathcat{G_k}(R, P) \cdot
- e \Big)^* \cdot \pathcat{G_k}(R, F)
+Add a new edge $e : q \edge{x} r$ labeled with $x \in X$ to the graph $G_k$. The
+resulting graph shall be $G_{k+1}$. 
+
+The set of accepting paths in $G_{k+1}$ can be written as
+\begin{eqnarray*}
+\pathcat{G_{k+1}}(S, F) & = & \pathcat{G_k}(S, F) \\
+& \cup & \pathcat{G_k}(S, q) \cdot e \cdot \Big( \pathcat{G_k}(r, q) \cdot e 
+\Big)^* \cdot \pathcat{G_k}(r, F)
 \end{eqnarray*}
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-2-kleene-theorem.tikz}
+\end{center}
 
 By induction hypothesis it holds:
-\[ \alpha(\pathcat{G_k}(S, F)) \in \ratlang(X^*) \]
-\[ \alpha(\pathcat{G_k}(S, P)) \in \ratlang(X^*) \]
-\[ \alpha(\pathcat{G_k}(R, F)) \in \ratlang(X^*) \]
-\[ \alpha(\pathcat{G_k}(R, P)) \in \ratlang(X^*) \]
+\begin{eqnarray*}
+& \alpha(\pathcat{G_k}(S, F)) \in \ratlang(X^*) \\
+& \alpha(\pathcat{G_k}(S, q)) \in \ratlang(X^*) \\
+&\alpha(\pathcat{G_k}(r, F)) \in \ratlang(X^*) \\
+& \alpha(\pathcat{G_k}(r, q)) \in \ratlang(X^*)
+\end{eqnarray*}
 
-From this we get $\alpha(\pathcat{G_{k+1}}(S, F)) \in \ratlang(X^*)$.
-
+Together we get $\alpha\left(\pathcat{G_{k+1}}(S, F)\right) \in \ratlang(X^*)$.
 This concludes the proof of Kleene's theorem.
 \end{proof}
 

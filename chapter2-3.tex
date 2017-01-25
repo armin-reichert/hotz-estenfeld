@@ -1,19 +1,20 @@
 \section{Sets recognizable by homomorphisms,
 \texorpdfstring{$\reclang(X^*)$}{REC(X*)}}
 
-In this section we investigate a third possibility for characterizing subsets of
+In this section we consider a third possibility for characterizing subsets of
 $X^*$.
 
 \begin{definition}
 \begin{eqnarray*}
- \reclang(X^*) & := & \{ L \subset X^* \mid \mbox{ there exists a
+ \reclang(X^*) & := & \{ L \subset X^* \mid \text{ there exists a
 finite monoid } H \\
-& & \mbox{ and a monoid homomorphism }\mu : X^* \to H \\
-& & \mbox{ with } L = \mu^{-1}(T), T \subset H \}
+& & \text{ and a monoid homomorphism }\mu : X^* \to H \\
+& & \text{ with } L = \inv\mu(T),\ T \subset H \}
 \end{eqnarray*}
 is the class of {\bf recognizable sets} over $X$.
 \end{definition}
 
+\bigskip
 \begin{lemma}
 \[ \reglang(X^*) \subset \reclang(^*) \]
 \end{lemma}
@@ -23,20 +24,22 @@ Let $L \in \reglang(X^*)$, then there exists a complete, deterministic finite
 automaton $\fa{A} = (G, X, S, F, \alpha)$ with graph $G = (V, E)$ accepting $L$.
 
 We define 
-\[ H := Map(V,V) := \setof{f : V \to V \mid f \mbox{ is a mapping}} \]
-and define a homomorphism $\mu : X^* \to H$ as follows:
+\[ H := Map(V, V) := \setof{f : V \to V \mid f \text{ is a mapping}} \]
 
-Let $\mu$ be the homomorphic continuation of mapping $\mu'$ where
+We define a homomorphism $\mu : X^* \to H$ as follows:
+
+Let $\mu$ be the homomorphic continuation of the mapping $\mu'$ defined by
 \begin{eqnarray*}
-& \mu'(x)(P) = R & \\
-& \Leftrightarrow & \\
-& \mbox{ there exists an edge }e \in E\mbox{ with }Q(e) = P, Z(e) = R\mbox{ and
-}\alpha(e) = x \in X &
+& \mu'(x)(q) = r \iff & \\
+& \text{ there exists an edge }e \in E\text{ with }Q(e) = q, Z(e) = r\text{ and
+}\alpha(e) = x \in X
 \end{eqnarray*}
 
-We define further \[ T := \setof{f \in H \mid f(S) \in F} \]
+We define 
+\[ T := \setof{f \in H \mid f(S) \in F} \] 
+%TODO: is this correct?
 
-Then it holds $\lang{A} = \mu^{-1}(T)$ (exercise).
+Then it holds $\lang{A} = \inv\mu(T)$ (exercise).
 \end{proof}
 
 \bigskip
@@ -45,43 +48,47 @@ Then it holds $\lang{A} = \mu^{-1}(T)$ (exercise).
 \end{lemma}
 
 \begin{proof}
-Sei $L \in \reclang(X^*)$, thus let $H$ be a finite monoid and $\mu : X^* \to
-H$ be a monoid homomorphism and $L = \mu^{-1}(T), T \subset H$.
+Sei $L \in \reclang(X^*)$, let $H$ be a finite monoid and $\mu : X^* \to
+H$ a monoid homomorphism and $L = \inv\mu(T),\ T \subset H$.
 
-We construct a graph $G = (V, E)$:
+We construct a graph $G = (V, E)$ with
+\begin{itemize}
+  \item vertex set $V := H$
+  \item edge set $E := \setof{(h, a) \mid h \in H,\ a \in X}$ with $Q((h,a)) =
+  h,\ Z((h,a)) = h \cdot \mu(a)$
+\end{itemize}
 
-Vertex set: $V := H$.
-
-Edges: $E := \setof{(h, a) \mid h \in H, a \in X}$ with $Q((h,a)) = h,
-Z((h,a)) = h \cdot \mu(a)$.
-
-\missingfigure
-
-Let $\fa{A} = (G, X, S, F, \alpha)$ with $S = \setof{1_H},\ F = T,\ \alpha((h,
-a)) = a$.
+Let
+\[ \fa{A} = (G, X, S, F, \alpha) \]
+with start states $S = \setof{1_H}$, final states $F = T$ and labelling 
+$\alpha((h, a)) = a$.
 
 We show: $L = \lang{A}$.
 
-''$\subset$'': Let $w \in L$, so $w \in X^*$ with $\mu(w) \in T$.
+''$\subset$'': Let $w \in L$, i.e.\ $w \in X^*$ with $\mu(w) \in T$.
 
 If $w = x_1 \cdots w_n$ with $x_i \in X$, then $\mu(x_1) \cdots \mu(x_n) = t
 \in T$.
 
-We consider \[ v = (1_H, (1_H, x_1), (\mu(x_1), x_2), (\mu(x_1 \cdot x_2),
+We consider the path
+\[ \pi = (1_H, (1_H, x_1), (\mu(x_1), x_2), (\mu(x_1 \cdot x_2),
 x_3), \ldots, (\mu(x_1 \cdots x_{n-1}), x_n), \mu(w)) \]
 
-$v \in \pathcat{G}$ with $\alpha(v) = x_1 \cdots x_n = w$. It even holds $v \in
-\pathcat{G(S, F)}$ because $\mu(w) \in T \Rightarrow w \in \lang{A}$.
+$\pi \in \pathcat{G}$ with label $\alpha(\pi) = x_1 \cdots x_n = w$. 
 
-''$\supset$'': Let $w \in \lang{A}$, then there exists a path $v \in
-\pathcat{G}(\setof{1_h}, T)$ with $\alpha(v) = w$. For $w = x_1 \cdots x_n$
-then obviously holds $\mu(x_1 \cdots x_n) \in T$ thus $w \in \mu^{-1}(T) = L$ from
-which the claim follows.
+It even holds $\pi \in \pathcat{G}(S, F)$ because $\mu(w) \in T$. From this
+follows $w \in L_{\fa{A}}$.
+
+''$\supset$'': Let $w \in L_{\fa{A}}$, then there exists a path $\pi \in
+\pathcat{G}(\setof{1_H}, T)$ with label $\alpha(\pi) = w$. 
+
+For $w = x_1 \cdots x_n$ then obviously holds $\mu(x_1 \cdots x_n) \in T$, thus
+$w \in \inv\mu(T) = L$ from which the claim follows.
 \end{proof}
 
 From both lemmata immediately follows
 
-\begin{theorem}[Regular sets of free monoid are exactly the recognizable sets]
+\begin{theorem}[Regular sets and recognizable sets coincide over free monoids]
 \[ \reglang(X^*) = \reclang(X^*) \]
 \end{theorem}
 
@@ -89,22 +96,25 @@ In the first section of this chapter we showed closure properties for regular
 sets. We show now closure under inverse homomorphism which is rather easy using
 our last theorem.
 
-\begin{theorem}[Recognizable sets are closed under inverse homomorphism]
-Let $\phi : X^* \to Y^*$ a monoid homomorphism, $L \in \reclang(Y^*) \Rightarrow
-\phi^{-1}(L) \in \reclang(X^*)$.
+\begin{theorem}[Closure under inverse homomorphism]
+Let $\phi : X^* \to Y^*$ be a monoid homomorphism.
+\[ L \in \reclang(Y^*) \Rightarrow \inv\phi(L) \in \reclang(X^*) \]
 \end{theorem}
 
 \begin{proof}
-Let $\phi : X^* \to Y^*$ and $L$ should be defined by monoid homomorphism $\mu'
-: Y^* \to H$ as $L = \mu'^{-1}(T)$ for a subset $T \subset H$.
+Let $L \in \reclang{X^*}$, i.e.$L$ is defined by a monoid homomorphism
+$\mu' : Y^* \to H$ as $L = \inv\mu'(T)$ for some subset $T \subset H$.
 
-We set $\mu = \phi \circ \mu'$ and have $\mu : X^* \to H$ is a monoid
-homomorphism and $\phi^{-1}(L) = \mu^{-1}(T)$ from which follows $\phi^{-1}(L)
+We set $\mu := \phi \circ \mu'$. Then $\mu : X^* \to H$ is also a monoid
+homomorphism and $\inv\phi(L) = \inv\mu(T)$ from which follows $\inv\phi(L)
 \in \reclang(X^*)$.
 \end{proof}
 
-Exercise: For the integer numbers $\mathbb{Z}$ the set of recognizable sets
+\bigskip
+\begin{exercise}
+For the integer numbers $\mathbb{Z}$, the set of recognizable sets
 $\reclang(\mathbb{Z})$ shall be defined in analogy to $\reclang(X^*)$.
 
-Characterize $\reclang(\mathbb{Z})$! Are there nonempty, infinite sets in
+Characterize $\reclang(\mathbb{Z})$! Are there non-empty, infinite sets in
 $\reclang(\mathbb{Z})$?
+\end{exercise}

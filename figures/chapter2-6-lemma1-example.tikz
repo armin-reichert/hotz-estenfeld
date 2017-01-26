@@ -1,0 +1,37 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (-2, 4.5) {1};
+		\node [style=state] (1) at (0, 4.5) {3};
+		\node [style=state] (2) at (-2, 3) {2};
+		\node [style=state] (3) at (0, 3) {4};
+		\node [style=state] (4) at (-5, 0.75) {1};
+		\node [style=state] (5) at (-5, -0.75) {2};
+		\node [style=state] (6) at (2.5, -0) {1};
+		\node [style=state] (7) at (4.5, 1) {2};
+		\node [style=state] (8) at (4.5, -1) {3};
+		\node [style=none] (9) at (-3, 3) {};
+		\node [style=none] (10) at (-4, 2) {};
+		\node [style=none] (11) at (1.75, 3) {};
+		\node [style=none] (12) at (2.75, 2) {};
+		\node [style=none] (13) at (-2, 5.5) {$\fa{C}$};
+		\node [style=none] (14) at (-6.5, 1) {$\fa{A}$};
+		\node [style=none] (15) at (2, 1) {$\fa{B}$};
+		\node [style=none] (16) at (-4.25, 3) {$[1,3]$};
+		\node [style=none] (17) at (-4.75, 2.5) {$[2,4]$};
+		\node [style=none] (18) at (1.75, 2.25) {$[1,2]$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to node[auto]{a} (1);
+		\draw [style=transition] (2) to node[auto]{b} (3);
+		\draw [style=transition, in=135, out=45, loop] (1) to node[auto]{a} ();
+		\draw [style=transition, in=135, out=45, loop] (3) to node[auto]{b} ();
+		\draw [style=transition, in=135, out=45, loop] (4) to node[auto]{a} ();
+		\draw [style=transition, in=135, out=45, loop] (5) to node[auto]{b} ();
+		\draw [style=transition] (6) to node[auto]{a} (7);
+		\draw [style=transition] (6) to node[auto]{b} (8);
+		\draw [style=transition, in=135, out=45, loop] (7) to node[auto]{a} ();
+		\draw [style=transition, in=135, out=45, loop] (8) to node[auto]{b} ();
+		\draw [style=transition] (9.center) to node[auto]{$\beta_a$} (10.center);
+		\draw [style=transition] (11.center) to node[auto]{$\beta_b$} (12.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

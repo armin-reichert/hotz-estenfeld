@@ -1,76 +1,79 @@
 \section{Homomorphy and equivalence of finite automata}
 
-We consider again the finite automaton from chapter 2.1 and investigate the
+We consider again the finite automaton from chapter II.1 and turn to the
 question of structural relationship between finite automata.
 
 We tackle the question how finite automata are related which accept the same
 language. We will formalize this by the existence of certain functors between
 finite automata.
 
-For making statements about decidability wrt.\ accepted languages it is an
-advantage to be able to determine a ''simplest'''' finite acceptor. We will
+To make statements about decidability wrt.\ the accepted languages
+it is an advantage to be able to give a ''simplest'' finite acceptor. We will
 prove the existence of such a ''simplest'' automaton.
 
-First, we consider some simple decidability questions answered by the following
-theorems:
+First, we consider some simple decidability questions which get answered by the
+following theorems:
 
 \begin{theorem}
-Let $\fa{A}$ be a finite automaton. Then the questions $\lang{A} = \emptyset?$
-and $\lang{A} = X^*?$ are decidable.
+Let $\fa{A}$ be a finite automaton. Then the questions $L_{\fa{A}} = \emptyset?$
+and $L_{\fa{A}} = X^*?$ are decidable.
 \end{theorem}
 
-\begin{proof}
-''$\lang{A} = \emptyset$?'':
+\begin{proof}\leavevmode
+\begin{enumerate}
+  \item ''$L_{\fa{A}} = \emptyset$?'':
 
-Because of $\lang{A} = \emptyset \Leftrightarrow \pathcat{G}(S, F) =
-\emptyset$ this is a decidable problem (reachability in a finite graph). The
-formal proof is up to the reader.
+	Because of $L_{\fa{A}} = \emptyset \Leftrightarrow \pathcat{G}(S, F) =
+	\emptyset$ this is a decidable problem (reachability in a finite graph). The
+	formal proof is up to the reader.
 
-''$\lang{A} = X^*$?'':
+	\item ''$L_{\fa{A}} = X^*$?'':
 
-We gave in chapter 2.1 an effective procedure for constructing a deterministic,
-finite automaton $\fa{A}'$ from an automaton $\fa{A}$. From this deterministic
-automaton, one can construct an automaton $\fa{B}$ accepting the complement of
-$\lang{A}$. From $\lang{B} = \emptyset \Leftrightarrow \lang{A} = X^*$,
-and 1) follows the claim.
+	We gave in chapter II.1 an effective procedure for constructing a
+	deterministic, finite automaton $\fa{A}'$ from an automaton $\fa{A}$.	 From
+	this deterministic automaton one can construct an automaton $\fa{B}$  accepting
+	the complement of $L_{\fa{A}}$. From $L_{\fa{B}} = \emptyset \Leftrightarrow 
+	L_{\fa{A}} = X^*$ and (1) follows the claim.
+\end{enumerate}
 \end{proof}
 
 \begin{definition}
 $\fa{A}$ is called {\bf weakly-equivalent} to an automaton $\fa{B}$ if the
-accepted languages are equal: \[ \lang{A} = \lang{B} \]
+accepted languages are equal: \[ L_{\fa{A}} = L_{\fa{B}} \]
 \end{definition}
 
-\begin{theorem}[decidability of weak equivalence]
-For finite automata $\fa{A}$ and $\fa{B}$ it is decidable if $\lang{A} =
-\lang{B}$.
+\bigskip
+\begin{theorem}[weak equivalence is decidable]
+For finite automata $\fa{A}$ and $\fa{B}$ it is decidable if $L_{\fa{A}} =
+L_{\fa{B}}$.
 \end{theorem}
 
 \begin{proof}
-Without loss of generality we may assume that $\fa{A}$ and $\fa{B}$ are complete
-and deterministic.
+Without loss of generality we may assume that $\fa{A}$ and $\fa{B}$ being
+complete and deterministic.
 
 From $\fa{A}$ and $\fa{B}$ using our constructions we can directly give automata
-for 
-\[\bar{\lang{A}}, \bar{\lang{B}}, \bar{\lang{A}} \cap
-\lang{B}, \lang{A} \cap \bar{\lang{A}}\]
+for
+\[\bar{L}_{\fa{A}},\ \bar{L}_{\fa{B}},\ \bar{L}_{\fa{A}} \cap L_{\fa{B}},\ 
+L_{\fa{A}} \cap \bar{L}_{\fa{A}} \]
 and also for 
-\[ \lang{C} := (\bar{\lang{A}} \cap \lang{B}) \cup (\lang{A} \cap
-\bar{\lang{A}}) \]
-
-Because $\lang{A} = \lang{B} \Leftrightarrow \lang{C} = \emptyset$ which
-is decidable (theorem 1) we get the proof of theorem 2.
+\[ L_{\fa{C}} := (\bar{L}_{\fa{A}} \cap L_{\fa{B}}) \cup (L_{\fa{A}} \cap
+\bar{L}_{\fa{A}}) \]
+Because $L_{\fa{A}} = L_{\fa{B}} \Leftrightarrow L_{\fa{C}} = \emptyset$, which
+is decidable by theorem 1, this proves theorem 2.
 \end{proof}
- 
+
+\bigskip
 We consider now the homomorphy between finite automata. Structure-preserving
 mappings between finite automata are called {\bf automata homomorphisms}.
 
 \begin{definition}
 Let $\fa{A}, \fa{A'}$ be finite automata. A functor $\beta = (\beta', \beta'')$
-is called an {\bf automata homomorphism}, if
-\[ \beta' = (\pathcat{G}, \pathcat{G'}, \beta'_1, \beta'_2) \]
-is a functor,
-\[ \beta'': X^* \to X'^*	\]
-is a monoid homomorphism, and the axioms (A1) and (A2) hold:
+is called an {\bf automata homomorphism} $\iff$
+\[ \beta' = (\pathcat{G}, \pathcat{G'}, \beta'_1, \beta'_2)\text{ is a functor,}
+\]
+\[ \beta'': X^* \to X'^*	\text{ is a monoid homomorphism} \]
+and the following axioms hold:
 \begin{itemize}
   \item[(A1)] The following diagram commutes:
   
@@ -83,86 +86,92 @@ is a monoid homomorphism, and the axioms (A1) and (A2) hold:
   \item[(A2)] $\beta'_1(S) = S'$ and $\beta'_1(F) = F'$. 
 \end{itemize}
 
-$\beta$ is called {\bf length-preserving} $\Leftrightarrow \beta'_2(e) \in
-E(G')$ for each edge $e \in E(G)$.
+Let $G = (V,E)$ and $G' = (V', E')$.
 
-$\beta$ is called {\bf non-expanding} $\Leftrightarrow \beta_2'(e) \in E(G')
-\cup \setof{1_e \mid e \in E(G')}$
+$\beta$ is called {\bf length-preserving} $\iff \beta'_2(e) \in E'$ for each
+edge $e \in E$.
+
+$\beta$ is called {\bf non-expanding} $\iff \beta_2'(e) \in E' \cup \setof{1_e
+\mid e \in E'}$.
 \end{definition}
 
 In the following we will always identify $\beta'$ with $\beta$.
 
-It holds:
-
 \begin{theorem}
-Given an automata homomorphism $\beta: \fa{A} \to \fa{A'}$. If
-\[\beta_2(\pathcat{G}(S,F)) = \pathcat{G'}(S',F')\]
-then $\beta''(\lang{A}) = \lang{A'}$.
+For an automata homomorphism $\beta: \fa{A} \to \fa{A'}$ and
+\[\beta_2(\pathcat{G}(S, F)) = \pathcat{G'}(S', F') \]
+it holds
+\[ \beta''(L_{\fa{A}}) = L_{\fa{A}'} \]
 \end{theorem}
 
-\begin{proof} 
+\begin{proof}\leavevmode
+
 ''$\subset$'':
 
-Let $u \in \lang{A}$, then there exists a path $\pi \in \pathcat{G}(S, F)$
-labelled with $u$, i.e. $\alpha(\pi) = u$. Because $\beta_2(\pi) \in
-\pathcat{G'}(S',F')$ by assumption, it follows $\alpha'(\beta_2(\pi)) \in
-\lang{A'}$.
+Let $u \in L_{\fa{A}}$, then there exists a path $\pi \in \pathcat{G}(S, F)$
+labelled with $u$, i.e.\ $\alpha(\pi) = u$. Because $\beta_2(\pi) \in
+\pathcat{G'}(S', F')$ by assumption, it follows $\alpha'(\beta_2(\pi)) \in
+L_{\fa{A}'}$.
 
 Because of the commutativity of the diagram it follows $ \alpha'(\beta_2(\pi))
 = \beta''(\alpha(\pi))$.
-\[ \Rightarrow \beta''(\lang{A}) \subset \lang{A'} \]
+\[ \Rightarrow \beta''(L_{\fa{A}}) \subset L_{\fa{A}'} \]
 
 ''$\supset$'':
 
-Let $u' \in \lang{A'}$. Then there exists a path $\pi' \in \pathcat{G'}(S', F')$
-that is labeled with $u'$: $\alpha'(\pi') = u'$.
+Let $u' \in L_{\fa{A}'}$. Then there exists a path $\pi' \in \pathcat{G'}(S', F')$
+labeled with $u'$, i.e\ $\alpha'(\pi') = u'$.
 
 Because $\beta_2$ is surjective on $\pathcat{G'}(S', F')$ it follows: there
-exists a path $\pi$ with $\beta_2(\pi) = \pi'$ and because $\beta$ is a functor
-it follows $\alpha(\pi) \in \lang{A}$.
+exists a path $\pi$ with $\beta_2(\pi) = \pi'$, and because $\beta$ is a functor
+it follows $\alpha(\pi) \in L_{\fa{A}}$.
 
 By definition, $\beta''(\alpha(\pi)) = \alpha'(\beta_2(\pi)) = \alpha'(\pi') =
-u'$, therefore $u' \in \beta''(\lang{A})$.
-\[ \Rightarrow  \beta''(\lang{A}) \supset \lang{A'} \]
+u'$, therefore $u' \in \beta''(L_{\fa{A}})$.
+\[ \Rightarrow  \beta''(L_{\fa{A}}) \supset L_{\fa{A}'} \]
 
-Together this proves \[ \lang{A'} = \beta''(\lang{A}) \]
+Together this proves \[ L_{\fa{A}'} = \beta''(L_{\fa{A}}) \]
 \end{proof}
 
-\begin{definition}[Reduction, closed homomorphism]
+\medskip
+\begin{definition}
 Let $\fa{A}$ and $\fa{A'}$ be finite automata.
 
 A homomorphism $\beta : \fa{A \to \fa{A'}}$ is called a {\bf reduction} from
-$\fa{A}$ to $\fa{A'}$ if \[ \beta_2(\pathcat{G}(S, F)) = \pathcat{G'}(S', F') \]
-and $\beta'' = id_{X^*}$.
+$\fa{A}$ onto $\fa{A'}$ if 
+\[ \beta_2(\pathcat{G}(S, F)) = \pathcat{G'}(S', F') \text{ and }\beta'' =
+id_{X^*} \]
 
-$\beta$ is a {\bf length-preserving reduction}, if it is a reduction and the
-homomorphisms is length-preserving.
+$\beta$ is called
+\begin{itemize}
+  \item[] {\bf length-preserving reduction} $\iff$ it is a reduction and
+	the homomorphisms is length-preserving.
 
-$\beta$ is a {\bf non-expanding reduction}, if it is a
-reduction and the homomorphisms is non-expanding.
+	\item[] {\bf non-expanding reduction} $\iff$ it is a reduction and the
+	homomorphisms is non-expanding.
 
-$\beta$	 is called a {\bf closed homomorphism} or short: {\bf closed}, if it is
-a homomorphism and it holds \[ \beta_1^{-1}(S') = S \quad\wedge\quad
-\beta_1^{-1}(F') = F
-\]
+	\item[] {\bf closed homomorphism} or {\bf closed} $\iff$ it
+	is a homomorphism and it holds
+	\[ \inv{\beta_1}(S') = S \quad\text{and}\quad \inv{\beta_1}(F') = F \]
+\end{itemize}
 
-In analogy, one defines a {\bf closed reduction}.
+In the same way one defines a {\bf closed reduction}.
 \end{definition}
 
 We immediately get the following corollary to theorem 3:
 
 \begin{corollary}
-\[ \beta : \fa{A} \to \fa{A'} \mbox{ reduction } \Rightarrow \lang{A} =
-\lang{A'} \]
+\[ \beta : \fa{A} \to \fa{A'} \text{ reduction } \Rightarrow L_{\fa{A}} =
+L_{\fa{A}'} \]
 \end{corollary}
 
-Our goal will be to transfer equivalent automata into each other using chains of
-reductions.
+Our goal will be to transform equivalent automata into each other using chains
+of reductions.
 
 To reach this goal, we will need a number of lemmata.
 
 \begin{lemma}
-Let $\fa{A}, \fa{B}, \fa{C}$ be complete, deterministic finite automata and let
+Let $\fa{A}, \fa{B}, \fa{C}$ be complete, deterministic, finite automata and let
 $\beta_{\fa{A}} : \fa{C} \to \fa{A}$ and $\beta_{\fa{B}} : \fa{C} \to \fa{B}$ be
 closed reductions. Then there exists a finite automaton $\fa{D}$ and reductions
 $\gamma_{\fa{A}}$ and $\gamma_{\fa{B}}$ such that the following diagram
@@ -180,33 +189,31 @@ dashrightarrow, "\gamma_{\fa{B}}"]\\
 \end{lemma}
 
 \begin{proof}
-The idea of the proof is as follows: We create from $\fa{C}$ a
-new automaton $\fa{D}$ by putting those vertices and edges into classes which will
-be identified under the reductions $\beta_{\fa{A}}$ or $\beta_{\fa{B}}$. In that
-way we will get the reduction $\delta$. The difficulty that arises in
-identifying the edges is that the labelling of the edges has to be respected.
+The idea of the proof is as follows: We create from $\fa{C}$ a new automaton
+$\fa{D}$ by putting those vertices and edges into classes which are identified
+under the reductions $\beta_{\fa{A}}$ or $\beta_{\fa{B}}$. In this way we get 
+the reduction $\delta$. The difficulty that arises in identifying the edges is 
+that the labelling of the edges has to be respected.
 
-To realize out idea we define equivalence relations on the edges and vertices of
+To realize our idea we define equivalence relations on the edges and vertices of
 the graph $G_{\fa{C}} = (V_{\fa{C}}, E_{\fa{C}})$ of $\fa{C}$:
 
 Let $v_1, v_2 \in V_{\fa{C}}$ be vertices (states). Define
 \begin{eqnarray*}
-v_1 \faequiv{A} v_2 & : \Longleftrightarrow & \beta_{\fa{A}}(v_1) =
-\beta_{\fa{A}}(v_2) \\
-v_1 \faequiv{B} v_2 & : \Longleftrightarrow & \beta_{\fa{B}}(v_1) =
-\beta_{\fa{B}}(v_2)
+v_1 \faequiv{A} v_2 & : \iff & \beta_{\fa{A}}(v_1) = \beta_{\fa{A}}(v_2) \\
+v_1 \faequiv{B} v_2 & : \iff & \beta_{\fa{B}}(v_1) = \beta_{\fa{B}}(v_2)
 \end{eqnarray*}
 
-In analogy we define such an equivalence relation for the edges of the graph
-$G_{\fa{C}}$.
+In the same way we define such an equivalence relation for the edges of the
+graph $G_{\fa{C}}$.
 
-We define now an equivalence relation on the vertices (states) of the automaton
+We define an equivalence relation on the vertices (states) of the automaton
 $\fa{C}$. For $v, v' \in V_{\fa{C}}$:
 \begin{eqnarray*}
-v \equiv v' & :\Leftrightarrow & \mbox{there is a chain of states } v = v_1,
-v_2, \ldots, v_k = v'\mbox{ with } \\
-& & v_i \faequiv{A} v_{i+1}\mbox{\quad or\quad }v_i \faequiv{B} v_{i+1},\quad i
-= 1, \ldots, k
+v \equiv v' & :\iff & \text{there is a chain of states } v = v_1, v_2, \ldots,
+v_k = v'\text{ with } \\
+& & v_i \faequiv{A} v_{i+1}\text{\quad or\quad }v_i \faequiv{B} v_{i+1},\quad i
+= 1, \ldots, k-1
 \end{eqnarray*} 
 
 Obviously this defines an equivalence relation on the vertex (state) set
@@ -228,35 +235,43 @@ Claim: With $Q([e]) := [Q(e)]$ and $Z([e]) := [Z(e)],\ e \in E_{\fa{C}}$ we get
 well-defined source and target mappings for the edges of the graph of
 the automaton $\fa{C}$.
 
-Proof. Let $e' \in [e]$. To prove that $Q(e') \in [Q(e)]$, we use induction over
-the length of the chain $e = e_1, \ldots, e_k = e'$ where $s_i \faequiv{A}
-s_{i+1}$ or $s_i \faequiv{B} s_{i+1}$ for all $i = 1,\ldots,k-1$. 
+\begin{proof}
+Let $e' \in [e]$. To prove that $Q(e') \in [Q(e)]$, we use induction over
+the length of the chain $e = e_1, \ldots, e_k = e'$ where
+\[ s_i \faequiv{A} s_{i+1}\text{ or }s_i \faequiv{B} s_{i+1},\ i =
+1, \ldots, k-1 \]
 
 It is sufficient to show that the claim is correct for each single step. Because
 $\beta_{\fa{A}}$ and $\beta_{\fa{B}}$ are functors, it holds
-\[ e_i \faequiv{A} e_{i+1} \Rightarrow Q(e_i) \faequiv{A} Q(e_{i+1}) \]
+\[ e_i \faequiv{A} e_{i+1} \Rightarrow Q(e_i) \faequiv{A} Q(e_{i+1}) \text{
+and }Z(e_i) \faequiv{A} Z(e_{i+1}) \]
 and
-\[ e_i \faequiv{B} e_{i+1} \Rightarrow Q(e_i) \faequiv{B} Q(e_{i+1}) \]
+\[ e_i \faequiv{B} e_{i+1} \Rightarrow Q(e_i) \faequiv{B} Q(e_{i+1}) \text{ and
+}Z(e_i) \faequiv{B} Z(e_{i+1}) \]
 
 From this it follows that $Q$ and $Z$ are well-defined on the equivalence
 classes.
+\end{proof}
 
+\medskip
 Let $\bar{G} = (\bar{V}, \bar{E})$ be the graph defined by the sets of vertex
 and edge equivalence classes. Define the labelling $\alpha_{\fa{D}} : \bar{E}
 \to X^*$ for the edges of this graph by
 \[ \alpha_{\fa{D}}([e]) := \alpha_{\fa{C}}(e) \]
 
-This mapping is well-defined. 
+Claim: This mapping is well-defined. 
 
-Proof: Because $\beta_{\fa{A}}$ is a reduction, it holds:
+\begin{proof}
+Because $\beta_{\fa{A}}$ is a reduction, it holds:
 \[ \alpha_{\fa{A}}(\beta_{\fa{A}}(e) = \beta''(\alpha_{\fa{C}}(e)) =
 \alpha_{\fa{C}}(e) \]
 
 This means that for each $e' \in [e]_{\fa{A}}$ we have
-$\alpha_{\fa{A}}(\beta_{\fa{A}}(e')) = \alpha_{\fa{C}}(e)$. This our claim is
+$\alpha_{\fa{A}}(\beta_{\fa{A}}(e')) = \alpha_{\fa{C}}(e)$. Thus our claim is
 correct if $e \faequiv{A} e'$. The same holds for $e \faequiv{B} e'$. Together
 we get that this holds for all $e \equiv e'$ so $\alpha_{\fa{D}}$ is
 well-defined.
+\end{proof}
 
 To complete the definition of the automaton $\fa{D}$ we have to define start and
 final state sets.
@@ -265,35 +280,42 @@ with final state set $[F_{\fa{C}}] := \setof{[f] \mid f \in F_{\fa{C}}}$.
 
 Claim: The canonical mapping $e \to [e],\ v \to [v]$ is a reduction.
 
-Proof: Exercise (Hint: use that automaton is complete and deterministic)
+\begin{proof}
+Exercise (hint: use the fact that the automaton is complete and deterministic.)
+\end{proof}
 
 Finally we define the reductions $\gamma_{\fa{A}}$ and $\gamma_{\fa{B}}$ by
 \begin{eqnarray*}
-\gamma_{\fa{A}}(v) & := & [\beta_{\fa{A}}^-1](v),\quad v \in V_{\fa{A}} \\
-\gamma_{\fa{B}}(v) & := & [\beta_{\fa{B}}^-1](v),\quad v \in V_{\fa{B}} \\
-\gamma_{\fa{A}}(e) & := & [\beta_{\fa{A}}^-1](e),\quad e \in E_{\fa{A}} \\
-\gamma_{\fa{B}}(e) & := & [\beta_{\fa{B}}^-1](e),\quad e \in E_{\fa{B}} \\
+\gamma_{\fa{A}}(v) & := & [\inv{\beta_{\fa{A}}}(v)], \quad v \in V_{\fa{A}} \\
+\gamma_{\fa{B}}(v) & := & [\inv{\beta_{\fa{B}}}(v)], \quad v \in V_{\fa{B}} \\
+\gamma_{\fa{A}}(e) & := & [\inv{\beta_{\fa{A}}}(e)], \quad e \in E_{\fa{A}} \\
+\gamma_{\fa{B}}(e) & := & [\inv{\beta_{\fa{B}}}(e)], \quad e \in E_{\fa{B}}
 \end{eqnarray*}
 \end{proof}
 
 Remark: The requirement of our lemma, that the automata have to be complete, is
 essential, as the following example shows:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-6-lemma1-example.tikz}
+\end{center}
 
-It holds: $\lang{A} = \lang{B} = \lang{C} = \setof{a^n \mid n \in \mathbb{N}}
+It holds: $L_{\fa{A}} = L_{\fa{B}} = L_{\fa{C}} = \setof{a^n \mid n \in \mathbb{N}}
 \cup \setof{b^n \mid n \in \mathbb{N}}$.
 
 From our construction it follows $4 \equiv 2 \equiv 1 \equiv 3$ and the
 automaton $\fa{D}$ has the form
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-6-lemma1-example-result.tikz}
+\end{center}
 
-But $\lang{D} = \setof{a, b}^* \neq \lang{C}$. It follows:
+But $L_{\fa{D}} = \setof{a, b}^* \neq L_{\fa{C}}$. It follows:
 
 There exists no reduction from $\fa{C}$ to $\fa{D}$ because \fa{A}, \fa{B} and
 \fa{C} are not complete {\it and} deterministic.
 
+\bigskip
 The motivation for lemma 1 can be easily seen in the following diagram:
 
 Let
@@ -329,6 +351,7 @@ such that the diagram can be ''shortened'' to
 \end{tikzcd}
 \end{center}
 
+\bigskip
 \begin{lemma}
 Let $\gamma_{\fa{A}} : \fa{A} \to \fa{D}$ and $\gamma_{\fa{B}} : \fa{B} \to
 \fa{D}$ be length-preserving reductions.
@@ -471,9 +494,9 @@ q_j) \] if $p_i \edge{e'} q_j \in E_{\fa{A_2}}$ and $\alpha(e') = x$ for all $i 
 \ldots,r,\ j = 1, \ldots, s$ in the construction of the deterministic automaton.
 
 We get homomorphisms
-\[ \tilde{\phi} \mbox{ with } \tilde{\phi}(e) := (p_i \edge{x} q_j) \]
+\[ \tilde{\phi} \text{ with } \tilde{\phi}(e) := (p_i \edge{x} q_j) \]
 and 
-\[ \hat{\phi} \mbox{ with } \hat{\phi}(e) := (\setof{p_1, \ldots, p_r} \edge{x}
+\[ \hat{\phi} \text{ with } \hat{\phi}(e) := (\setof{p_1, \ldots, p_r} \edge{x}
 \setof{q_1, \ldots, q_s}) \]
 for all edges $e$ as described above.
 
@@ -574,7 +597,7 @@ two equivalent automata.
 
 We want to achieve the following:
 
-$\lang{A} = \lang{B}$, then there should exist a diagram
+$L_{\fa{A}} = L_{\fa{B}}$, then there should exist a diagram
 
 \missingfigure
 
@@ -635,7 +658,7 @@ We consider now a restriction of the syntactic congruence defined in chapter
 
 \begin{definition}
 $u, v \in X^*$ are called {\bf congruent modulo $L$}, written as 
-\[ u \equiv_L v :\iff \mbox{ for all } w \in X^* \mbox{ holds}\quad u \cdot w
+\[ u \equiv_L v :\iff \text{ for all } w \in X^* \text{ holds}\quad u \cdot w
 \in L \iff v \cdot w \in L \]
 \end{definition}
 
@@ -645,7 +668,7 @@ Notation: $[w]_L := \setof{v \mid w \equiv_L v}$
 With this notatation it holds
 
 \begin{lemma}
-\[ \card{X^*/L} \mbox{ is finite} \iff L \in \reglang(X^*) \]
+\[ \card{X^*/L} \text{ is finite} \iff L \in \reglang(X^*) \]
 \end{lemma}
 
 \begin{proof}
@@ -661,7 +684,7 @@ Set $S := \setof{[e]},\ F := \setof{[w] \mid w\in L}$ and define the labelling
 $\alpha$ by $\alpha(([w], [wx])) := x$.
 
 We obtain a finite automaton \[ \fa{A} = \fa{A}(L) = (G', X, S, F, \alpha) \]
-with the property $\lang{A} = L$ (exercise).
+with the property $L_{\fa{A}} = L$ (exercise).
 
 ''$\Leftarrow$'':
 
@@ -817,7 +840,7 @@ $\delta$ is a homomorphism from $\fa{C}$ to $\fa{A} \times \fa{B}$.
 
 Now $\gamma_{\fa{A}} = \delta \circ \pi_{\fa{A}}$ and $\gamma_{\fa{B}} = \delta
 \circ \pi_{\fa{B}}$ are reductions
-\[ \Rightarrow \pi_{\fa{A}} \mbox{ and } \pi_{\fa{B}} \mbox{ are reductions.} \]
+\[ \Rightarrow \pi_{\fa{A}} \text{ and } \pi_{\fa{B}} \text{ are reductions.} \]
 \end{proof}
 
 With lemma 6 we get
@@ -848,7 +871,7 @@ automata \fa{A} and \fa{B}.
   \begin{tikzcd} \fa{A}_2 & \fa{A}_2 \times \fa{B}_2
 		\arrow[l, "\pi_{\fa{A}}"'] \arrow[r, "\pi_{\fa{B}}"] & \fa{B}_2 
 	\end{tikzcd}
-	are reductions. If this is the case, $\lang{A} = \lang{B}$.
+	are reductions. If this is the case, $L_{\fa{A}} = L_{\fa{B}}$.
 \end{enumerate}
 
 We want to specify the {\bf complexity} of this decision algorithm:

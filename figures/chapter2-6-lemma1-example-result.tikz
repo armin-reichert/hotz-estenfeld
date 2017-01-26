@@ -1,0 +1,9 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={oval_state}] (0) at (0, -0) {$[1,2,3,4]$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition, in=-135, out=135, loop] (0) to node[auto]{a} ();
+		\draw [style=transition, in=45, out=-45, loop] (0) to node[auto]{b} ();
+	\end{pgfonlayer}
+\end{tikzpicture}

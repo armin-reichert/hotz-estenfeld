@@ -1,12 +1,15 @@
 \section{The rational transducer}
 
-In this section we extend the finite automaton with an output which leads to:
+In this section, we extend the finite automaton by an output which leads to:
 
 \begin{definition}
-\[ \fa{T} = (G, X, S, F, \alpha, \beta) \] is called a {\bf finite transducer}
-with input alphabet $X$ and output alphabet $Y$ if $(G, X, S, F, \alpha)$ is a
-finite automaton, $G = (V, E)$, and $\beta = (\pathcat{G}, Y^*, \beta_1,
-\beta_2)$ is a functor.
+\[ \fa{T} = (G, X, S, F, \alpha, \beta) \]
+is called a {\bf finite transducer}
+with input alphabet $X$ and output alphabet $Y \iff$
+\[ (G, X, S, F, \alpha) \]
+is a finite automaton with graph $G = (V, E)$ and
+\[ \beta = (\pathcat{G}, Y^*, \beta_1, \beta_2) \]
+is a functor.
 \end{definition}
 
 $\fa{T}$ is called {\bf length-preserving} if $|\alpha(e)| = |\beta(e)|$ for all
@@ -14,9 +17,9 @@ edges $e \in E$.
 
 $\fa{T}$ computes the {\bf finite transduction}
 \begin{eqnarray*}
-\tau(\fa{T}) & = & \{ (u, v) \in X^* \times Y^* \mid \mbox{there
-exists a path } w \in \pathcat{G}(S, F) \\
-& &  \mbox{ with } \alpha(w) = u \mbox{ and } \beta(w) = v \}
+\tau(\fa{T}) & = & \{ (u, v) \in X^* \times Y^* \mid \text{there exists a path }
+\pi \in \pathcat{G}(S, F) \\
+& & \text{with }\alpha(\pi) = u\text{ and }\beta(\pi) = v \}
 \end{eqnarray*}
 
 Remark: For each length-preserving transducer $\fa{T}$ there exists a
@@ -28,6 +31,7 @@ A finite transduction can equivalently be written as
 
 We also speak of {\bf rational transduction} instead of finite transduction.
 
+\bigskip
 We give an example for a rational transducer:
 
 Let $\fa{T} = (G, \setof{x}, \setof{a, b}, \setof{1}, \setof{3, 5}, \alpha,
@@ -40,30 +44,31 @@ Let $\fa{T} = (G, \setof{x}, \setof{a, b}, \setof{1}, \setof{3, 5}, \alpha,
 The edges are labeled with the input/output symbols.
 
 $\fa{T}$ realizes the transduction $\tau(\fa{T})$ defined by
-\[ \tau(\fa{T})(x^n) = \left\{ 
-\begin{array}{l@{\quad}l}
-a^n & \mbox{if } n \equiv 1 \bmod 2 \\
-b^n & \mbox{if } n \equiv 0 \bmod 2
-\end{array}
-\right. \]
+\[ \tau(\fa{T})(x^n) = \begin{cases}
+a^n & \text{if } n \equiv 1 \bmod 2 \\
+b^n & \text{if } n \equiv 0 \bmod 2
+\end{cases} \]
 
+\bigskip
 \begin{lemma}[closure under inversion]
-Let $\tau(\fa{T})$ be a rational transduction. Then $(\tau(\fa{T}))^{-1}$ is
-also a rational transduction.
+Let $\tau(\fa{T})$ be a rational transduction. Then $\inv{(\tau(\fa{T}))}$ is a 
+rational transduction.
 \end{lemma}
 
 \begin{proof}
-Let \[ \fa{T} = (G, X, Y, S, F, \alpha, \beta) \] be a finite tranductor.
-Then \[ \fa{T'} = (G, Y, X, S, F, \beta, \alpha) \] is a finite transducer and
-\[ \tau(\fa{T'}) = (\tau(\fa{T}))^{-1} \]
+Let $\fa{T} = (G, X, Y, S, F, \alpha, \beta)$ be a finite tranductor.
+Then
+\[ \fa{T'} = (G, Y, X, S, F, \beta, \alpha) \]
+is a finite transducer and
+\[ \tau(\fa{T'}) = \inv{(\tau(\fa{T}))} \]
 \end{proof}
 
-We now define the image of a language under rational transduction:
+We define now the image of a language under a rational transduction:
 
 \begin{definition}
 Let $L \subset X^*$, then
 \begin{eqnarray*}
-\tau(\fa{T})(L) & := & \setof{v \in Y^* \mid \mbox{there exists } u \in L \mbox{
+\tau(\fa{T})(L) & := & \setof{v \in Y^* \mid \text{there exists } u \in L \text{
 with } (u, v) \in \tau(\fa{T})} \\
 & := & \bigcup_{u \in L} \tau(\fa{T})(u)
 \end{eqnarray*}
@@ -72,7 +77,7 @@ with } (u, v) \in \tau(\fa{T})} \\
 The following theorem holds:
 
 \begin{theorem}[Regular languages are closed under rational transductions]
-Let $L \in \reglang(X^*)$ be a regular language and $\fa{T}$ be a finite transducer,
+Let $L \in \reglang(X^*)$ be a regular language and $\fa{T}$ a finite transducer,
 then the image of $L$ under $\tau$ is a regular language over $Y^*$:
 \[ \tau(\fa{T})(L) \in \reglang(Y^*) \]
 \end{theorem}
@@ -82,16 +87,16 @@ By definition, the image of $L$ can be presented as
 \[ \tau(\fa{T})(L) = \beta\big( \alpha^{-1}(L) \cap \pathcat{G}(S, F) \big) \]
 
 $\alpha$ may be continued to a monoid homomorphism from $E^*$, the free monoid
-over the edge set of graph $G$, into $X^*$.
+over the edge set of $G$, to $X^*$.
 
 We already know:
 \begin{eqnarray*}
-\alpha^{-1}(L) \in \reglang(E^*)    & \mbox{Theorem 2, chapter 2.3} \\
-\pathcat{G}(S, F) \in \reglang(E^*) & \mbox{Lemma 4, chapter 2.1} \\
-\Rightarrow \alpha^{-1}(L) \cap \pathcat{G}(S, F) \in
-\reglang(E^*) & \mbox{Theorem 1, chapter 2.1} \\
-\Rightarrow \beta(\alpha^{-1}(L) \cap \pathcat{G}(S, F)) \in
-\reglang(Y^*) & \mbox{Theorem 7, chapter 2.1}
+\inv\alpha(L) \in \reglang(E^*)    & \text{by theorem 2, chapter II.3} \\
+\pathcat{G}(S, F) \in \reglang(E^*) & \text{by lemma 4, chapter II.1} \\
+\Rightarrow \inv\alpha(L) \cap \pathcat{G}(S, F) \in \reglang(E^*) & \text{by
+theorem 1, chapter II.1} \\
+\Rightarrow \beta(\inv\alpha(L) \cap \pathcat{G}(S, F)) \in \reglang(Y^*) &
+\text{by theorem 7, chapter II.1}
 \end{eqnarray*}
 \end{proof}
 
@@ -99,23 +104,28 @@ The next theorem gives an insight into the power of rational transductions.
 
 \begin{theorem}
 For each $L \in \reglang(Y^*)$ there exists a length-preserving transducer
-$\fa{T}_L$ with \[ \tau(\fa{T}_L)(\setof{x}^*) = L \]
+$\fa{T}_L$ with
+\[ \tau(\fa{T}_L)(\setof{x}^*) = L \]
 \end{theorem}
 
 \begin{proof}
-$L \in \reglang(Y^*) \Rightarrow$ there exists a finite automaton $\fa{B} =
-(G, Y, S, F, \beta),\ G= (V, E)$ with $L = \beta(\pathcat{G}(S, F))$. For $X =
-\setof{x}$ set $\alpha(e) = x$ for all edges $e \in E$.
+For $L \in \reglang(Y^*)$ there exists a finite automaton
+\[ \fa{B} = (G, Y, S, F, \beta),\ G= (V, E) \]
+with $L = \beta(\pathcat{G}(S, F))$. 
 
-Then $\alpha^{-1}(X^*) \cap \pathcat{G}(S, F) = \pathcat{G}(S, F)$, from which
-follows \[\beta(\alpha^{-1}(X^*) \cap \pathcat{G}(S, F)) = L\]
+For $X = \setof{x}$, set $\alpha(e) = x$ for all edges $e \in E$.
+
+Then $\inv\alpha(X^*) \cap \pathcat{G}(S, F) = \pathcat{G}(S, F)$, from
+which follows
+\[ \beta(\inv\alpha(X^*) \cap \pathcat{G}(S, F)) = L \]
 \end{proof}
 
 \bigskip
 \begin{theorem}
 If $\tau_1 : X^* \to Y^*$ and $\tau_2 : Y^* \to Z^*$ are finite,
-length-preserving transductions, then $\tau_1 \circ \tau_2 : X^* \to Z^*$ is a
-finite transduction.
+length-preserving transductions, then
+\[ \tau_1 \circ \tau_2 : X^* \to Z^* \]
+is a finite transduction.
 \end{theorem}
 
 \begin{proof}
@@ -134,8 +144,7 @@ We have the following situation:
 \[ \tau_1(u) = \beta^{(1)}\big( {\alpha^{(1)}}^{-1}(u) \cap R_1 \big) \]
 and
 \[ \tau_2(v) = \beta^{(2)}\big( {\alpha^{(2)}}^{-1}(v) \cap R_2 \big) \]
-
-with $u \in X^*, v \in Y^*$ and $R_1 \subset E_1^*, R_2 \subset E_2^*$ regular
+with $u \in X^*,\ v \in Y^*$ and $R_1 \subset E_1^*,\ R_2 \subset E_2^*$ regular
 languages and monoid homomorphisms
 \[ \alpha^{(1)} : E_1^* \to X^*,\quad \beta^{(1)} : E_1^* \to
 Y^*,\quad \alpha^{(2)} : E_2^* \to Y^*,\quad \beta^{(2)} : E_2^* \to Z^* \]
@@ -143,9 +152,8 @@ Y^*,\quad \alpha^{(2)} : E_2^* \to Y^*,\quad \beta^{(2)} : E_2^* \to Z^* \]
 Let
 \[ E_3 := \setof{(e_1, e_2) \mid \beta^{(1)}(e_1) = \alpha^{(2)}(e_2)} \]
 and 
-\[ R_3 := \chi^{-1}(R_1) \times \rho^{-1}(R_2) = \pathcat{}(S_1 \times S_2, F_1
-\times F_2) \]
-
+\[ R_3 := \chi^{-1}(R_1) \times \rho^{-1}(R_2) = \mathfrak{W}(S_1 \times S_2,
+F_1 \times F_2) \]
 with monoid homomorphisms $\chi: e_3^* \to E_1^*$ and $\rho: E_3^* \to E_2^*$.
 
 Now let $(u, v) \in \tau_1$ and ($v, w) \in \tau_2$. Then there exists paths
@@ -159,11 +167,12 @@ $\chi(\omega) = \omega_1,\ \rho(\omega) = \omega_2$ (without loss of
 generality the length-restriction from the remark after definition 1 should
 hold here too).
 
-Together this means
+Together this gives
 \[ (u, v) \in \rho \circ \beta^{(2)} \big( {\alpha^{(1)}}^{-1} \circ
 \chi^{-1}(X^*) \cap R_3 \big) \]
 which means $(u, v) \in \tau_3$.
 
+\medskip
 To the opposite, let $(u, v) \in \tau_3$. Then there exists a path $\omega \in
 E_3^* \cap R_3$ with $\chi(\alpha^{(1)})(\omega) = u$ and $\rho(\beta^{(2)})(\omega)
 = v$.
@@ -175,6 +184,7 @@ By construction of $E_3$ it follows
 \[ \beta^{(1)}(\omega_1) = \alpha^{(2)}(\omega_2) \]
 \end{proof}
 
+\medskip
 \begin{corollary}
 Length-preserving transductions with composition form a category.
 \end{corollary}
@@ -182,16 +192,19 @@ Length-preserving transductions with composition form a category.
 We generalize now our statement by allowing $\alpha$ and $\beta$ to be arbitrary
 functors to $X^*$ resp. $Y^*$.
 
-Next, we investigate the case $|\alpha(w)| \leq |w|$ and $|\beta(w)| \leq |w|$.
-Afterwards we will reduce the general case to this special case.
+Next, we investigate the case $|\alpha(\pi)| \leq |\pi|$ and $|\beta(\pi)| \leq
+|\pi|$. Afterwards we will reduce the general case to this special case.
 
 Notation: Functors fulfilling the condition above are called {\bf
 non-expanding}.
 
-\begin{theorem}[Composition of non-expanding transductions is a transduction]
-Let $\fa{T}_i = (G_i, X_i, S_i, F_i, \alpha^{(i)}, \beta^{(i)}),\ G_i = (V_i,
-E_i)$ be transducers with non-expanding functors $\alpha^{(i)}$ and
-$\beta^{(i)},\ i = 1,2.$
+\begin{theorem}[The composition of non-expanding transductions is a
+transduction]
+Let
+\[ \fa{T}_i = (G_i, X_i, S_i, F_i, \alpha^{(i)}, \beta^{(i)}),\ G_i = (V_i,
+E_i) \]
+be transducers with non-expanding functors $\alpha^{(i)}$ and $\beta^{(i)},\ i =
+1,2.$
 
 If $Y_1 = X_2$ (the input alphabet of the second is the output alphabet of the
 first transducer), then the composition $\tau(\fa{T}_1) \circ \tau(\fa{T}_2)$
@@ -211,14 +224,14 @@ Y_2^*
 \end{tikzcd}
 \end{center}
 
-Remark: It should be clear that the addition of $\epsilon$-loops ($e \in E,
+Remark: It should be clear that the addition of $\epsilon$-loops ($e \in E,\ 
 \alpha(e) = \beta(e) = \epsilon$) in the graph does not change the computed
 transduction.
 
-We add to each state of $\fa{T}_1$ and $\fa{T}_2$ such a loop.
+We add to each vertex of $\fa{T}_1$ and $\fa{T}_2$ such a loop.
 
 Because this does not change the computed transductions, this also is the case
-for the composition of those.
+for the composition.
 
 We define the vertex set of the composed transducer as $V := V_1 \times V_2$.
 The edge set is given by
@@ -230,7 +243,7 @@ Q((e_1, e_2)) & = & (Q(e_1), Q(e_2)) \\
 Z((e_1, e_2)) & = & (Z(e_1), Z(e_2)) 
 \end{eqnarray*}
 
-With the projections $\pi^i : E^* \to E_i^*,\ i = 1,2$ we get the commutative
+With the projections $\pi^i : E^* \to E_i^*,\ i = 1,2$, we get the commutative
 diagram:
 
 \begin{center}
@@ -254,18 +267,19 @@ Then the composed transducer
 \beta^{(2)})\]
 computes the composition of transductions $\tau_1$ and $\tau_2$:
 \[ \tau(\fa{T}) = \tau(\fa{T}_1) \circ \tau(\fa{T}_2) \]
-(Exercise).
+(exercise).
 \end{proof}
 
 In analogy to the corresponding result for finite automata it holds:
 
 \begin{lemma}
 For each transducer
-\[\fa{T} = (G, X, Y, S, F, \alpha, \beta)\] there exists a
-transducer \[\fa{T'} = (G', X, Y, S', F', \alpha', \beta')\] with
+\[ \fa{T} = (G, X, Y, S, F, \alpha, \beta) \] there exists a
+transducer
+\[ \fa{T'} = (G', X, Y, S', F', \alpha', \beta'),\ (G'=(V', E') \] with
 \begin{eqnarray*}
-& \forall e \in E(G'): \alpha'(e) \in X \cup \setof{\epsilon} \\
-& \forall e \in E(G'): \beta'(e) \in Y \cup \setof{\epsilon} \\
+& \forall e \in E': \alpha'(e) \in X \cup \setof{\epsilon} \\
+& \forall e \in E': \beta'(e) \in Y \cup \setof{\epsilon} \\
 & \card{S'} = 1 \\
 & \card{F'} = 1
 \end{eqnarray*}
@@ -275,9 +289,9 @@ which computes the same transduction as $\fa{T}$.
 \begin{proof}
 Let $\fa{T}$ be an arbitrary transducer. If an edge $e \in E$ has an
 input or output label longer than 1, that is $e \in E$ with $|\alpha(e)| = k >
-1$ or $|\beta(e)| = l > 1$ and $m := max(k, l)$, then a path of length $m$ is
-split as follows:
-\[ \edge{e_1} \edge{e_2} \ldots \edge{e_m} \]
+1$ or $|\beta(e)| = l > 1$ and $m := max(k, l)$, then a path of length $m$ can
+be decomposed as follows:
+\[ Q(e_1) \edge{e_1} Q(e_2) \edge{e_2} \ldots Q(e_m) \edge{e_m} Z(e_m) \]
 
 \begin{enumerate}
   \item $|\alpha'(e_i)| \leq 1$
@@ -286,27 +300,28 @@ split as follows:
   \cdots e_m)$
 \end{enumerate}
 
-For the resulting transducer $\fa{T'}$ it holds 
+For the resulting transducer $\fa{T'}$ it holds
 \[ \tau(\fa{T}) = \tau(\fa{T}') \]
-\end{proof}
 
 The construction for making this transducer initial (single start state) is
-completely analog to the construction in lemma 1 in chapter 2.1.
+completely analog to the construction in lemma 1 in chapter II.1.
+\end{proof}
 
-From lemma 2 and theorem 4 we get directly
+From lemma 2 and theorem 4 follows directly
 
-\begin{theorem}[composition of rational transductions is a rational
-transduction] For rational transductions $\tau_1$ and $\tau_2$ the composition 
+\begin{theorem}[the composition of rational transductions is a rational
+transduction]
+For rational transductions $\tau_1$ and $\tau_2$, the composition 
 $\tau_1 \circ \tau_2$, if defined, is also a rational transduction.
 \end{theorem}
 
+\medskip
 Remark: An equivalent definition of rational transductions can be given using
-matrices. These are a compact description for transductions which one gets by
+matrices. They give a compact description for transductions which one gets by
 putting the output words that belong to a fixed input word into the matrix, for
 all state changes.
 
 Multiplication of matrices corresponds to concatenation of paths in the graph of
-the transducer and to the union of sets of output words of these paths.
+the transducer and to the union of the sets of output words of these paths.
 
 The interested reader should refer to \cite{Berstel79} for more information.
-

@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={filled_vertex}] (0) at (0, -0) {};
+		\node [style={filled_vertex}] (1) at (-1, -0) {};
+		\node [style={filled_vertex}] (2) at (4, -0) {};
+		\node [style={filled_vertex}] (3) at (5, -0) {};
+		\node [style={filled_vertex}] (4) at (6, -0) {};
+		\node [style=none] (5) at (1.5, -0) {};
+		\node [style=none] (6) at (2.5, -0) {};
+		\node [style={filled_vertex}] (7) at (7, -0) {};
+		\node [style={filled_vertex}] (8) at (8, -0) {};
+		\node [style=none] (9) at (6.5, -0) {$\ldots$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (1) to node[auto]{$x_1 \cdots x_k$} (0);
+		\draw [style=transition] (2) to node[auto]{$x_1$} (3);
+		\draw [style=transition] (3) to node[auto]{$x_2$} (4);
+		\draw [style=transition] (5.center) to node[auto]{$\phi$} (6.center);
+		\draw [style=transition] (7) to node[auto]{$x_k$} (8);
+	\end{pgfonlayer}
+\end{tikzpicture}

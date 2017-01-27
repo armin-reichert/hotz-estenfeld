@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={filled_vertex}] (0) at (0, -0) {};
+		\node [style={filled_vertex}] (1) at (-1, -0) {};
+		\node [style={filled_vertex}] (2) at (-2, -0) {};
+		\node [style={filled_vertex}] (3) at (4, -0) {};
+		\node [style={filled_vertex}] (4) at (5, -0) {};
+		\node [style={filled_vertex}] (5) at (6, -0) {};
+		\node [style=none] (6) at (1.5, -0) {};
+		\node [style=none] (7) at (2.5, -0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (1) to node[auto]{$e_2$} (0);
+		\draw [style=transition] (3) to node[auto]{$e_1$} (4);
+		\draw [style=transition] (4) to node[auto]{$e_2$} (5);
+		\draw [style=transition, bend left=90, looseness=1.75] (2) to node[auto]{$e'_1$} (0);
+		\draw [style=transition] (6.center) to node[auto]{$\phi$} (7.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

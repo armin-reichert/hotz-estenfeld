@@ -370,36 +370,37 @@ $\beta_{\fa{B}}$ such that the following diagram commutes:
 \end{lemma}
 
 \begin{proof}
-We construct the automaton 
-\[ \fa{C} = (G_{\fa{C}}, X, S_{\fa{C}}, F_{\fa{C}}, \alpha_{\fa{C}}) \]
-with vertex (state) set
-\[ V_{\fa{C}} = V_{\fa{A}} \times V_{\fa{B}} \]
-and edge set
-\[ E_{\fa{C}} = \setof{(e, e') \in E_{\fa{A}} \times E_{\fa{B}} \mid
-\gamma_{\fa{A}}(e) = \gamma_{\fa{B}}(e')} \]
-start states
-\[ S_{\fa{C}} = S_{\fa{A}} \times S_{\fa{B}} \]
-final states
-\[ F_{\fa{C}} = F_{\fa{A}} \times F_{\fa{B}} \]
-and labelling
-\[ \alpha_{\fa{C}}((e, e')) = \alpha_{\fa{A}}(e) \] 
+We construct the automaton
+\[ \fa{C} = (G_{\fa{C}}, X, S_{\fa{C}}, F_{\fa{C}}, \alpha_{\fa{C}}),\
+G_{\fa{C}}=(V_{\fa{C}}, E_{\fa{C}}) \]
+\begin{itemize}
+\item vertex set: $V_{\fa{C}} = V_{\fa{A}} \times V_{\fa{B}}$
+\item edge set: $ E_{\fa{C}} = \setof{(e, e') \in E_{\fa{A}} \times
+E_{\fa{B}} \mid \gamma_{\fa{A}}(e) = \gamma_{\fa{B}}(e')}$
+\item start states: $S_{\fa{C}} = S_{\fa{A}} \times S_{\fa{B}}$
+\item final states: $F_{\fa{C}} = F_{\fa{A}} \times F_{\fa{B}}$
+\item labelling: $\alpha_{\fa{C}}((e, e')) = \alpha_{\fa{A}}(e)$ 
+\end{itemize}
 
 $\beta_{\fa{A}}$ and $\beta_{\fa{B}}$ are the projections onto $\fa{A}$ and
 $\fa{B}$.
 
-Claim: $\beta_{\fa{A}}$ and $\beta_{\fa{B}}$ are reductions.
+{\em Claim:} $\beta_{\fa{A}}$ and $\beta_{\fa{B}}$ are reductions.
 
-Without loss of generality we show the claim for $\beta_{\fa{A}}$ only.
+We show the claim for $\beta_{\fa{A}}$ only, the proof for $\beta_{\fa{B}}$ is
+analogous.
 
 \begin{enumerate}
-\item $\alpha_{\fa{A}}(\beta_{\fa{A}}((e,e'))) = \alpha_{\fa{A}}(e) =
-\beta''_{\fa{A}}(\alpha_{\fa{C}})(e, e') = \beta''_{\fa{A}}(\alpha_{\fa{A}})(e)$
-
-With $\beta''_{\fa{A}}$ the equation above holds.
-\item $\beta_{\fa{A}}(S_{\fa{C}}) = S_{\fa{A}}$ and $\beta_{\fa{A}}(F_{\fa{C}})
-= F_{\fa{A}}$ holds by definition
-\item $\beta_{\fa{A}}\Big(\pathcat{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})\Big)
-\stackrel{!}{=} \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}})$
+	\item $\alpha_{\fa{A}}(\beta_{\fa{A}}((e,e'))) = \alpha_{\fa{A}}(e) =
+	\beta''_{\fa{A}}(\alpha_{\fa{C}}((e, e')) =
+	\beta''_{\fa{A}}(\alpha_{\fa{A}}(e))$. \\
+	With $\beta''_{\fa{A}}$ the equation above holds.
+	
+	\item $\beta_{\fa{A}}(S_{\fa{C}}) = S_{\fa{A}}$ and $\beta_{\fa{A}}(F_{\fa{C}})
+	= F_{\fa{A}}$ by definition.
+	
+	\item $\beta_{\fa{A}}\Big(\pathcat{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})\Big)
+	\stackrel{!}{=} \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}})$
 \end{enumerate}
 
 Let $\pi \in \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}})$ be an accepting path.
@@ -421,20 +422,22 @@ for:
 \gamma_{\fa{A}}(e_n) = \gamma_{\fa{B}}(\pi_{\fa{B}}) \]
 
 Because $\gamma_{\fa{A}}$ and $\gamma_{\fa{B}}$ are length-preserving it follows
-\[ \pi_{\fa{B}} = e'_1 \cdots e'_n \]
-with $e'_i \in E_{\fa{B}}$.
+\[ \pi_{\fa{B}} = e'_1 \cdots e'_n \text{ with }e'_i \in E_{\fa{B}} \]
 
 Now create the path $\pi_{\fa{C}} = (e_1, e'_1) \cdots (e_n, e'_n) \in
 \pathcat{G_{\fa{C}}}(S_{\fa{C}}, F_{\fa{C}})$.
 
-\[ \Rightarrow \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}}) \subset
-\beta_{\fa{A}}(\pathcat{\fa{C}}(S_{\fa{C}}, F_{\fa{C}})) \]
-\[ \Rightarrow \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}}) =
-\beta_{\fa{A}}(\pathcat{\fa{C}}(S_{\fa{C}}, F_{\fa{C}})) \]
+\begin{eqnarray*}
+& \Rightarrow & \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}}) \subset
+\beta_{\fa{A}}(\pathcat{\fa{C}}(S_{\fa{C}}, F_{\fa{C}})) \\
+& \Rightarrow & \pathcat{G_{\fa{A}}}(S_{\fa{A}}, F_{\fa{A}}) =
+\beta_{\fa{A}}(\pathcat{\fa{C}}(S_{\fa{C}}, F_{\fa{C}}))
+\end{eqnarray*}
 \end{proof}
 
-We want to treat again the question from the beginning of this section: How do
-automata relate which accept the same language?
+\bigskip
+We want to turn again to the question from the beginning of this section: How
+are automata related that accept the same language?
 
 First, we want to render more precisely: How does a non-deterministic automaton
 \fa{A} relate to the complete, deterministic automaton \fa{A}'?
@@ -447,24 +450,30 @@ At first, we want to start with an $\epsilon$-free automaton with $\alpha(e)
 Consider the step which makes this automaton initial (single start state). The
 construction was as follows:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-6-lemma2-initialstate.tikz}
+\end{center}
 
-Let $\fa{A}_1$ be the initial automaton with start state $Z_0$.
+Here, $\fa{A}_1$ is the initial automaton created from $\fa{A}$ and $z_0$ is the
+single initial state. Let $G = (V, E)$ be the graph of $\fa{A}$.
 
 We construct an automaton $\fa{A}'_1$ by adding for each start state $i \in
 S_{\fa{A}}$ a state $i' \in V_G$ and setting $S_{\fa{A}'} = \setof{1', \ldots,
 k'}$:
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-6-lemma2-initialstates.tikz}
+\end{center}
 
 The homomorphism $\phi : \fa{A}'_1 \to \fa{A}$ is defined by $\phi_1(i) =
 \phi_1(i') = i,\ i = 1, \ldots, k$ and the identity otherwise. Then $\phi$ is a
 reduction.
 
 The homomorphism $\phi' : \fa{A}_1' \to \fa{A}$ is defined by $\phi'_1(i') =
-Z_0,\ i = 1, \ldots, k$ and $\phi'_1(i) = i$. $\phi'$ is also a reduction such
-that the step of make an automaton initial can be described by the following
-reduction diagram:
+z_0,\ i = 1, \ldots, k$ and $\phi'_1(i) = i$. 
+
+$\phi'$ is also a reduction thus making an automaton initial can be
+described by the following reduction diagram:
 
 \begin{center}
 \begin{tikzcd}
@@ -473,31 +482,33 @@ reduction diagram:
 \end{tikzcd}
 \end{center}
 
-The construction of the final states is totally similar.
+The construction of the final states works completely similar.
 
-As the next step we want to make our initial automaton $\fa{A}_1$ complete.
+As the next step, we want to make our initial automaton $\fa{A}_1$ {\em
+complete}.
 
-This is realized by introducing a new vertex (state) $\omega$ to which from all 
+This is realized by introducing a new vertex $\omega$ to which from all
 ''incomplete'' vertices new edges with the corresponding label will be drawn.
-Each edge starting from $\omega$ also ends in $\omega$.
+Each edge starting in $\omega$ also ends in $\omega$.
 
 Let's name the automaton which results from this step with $\fa{A}_2$. Obviously
 we get a reduction $\phi'' : \fa{A}_1 \to \fa{A}_2$.
 
+\bigskip
 Now we make $\fa{A}_2$ deterministic. The resulting automaton shall be named
 $\fa{A}'$.
 
 We construct an automaton $\fa{A}_2'$ by constructing edges of the following
 form:
-\[ e := (\setof{p_1, \ldots, p_r}, p_i) \edge{x} (\setof{q_1, \ldots, q_s},
+\[ e : (\setof{p_1, \ldots, p_r}, p_i) \edge{x} (\setof{q_1, \ldots, q_s},
 q_j) \] if $p_i \edge{e'} q_j \in E_{\fa{A_2}}$ and $\alpha(e') = x$ for all $i = 1,
 \ldots,r,\ j = 1, \ldots, s$ in the construction of the deterministic automaton.
 
-We get homomorphisms
-\[ \tilde{\phi} \text{ with } \tilde{\phi}(e) := (p_i \edge{x} q_j) \]
-and 
-\[ \hat{\phi} \text{ with } \hat{\phi}(e) := (\setof{p_1, \ldots, p_r} \edge{x}
-\setof{q_1, \ldots, q_s}) \]
+We get homomorphisms $ \tilde{\phi}$ defined by
+\[ \tilde{\phi}(e) := (p_i \edge{x} q_j) \]
+and $\hat{\phi}$ defined by
+\[ \hat{\phi}(e) := (\setof{p_1, \ldots, p_r} \edge{x} \setof{q_1, \ldots, q_s})
+\]
 for all edges $e$ as described above.
 
 Both homomorphisms are reductions.
@@ -512,7 +523,7 @@ If we compose all these reductions, we get the following diagram:
 \end{tikzcd}
 \end{center}
 
-Because the composition of reductions is also a reduction, we can change this
+Because the composition of reductions is also a reduction, we can modify this
 diagram as follows:
 
 \begin{center}
@@ -543,12 +554,12 @@ and finally to
 \end{center}
 
 Remark: All the reductions that we constructed for make an automaton initial,
-complete and deterministic have been length-preserving. In chapter 2.1 we
+complete and deterministic have been length-preserving. In chapter II.1 we
 additionally made a construction which transforms an automaton with labelling
 $\alpha(e) \in X^*$ into an automaton with $\alpha(e) \in X$. We had to split
 edges and make the automaton $\epsilon$-free. We can represent this also by
-reduction diagrams but in that case the reductions are are not length-preserving
-(non-expanding) anymore.
+reduction diagrams, but in that case the reductions are no longer
+length-preserving (non-expanding).
 
 The consequence is that lemma 2 cannot be applied anymore.
 
@@ -556,20 +567,26 @@ We now describe these reductions informally.
 
 \begin{enumerate}
   \item Splitting of edges:
-  \[ \edge{x_1 \cdots x_k} \qquad\stackrel{\phi}{\to}\qquad \edge{x_1}\quad
-  \cdots\quad \edge{x_k} \] Here, an edge is mapped to a path. The reduction
-  properties are fulfilled.
+  \begin{center}
+  \input{figures/chapter2-6-lemma2-splitting.tikz}
+  \end{center}
+  Here, an edge is mapped to a path. The reduction properties are fulfilled.
+
   \item Removal of $\epsilon$-edges after insertion of bridges:
+  \begin{center}
+  \input{figures/chapter2-6-lemma2-bridges.tikz}
+  \end{center}
   
-  \missingfigure
-  
-  $\phi(e_1') = e_1 \cdot e_2,\quad Q(e_1') = Q(e_1),\quad Z(e_1') =
-  Z(e_2),\quad \phi(e_2) = e_2$, identity otherwise.
-  
-  Here the properties of a reduction are also fulfilled.
+  \begin{eqnarray*}
+  \phi(e_1') &=& e_1 \cdot e_2,\quad Q(e_1') = Q(e_1),\ Z(e_1') = Z(e_2) \\
+  \phi(e_2) &=& e_2,\text{ identity otherwise.}
+  \end{eqnarray*}
 \end{enumerate}
 
-Let's visualize the complete construction graphically:
+Here the properties of a reduction are also fulfilled.
+
+\medskip
+We want to visualize the complete construction graphically:
 
 \begin{center}
 \begin{tikzcd}
@@ -580,6 +597,9 @@ Let's visualize the complete construction graphically:
 & \fa{A}_1 & & & & \fa{A}_3 & & \fa{A}' 
 \end{tikzcd}
 \end{center}
+
+The left-most reduction $(\fa{A}, \fa{A}_2) \to \fa{A}_1$ is expanding, all
+other reductions are length-preserving.
 
 This diagram can be simplified after our previous considerations and using the
 categorial closure of length-preserving reductions into:
@@ -592,22 +612,25 @@ categorial closure of length-preserving reductions into:
 \end{tikzcd}
 \end{center}
 
-We can now concretize our initial goal: describing the relation between
-two equivalent automata.
+We can now concretize our initial goal of describing the relation between
+two {\em equivalent} automata.
 
 We want to achieve the following:
 
 $L_{\fa{A}} = L_{\fa{B}}$, then there should exist a diagram
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-6-lemma2-diagram-lang-equal.tikz}
+\end{center}
 
-We specify for the complete, deterministic automaton a normal-form and define
+We define for the complete, deterministic automaton a {\em normal form}:
 
-\begin{definition}[reduced automaton]
+\begin{definition}
 A complete, deterministic automaton is called {\bf reduced} $\iff$ each
 reduction $\rho : \fa{A} \to \fa{B}$ is a monomorphism (injective homomorphism).
 \end{definition}
 
+\bigskip
 \begin{lemma}
 For each complete, deterministic finite automaton $\fa{A}$ there exists a
 reduced automaton $\fa{A}_r$ and a closed reduction $\rho : \fa{A} \to
@@ -639,12 +662,14 @@ By assumption, $\fa{A}_1$ and $\fa{A}_2$ are reduced, therefore $\psi_1$ and
 $\psi_2$ are monomorphisms (injective) and $\rho_1$ and $\rho_2$ are surjective,
 $\fa{A}_1$ and $\fa{A}_2$	are complete and deterministic
 
-$\Rightarrow$ the images under $\psi_1$ and $\psi_2$ are equal
-
-$\Rightarrow \psi_1, \psi_2$ are isomorphisms on the images. 
+\begin{eqnarray*}
+&\Rightarrow& \text{the images under }\psi_1\text{ and }\psi_2\text{ are
+equal}\\
+&\Rightarrow& \psi_1, \psi_2\text{ are isomorphisms on the images.} 
+\end{eqnarray*}
 \end{proof}
 
-It remains to prove that for each automaton $\fa{A}$ there exists a reduces
+It remains to prove that for each automaton $\fa{A}$ there exists a reduced
 automaton $\fa{A}_r$.
 
 This follows from the fact that the automata are finite and is shown by the
@@ -653,16 +678,17 @@ following construction.
 Remark: For simplicity (without loss of generality) we want to assume that our
 automata in the following do not contain superfluous vertices (states).
 
+\bigskip
 We consider now a restriction of the syntactic congruence defined in chapter
-1.2.
+I.2.
 
 \begin{definition}
-$u, v \in X^*$ are called {\bf congruent modulo $L$}, written as 
-\[ u \equiv_L v :\iff \text{ for all } w \in X^* \text{ holds}\quad u \cdot w
-\in L \iff v \cdot w \in L \]
+$u, v \in X^*$ are called {\bf congruent modulo $L$} 
+\[ u \equiv v\pmod{L} :\iff \text{ for all } w \in X^* \text{ holds:}\quad u
+\cdot w \in L \Leftrightarrow v \cdot w \in L \]
 \end{definition}
 
-Notation: $[w]_L := \setof{v \mid w \equiv_L v}$
+Notation: $[w]_L := \setof{v \mid w \equiv v\pmod{L}}$
 \[ X^*/L := \setof{[w]_L \mid w \in X^*} \]
 
 With this notatation it holds
@@ -671,38 +697,45 @@ With this notatation it holds
 \[ \card{X^*/L} \text{ is finite} \iff L \in \reglang(X^*) \]
 \end{lemma}
 
-\begin{proof}
+\begin{proof}\leavevmode
+
 ''$\Rightarrow$'':
 
-One sees immediately: $w \equiv_L w' \Rightarrow w \cdot x \equiv_L w' \cdot x$
+One sees immediately: $w \equiv w' \pmod{L} \Rightarrow w \cdot x \equiv w'
+\cdot x \pmod{L}$
 
 We construct the graph $G' = (X^*/L, E)$ with edge set
 \[ E = \setof{([w], [wx]) \mid w \in X^*,\ x \in X} \]
 which by assumption is finite.
 
-Set $S := \setof{[e]},\ F := \setof{[w] \mid w\in L}$ and define the labelling
-$\alpha$ by $\alpha(([w], [wx])) := x$.
+Define start and final state sets by
+\[ S := \setof{[\epsilon]},\quad F := \setof{[w] \mid w\in L} \]
+and define the labelling $\alpha$ by
+\[ \alpha(([w], [wx])) := x \]
 
-We obtain a finite automaton \[ \fa{A} = \fa{A}(L) = (G', X, S, F, \alpha) \]
+We obtain a finite automaton
+\[ \fa{A} = \fa{A}(L) = (G', X, S, F, \alpha) \]
 with the property $L_{\fa{A}} = L$ (exercise).
 
 ''$\Leftarrow$'':
 
-(Translator remark: Made the proof more readable)
+(The proof in original book has been slightly reformulated.)
 
 Let $L \in \reglang(X^*)$ be a regular language, then there exists a finite acceptor
-$\fa{A}$ for $L$. Assume, that $\fa{A}$ is complete and deterministic with graph
-$G = (V, E)$.
+$\fa{A}$ accepting $L$. Assume that $\fa{A}$ is complete and deterministic with
+graph $G = (V, E)$.
 
 Consider paths $\pi$ and $\pi'$ both starting at some start state of $\fa{A}$
 \[ Q(\pi) \in S,\ Q(\pi')\in S \]
 with labels being congruent modulo $L$:
-\[ \alpha(\pi) \equiv_L \alpha(\pi') \]
+\[ \alpha(\pi) \equiv \alpha(\pi') \pmod{L} \]
 
 For any pair of paths $\omega, \omega'$ that can be appended to $\pi$ and $\pi'$
 and which have equal labels, that is
 \[ Q(\omega) = Z(\pi),\ Q(\omega') = Z(\pi'),\ \alpha(\omega) = \alpha(\omega')
-\] it holds: \[ Z(\omega) \in F \iff Z(\omega') \in F \]
+\] 
+it holds 
+\[ Z(\omega) \in F \iff Z(\omega') \in F \]
 
 (Otherwise, we would have for example $Z(\omega) \in F,\ Z(\omega') \notin F$.
 But from this would follow $\alpha(\pi) \cdot \alpha(\omega) \in L$ and
@@ -715,7 +748,7 @@ Now assume to the opposite that for each pair of paths $\omega,
 Then for any pair of paths $\pi, \pi'$ with 
 \[Z(\pi) = Q(\omega),\ Z(\pi') = Q(\omega'),\quad Q(\pi)\in S,\ Q(\pi') \in S \]
 it follows 
-\[ \alpha(\pi) \equiv_L \alpha(\pi') \]
+\[ \alpha(\pi) \equiv \alpha(\pi') \pmod{L} \]
 
 This gives us a mapping that assigns to each vertex (state) $v \in V$ a
 congruence class, namely $[\alpha(\pi)]$.
@@ -724,6 +757,7 @@ From this we get: $\card{X^*/L}$ is finite, especially $\card{X^*/L} \leq
 \card{V}$.
 \end{proof}
 
+\medskip
 In our lemma we even proved a bit more:
 
 Let $\rho_1 : V \to X^*/L$ with $\rho_1(v) = [u]_L$, if $\pi \in
@@ -736,14 +770,15 @@ $\rho_1$ induces a reduction from $\fa{A}$ to $\fa{A}(L)$.
 
 \begin{proof}
 Let $e \in E$ be an edge with $Q(e) = v, Z(e) = v'$ and $\alpha(e) = x$, then
-the mapping $\rho_2$ with \[ \rho_2(e) = e' \in E(G'),\ Q(e') = [u] =
-\rho_1(v),\ Z(e') = [ux] = \rho_1(v') \]
+the mapping $\rho_2$ with 
+\[ \rho_2(e) = e' \in E',\ Q(e') = [u] = \rho_1(v),\ Z(e') = [ux] = \rho_1(v')
+\]
 induces a reduction.
 \end{proof}
 
 We get immediately
 
-\begin{theorem}If $\fa{A}$ is a complete, deterministic finite automaton, then
+\begin{theorem}If\ $\fa{A}$ is a complete, deterministic finite automaton, then
 there exists a closed reduction \[ \rho : \fa{A} \to \fa{A}_L \]
 \end{theorem}
 
@@ -755,33 +790,36 @@ Let $\rho$ be the mapping defined by $\rho_1$ and $\rho_2$. It holds:
   \item $\rho$ is surjective!
 \end{enumerate}
 
-$\rho_1$: clear, because to each $v \in V$ there is a corresponding congruence
-class.
+$\rho_1$: clear, because to each $v \in V$ there exists a corresponding
+congruence class.
 
 $\rho_2$ is surjective because $\fa{A}$ is complete.
 \end{proof}
 
 Remark: $\rho$ is even length-preserving.
 
+\bigskip
 \begin{corollary}
-$\fa{A}(L)$ is reduced. (Exercise)
+$\fa{A}(L)$ is reduced. (exercise)
 \end{corollary}
 
-With all this we can set $\fa{A}_r := \fa{A}(L)$ and we have proved lemma 3
-completely.
+With all this we can set $\fa{A}_r := \fa{A}(L)$ and we have completely proved
+lemma 3.
 
-The question remains: how do equivalent, reduced, complete and deterministic
-finite automata relate?
+The question remains: how are equivalent, reduced, complete and deterministic
+finite automata related?
 
+\bigskip
 \begin{theorem}
 If $\fa{A}$ and $\fa{B}$ are reduced, complete and deterministic finite
 automata which accept the same language, then they are isomorphic.
 \end{theorem}
 
 \begin{proof}
-If \fa{A} and \fa{B} are reduced, then $\fa{A} \cong \fa{A}(L) \cong \fa{B}$.
+\fa{A} and \fa{B} are reduced, therefore $\fa{A} \cong \fa{A}(L) \cong \fa{B}$.
 \end{proof}
 
+\medskip
 \begin{corollary}
 If $\fa{A}$ is equivalent to $\fa{B}$ then there exists a chain of reductions
 \[ \fa{A} \longrightarrow \fa{A}_1 \longleftarrow \fa{A}_2 \longleftarrow \fa{C}
@@ -789,7 +827,7 @@ If $\fa{A}$ is equivalent to $\fa{B}$ then there exists a chain of reductions
 \end{corollary}
 
 \begin{proof}
-We look at the construction from figure TODO:
+We look at the construction we have done above:
 
 \begin{center}
 \begin{tikzcd}[column sep=small]
@@ -804,6 +842,7 @@ We look at the construction from figure TODO:
 $\fa{A}_r$ exists by theorems 4 and 5. $\fa{C}$ exists by lemma 2.
 \end{proof}
 
+\bigskip
 \begin{lemma}
 Let $\gamma_{\fa{A}} : \fa{C} \to \fa{A},\ \gamma_{\fa{B}} : \fa{C} \to \fa{B}$
 be length-preserving reductions.
@@ -829,29 +868,32 @@ such that the following diagram commutes:
 Let \[ G := (V_{\fa{A}} \times V_{\fa{B}}, \setof{(e, e') \in E_{\fa{A}} \times
 E_{\fa{B}} \mid \alpha_{\fa{A}}(e) = \alpha_{\fa{B}}(e')}  ) \]
 
-Then the finite automaton $\fa{A} \times \fa{B}$ is defined by
+Let the finite automaton $\fa{A} \times \fa{B}$ be defined by
 \[ \fa{A} \times \fa{B} := (G, X, S_{\fa{A}} \times S_{\fa{B}}, F_{\fa{A}}
 \times F_{\fa{B}}, \alpha) \]
 
-Let $\delta(v) = (\gamma_{\fa{A}}(v), \gamma_{\fa{B}}(v)),\ v \in V_{\fa{C}}$,
-and $\delta(e) = \gamma_{\fa{A}}(e), \gamma_{\fa{B}}(e)),\ e \in E_{\fa{C}}$.
+Define
+\begin{eqnarray*}
+\delta(v) &=& (\gamma_{\fa{A}}(v), \gamma_{\fa{B}}(v)),\ v \in V_{\fa{C}} \\
+\delta(e) &=& (\gamma_{\fa{A}}(e), \gamma_{\fa{B}}(e)),\ e \in E_{\fa{C}}
+\end{eqnarray*}
 
-$\delta$ is a homomorphism from $\fa{C}$ to $\fa{A} \times \fa{B}$.
+Then $\delta$ is a homomorphism from $\fa{C}$ to $\fa{A} \times \fa{B}$.
 
-Now $\gamma_{\fa{A}} = \delta \circ \pi_{\fa{A}}$ and $\gamma_{\fa{B}} = \delta
-\circ \pi_{\fa{B}}$ are reductions
+Now $\gamma_{\fa{A}} := \delta \circ \pi_{\fa{A}}$ and $\gamma_{\fa{B}} :=
+\delta \circ \pi_{\fa{B}}$ are reductions
 \[ \Rightarrow \pi_{\fa{A}} \text{ and } \pi_{\fa{B}} \text{ are reductions.} \]
 \end{proof}
 
 With lemma 6 we get
 
 \begin{theorem}
-If \fa{A} is equivalent to \fa{B}, then \fa{A} can be transformed into \fa{B} by
-the following chain of reductions:
+If\ \fa{A} is equivalent to \fa{B}, then \fa{A} can be transformed into \fa{B}
+by the following chain of reductions:
 \begin{center}
 \begin{tikzcd}
 \fa{A} \arrow[r] & \fa{A}_1 & \fa{A}_2 \arrow[l] & \fa{A}_2 \times \fa{B}_2
-\arrow[l, "\pi_{\fa{A}}"'] \arrow[r, "\pi_{\fa{B}}"] & \fa{B}_2 \arrow[r] &
+\arrow[l, "\pi_{\fa{A}_2}"'] \arrow[r, "\pi_{\fa{B}_2}"] & \fa{B}_2 \arrow[r] &
 \fa{B}_1 & \fa{B}
 \arrow[l]
 \end{tikzcd}
@@ -859,17 +901,18 @@ the following chain of reductions:
 \end{theorem}
 
 \begin{proof}
-Our constructions above.
+Clear using our constructions from above.
 \end{proof}
 
-We can now give a {\bf decision algorithm} for the equivalence of finite
+\bigskip
+We can give now a {\bf decision algorithm} for the equivalence of finite
 automata \fa{A} and \fa{B}.
 
 \begin{enumerate}
   \item From \fa{A} and \fa{B} construct the automata $\fa{A}_2$ and $\fa{B}_2$.
   \item Check if 
   \begin{tikzcd} \fa{A}_2 & \fa{A}_2 \times \fa{B}_2
-		\arrow[l, "\pi_{\fa{A}}"'] \arrow[r, "\pi_{\fa{B}}"] & \fa{B}_2 
+		\arrow[l, "\pi_{\fa{A}_2}"'] \arrow[r, "\pi_{\fa{B}_2}"] & \fa{B}_2 
 	\end{tikzcd}
 	are reductions. If this is the case, $L_{\fa{A}} = L_{\fa{B}}$.
 \end{enumerate}
@@ -890,18 +933,19 @@ As measure of complexity of \fa{A} we define
 \end{tabular}
 
 The test for surjectivity takes most of the time and dominates the complexity of
-this decision algorithm. Our algorithm takes the same time as the other
-algorithms from the literature \cite{AHU}, because we start from
+the decision algorithm. Our algorithm takes the same time as the other
+algorithms from the literature \cite{AHU} because we start from
 non-deterministic automata.
 
+\medskip
 Remark: If we would have required for our automata \fa{A} and \fa{B} that
 $\alpha_{\fa{A}}(e) \in X$ and $\alpha_{\fa{B}}(e) \in X$, then the diagram from
-the corollary to theorem 5 could have been simplified to \begin{tikzcd}
-\fa{A} & \fa{C} \arrow[l] \arrow[r] & \fa{B} \end{tikzcd}. For the compexity of
-our decision algorithm this however would be insignificant.
+the corollary to theorem 5 could have been simplified to $\fa{A} \longleftarrow 
+\fa{C} \longrightarrow \fa{B}$. For the compexity of our decision algorithm
+this however would be insignificant.
 
-Exercises:
-
+\bigskip
+\begin{exercise}
 \begin{enumerate}
 \item Let \fa{A}, \fa{B}, \fa{C} be finite automata, $\beta_{\fa{A}} : \fa{C}
 \to \fa{A},\ \beta_{\fa{B}} : \fa{C} \to \fa{B}$ reductions and $\faequiv{A},
@@ -911,7 +955,7 @@ Show: $(\faequiv{A}\ \subset\ \faequiv{B}) \Rightarrow$ there exists a reduction
 $\beta : \fa{B} \to \fa{A}$ such that the following diagram commutes:
 \begin{center}
 \begin{tikzcd}
-& \fa{C} \arrow[ld,"\beta_{\fa{A}}"] \arrow[rd,"\beta_{\fa{B}}"] \\
+& \fa{C} \arrow[ld,"\beta_{\fa{A}}"'] \arrow[rd,"\beta_{\fa{B}}"] \\
 \fa{A} & & \fa{B} \arrow[ll,dashed,"\beta"]
 \end{tikzcd}
 \end{center}
@@ -926,28 +970,4 @@ Show:
 \end{itemize}
 
 \end{enumerate}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\end{exercise}

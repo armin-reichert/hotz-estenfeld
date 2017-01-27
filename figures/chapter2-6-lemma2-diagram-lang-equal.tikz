@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=state] (0) at (-2, -0) {$\fa{A}$};
+		\node [style={filled_vertex}] (1) at (-1, -0) {};
+		\node [style={filled_vertex}] (2) at (0, -0) {};
+		\node [style={filled_vertex}] (3) at (2, -0) {};
+		\node [style={filled_vertex}] (4) at (3, -0) {};
+		\node [style=state] (5) at (4, -0) {$\fa{A}$};
+		\node [style=none] (6) at (1, -0) {$\cdots$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition] (0) to (1);
+		\draw [style=transition] (2) to (1);
+		\draw [style=transition] (3) to (4);
+		\draw [style=transition] (5) to (4);
+	\end{pgfonlayer}
+\end{tikzpicture}

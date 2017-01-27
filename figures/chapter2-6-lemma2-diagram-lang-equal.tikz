@@ -5,7 +5,7 @@
 		\node [style={filled_vertex}] (2) at (0, -0) {};
 		\node [style={filled_vertex}] (3) at (2, -0) {};
 		\node [style={filled_vertex}] (4) at (3, -0) {};
-		\node [style=state] (5) at (4, -0) {$\fa{A}$};
+		\node [style=state] (5) at (4, -0) {$\fa{B}$};
 		\node [style=none] (6) at (1, -0) {$\cdots$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}

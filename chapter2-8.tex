@@ -1,1 +1,208 @@
 \section{The finite 2-way automaton}
+
+We start now with generalizing the concept of the finite automaton as described
+in chapter II.4.
+
+We consider a finite automaton where the reading head can traverse the input
+tape in two directions as indicated by the following figure:
+
+\missingfigure
+
+The representation of such an automaton by a state graph is not trivial. For
+this reason, we  define this type of automaton as usual at first.
+
+Afterwards, we will show how to represent this automaton by a state graph.
+
+\begin{definition}
+A {\bf finite two-way automaton} is defined by
+\[ \fa{B} = (X, Z, \delta, S, F, \setof{l, r}) \]
+where 
+\begin{itemize}
+  \item $X$ is the input alphabet with $\setof{l, r} \cap X = \emptyset$
+  \item $Z$ is the state set with $\setof{l, r} \cap X = \emptyset$
+  \item $S \subset Z$ is the set of start states
+  \item $F \subset Z$ is the set of final states of $\fa{B}$
+  \item $\delta \subset (X \times Z) \times (Z \times \setof{l, r})$ is a
+  relation describing the functioning of $\fa{B}$
+\end{itemize}
+
+If $\delta : (X \times Z) \to Z \times \setof{l, r}$ is a mapping, then $\fa{B}$
+is called a {\bf complete, deterministic finite two-way automaton}.
+\end{definition}
+
+\bigskip
+\begin{definition}
+A {\bf computation} of $\fa{B}$ on the input tape with label $v \in X^*$ is a
+sequence
+\[ f_k = (z_0 v \to u_1 z_1 v_1 \to u_2 z_2 v_2 \to \ldots \to u_k z_k v_k) \]
+with $u_i, v_i \in X^*,\ z_i \in Z$ for $i = 1, \ldots, k$ and $z_0 \in S$. 
+\end{definition}
+
+$u_i z_i v_i$ transfers in a single step into $u_{i+1} z_{i+1} v_{i+1}$ if the
+following holds:
+
+\begin{enumerate}
+  \item If $v_i = a v'_i$, then $u_{i+1} = u_i a,\ v_{i+1} = v'_i$, if $(z_{i+1}, r)
+\in \delta(a, z_i)$, i.e.\ the reading head moves to the right and the
+automaton changes into state $z_{i+1}$, if it reads in state $z_i$ a symbol $a$,
+or
+\item if $u_i = u'_i b,\ v_i = a v'_i$, then $u_{i+1} = u'_i$ and $v_{i+1} = b
+v_i$, if $(z_{i+1}, l) \in \delta(a, z_i)$, i.e.\ the reading head moves to the
+left and the automaton changes into state $z_{i+1}$, if it reads in state $z_i$
+a symbol $a$.
+\end{enumerate}
+
+\bigskip
+\begin{definition}
+A word $w \in X^*$ is {\bf accepted by} $\fa{B}$ if there exists a computation
+$f_k$ with $v_k = \epsilon$ and $z_k \in F$.
+\end{definition}
+
+We set
+\[ L_{\fa{B}} = \setof{w \in X^* \mid w\text{ is accepted by }\fa{B}} \]
+
+We want to consider again the monoid $\hgroup{X}$, see chapter I.3.
+
+We construct an automaton
+\[ \fa{D} = (G, \hgroup{X}, S, F, \alpha) \]
+with graph $G=(V, E)$ as follows:
+\begin{itemize}
+  \item $V = Z \times \setof{l_1, l_2, r_1, r_2}$
+  \item $E$ and $\alpha: E^* \to \hgroup{X}$ is defined as follows:
+  
+  $E$ contains an edge $e: (z, y) \edge{a} (z', y') \iff$ one of the following
+  cases occurs:
+  \begin{enumerate}
+    \item $y = r_2,\ y' = r_2,\ (z', r) \in \delta(a, z)$
+    \item $y = r_2,\ y' = l_1,\ (z', l) \in \delta(a, z)$
+    \item $y = r_1,\ y' = r_2,\ z = z'$ and there exists $\bar{z}$ with $(z, r)
+    \in \delta(a, \bar{z})$
+  \end{enumerate}
+
+  $E$ contains an edge $e: (z, y) \edge{\inv{a}} (z', y') \iff$ one of the
+  following cases occurs:
+  \begin{enumerate}
+    \item $y = l_2,\ y' = l_2,\ (z', l) \in \delta(a, z)$
+    \item $y = l_2,\ y' = r_1,\ (z', r) \in \delta(a, z)$
+    \item $y = l_1,\ y' = l_2,\ z = z'$ and there exists $\bar{z}$ with $(z, l)
+    \in \delta(a, \bar{z})$
+  \end{enumerate}
+\end{itemize}
+
+\bigskip
+To clarify this definition we use the following visualization:
+
+The input tape of the automaton is divided alternatingly into rectangular and
+oval cells.
+
+\missingfigure
+
+The ovals are ''idle-positions'' for the reading head, the rectangles
+each contain a symbol of the input alphabet.
+
+The reading head moves from a ''idle-position'' to the ''idle-position'' to the
+left or to the right.
+
+If it moves from left to right over the cell $k$ with symbol $a$, then the
+automaton reads $a$, if to the opposite it moves from right to left over that
+cell, it reads $\inv{a}$. (This kind of reading when a cell is traversed
+corresponds to the physical process when for example using a magnetic disk).
+
+In some cases, our geometric model has to perform two computation steps, when
+the automaton $\fa{B}$ performs only a single step.
+
+The following cases may occur:
+
+\begin{enumerate}
+  \item The automaton is in idle position to the left of a cell $k$. It
+  remembers that it should move to the right, i.e.\ it is in some state $(z,
+  r_2)$. It traverses now the $k$th cell, reads the symbol $a$, reaches the
+  subsequent idle position and finds that it should have gone to the left. This
+  is desribed by the state $(z', l_1)$. Therefore it moves back to its previous
+  idle position and changes into state $(z', l_2)$. Together it has read $a
+  \inv{a}$.
+  
+  This kind of movement can be expressed using the following diagram:
+  \[ (z, r_2) \edge{a} (z', l_1) \edge{\inv{a}} (z', l_2) \]
+  
+  \item In the same way, the following diagram is to be understood:
+  \[ (z, l_2) \edge{\inv{a}} (z', r_1) \edge{a} (z', r_2) \]
+\end{enumerate}
+
+We complete the definition of $\fa{D}$ by setting
+\[ S = S_{\fa{B}} \times \setof{r_2},\quad F = F_{\fa{B}} \times \setof{r_2} \]
+
+We denote again by $|u| \in (\unioninv{X})^*$ the reduced word for an element
+$[u] \in \hgroup{X}$.
+
+Then we can define:
+
+\begin{definition}
+\begin{eqnarray*}
+\generatedbyone{L_{\fa{D}}} &:=& \{ |\alpha(\pi)| \mid  |\alpha(\pi)| \in
+X^*,\ \pi \in \pathcat{G}(S, F) \\
+&& \text{and for all paths prefixes }\omega \prefix \pi \text{ holds: }
+|\alpha(\omega)| \prefix |\alpha(\pi)| \}
+\end{eqnarray*}
+
+Here the relation $\prefix \subset \pathcat{G} \times \pathcat{G}$ denotes the
+path prefix relation, and the relation $\prefix \subset (\unioninv{X})^* \times
+(\unioninv{X})^*$ denotes the word prefix relation.
+\end{definition}
+
+\bigskip
+First, we want to give an example to clarify the construction given above.
+
+We have a finite two-way automaton which accepts the language
+\[ L = \setof{w \in \setof{a, b}^+ c \setof{a, b}^+ \mid w = w_1 \cdots w_n
+\text{ with } w_i = c \Rightarrow w_{i-1} = w_{i+1},\ 1 \leq i \leq n} \]
+
+The transition function shall be defined as follows:
+\begin{eqnarray*}
+\delta(a, z_0) &=& \delta(a, z_1) = (z_1, r) \\
+\delta(b, z_0) &=& \delta(b, z_1) = (z_1, r) \\
+\delta(c, z_1) &=& (z_2, l) \\
+\delta(a, z_2) &=& (z_a, r) \\
+\delta(b, z_2) &=& (z_b, r) \\
+\delta(c, z_a) &=& (z_{a'}, r) \\
+\delta(c, z_b) &=& (z_{b'}, r) \\
+\delta(a, z_{a'}) &=& (z_e, r) \\
+\delta(b, z_{b'}) &=& (z_e, r) \\
+\delta(a, z_{e}) &=& \delta(b, z_e) = (z_e, r)
+\end{eqnarray*}
+
+The two-way automaton $\fa{A}$ is defined by
+\[ \fa{A} = (\setof{z_0, z_1, z_2, z_a, z_b, z_{a'}, z_{b'}, z_e}, \setof{a,
+b, c}, \setof{z_0}, \setof{z_e}, \delta) \]
+
+From this we want to construct our automaton 
+\[ \fa{D} = (G, \hgroup{\setof{a, b, c}}, \setof{(z_0, r_2)}, \setof{(z_e,
+r_2)}, \alpha) \]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

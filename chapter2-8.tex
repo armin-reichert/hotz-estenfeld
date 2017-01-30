@@ -139,7 +139,7 @@ Then we can define:
 
 \begin{definition}
 \begin{eqnarray*}
-\generatedbyone{L_{\fa{D}}} &:=& \{ |\alpha(\pi)| \mid  |\alpha(\pi)| \in
+\genbyone{L_{\fa{D}}} &:=& \{ |\alpha(\pi)| \mid  |\alpha(\pi)| \in
 X^*,\ \pi \in \pathcat{G}(S, F) \\
 && \text{and for all paths prefixes }\omega \prefix \pi \text{ holds: }
 |\alpha(\omega)| \prefix |\alpha(\pi)| \}
@@ -178,6 +178,255 @@ b, c}, \setof{z_0}, \setof{z_e}, \delta) \]
 From this we want to construct our automaton 
 \[ \fa{D} = (G, \hgroup{\setof{a, b, c}}, \setof{(z_0, r_2)}, \setof{(z_e,
 r_2)}, \alpha) \]
+
+The graph $G = (V, E)$ has the following form (the markings at the edges are
+the edge labels):
+
+\missingfigure
+
+We begin with proving the equivalence between both automata models. To do so, we
+prove the following lemma.
+
+\begin{lemma}
+\[ L_{\fa{B}} \subset \genbyone{L_{\fa{D}}} \]
+\end{lemma}
+
+\begin{proof}
+We assign to each computation $f_k,\ k \in \mathbb{N}$ of the automaton $\fa{B}$
+a path $\pi \in \pathcat{G}(S, V)$. We do that by induction over the length of
+the computations.
+
+{\em Induction base:}
+
+To the empty computation $f_0$ we assign the empty path $1_{(z_0, r_2)}$ where
+$z_0 \in S_{\fa{B}}$ is a start state of $\fa{B}$.
+
+It holds: $\alpha(1_{(z_0, r_2)}) = \epsilon = u_0$.
+
+{\em Induction hypothesis:}
+
+For all computations $f_k$ of length $k$ we assume to have a path $\pi_k \in
+\pathcat{G}(S, V)$ such that $Z(\pi_k) \in Z \times \setof{(r_2, l_2)}$ and
+\[ |\alpha(\pi_k)| = \begin{cases}
+u_k & \text{for }Z(\pi_k) \in Z \times \setof{r_2} \\
+u_k \cdot First(v_k) & \text{for }Z(\pi_k) \in Z \times \setof{l_2}
+\end{cases} \]
+
+Here $First(w)$ denotes the first character of the word $w$.
+
+Let $f_{k+1}$ be a computation of length $k+1$ which ends with the computation
+step
+\[ u_k z_k v_k \to u_{k+1} z_{k+1} v_{k+1} \]
+
+\begin{itemize}
+  \item[Case 1:] $Z(\pi_k) = (z_k, r_2),\ v_k = a \bar{v_k},\ (z_{k+1}, r) \in
+  \delta(a, z_k)$
+  
+  By construction, $G$ contains an edge $e: (z_k, r_2) \edge{a} (z_{k+1}, r_2)$.
+  
+  We set $\pi_{k+1} := \pi_k \cdot e$ and get
+  \[ |\alpha(\pi_{k+1})| = |\alpha(\pi_k)| \cdot a = u_{k+1} \]
+  
+  \item[Case 2:] $Z(\pi_k) = (z_k, r_2),\ u_k = \bar{u}_k b,\ v_k = a
+  \bar{v_k},\ (z_{k+1}, l) \in \delta(a, z_k)$
+  
+  By construction, in $G$ there exists a path
+  \[ (z_k, r_2) \edge{e_1 / a} (z_{k+1}, l_1) \edge{e_2 / \inv{a}} (z_{k+1},
+  l_2),\ e_1, e_2 \in E \]
+  
+  We set $\pi_{k+1} = \pi_k \cdot e_1 \cdot e_2$, then it is
+  \[ |\pi_{k+1}| = |\pi_k| = u_{k+1} \cdot b = u_{k+1} \cdot First(v_{k+1}) \]
+  and $Z(\pi_{k+1}) \in Z \times \setof{l_2}$.
+  
+  \item[Case 3:] $Z(\pi_k) = (z_k, l_2),\ v_k = a \bar{v_k},\ (z_{k+1}, r) \in
+  \delta(a, z_k)$
+  
+  In $G$ there exists a path 
+  \[ (z_k, l_2) \edge{e_1 / \inv{a}} (z_{k+1}, r_1) \edge{e_2 / a} (z_{k+1},
+  r_2),\ e_1, e_2 \in E \]
+  
+  We set $\pi_{k+1} = \pi_k \cdot e:1 \cdot e_2$, then it is $Z(\pi_{k+1}) \in
+  Z \times \setof{r_2}$ and
+  \[ |\alpha(\pi_{k+1})| = |u_k a \inv{a} a| = u_k a = u_{k+1} \]
+  
+  \item[Case 4:] $Z(\pi_k) = (z_k, l_2),\ u_k = \bar{u_k} b,\ v_k = a
+  \bar{v_k},\ (z_{k+1}, l) \in \delta(a, z_k)$
+  
+  In $G$ there exists the edge $e: (z_k, l_2) \edge{\inv{a}} (z_{k+1}, l_2)$.
+  
+  We set $\pi_{k+1} = \pi_k \cdot e$, so $Z(\pi_{k+1}) = (z_{k+1}, l_2)$ and it
+  is
+  \[ |\alpha(\pi_{k+1})| = |\alpha(\pi_k)| \cdot \inv{a} = |u_k \cdot a \inv{a}|
+  = |u_k| = u_{k+1} \cdot First(v_{k+1}) \]
+\end{itemize}
+
+These are all possible cases for $\pi_{k+1}$ and $\pi_{k+1}$ fulfills the
+induction hypothesis for $k+1$.
+
+Let now $f_n$ be an accepting computation for $v$, so $v_n = \epsilon,\ u_n = v$
+and $z_n \in F$.
+
+The last move of $\fa{B}$ was a right-move. It holds $Z(\pi_n) = (z_n, r_2)$ and
+therefore it holds $|\alpha(\pi_n)| = u_n = v$.
+
+For each path $\pi_n$ constructed in that way it holds
+\[ \forall \omega \prefix \pi_n \text{ holds }|\alpha(\omega)| \prefix
+|\alpha(\pi_n)| \]
+
+Because $f_n$ is an accepting computation, i.e.\ the reading head is placed to
+the right of the right-most input symbol, each input symbol must have been
+traversed one time more often to the right than to the left.
+
+This means, if a subpath $e \cdot e'$ with label $\alpha(e \cdot e') = a
+\inv{a}$ exists in $\pi_n$, then it must be followed by an edge $e''$ with
+$\alpha(e'') = a$ in $\pi_n$.
+
+The prefix condition of $\pi_n$ therefore cannot be violated by cancellation of
+an edge labelled with $\inv{a}$.
+
+It holds therefore $|\alpha(\pi_n)| = u_n = v \in \genbyone{L_{\fa{D}}}$.
+\end{proof}
+
+\bigskip
+\begin{lemma}
+\[ \genbyone{L_{\fa{D}}} \subset L_{\fa{B}} \]
+\end{lemma}
+
+\begin{proof}
+Let $G = (V, E)$ be the graph of $\fa{D}$, $v \in \genbyone{L_{\fa{D}}}$ and
+$\pi \in \pathcat{G}(S, F)$ be a path with label $|\alpha(\pi) = v$ and for any
+path prefix $\omega \prefix \pi$ it should hold $|\alpha(\omega)| \prefix
+|\alpha(\pi)$.
+
+We want to construct a computation $f$ which corresponds to the path $\pi$ in
+the sense of the previous lemma.
+
+We consider the sequence of subpaths
+\[ 1_{(z_0, r_2)} \prefix \pi_1 \prefix \pi_2 \ldots \prefix \pi_n = \pi \]
+with $\len{\pi_i} \leq \len{\pi_{i-1}} + 2$ and $Z(\pi_i) \in Z \times
+\setof{r_2, l_2}$ for $i = 1, \ldots, n$ and for $\pi_i \prefix \omega \prefix
+\pi_{i+1} \Rightarrow Z(\omega) \in Z \times \setof{r_1, l_1}$ if $\pi_i
+\neq \omega \neq \pi_{i+1}$.
+
+We run the automaton $\fa{B}$ on the input $v$ and show that there exists a
+computation $f$ which corresponds to the path $\pi$.
+
+\medskip
+To the empty path $\pi_0 = 1_{(z_0, r2)}$ corresponds $z_0 v$.
+
+Let $f_k$ be ending with $u_k z_k v_k$.
+
+Here, we also have to consider 4 cases:
+
+\begin{itemize}
+  \item[Case 1:] $Z(\pi_k) = (z_k, r_2),\ \pi_{k+1} = \pi_k \cdot e$ with $Z(e)
+  = (z_{k+1}, r_2)$ and $\alpha(e) = a$.
+  
+  It then holds $v_k = a \bar{v_k}$ and by construction of $\fa{D}$ it holds
+  $(z_{k+1, r}) \in \delta(a, z_k)$, therefore $u_{k+1} z_{k+1} v_{k+1}$ is a
+  configuration following $u_{k} z_{k} v_{k}$.
+   
+  \item[Case 2:] $Z(\pi_k) = (z_k, r_2),\ \pi_{k+1} = \pi_k \cdot e_1 \cdot
+  e_2$.
+  
+  We then have $Z(e_1) = (z_{k+1}, l_1),\ Z(e_2) = (z_{k+1}, l_2)$ and
+  $\alpha(e_1) = a$ and $\alpha(e_2) = \inv{b}$.
+  
+  Because of $|\alpha(\pi)| \in X^*$ it follows $b = a$ and we have
+  \[ (z_{k+1}, l) \in \delta(a, z_k)\text{ and }u_{k+1} = u \inv{a},\ v_{k+1} =
+  a v_k \]
+  and $u_{k+1} z_{k+1} v_{k+1}$ is a configuration following $u_{k} z_{k} v_{k}$.
+  
+  \item[Case 3:] $Z(\pi_k) = (z_k, l_2),\ \pi_{k+1} = \pi_k \cdot e$.
+  
+  It then holds $Z(e) = (z_{k+1}, l_2)$ and $\alpha(e) \in \inv{X}$. Let
+  $\alpha(e) = \inv{a}$. We have then $|\alpha(\pi_{k+1})| = |\alpha(\pi_k)
+  \cdot \inv{a}|$. Because of $|\alpha(\pi| \in X^*,\ \pi \in \pathcat{G}(S, V)$
+  and $|\alpha(\pi_k| = u_k \cdot First(v_k)$ it follows $First(v_k) = a$.
+  
+  If we have $u_k = \bar{u}_k b$, then for $u_{k+1} = \bar{u}_k$ and $v_{k+1} =
+  b a v_k$ it holds: $u_{k+1} z_{k+1} v_{k+1}$ is a configuration following
+  $u_{k} z_{k} v_{k}$.
+  
+  \item[Case 4:] $Z(\pi_k) = (z_k, l_2),\ \pi_{k+1} = \pi_k \cdot e_1 \cdot
+  e_2$.
+  
+  It follows $Z(e_1) = (z_{k+1}, r_1)$ and $Z(e_2) = (z_{k+1}, r_2)$ and
+  $\alpha(e_1) = \inv{a} \in \inv{X},\ \alpha(e_2) = b \in X$.
+  
+  Because of $\alpha(\pi) \in X^*,\ \pi \in \pathcat{G}(S, V)$, it follows
+  $|\alpha(\pi_k)| = u_k a$ and because $u_k a \inv{a} b \prefix |\alpha(\pi)|$
+  and $u_k a \prefix |\alpha(\pi_{k+1})|$ it follows $b = a$.
+  
+  Therefore $\alpha(\pi_{k+1}) = u_k a$. If we set $u_{k+1} = u_k a$ and
+  $v_{k+1} = \inv{a} v_k\ (v_k = a \bar{v}_k)$, then by construction of $\fa{D}$
+  $u_{k+1} z_{k+1} v_{k+1}$ is a configuration following $u_{k} z_{k} v_{k}$ and
+  the path $\pi_{k+1}$ corresponds to the computation $f_k$.
+\end{itemize}
+
+Let $v \in \genbyone{L_{\fa{D}}}$ and $\pi_n \in \pathcat{G}(S, F)$ with label
+$|\alpha(\pi_n)| = v$ and let for $\omega \prefix \pi_n$ hold $|\alpha(\omega)|
+\prefix |\alpha(\pi_n)|$, then there exists a computation $f_n = (z_0 v \to
+\ldots \to v z_n)$ with $z_0 \in S_{\fa{B}},\ z_n \in F_{\fa{B}}$ and therefore
+$v \in L_{\fa{B}}$.
+\end{proof}
+
+Both lemmata are summarized in the following theorem:
+
+\begin{theorem}
+\[ L_{\fa{B}} = \genbyone{L_{\fa{D}}} \]
+\end{theorem}
+
+\bigskip
+We will show now that for all finite two-way automata $\fa{B}$ it holds
+\[ L_{\fa{B}} \in \reglang(X^*)\ (= \ratlang(X^*)) \]
+
+Before doing that, we show a relationship between $\ratlang(X^*)$ and
+$\ratlang{\hgroup{X}}$.
+
+For the automaton $\fa{D}$ constructed above we set
+\[ L_{\fa{D}} := \setof{|\alpha(\pi)| \mid \pi \in \pathcat{G}(S, F)} \]
+where $G = (V, E)$ is the graph of $\fa{D}$.
+
+In this way, $\ratlang(\hgroup{X})$ is embedded in a natural way into
+$(\unioninv{X})^*$, see chapter II.7.
+
+We set
+\[ |\ratlang(\hgroup{X})| := \setof{|L| \mid L \in \ratlang(\hgroup{X}}) \]
+
+Then the following theorem holds:
+
+\begin{theorem}
+\[ |L| \cap X^* \in \ratlang(X^*) \]
+\end{theorem}
+
+\begin{proof}
+We only sketch the proof of this theorem, the reader may give the proof
+formally.
+
+Let $v_1, v_2$ be vertices of the graph $G = (V, E)$ of the automaton $\fa{D}$,
+and let $\pi: v_1 \to v_1$ be a path with label $\alpha(\pi) \equiv 1
+\pmod{\hgroup{X}}$.
+
+In this case, a new edge $e: v_1 \edge{\epsilon} v_2$ will be added to the
+graph. This will be done for all pairs $(v_1, v_2) \in V \times V$ which are
+connected by such a path.
+
+We get a new automaton $\fa{D}'$ with $|L_{\fa{D}}| = |L_{\fa{D}'}|$.
+
+If one removes all edges $e$ from the graph of $\fa{D}'$ where the label is
+$\alpha(e) \in \inv{X}$, then one gets a finite automaton $\fa{A}$ accepting the
+language $|L| \cap X^*$.
+\end{proof}
+
+Remark: A similar result can be proved for the free group $F(X)$
+(exercise).
+
+
+
+
+
+
 
 
 

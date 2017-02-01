@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={oval_state}] (0) at (0, 6) {$(q_0, R_2)$};
+		\node [style={oval_state}] (1) at (0, 4) {$(q_1, R_2)$};
+		\node [style={oval_state}] (2) at (0, 2) {$(q_2, L_1)$};
+		\node [style={oval_state}] (3) at (0, -0) {$(q_2, L_2)$};
+		\node [style={oval_state}] (4) at (2, 1) {$(q_a, R_1)$};
+		\node [style={oval_state}] (5) at (2, -1) {$(q_b, R_1)$};
+		\node [style={oval_state}] (6) at (4, 2) {$(q_a, R_2)$};
+		\node [style={oval_state}] (7) at (6, 3) {$(q_{a'}, R_2)$};
+		\node [style={oval_state}] (8) at (6, -0) {$(q_e, R_2)$};
+		\node [style={oval_state}] (9) at (4, -2) {$(q_b, R_2)$};
+		\node [style={oval_state}] (10) at (6, -3) {$(q_{b'}, R_2)$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=transition, bend right=60, looseness=1.25] (0) to node[auto]{$a$} (1);
+		\draw [style=transition] (1) to node[auto]{$c$} (2);
+		\draw [style=transition] (2) to node[auto]{$\inv{c}$} (3);
+		\draw [style=transition] (3) to node[auto]{$\inv{a}$} (4);
+		\draw [style=transition] (4) to node[auto]{$a$} (6);
+		\draw [style=transition] (6) to node[auto]{$c$} (7);
+		\draw [style=transition] (7) to node[auto]{$a$} (8);
+		\draw [style=transition] (3) to node[auto]{$\inv{b}$} (5);
+		\draw [style=transition] (5) to node[auto]{$b$} (9);
+		\draw [style=transition] (9) to node[auto]{$c$} (10);
+		\draw [style=transition] (10) to node[auto]{$b$} (8);
+		\draw [style=transition, in=-150, out=150, loop] (1) to node[auto]{$a$} ();
+		\draw [style=transition, in=30, out=-30, loop] (1) to node[auto]{$b$} ();
+		\draw [style=transition, bend left=45, looseness=1.25] (0) to node[auto]{$b$} (1);
+		\draw [style=transition, in=90, out=0, loop] (8) to node[auto]{$a$} ();
+		\draw [style=transition, in=0, out=-90, loop] (8) to node[auto]{$b$} ();
+	\end{pgfonlayer}
+\end{tikzpicture}

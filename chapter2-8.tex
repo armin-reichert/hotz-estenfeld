@@ -191,9 +191,11 @@ From this we want to construct our automaton
 R_2)}, \alpha) \]
 
 The graph $G = (V, E)$ has the following form (the markings at the edges are
-the edge labels):
+the edge labels): 
 
-\missingfigure
+\begin{center}
+\input{figures/chapter2-8-example-graph.tikz}
+\end{center}
 
 We begin with proving the equivalence between both automata models. To do so, we
 prove the following lemma.
@@ -444,17 +446,17 @@ used in the construction of $\fa{D}$.
 
 \missingfigure
 
-On the input tape we have $w = x_1 \cdots x_n$, the automaton shall be in state
-$(z, y	,\ y \in \setof{L_2, R_2})$, and the reading head shall be located to the
-right of the $k$th cell.
+On the input tape we have $w = x_1 \cdots x_n,\ x_i \in X$, the automaton shall
+be in state $(q, y),\ y \in \setof{L_2, R_2})$ and the reading head shall be
+located to the right of the $k$th cell.
 
-We set $w_k = x_1 \cdots x_k$ and ask in which states the automaton will return
+We set $w_k := x_1 \cdots x_k$ and ask in which states the automaton will return
 to its current position for $y = L_2$.
 
-We denote the set of these states as the {\bf echo} of state $z$ in $w_k$.
+We denote the set of these states as the {\bf echo} of state $q$ in $w_k$.
 
 We don't assume that the automaton has read the tape from the left, but think of
-the head to be placed arbitrarily at this position in state $(z, L_2)$.
+the head to be placed arbitrarily at this position in state $(q, L_2)$.
 
 We define the echo formally:
 \newcommand{\echo}[2]{\mathrm{Echo}_{#1}(#2)}
@@ -462,13 +464,13 @@ We define the echo formally:
 Define for $v \in X^*,\ a \in X$ the relation $\mathrm{Echo}_v \subset V \times
 \powset{V}$ by
 \begin{enumerate}
-  \item $\echo{\epsilon}{(z, l_i)} = \emptyset$ for $i = 1, 2$.
+  \item $\echo{\epsilon}{(q, L_i)} = \emptyset$ for $i = 1, 2$.
   
-  \item $\echo{v}{(z, r_i)} = (z, r_i)$ for $i = 1, 2$.
+  \item $\echo{v}{(q, R_i)} = (q, R_i)$ for $i = 1, 2$.
   
-  \item $\echo{va}{(z, L_1)} = a \cdot \echo{v}{(\inv{a}(z, L_1))}$
+  \item $\echo{v \cdot a}{(q, L_1)} = a \cdot \echo{v}{(\inv{a}(q, L_1))}$
   
-  \item $\echo{va}{(z, L_2)} = (a \cdot \echo{v}{\inv{a}})^+ (z, L_2)$
+  \item $\echo{v \cdot a}{(q, L_2)} = (a \cdot \echo{v}{\inv{a}})^+ (q L_2)$
 \end{enumerate}
 
 \end{proof}

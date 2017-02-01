@@ -11,48 +11,52 @@ tape in two directions as indicated by the following figure:
 \end{center}
 
 The representation of such an automaton by a state graph is not trivial. For
-this reason, we  define this type of automaton as usual at first.
+this reason, we first define this type of automaton as usual.
 
 Afterwards, we will show how to represent this automaton by a state graph.
 
+(The definition in the original book has been slightly adapted to conform to
+the common literature.)
+
 \begin{definition}
-A {\bf finite two-way automaton} is defined by
-\[ \fa{B} = (X, Z, \delta, S, F, \setof{l, r}) \]
+A {\bf (non-deterministic) two-way finite automaton} is defined by
+\[ \fa{B} = (X, Q, \delta, S, F, \setof{L, R}) \]
 where 
 \begin{itemize}
-  \item $X$ is the input alphabet with $\setof{l, r} \cap X = \emptyset$
-  \item $Z$ is the state set with $\setof{l, r} \cap X = \emptyset$
-  \item $S \subset Z$ is the set of start states
-  \item $F \subset Z$ is the set of final states of $\fa{B}$
-  \item $\delta \subset (X \times Z) \times (Z \times \setof{l, r})$ is a
+  \item $X$ is the input alphabet with $\setof{L, R} \cap X = \emptyset$
+  \item $Q$ is the state set with $\setof{L, R} \cap Q = \emptyset$
+  \item $S \subset Q$ is the set of start states
+  \item $F \subset Q$ is the set of final states of $\fa{B}$
+  \item $\delta \subset (Q \times X) \to (Q \times \setof{L, R})$ is a
   relation describing the functioning of $\fa{B}$
 \end{itemize}
 
-If $\delta : (X \times Z) \to Z \times \setof{l, r}$ is a mapping, then $\fa{B}$
-is called a {\bf complete, deterministic finite two-way automaton}.
+If $\delta : (Q \times X) \to Q \times \setof{L, R}$ is a map, then
+$\fa{B}$ is called a {\bf complete, deterministic two-way finite automaton}.
 \end{definition}
 
 \bigskip
 \begin{definition}
-A {\bf computation} of $\fa{B}$ on the input tape with label $v \in X^*$ is a
-sequence
+A {\bf computation} of $\fa{B}$ on the input word $v \in X^*$ is a sequence of
+single computation steps
 \[ f_k = (z_0 v \to u_1 z_1 v_1 \to u_2 z_2 v_2 \to \ldots \to u_k z_k v_k) \]
 with $u_i, v_i \in X^*,\ z_i \in Z$ for $i = 1, \ldots, k$ and $z_0 \in S$. 
 \end{definition}
 
-$u_i z_i v_i$ transfers in a single step into $u_{i+1} z_{i+1} v_{i+1}$ if the
-following holds:
+A single computation step $u_i z_i v_i \to u_{i+1} z_{i+1} v_{i+1}$ is defined
+by the following alternatives:
 
-\begin{enumerate}
-  \item If $v_i = a v'_i$, then $u_{i+1} = u_i a,\ v_{i+1} = v'_i$, if $(z_{i+1}, r)
-\in \delta(a, z_i)$, i.e.\ the reading head moves to the right and the
-automaton changes into state $z_{i+1}$, if it reads in state $z_i$ a symbol $a$,
-or
-\item if $u_i = u'_i b,\ v_i = a v'_i$, then $u_{i+1} = u'_i$ and $v_{i+1} = b
-v_i$, if $(z_{i+1}, l) \in \delta(a, z_i)$, i.e.\ the reading head moves to the
-left and the automaton changes into state $z_{i+1}$, if it reads in state $z_i$
-a symbol $a$.
-\end{enumerate}
+\begin{itemize}
+  \item If $v_i = a v'_i$, then $u_{i+1} = u_i a,\ v_{i+1} =
+  v'_i$, if $(z_{i+1}, R) \in \delta(z_i, a)$,\\
+  i.e.\ the reading head moves to the right and the automaton changes into state
+  $z_{i+1}$, if it reads $a$ in state $z_i$.
+
+	\item If $u_i = u'_i b,\ v_i = a v'_i$, then $u_{i+1} = u'_i$ and
+	$v_{i+1} = b v_i$, if $(z_{i+1}, L) \in \delta(z_i, a)$,\\
+	i.e.\ the reading head moves to the left and the automaton changes into state
+	$z_{i+1}$, if it reads $a$ in state $z_i$.
+\end{itemize}
 
 \bigskip
 \begin{definition}
@@ -60,86 +64,86 @@ A word $w \in X^*$ is {\bf accepted by} $\fa{B}$ if there exists a computation
 $f_k$ with $v_k = \epsilon$ and $z_k \in F$.
 \end{definition}
 
-We set
+The language of $\fa{B}$ is
 \[ L_{\fa{B}} = \setof{w \in X^* \mid w\text{ is accepted by }\fa{B}} \]
 
-We want to consider again the monoid $\hgroup{X}$, see chapter I.3.
-
-We construct an automaton
+\bigskip
+We want to consider again the monoid $\hgroup{X}$ (H-group, involutive monoid),
+see chapter I.3, and construct an automaton 
 \[ \fa{D} = (G, \hgroup{X}, S, F, \alpha) \]
 with graph $G=(V, E)$ as follows:
 \begin{itemize}
-  \item $V = Z \times \setof{l_1, l_2, r_1, r_2}$
-  \item $E$ and $\alpha: E^* \to \hgroup{X}$ is defined as follows:
+  \item $V = Q \times \setof{L_1, L_2, R_1, R_2}$
   
-  $E$ contains an edge $e: (z, y) \edge{a} (z', y') \iff$ one of the following
+  \item Edge set $E$ and labelling $\alpha: E \to \hgroup{X}$ are defined as
+  follows:
+  
+  $E$ contains an edge $e: (q, y) \edge{a} (q', y') \iff$ one of the following
   cases occurs:
   \begin{enumerate}
-    \item $y = r_2,\ y' = r_2,\ (z', r) \in \delta(a, z)$
-    \item $y = r_2,\ y' = l_1,\ (z', l) \in \delta(a, z)$
-    \item $y = r_1,\ y' = r_2,\ z = z'$ and there exists $\bar{z}$ with $(z, r)
-    \in \delta(a, \bar{z})$
+    \item $y = R_2,\ y' = R_2,\ (q', R) \in \delta(q, a)$
+    \item $y = R_2,\ y' = L_1,\ (q', L) \in \delta(q, a)$
+    \item $y = R_1,\ y' = R_2,\ q = q'$ and there exists $\bar{q} \in Q$ with
+    $(q, R) \in \delta(\bar{q}, a)$
   \end{enumerate}
 
-  $E$ contains an edge $e: (z, y) \edge{\inv{a}} (z', y') \iff$ one of the
+  $E$ contains an edge $e: (q, y) \edge{\inv{a}} (q', y') \iff$ one of the
   following cases occurs:
   \begin{enumerate}
-    \item $y = l_2,\ y' = l_2,\ (z', l) \in \delta(a, z)$
-    \item $y = l_2,\ y' = r_1,\ (z', r) \in \delta(a, z)$
-    \item $y = l_1,\ y' = l_2,\ z = z'$ and there exists $\bar{z}$ with $(z, l)
-    \in \delta(a, \bar{z})$
+    \item $y = L_2,\ y' = L_2,\ (q', L) \in \delta(q, a)$
+    \item $y = L_2,\ y' = R_1,\ (q', R) \in \delta(q, a)$
+    \item $y = L_1,\ y' = L_2,\ q = q'$ and there exists $\bar{q} \in Q$ with
+    $(q, L) \in \delta(\bar{q}, a)$
   \end{enumerate}
 \end{itemize}
 
 \bigskip
-To clarify this definition we use the following visualization:
+To clarify this definition, we imagine the following model:
 
-The input tape of the automaton is divided alternatingly into rectangular and
+The input tape of the automaton is alternatingly divided into rectangular and
 oval cells.
 
 \begin{center}
 \input{figures/chapter2-8-two-way-automaton-cells.tikz}
 \end{center}
 
-The ovals are ''idle-positions'' for the reading head, the rectangles
-each contain a symbol of the input alphabet.
+The ovals represent ''idle-positions'' for the reading head, the rectangles
+contain the single symbols of the input word.
 
-The reading head moves from a ''idle-position'' to the ''idle-position'' to the
-left or to the right.
+The reading head moves from an ''idle-position'' to the neighbor
+''idle-position'' to the left or to the right.
 
 If it moves from left to right over the cell $k$ with symbol $a$, then the
-automaton reads $a$, if to the opposite it moves from right to left over that
-cell, it reads $\inv{a}$. (This kind of reading when a cell is traversed
-corresponds to the physical process when for example using a magnetic disk).
+automaton reads $a$, if it moves from right to left over that cell, it reads
+$\inv{a}$. (This kind of reading when traversing a cell corresponds
+to the physical model of a magnetic disc).
 
-In some cases, our geometric model has to perform two computation steps, when
-the automaton $\fa{B}$ performs only a single step.
+In some cases, our model has to perform two computation steps when the
+automaton $\fa{B}$ performs only a single step.
 
 The following cases may occur:
 
 \begin{enumerate}
   \item The automaton is in idle position to the left of a cell $k$. It
-  remembers that it should move to the right, i.e.\ it is in some state $(z,
-  r_2)$. It traverses now the $k$th cell, reads the symbol $a$, reaches the
+  remembers that it should move to the right, i.e.\ it is in some state $(q,
+  R_2)$. It traverses now the $k$th cell, reads the symbol $a$, reaches the
   subsequent idle position and finds that it should have gone to the left. This
-  is desribed by the state $(z', l_1)$. Therefore it moves back to its previous
-  idle position and changes into state $(z', l_2)$. Together it has read $a
+  is desribed by the state $(q', L_1)$. Therefore it moves back to its previous
+  idle position and changes into state $(q', L_2)$. Together it has read $a
   \inv{a}$.
   
-  This kind of movement can be expressed using the following diagram:
-  \[ (z, r_2) \edge{a} (z', l_1) \edge{\inv{a}} (z', l_2) \]
+  This kind of movement can be expressed using the following path:
+  \[ (q, R_2) \edge{a} (q', L_1) \edge{\inv{a}} (q', L_2) \]
   
-  \item In the same way, the following diagram is to be understood:
-  \[ (z, l_2) \edge{\inv{a}} (z', r_1) \edge{a} (z', r_2) \]
+  \item In the same way, the following path is to be understood:
+  \[ (q, L_2) \edge{\inv{a}} (q', R_1) \edge{a} (q', R_2) \]
 \end{enumerate}
 
-We complete the definition of $\fa{D}$ by setting
-\[ S = S_{\fa{B}} \times \setof{r_2},\quad F = F_{\fa{B}} \times \setof{r_2} \]
+The definition of $\fa{D}$ is completed by setting
+\[ S = S_{\fa{B}} \times \setof{R_2},\quad F = F_{\fa{B}} \times \setof{R_2} \]
 
-We denote again by $|u| \in (\unioninv{X})^*$ the reduced word for an element
-$[u] \in \hgroup{X}$.
-
-Then we can define:
+We write again $|u| \in (\unioninv{X})^*$ for the reduced word for an element
+$[u] \in \hgroup{X}$ and define:
 
 \begin{definition}
 \begin{eqnarray*}
@@ -149,39 +153,42 @@ X^*,\ \pi \in \pathcat{G}(S, F) \\
 |\alpha(\omega)| \prefix |\alpha(\pi)| \}
 \end{eqnarray*}
 
-Here the relation $\prefix \subset \pathcat{G} \times \pathcat{G}$ denotes the
-path prefix relation, and the relation $\prefix \subset (\unioninv{X})^* \times
-(\unioninv{X})^*$ denotes the word prefix relation.
+Here, the symbol $\prefix$ denotes the path-prefix relation
+\[ \prefix\ \subset \pathcat{G} \times \pathcat{G} \]
+as well as the word-prefix relation
+\[ \prefix\ \subset (\unioninv{X})^* \times (\unioninv{X})^* \]
 \end{definition}
 
-\bigskip
 First, we want to give an example to clarify the construction given above.
 
-We have a finite two-way automaton which accepts the language
-\[ L = \setof{w \in \setof{a, b}^+ c \setof{a, b}^+ \mid w = w_1 \cdots w_n
-\text{ with } w_i = c \Rightarrow w_{i-1} = w_{i+1},\ 1 \leq i \leq n} \]
+The following two-way finite automaton accepts the language
+\begin{eqnarray*}
+L &=& \{ w \in \setof{a, b}^+ \cdot c \cdot \setof{a, b}^+ \mid w = w_1 \cdots
+w_n,\ w_i \in X \\
+&& \text{ with } w_i = c \Rightarrow w_{i-1} = w_{i+1},\ 1 < i < n \}
+\end{eqnarray*} 
 
 The transition function shall be defined as follows:
 \begin{eqnarray*}
-\delta(a, z_0) &=& \delta(a, z_1) = (z_1, r) \\
-\delta(b, z_0) &=& \delta(b, z_1) = (z_1, r) \\
-\delta(c, z_1) &=& (z_2, l) \\
-\delta(a, z_2) &=& (z_a, r) \\
-\delta(b, z_2) &=& (z_b, r) \\
-\delta(c, z_a) &=& (z_{a'}, r) \\
-\delta(c, z_b) &=& (z_{b'}, r) \\
-\delta(a, z_{a'}) &=& (z_e, r) \\
-\delta(b, z_{b'}) &=& (z_e, r) \\
-\delta(a, z_{e}) &=& \delta(b, z_e) = (z_e, r)
+\delta(q_0, a) &=& \delta(q_1, a) = (q_1, R) \\
+\delta(q_0, b) &=& \delta(q_1, b) = (q_1, R) \\
+\delta(q_1, c) &=& (q_2, L) \\
+\delta(q_2, a) &=& (q_a, R) \\
+\delta(q_2, b) &=& (q_b, R) \\
+\delta(q_a, c) &=& (q_{a'}, R) \\
+\delta(q_b, c) &=& (q_{b'}, R) \\
+\delta(q_{a'}, a) &=& (q_e, R) \\
+\delta(q_{b'}, b) &=& (q_e, R) \\
+\delta(q_{e}, a) &=& \delta(q_e, b) = q_e, R)
 \end{eqnarray*}
 
-The two-way automaton $\fa{A}$ is defined by
-\[ \fa{A} = (\setof{z_0, z_1, z_2, z_a, z_b, z_{a'}, z_{b'}, z_e}, \setof{a,
-b, c}, \setof{z_0}, \setof{z_e}, \delta) \]
+The two-way finite automaton $\fa{A}$ is defined by
+\[ \fa{A} = (\setof{q_0, q_1, q_2, q_a, q_b, q_{a'}, q_{b'}, q_e}, \setof{a,
+b, c}, \setof{q_0}, \setof{q_e}, \delta) \]
 
 From this we want to construct our automaton 
-\[ \fa{D} = (G, \hgroup{\setof{a, b, c}}, \setof{(z_0, r_2)}, \setof{(z_e,
-r_2)}, \alpha) \]
+\[ \fa{D} = (G, \hgroup{\setof{a, b, c}}, \setof{(q_0, R_2)}, \setof{(q_e,
+R_2)}, \alpha) \]
 
 The graph $G = (V, E)$ has the following form (the markings at the edges are
 the edge labels):
@@ -196,99 +203,99 @@ prove the following lemma.
 \end{lemma}
 
 \begin{proof}
-We assign to each computation $f_k,\ k \in \mathbb{N}$ of the automaton $\fa{B}$
-a path $\pi \in \pathcat{G}(S, V)$. We do that by induction over the length of
-the computations.
+To each computation $f_k,\ k \in \mathbb{N}$, of the automaton
+$\fa{B}$ we assign a path $\pi \in \pathcat{G}(S, V)$. We use induction over the
+length of the computations.
 
 {\em Induction base:}
 
-To the empty computation $f_0$ we assign the empty path $1_{(z_0, r_2)}$ where
-$z_0 \in S_{\fa{B}}$ is a start state of $\fa{B}$.
+To the empty computation $f_0$ we assign the empty path $1_{(q_0, R_2)}$ where
+$q_0 \in S_{\fa{B}}$ is a start state of $\fa{B}$.
 
-It holds: $\alpha(1_{(z_0, r_2)}) = \epsilon = u_0$.
+It holds: $\alpha(1_{(q_0, R_2)}) = \epsilon = u_0$.
 
-{\em Induction hypothesis:}
+{\em Induction step:}
 
 For all computations $f_k$ of length $k$ we assume to have a path $\pi_k \in
-\pathcat{G}(S, V)$ such that $Z(\pi_k) \in Z \times \setof{(r_2, l_2)}$ and
+\pathcat{G}(S, V)$ such that $Z(\pi_k) \in Q \times \setof{(R_2, L_2)}$ and
 \[ |\alpha(\pi_k)| = \begin{cases}
-u_k & \text{for }Z(\pi_k) \in Z \times \setof{r_2} \\
-u_k \cdot First(v_k) & \text{for }Z(\pi_k) \in Z \times \setof{l_2}
+u_k & \text{for }Z(\pi_k) \in Q \times \setof{R_2} \\
+u_k \cdot First(v_k) & \text{for }Z(\pi_k) \in Q \times \setof{L_2}
 \end{cases} \]
 
-Here $First(w)$ denotes the first character of the word $w$.
+Here $First(w)$ denotes the first symbol of the word $w$.
 
 Let $f_{k+1}$ be a computation of length $k+1$ which ends with the computation
 step
 \[ u_k z_k v_k \to u_{k+1} z_{k+1} v_{k+1} \]
 
 \begin{itemize}
-  \item[Case 1:] $Z(\pi_k) = (z_k, r_2),\ v_k = a \bar{v_k},\ (z_{k+1}, r) \in
-  \delta(a, z_k)$
+  \item[Case 1:] $Z(\pi_k) = (q_k, R_2),\ v_k = a \bar{v}_k,\ (q_{k+1}, R) \in
+  \delta(q_k, a)$
   
-  By construction, $G$ contains an edge $e: (z_k, r_2) \edge{a} (z_{k+1}, r_2)$.
+  By construction, $G$ contains an edge $e: (q_k, R_2) \edge{a} (q_{k+1}, R_2)$.
   
   We set $\pi_{k+1} := \pi_k \cdot e$ and get
   \[ |\alpha(\pi_{k+1})| = |\alpha(\pi_k)| \cdot a = u_{k+1} \]
   
-  \item[Case 2:] $Z(\pi_k) = (z_k, r_2),\ u_k = \bar{u}_k b,\ v_k = a
-  \bar{v_k},\ (z_{k+1}, l) \in \delta(a, z_k)$
+  \item[Case 2:] $Z(\pi_k) = (q_k, R_2),\ u_k = \bar{u}_k b,\ v_k = a
+  \bar{v}_k,\ (q_{k+1}, L) \in \delta(q_k, a)$
   
   By construction, in $G$ there exists a path
-  \[ (z_k, r_2) \edge{e_1 / a} (z_{k+1}, l_1) \edge{e_2 / \inv{a}} (z_{k+1},
-  l_2),\ e_1, e_2 \in E \]
+  \[ (q_k, R_2) \edge{e_1 / a} (q_{k+1}, L_1) \edge{e_2 / \inv{a}} (q_{k+1},
+  L_2),\ e_1, e_2 \in E \]
   
-  We set $\pi_{k+1} = \pi_k \cdot e_1 \cdot e_2$, then it is
+  We set $\pi_{k+1} := \pi_k \cdot e_1 \cdot e_2$, then it is
   \[ |\pi_{k+1}| = |\pi_k| = u_{k+1} \cdot b = u_{k+1} \cdot First(v_{k+1}) \]
-  and $Z(\pi_{k+1}) \in Z \times \setof{l_2}$.
+  and $Z(\pi_{k+1}) \in Q \times \setof{L_2}$.
   
-  \item[Case 3:] $Z(\pi_k) = (z_k, l_2),\ v_k = a \bar{v_k},\ (z_{k+1}, r) \in
-  \delta(a, z_k)$
+  \item[Case 3:] $Z(\pi_k) = (q_k, L_2),\ v_k = a \bar{v}_k,\ (q_{k+1}, R) \in
+  \delta(q_k, a)$
   
   In $G$ there exists a path 
-  \[ (z_k, l_2) \edge{e_1 / \inv{a}} (z_{k+1}, r_1) \edge{e_2 / a} (z_{k+1},
-  r_2),\ e_1, e_2 \in E \]
+  \[ (q_k, L_2) \edge{e_1 / \inv{a}} (q_{k+1}, R_1) \edge{e_2 / a} (q_{k+1},
+  R_2),\ e_1, e_2 \in E \]
   
-  We set $\pi_{k+1} = \pi_k \cdot e:1 \cdot e_2$, then it is $Z(\pi_{k+1}) \in
-  Z \times \setof{r_2}$ and
+  We set $\pi_{k+1} := \pi_k \cdot e_1 \cdot e_2$, then it is $Z(\pi_{k+1}) \in
+  Q \times \setof{R_2}$ and
   \[ |\alpha(\pi_{k+1})| = |u_k a \inv{a} a| = u_k a = u_{k+1} \]
   
-  \item[Case 4:] $Z(\pi_k) = (z_k, l_2),\ u_k = \bar{u_k} b,\ v_k = a
-  \bar{v_k},\ (z_{k+1}, l) \in \delta(a, z_k)$
+  \item[Case 4:] $Z(\pi_k) = (q_k, L_2),\ u_k = \bar{u}_k b,\ v_k = a
+  \bar{v}_k,\ (q_{k+1}, L) \in \delta(q_k, a)$
   
-  In $G$ there exists the edge $e: (z_k, l_2) \edge{\inv{a}} (z_{k+1}, l_2)$.
+  In $G$ there exists an edge $e: (q_k, L_2) \edge{\inv{a}} (q_{k+1}, L_2)$.
   
-  We set $\pi_{k+1} = \pi_k \cdot e$, so $Z(\pi_{k+1}) = (z_{k+1}, l_2)$ and it
-  is
+  We set $\pi_{k+1} := \pi_k \cdot e$, then $Z(\pi_{k+1}) = (q_{k+1}, L_2)$ and
+  it is
   \[ |\alpha(\pi_{k+1})| = |\alpha(\pi_k)| \cdot \inv{a} = |u_k \cdot a \inv{a}|
   = |u_k| = u_{k+1} \cdot First(v_{k+1}) \]
 \end{itemize}
 
 These are all possible cases for $\pi_{k+1}$ and $\pi_{k+1}$ fulfills the
-induction hypothesis for $k+1$.
+induction claim for $k+1$.
 
-Let now $f_n$ be an accepting computation for $v$, so $v_n = \epsilon,\ u_n = v$
-and $z_n \in F$.
+Let now $f_n$ be an accepting computation for a word $v$, so $v_n = \epsilon,\
+u_n = v$ and $z_n \in F$.
 
-The last move of $\fa{B}$ was a right-move. It holds $Z(\pi_n) = (z_n, r_2)$ and
+The last move of $\fa{B}$ was a right-move. It holds $Z(\pi_n) = (q_n, R_2)$ and
 therefore it holds $|\alpha(\pi_n)| = u_n = v$.
 
-For each path $\pi_n$ constructed in that way it holds
-\[ \forall \omega \prefix \pi_n \text{ holds }|\alpha(\omega)| \prefix
+For each subpath $\omega$ of a path $\pi_n$ constructed in that way we get
+\[ \forall \omega \prefix \pi_n \text{ it holds: }|\alpha(\omega)| \prefix
 |\alpha(\pi_n)| \]
 
-Because $f_n$ is an accepting computation, i.e.\ the reading head is placed to
-the right of the right-most input symbol, each input symbol must have been
-traversed one time more often to the right than to the left.
+Because $f_n$ is an {\em accepting} computation, i.e.\ the reading head is
+placed to the right of the right-most input symbol, each input symbol must have 
+been traversed one time more often to the right than to the left.
 
 This means, if a subpath $e \cdot e'$ with label $\alpha(e \cdot e') = a
 \inv{a}$ exists in $\pi_n$, then it must be followed by an edge $e''$ with
-$\alpha(e'') = a$ in $\pi_n$.
+$\alpha(e'') = a$.
 
 The prefix condition of $\pi_n$ therefore cannot be violated by cancellation of
 an edge labelled with $\inv{a}$.
 
-It holds therefore $|\alpha(\pi_n)| = u_n = v \in \genbyone{L_{\fa{D}}}$.
+It therefore holds: $|\alpha(\pi_n)| = u_n = v \in \genbyone{L_{\fa{D}}}$.
 \end{proof}
 
 \bigskip
@@ -298,80 +305,80 @@ It holds therefore $|\alpha(\pi_n)| = u_n = v \in \genbyone{L_{\fa{D}}}$.
 
 \begin{proof}
 Let $G = (V, E)$ be the graph of $\fa{D}$, $v \in \genbyone{L_{\fa{D}}}$ and
-$\pi \in \pathcat{G}(S, F)$ be a path with label $|\alpha(\pi) = v$ and for any
-path prefix $\omega \prefix \pi$ it should hold $|\alpha(\omega)| \prefix
-|\alpha(\pi)$.
+$\pi \in \pathcat{G}(S, F)$ be a path with label $|\alpha(\pi)| = v$, and for
+any path prefix $\omega \prefix \pi$ it should hold $|\alpha(\omega)| \prefix
+|\alpha(\pi)|$.
 
 We want to construct a computation $f$ which corresponds to the path $\pi$ in
 the sense of the previous lemma.
 
 We consider the sequence of subpaths
-\[ 1_{(z_0, r_2)} \prefix \pi_1 \prefix \pi_2 \ldots \prefix \pi_n = \pi \]
-with $\len{\pi_i} \leq \len{\pi_{i-1}} + 2$ and $Z(\pi_i) \in Z \times
-\setof{r_2, l_2}$ for $i = 1, \ldots, n$ and for $\pi_i \prefix \omega \prefix
-\pi_{i+1} \Rightarrow Z(\omega) \in Z \times \setof{r_1, l_1}$ if $\pi_i
-\neq \omega \neq \pi_{i+1}$.
+\[ 1_{(q_0, R_2)} \prefix \pi_1 \prefix \pi_2 \ldots \prefix \pi_n = \pi \]
+with $\len{\pi_i} - \len{\pi_{i-1}} \leq 2$ and $Z(\pi_i) \in Q \times
+\setof{R_2, L_2}$ for $i = 1, \ldots, n$ and for $\pi_i \prefix \omega \prefix
+\pi_{i+1},\ \pi_i \neq \omega \neq \pi_{i+1}, \Rightarrow Z(\omega) \in Q \times
+\setof{R_1, L_1}$.
 
-We run the automaton $\fa{B}$ on the input $v$ and show that there exists a
+We apply the automaton $\fa{B}$ on the input $v$ and show that there exists a
 computation $f$ which corresponds to the path $\pi$.
 
 \medskip
-To the empty path $\pi_0 = 1_{(z_0, r2)}$ corresponds $z_0 v$.
+To the empty path $\pi_0 = 1_{(q_0, R_2)}$ corresponds the computation $q_0 v$.
 
-Let $f_k$ be ending with $u_k z_k v_k$.
+Let $f_k$ be a computation ending with $u_k z_k v_k$.
 
 Here, we also have to consider 4 cases:
 
 \begin{itemize}
-  \item[Case 1:] $Z(\pi_k) = (z_k, r_2),\ \pi_{k+1} = \pi_k \cdot e$ with $Z(e)
-  = (z_{k+1}, r_2)$ and $\alpha(e) = a$.
+  \item[Case 1:] $Z(\pi_k) = (q_k, R_2),\ \pi_{k+1} = \pi_k \cdot e$ with $Z(e)
+  = (q_{k+1}, R_2)$ and $\alpha(e) = a$.
   
-  It then holds $v_k = a \bar{v_k}$ and by construction of $\fa{D}$ it holds
-  $(z_{k+1, r}) \in \delta(a, z_k)$, therefore $u_{k+1} z_{k+1} v_{k+1}$ is a
-  configuration following $u_{k} z_{k} v_{k}$.
+  It then holds $v_k = a \bar{v}_k$ and by construction of $\fa{D}$ it holds
+  $(q_{k+1, R}) \in \delta(q_k, a)$, therefore $u_{k+1} q_{k+1} v_{k+1}$ is
+  a configuration following $u_k q_k v_k$.
    
-  \item[Case 2:] $Z(\pi_k) = (z_k, r_2),\ \pi_{k+1} = \pi_k \cdot e_1 \cdot
+  \item[Case 2:] $Z(\pi_k) = (q_k, R_2),\ \pi_{k+1} = \pi_k \cdot e_1 \cdot
   e_2$.
   
-  We then have $Z(e_1) = (z_{k+1}, l_1),\ Z(e_2) = (z_{k+1}, l_2)$ and
+  We then have $Z(e_1) = (q_{k+1}, L_1),\ Z(e_2) = (q_{k+1}, L_2)$ and
   $\alpha(e_1) = a$ and $\alpha(e_2) = \inv{b}$.
   
   Because of $|\alpha(\pi)| \in X^*$ it follows $b = a$ and we have
-  \[ (z_{k+1}, l) \in \delta(a, z_k)\text{ and }u_{k+1} = u \inv{a},\ v_{k+1} =
-  a v_k \]
-  and $u_{k+1} z_{k+1} v_{k+1}$ is a configuration following $u_{k} z_{k} v_{k}$.
+  \[ (q_{k+1}, L) \in \delta(q_k, a)\text{ and }u_{k+1} = u \inv{a},\
+  v_{k+1} = a v_k \]
+  and $u_{k+1} q_{k+1} v_{k+1}$ is a configuration following $u_k q_k v_k$.
   
-  \item[Case 3:] $Z(\pi_k) = (z_k, l_2),\ \pi_{k+1} = \pi_k \cdot e$.
+  \item[Case 3:] $Z(\pi_k) = (q_k, L_2),\ \pi_{k+1} = \pi_k \cdot e$.
   
-  It then holds $Z(e) = (z_{k+1}, l_2)$ and $\alpha(e) \in \inv{X}$. Let
-  $\alpha(e) = \inv{a}$. We have then $|\alpha(\pi_{k+1})| = |\alpha(\pi_k)
+  It then holds $Z(e) = (q_{k+1}, L_2)$ and $\alpha(e) \in \inv{X}$. Let
+  $\alpha(e) = \inv{a}$. We then have $|\alpha(\pi_{k+1})| = |\alpha(\pi_k)
   \cdot \inv{a}|$. Because of $|\alpha(\pi| \in X^*,\ \pi \in \pathcat{G}(S, V)$
   and $|\alpha(\pi_k| = u_k \cdot First(v_k)$ it follows $First(v_k) = a$.
   
   If we have $u_k = \bar{u}_k b$, then for $u_{k+1} = \bar{u}_k$ and $v_{k+1} =
-  b a v_k$ it holds: $u_{k+1} z_{k+1} v_{k+1}$ is a configuration following
-  $u_{k} z_{k} v_{k}$.
+  b a v_k$ it holds: $u_{k+1} q_{k+1} v_{k+1}$ is a configuration following
+  $u_k q_k v_k$.
   
-  \item[Case 4:] $Z(\pi_k) = (z_k, l_2),\ \pi_{k+1} = \pi_k \cdot e_1 \cdot
+  \item[Case 4:] $Z(\pi_k) = (q_k, L_2),\ \pi_{k+1} = \pi_k \cdot e_1 \cdot
   e_2$.
   
-  It follows $Z(e_1) = (z_{k+1}, r_1)$ and $Z(e_2) = (z_{k+1}, r_2)$ and
+  It follows $Z(e_1) = (q_{k+1}, R_1)$ and $Z(e_2) = (q_{k+1}, R_2)$ and
   $\alpha(e_1) = \inv{a} \in \inv{X},\ \alpha(e_2) = b \in X$.
   
-  Because of $\alpha(\pi) \in X^*,\ \pi \in \pathcat{G}(S, V)$, it follows
+  Because of $\alpha(\pi) \in X^*,\ \pi \in \pathcat{G}(S, V)$ it follows
   $|\alpha(\pi_k)| = u_k a$ and because $u_k a \inv{a} b \prefix |\alpha(\pi)|$
   and $u_k a \prefix |\alpha(\pi_{k+1})|$ it follows $b = a$.
   
   Therefore $\alpha(\pi_{k+1}) = u_k a$. If we set $u_{k+1} = u_k a$ and
-  $v_{k+1} = \inv{a} v_k\ (v_k = a \bar{v}_k)$, then by construction of $\fa{D}$
-  $u_{k+1} z_{k+1} v_{k+1}$ is a configuration following $u_{k} z_{k} v_{k}$ and
-  the path $\pi_{k+1}$ corresponds to the computation $f_k$.
+  $v_{k+1} = \inv{a} v_k\ (v_k = a \bar{v}_k)$, then by construction of
+  $\fa{D}$, $u_{k+1} q_{k+1} v_{k+1}$ is a configuration following $u_k q_k v_k$
+  and the path $\pi_{k+1}$ corresponds to the computation $f_k$.
 \end{itemize}
 
 Let $v \in \genbyone{L_{\fa{D}}}$ and $\pi_n \in \pathcat{G}(S, F)$ with label
 $|\alpha(\pi_n)| = v$ and let for $\omega \prefix \pi_n$ hold $|\alpha(\omega)|
-\prefix |\alpha(\pi_n)|$, then there exists a computation $f_n = (z_0 v \to
-\ldots \to v z_n)$ with $z_0 \in S_{\fa{B}},\ z_n \in F_{\fa{B}}$ and therefore
+\prefix |\alpha(\pi_n)|$, then there exists a computation $f_n = (q_0 v \to
+\ldots \to v q_n)$ with $q_0 \in S_{\fa{B}},q_n \in F_{\fa{B}}$ and therefore
 $v \in L_{\fa{B}}$.
 \end{proof}
 
@@ -386,7 +393,7 @@ We will show now that for all finite two-way automata $\fa{B}$ it holds
 \[ L_{\fa{B}} \in \reglang(X^*)\ (= \ratlang(X^*)) \]
 
 Before doing that, we show a relationship between $\ratlang(X^*)$ and
-$\ratlang{\hgroup{X}}$.
+$\ratlang(\hgroup{X})$.
 
 For the automaton $\fa{D}$ constructed above we set
 \[ L_{\fa{D}} := \setof{|\alpha(\pi)| \mid \pi \in \pathcat{G}(S, F)} \]
@@ -396,7 +403,7 @@ In this way, $\ratlang(\hgroup{X})$ is embedded in a natural way into
 $(\unioninv{X})^*$, see chapter II.7.
 
 We set
-\[ |\ratlang(\hgroup{X})| := \setof{|L| \mid L \in \ratlang(\hgroup{X}}) \]
+\[ |\ratlang(\hgroup{X})| := \setof{|L| \mid L \in \ratlang(\hgroup{X})} \]
 
 Then the following theorem holds:
 
@@ -408,27 +415,63 @@ Then the following theorem holds:
 We only sketch the proof of this theorem, the reader may give the proof
 formally.
 
-Let $v_1, v_2$ be vertices of the graph $G = (V, E)$ of the automaton $\fa{D}$,
-and let $\pi: v_1 \to v_1$ be a path with label $\alpha(\pi) \equiv 1
+Let $q_1, q_2$ be vertices of the graph $G = (V, E)$ of the automaton $\fa{D}$,
+and let $\pi: q_1 \to q_2$ be a path with label $\alpha(\pi) \equiv 1
 \pmod{\hgroup{X}}$.
 
-In this case, a new edge $e: v_1 \edge{\epsilon} v_2$ will be added to the
-graph. This will be done for all pairs $(v_1, v_2) \in V \times V$ which are
+In this case, a new edge $e: q_1 \edge{\epsilon} q_2$ will be added to the
+graph. This will be done for all pairs $(q_1, q_2) \in V \times V$ which are
 connected by such a path.
 
 We get a new automaton $\fa{D}'$ with $|L_{\fa{D}}| = |L_{\fa{D}'}|$.
 
-If one removes all edges $e$ from the graph of $\fa{D}'$ where the label is
-$\alpha(e) \in \inv{X}$, then one gets a finite automaton $\fa{A}$ accepting the
-language $|L| \cap X^*$.
+If one removes all edges $e$ from the graph of $\fa{D}'$ with label 
+$\alpha(e) \in \inv{X}$, one gets a finite automaton $\fa{A}$ accepting the 
+language $|L| \cap X^*$ (exercise).
 \end{proof}
 
 Remark: A similar result can be proved for the free group $F(X)$
 (exercise).
 
+\bigskip
+\begin{theorem}[Rabin, Scott]
+\[ \genbyone{L_{\fa{D}}} \in \reglang(X^*) \]
+\end{theorem}
 
+\begin{proof}
+The proof gets clearer if we don't use the state graph but the automaton model
+used in the construction of $\fa{D}$.
 
+\missingfigure
 
+On the input tape we have $w = x_1 \cdots x_n$, the automaton shall be in state
+$(z, y	,\ y \in \setof{L_2, R_2})$, and the reading head shall be located to the
+right of the $k$th cell.
+
+We set $w_k = x_1 \cdots x_k$ and ask in which states the automaton will return
+to its current position for $y = L_2$.
+
+We denote the set of these states as the {\bf echo} of state $z$ in $w_k$.
+
+We don't assume that the automaton has read the tape from the left, but think of
+the head to be placed arbitrarily at this position in state $(z, L_2)$.
+
+We define the echo formally:
+\newcommand{\echo}[2]{\mathrm{Echo}_{#1}(#2)}
+
+Define for $v \in X^*,\ a \in X$ the relation $\mathrm{Echo}_v \subset V \times
+\powset{V}$ by
+\begin{enumerate}
+  \item $\echo{\epsilon}{(z, l_i)} = \emptyset$ for $i = 1, 2$.
+  
+  \item $\echo{v}{(z, r_i)} = (z, r_i)$ for $i = 1, 2$.
+  
+  \item $\echo{va}{(z, L_1)} = a \cdot \echo{v}{(\inv{a}(z, L_1))}$
+  
+  \item $\echo{va}{(z, L_2)} = (a \cdot \echo{v}{\inv{a}})^+ (z, L_2)$
+\end{enumerate}
+
+\end{proof}
 
 
 

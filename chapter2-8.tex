@@ -15,8 +15,8 @@ this reason, we first define this type of automaton as usual.
 
 Afterwards, we will show how to represent this automaton by a state graph.
 
-(The definition in the original book has been slightly adapted to conform to
-the common literature.)
+(The definition from the original book has been adapted to be closer to the
+common namings.)
 
 \begin{definition}
 A {\bf (non-deterministic) two-way finite automaton} is defined by
@@ -39,29 +39,29 @@ $\fa{B}$ is called a {\bf complete, deterministic two-way finite automaton}.
 \begin{definition}
 A {\bf computation} of $\fa{B}$ on the input word $v \in X^*$ is a sequence of
 single computation steps
-\[ f_k = (z_0 v \to u_1 z_1 v_1 \to u_2 z_2 v_2 \to \ldots \to u_k z_k v_k) \]
-with $u_i, v_i \in X^*,\ z_i \in Z$ for $i = 1, \ldots, k$ and $z_0 \in S$. 
+\[ f_k = (q_0 v \to u_1 q_1 v_1 \to u_2 q_2 v_2 \to \ldots \to u_k q_k v_k) \]
+with $u_i, v_i \in X^*,\ q_i \in Z$ for $i = 1, \ldots, k$ and $q_0 \in S$. 
 \end{definition}
 
-A single computation step $u_i z_i v_i \to u_{i+1} z_{i+1} v_{i+1}$ is defined
+A single computation step $u_i q_i v_i \to u_{i+1} q_{i+1} v_{i+1}$ is defined
 by the following alternatives:
 
 \begin{itemize}
   \item If $v_i = a v'_i$, then $u_{i+1} = u_i a,\ v_{i+1} =
-  v'_i$, if $(z_{i+1}, R) \in \delta(z_i, a)$,\\
+  v'_i$, if $(q_{i+1}, R) \in \delta(q_i, a)$,\\
   i.e.\ the reading head moves to the right and the automaton changes into state
-  $z_{i+1}$, if it reads $a$ in state $z_i$.
+  $q_{i+1}$, if it reads $a$ in state $q_i$.
 
 	\item If $u_i = u'_i b,\ v_i = a v'_i$, then $u_{i+1} = u'_i$ and
-	$v_{i+1} = b v_i$, if $(z_{i+1}, L) \in \delta(z_i, a)$,\\
+	$v_{i+1} = b v_i$, if $(q_{i+1}, L) \in \delta(q_i, a)$,\\
 	i.e.\ the reading head moves to the left and the automaton changes into state
-	$z_{i+1}$, if it reads $a$ in state $z_i$.
+	$q_{i+1}$, if it reads $a$ in state $q_i$.
 \end{itemize}
 
 \bigskip
 \begin{definition}
 A word $w \in X^*$ is {\bf accepted by} $\fa{B}$ if there exists a computation
-$f_k$ with $v_k = \epsilon$ and $z_k \in F$.
+$f_k$ with $v_k = \epsilon$ and $q_k \in F$.
 \end{definition}
 
 The language of $\fa{B}$ is
@@ -229,7 +229,7 @@ Here $First(w)$ denotes the first symbol of the word $w$.
 
 Let $f_{k+1}$ be a computation of length $k+1$ which ends with the computation
 step
-\[ u_k z_k v_k \to u_{k+1} z_{k+1} v_{k+1} \]
+\[ u_k q_k v_k \to u_{k+1} q_{k+1} v_{k+1} \]
 
 \begin{itemize}
   \item[Case 1:] $Z(\pi_k) = (q_k, R_2),\ v_k = a \bar{v}_k,\ (q_{k+1}, R) \in
@@ -277,7 +277,7 @@ These are all possible cases for $\pi_{k+1}$ and $\pi_{k+1}$ fulfills the
 induction claim for $k+1$.
 
 Let now $f_n$ be an accepting computation for a word $v$, so $v_n = \epsilon,\
-u_n = v$ and $z_n \in F$.
+u_n = v$ and $q_n \in F$.
 
 The last move of $\fa{B}$ was a right-move. It holds $Z(\pi_n) = (q_n, R_2)$ and
 therefore it holds $|\alpha(\pi_n)| = u_n = v$.
@@ -327,7 +327,7 @@ computation $f$ which corresponds to the path $\pi$.
 \medskip
 To the empty path $\pi_0 = 1_{(q_0, R_2)}$ corresponds the computation $q_0 v$.
 
-Let $f_k$ be a computation ending with $u_k z_k v_k$.
+Let $f_k$ be a computation ending with $u_k q_k v_k$.
 
 Here, we also have to consider 4 cases:
 
